@@ -1,0 +1,15 @@
+section{
+	margin:auto;
+	margin-top:0px;
+	width:960px;
+	padding:20px;
+	border-radius:5px;
+	box-shadow:2px 2px 10px #6F6F6F;
+	background: rgba(255, 255, 255, 0.67);
+}
+
+.tbl-registro tr td{
+	padding-right:10px;
+	padding-bottom:10px;
+	text-align:center;
+}

@@ -1,0 +1,119 @@
+
+//Consulta oficios externos
+
+
+SELECT
+	ofc.id AS id_oficio,
+	ofc.origen,
+	ofc.tipo_oficio,
+	ofc.folio AS folio,
+	ofc.folio_institucion AS folio_institucion,
+	ofc.id_usuario_emisor AS id_usuario_emisor,
+	IF(ofc.tipo_oficio = 'RESPUESTA',(SELECT CONCAT(utemp.nombre,' ',utemp.apellido) FROM usuarios utemp WHERE utemp.id = ofc.id_usuario_emisor),'')as persona_responde,
+	odr.id_usuario AS id_usuario_receptor,
+	ofc.nombre_emisor AS nombre_emisor,
+	ofc.cargo AS cargo,
+	ofc.institucion_emisor AS institucion_emisor,
+	ofc.asunto_emisor AS asunto_emisor,
+	odr.estatus_inicial AS estatus_inicial,
+	odr.estatus_final AS estatus_final,
+	ofc.created_at as fecha_recibido
+FROM
+	sigi_oficios ofc
+JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
+JOIN sigi_documentos doc ON doc.id = odr.id_documentos
+WHERE origen = 'EXTERNO' 
+
+//Consulta oficios internos
+SELECT
+	ofc.id AS id_oficio,
+	ofc.folio AS folio,
+	ofc.id_usuario_emisor AS id_usuario_emisor,
+	ar.nombre as area,
+  us.correo as usuario,
+	odr.id_usuario AS id_usuario_receptor,
+	ofc.asunto_emisor AS asunto_emisor,
+	odr.estatus_inicial AS estatus_inicial,
+	odr.estatus_final AS estatus_final,
+	ofc.created_at
+FROM
+	sigi_oficios ofc
+JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
+JOIN sigi_documentos doc ON doc.id = odr.id_documentos
+JOIN usuarios us ON us.id = ofc.id_usuario_emisor
+JOIN areas ar ON ar.id = us.area
+WHERE
+	origen = 'INTERNO'
+GROUP BY
+	id_oficio
+
+
+//consulta especial
+SELECT
+	ofc.id AS id_oficio,
+	ofc.folio AS folio,
+	ofc.id_usuario_emisor AS id_usuario_emisor,
+	(
+		SELECT
+			CONCAT(
+				tmpAr.nombre,
+				',',
+				tmpUs.correo
+			)
+		FROM
+			usuarios tmpUs
+		JOIN areas tmpAr ON tmpAr.id = tmpUs.area
+		WHERE
+			tmpUs.id = ofc.id_usuario_emisor
+	) AS datos_usuario_emisor,
+	odr.id_usuario AS id_usuario_receptor,
+	(
+		SELECT
+			CONCAT(
+				tmpAr.nombre,
+				',',
+				tmpUs.correo
+			)
+		FROM
+			usuarios tmpUs
+		JOIN areas tmpAr ON tmpAr.id = tmpUs.area
+		WHERE
+			tmpUs.id = odr.id_usuario
+	) AS datos_usuario_receptor,
+	ofc.asunto_emisor AS asunto_emisor,
+	odr.estatus_inicial AS estatus_inicial,
+	odr.estatus_final AS estatus_final
+FROM
+	sigi_oficios ofc
+JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
+JOIN sigi_documentos doc ON doc.id = odr.id_documentos
+JOIN usuarios us ON us.id = ofc.id_usuario_emisor
+WHERE
+	origen = 'INTERNO'
+GROUP BY
+	id_oficio
+
+
+//consulta de respuestas enviadas por usuario
+SELECT
+	ofc.id AS id_oficio,
+	ofc.origen,
+	ofc.folio AS folio,
+	ofc.id_usuario_emisor AS id_usuario_emisor,
+
+IF (
+	ofc.origen = 'INTERNO',
+	CONCAT(us.nombre,' ',us.apellido, ' de ', ar.abreviatura),
+	CONCAT(ofc.nombre_emisor,' de ',ofc.institucion_emisor)
+) AS persona_recibe,
+ odr.id_usuario AS id_usuario_receptor,
+ ofc.asunto_emisor AS asunto_emisor,
+ ofc.created_at AS fecha_enviado
+FROM
+	sigi_oficios ofc
+JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
+JOIN sigi_documentos doc ON doc.id = odr.id_documentos
+LEFT JOIN usuarios us ON us.id = odr.id_usuario
+LEFT JOIN areas ar ON ar.id = us.area
+WHERE
+	ofc.tipo_oficio = 'RESPUESTA'
