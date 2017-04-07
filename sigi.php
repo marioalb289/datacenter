@@ -3,7 +3,7 @@ require_once 'sigi/model/database.php';
 
 $controller = 'ofcpartes';
 session_start();
-
+//echo exec('whoami');exit;
 // if( empty($_SESSION['data_user'])){
 //     header('Location: index.php');
 // }

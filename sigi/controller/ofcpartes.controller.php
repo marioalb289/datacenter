@@ -645,6 +645,7 @@ class OfcPartesController
       }
       else
       {
+        print_r($_FILES);
           // throw new Exception('No se ha seleccionado ningun archivo.');
           // print_r($_POST);exit;
         $origen = ($_POST['select_origen'] == 1) ? 'I': 'E';
@@ -666,7 +667,7 @@ class OfcPartesController
 
 
           //Proceder a guardar el arhivo
-        $nombre = $_FILES['archivo']['name'];
+        $nombre = basename( $_FILES['archivo']['name']);
         $nombre_tmp = $_FILES['archivo']['tmp_name'];
         $tipo = $_FILES['archivo']['type'];
         $tamano = $_FILES['archivo']['size'];
@@ -676,11 +677,15 @@ class OfcPartesController
         $extension = end( $partes_nombre );
         $ext_correcta = in_array($extension, $ext_permitidas);
 
+
         $tipo_correcto = preg_match('/^application\/(pdf)$/', $tipo);
 
-        $limite = 500 * 1024;
 
-        if( $ext_correcta && $tipo_correcto && $tamano <= $limite ){
+
+        //$limite = 500 * 1024;
+        //$absolute_path = substr(__DIR__, 0,24);
+
+        if( $ext_correcta && $tipo_correcto ){//&& $tamano <= $limite ){
           if( $_FILES['archivo']['error'] > 0 ){
                 //Error al subir el archivo, tipo incorrecto o tamaño excesido
             throw new Exception('Error al subir el archivo');
@@ -690,10 +695,16 @@ class OfcPartesController
                   //Archivo ya existente
             }else{
                   //crear archivo
-              move_uploaded_file($nombre_tmp,
-                "documentos/" . $newfilename);
+              // print_r($absolute_path ."/documentos/" . $newfilename);
+              // print_r("aqui");exit;
+              if(move_uploaded_file($nombre_tmp,
+                "documentos/" . $newfilename)){
 
-                  //
+              }
+              else{
+                print_r("no se subio archivo");
+                exit;
+              }
             }
           }
         }
@@ -767,7 +778,9 @@ class OfcPartesController
 
      } catch (Exception $e) {
         //Trabajar en un sistema de manejo de errores
-      $_SESSION['flash-message-error'] = 'Error al guardar la información';
+      print_r($e->getMessage());
+      //exit;
+      $_SESSION['flash-message-error'] = $e->getMessage();
       header('Location: sigi.php?c=OfcPartes&a=add');
     }
 
