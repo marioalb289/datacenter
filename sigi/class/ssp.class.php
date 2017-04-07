@@ -234,11 +234,16 @@ class SSP {
 
 		// print_r($data);exit;
 		// Data set length after filtering
+		/*print_r("SELECT $consulta_esp
+			 FROM   `$table`
+			 $where
+			 $group_by");*/
+
 		$resFilterLength = self::sql_exec( $db, $bindings,
 			"SELECT $consulta_esp
 			 FROM   `$table`
 			 $where
-			 $group_by"
+			 "
 		);
 		// print_r($resFilterLength);exit;
 		if(empty($resFilterLength))
