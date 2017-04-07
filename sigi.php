@@ -1,5 +1,6 @@
 <?php
 require_once 'sigi/model/database.php';
+include_once 'vendor/vlucas/phpdotenv/src/Dotenv.php';
 
 $controller = 'ofcpartes';
 session_start();
@@ -7,7 +8,13 @@ session_start();
 // if( empty($_SESSION['data_user'])){
 //     header('Location: index.php');
 // }
+//print_r(__DIR__);exit;
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
 
+// print_r(getenv('HOST'));exit;
+
+        // print_r($dotenv);exit;
 
 // $_SESSION['err'] = '';
 //Validar primero que exista una sesion
