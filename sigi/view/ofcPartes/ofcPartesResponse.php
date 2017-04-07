@@ -121,6 +121,7 @@
 					</div>
 					<div class="form-group" style="text-align: center; ">
 						<span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
+						
 				      <!-- <span class="fileinput-filename"></span><span class="fileinput-new">No se eligió archivo</span>
 				      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal">Ver</button> -->
 				      <!-- <p class="help-block">Example block-level help text here.</p> -->
