@@ -797,6 +797,7 @@ class OfcPartesController
       {
         print_r($_FILES);
         print_r($_REQUEST);
+        // exit;
 
          //Buscar el oficio original y obtener sus datos
         $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado

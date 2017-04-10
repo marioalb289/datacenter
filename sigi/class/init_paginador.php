@@ -3,6 +3,7 @@
 /**
 * 
 */
+include_once 'vendor/vlucas/phpdotenv/src/Dotenv.php';
 require( 'ssp.class.php' );
 class InitPaginador
 {
@@ -59,10 +60,15 @@ class InitPaginador
 		    )
 		);*/
 
-		$host      = 'localhost';
-			$usuario   = 'root';
-			$password  = 'IEPC2018$i$tema$';
-			$dataBase  = 'artic600_datacenter';
+		//$dotenv = new Dotenv\Dotenv(__DIR__);
+        //$dotenv->load();
+
+    	$host      = $_ENV['HOST'];
+		$usuario   = $_ENV['USUARIO'];
+		$password   = $_ENV['PASSWORD'];
+		$dataBase   = $_ENV['DATABASE'];
+
+
 		 
 		// SQL server connection information
 		$sql_details = array(
@@ -71,6 +77,8 @@ class InitPaginador
 		    'db'   => $dataBase,
 		    'host' => $host
 		);
+
+		// print_r($sql_details);exit;
 		 
 		 
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

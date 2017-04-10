@@ -8,7 +8,7 @@ class sistema{
 
 			$host      = 'localhost';
 			$usuario   = 'root';
-			$password  = 'IEPC2018$i$tema$';
+			$password  = '';
 			$dataBase  = 'artic600_datacenter';
 
 			$conexion = mysql_connect($host, $usuario, $password);

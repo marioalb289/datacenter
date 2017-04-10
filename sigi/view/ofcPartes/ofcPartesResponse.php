@@ -87,7 +87,7 @@
 						<div class="form-group" >
 							<label class="col-sm-4 control-label">Usuario Origen:</label>
 							<div class="col-sm-8">
-								<p class="form-control-static" ><?php echo $data['usuario_emisor']->email ?></p>
+								<p class="form-control-static" ><?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?></p>
 							</div>
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 					<div class="form-group" >
 						<label class="col-sm-4 control-label">Usuario Destino:</label>
 						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['usuario_receptor']->email ?></p>
+							<p class="form-control-static" ><?php echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ; ?></p>
 						</div>
 					</div>
 
@@ -176,7 +176,6 @@
 		        				<th></th>
 		        				<th></th>
 		        				<th>Nombre</th>
-		        				<th>Email</th>
 		        				<th>Area</th>
 		        			</tr>
 		        		</thead>
@@ -186,7 +185,6 @@
 		        					<td></td>
 		        					<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
 		        					<td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
-		        					<td><?php echo $u->email; ?></td>
 		        					<td><?php echo $u->area; ?></td>
 		        				</tr>
 		        			<?php endforeach; ?>

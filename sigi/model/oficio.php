@@ -538,7 +538,8 @@ class Oficio
                 odr.estatus_inicial AS estatus_inicial,
                 odr.ccp AS ccp,
                 odr.estatus_final AS estatus_final,
-                doc.id as id_documento
+                doc.id as id_documento,
+                odr.parent_id as parent_id
                FROM
                 sigi_oficios ofc
                JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
