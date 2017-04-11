@@ -405,8 +405,8 @@ class OficioDocumento
         try 
         {
             $sql = "UPDATE sigi_oficios_documentos_recepcion SET 
-                        estatus_final          = ?
-                    WHERE id_oficio = ? ";
+                        estatus_final = ?, update_at = ? , updated_by = ?
+                    WHERE id_oficio = ? OR parent_id = ? ";
 
                     // print_r($sql);exit;
 
@@ -414,6 +414,9 @@ class OficioDocumento
                  ->execute(
                     array(
                         $this->getEstatusFinal(),
+                        date('Y-m-d H:i:s'), 
+                        $this->getUpdatedBy(),
+                        intval($this->getIdOficio()),
                         intval($this->getIdOficio())
                     )
                 );
@@ -428,6 +431,7 @@ class OficioDocumento
     public function getRespuestas($id_oficio){
         try
         {
+            // print_r($id_oficio);
             $cond = "rr.parent_id = ? GROUP BY rr.id_oficio";
             
             $stm = $this->pdo->prepare("
@@ -437,6 +441,8 @@ class OficioDocumento
                 sigi_vw_respuestas_recibidas rr 
                WHERE
                 $cond
+               ORDER BY
+                rr.fecha_recibido DESC
             ");
             // print_r($stm);exit;
 

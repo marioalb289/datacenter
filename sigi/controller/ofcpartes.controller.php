@@ -52,26 +52,26 @@ class OfcPartesController
 
     $table = 'sigi_vw_oficios_externos';
     $columns = array(
-        array(
-            'db' => 'id_oficio',
-            'dt' => 'DT_RowId',
-            'formatter' => function( $d, $row ) {
-                return 'row_'.$d;
-            }
+      array(
+        'db' => 'id_oficio',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+          return 'row_'.$d;
+        }
         ),
-        array( 'db' => 'origen',  'dt' => 'origen' ),
-        array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
-        array( 'db' => 'folio',   'dt' => 'folio' ),
-        array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
-        array( 'db' => 'nombre_emisor',   'dt' => 'nombre_emisor' ),
-        array( 'db' => 'cargo',   'dt' => 'cargo' ),
-        array( 'db' => 'institucion_emisor',   'dt' => 'institucion_emisor' ),
-        array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-        array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-        array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
-        array( 'db' => 'fecha_recibido',  'dt' => 'fecha_recibido'),
-        array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-    );
+      array( 'db' => 'origen',  'dt' => 'origen' ),
+      array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
+      array( 'db' => 'folio',   'dt' => 'folio' ),
+      array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
+      array( 'db' => 'nombre_emisor',   'dt' => 'nombre_emisor' ),
+      array( 'db' => 'cargo',   'dt' => 'cargo' ),
+      array( 'db' => 'institucion_emisor',   'dt' => 'institucion_emisor' ),
+      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
+      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
+      array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
+      array( 'db' => 'fecha_recibido',  'dt' => 'fecha_recibido'),
+      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
+      );
     $primaryKey = 'id_oficio';
 
     $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
@@ -99,30 +99,30 @@ class OfcPartesController
 
     $table = 'sigi_vw_oficios_internos';
     $columns = array(
-        array(
-            'db' => 'id_oficio',
-            'dt' => 'DT_RowId',
-            'formatter' => function( $d, $row ) {
-                return 'row_'.$d;
-            },
-            'order' => 'desc'
+      array(
+        'db' => 'id_oficio',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+          return 'row_'.$d;
+        },
+        'order' => 'desc'
         ),
-        array( 'db' => 'origen',  'dt' => 'origen' ),
-        array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
-        array( 'db' => 'folio',   'dt' => 'folio' ),
-        array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
-        array( 'db' => 'area',   'dt' => 'area' ),
-        array( 'db' => 'usuario',   'dt' => 'usuario' ),
-        array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
-        array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-        array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-        array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
-        array(
-            'db'        => 'fecha_recibido',
-            'dt'        => 'fecha_recibido',
+      array( 'db' => 'origen',  'dt' => 'origen' ),
+      array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
+      array( 'db' => 'folio',   'dt' => 'folio' ),
+      array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
+      array( 'db' => 'area',   'dt' => 'area' ),
+      array( 'db' => 'usuario',   'dt' => 'usuario' ),
+      array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
+      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
+      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
+      array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
+      array(
+        'db'        => 'fecha_recibido',
+        'dt'        => 'fecha_recibido',
         ),
-        array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-    );
+      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
+      );
     $primaryKey = 'id_oficio';
 
     $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
@@ -150,27 +150,27 @@ class OfcPartesController
 
     $table = 'sigi_vw_respuestas_enviadas';
     $columns = array(
-        array(
-            'db' => 'id_oficio',
-            'dt' => 'DT_RowId',
-            'formatter' => function( $d, $row ) {
-                return 'row_'.$d;
-            },
-            'order' => 'desc'
+      array(
+        'db' => 'id_oficio',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+          return 'row_'.$d;
+        },
+        'order' => 'desc'
         ),
-        array( 'db' => 'origen',  'dt' => 'origen' ),
-        array( 'db' => 'folio',   'dt' => 'folio' ),
-        array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
-        array( 'db' => 'persona_recibe',   'dt' => 'persona_recibe' ),
-        array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
-        array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-        array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-        array(
-            'db'        => 'fecha_enviado',
-            'dt'        => 'fecha_enviado',
+      array( 'db' => 'origen',  'dt' => 'origen' ),
+      array( 'db' => 'folio',   'dt' => 'folio' ),
+      array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
+      array( 'db' => 'persona_recibe',   'dt' => 'persona_recibe' ),
+      array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
+      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
+      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
+      array(
+        'db'        => 'fecha_enviado',
+        'dt'        => 'fecha_enviado',
         ),
-        array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-    );
+      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
+      );
     $primaryKey = 'id_oficio';
 
     $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
@@ -198,27 +198,27 @@ class OfcPartesController
 
     $table = 'sigi_vw_respuestas_recibidas';
     $columns = array(
-        array(
-            'db' => 'id_oficio',
-            'dt' => 'DT_RowId',
-            'formatter' => function( $d, $row ) {
-                return 'row_'.$d;
-            },
-            'order' => 'desc'
+      array(
+        'db' => 'id_oficio',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+          return 'row_'.$d;
+        },
+        'order' => 'desc'
         ),
-        array( 'db' => 'folio',   'dt' => 'folio' ),
-        array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
-        array( 'db' => 'area',   'dt' => 'area' ),
-        array( 'db' => 'persona_responde',   'dt' => 'persona_responde' ),
-        array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
-        array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-        array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-        array(
-            'db'        => 'fecha_recibido',
-            'dt'        => 'fecha_recibido',
+      array( 'db' => 'folio',   'dt' => 'folio' ),
+      array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
+      array( 'db' => 'area',   'dt' => 'area' ),
+      array( 'db' => 'persona_responde',   'dt' => 'persona_responde' ),
+      array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
+      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
+      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
+      array(
+        'db'        => 'fecha_recibido',
+        'dt'        => 'fecha_recibido',
         ),
-        array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-    );
+      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
+      );
     $primaryKey = 'id_oficio';
 
     $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
@@ -242,11 +242,11 @@ class OfcPartesController
   }
 
   public function editAction(){
-    
+
 
     //Buscar oficio
     if(isset($_REQUEST['id'])){
-        $id_oficio = $_REQUEST['id'];
+      $id_oficio = $_REQUEST['id'];
         $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
 
         $oficio = new Oficio();
@@ -271,15 +271,18 @@ class OfcPartesController
         // exit;
         $this->layout->renderVista("ofcPartes","ofcPartesEdit",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $arrUsrccp));
 
+      }
+
     }
 
-  }
+    public function viewAction(){
 
-  public function viewAction(){
-    
 
     //Buscar oficio
-    if(isset($_REQUEST['id'])){
+      if(isset($_REQUEST['id'])){
+
+        // print_r($_REQUEST);exit;
+
         $id_oficio = $_REQUEST['id'];
         $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
 
@@ -305,6 +308,8 @@ class OfcPartesController
         //Traer la lista de respuestas recibidas a este folio
         $ofc_doc =  new OficioDocumento();
         $arrRespuestas = $ofc_doc->getRespuestas($objOficio->id_oficio);
+
+        // print_r($arrRespuestas);exit;
         //$area =  new Area();
         //$ar = $area->ListarAreas();
         $usuarios_ccp = array();
@@ -347,15 +352,15 @@ class OfcPartesController
         // exit;
         $this->layout->renderVista("ofcPartes","ofcPartesView",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $arrUsrccp,'usuarios_turnar' => $usr, 'respuestas_recibidas' => $arrRespuestas));
 
+      }
+
     }
 
-  }
+    public function responseAction(){
 
-  public function responseAction(){
-    
 
     //Buscar oficio
-    if(isset($_REQUEST['id'])){
+      if(isset($_REQUEST['id'])){
         $id_oficio = $_REQUEST['id'];
         $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
 
@@ -406,11 +411,11 @@ class OfcPartesController
         }
         $this->layout->renderVista("ofcPartes","ofcPartesResponse",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr));
 
+      }
+
     }
 
-  }
-
-  public function viewFileAction(){
+    public function viewFileAction(){
       // print_r($_REQUEST['id']);
       if(isset($_REQUEST['id']) && $_REQUEST['id'] != ""){
         $documento = new Documento();
@@ -428,26 +433,26 @@ class OfcPartesController
           $dir = $objDoc->ruta; // trailing slash is important
           $file = $dir . $objDoc->nombre . ".pdf";          
           if (file_exists($file))
-              {
-                header('Content-type: application/pdf');
-                header('Content-Disposition: inline; filename='.basename($file));
-                header('Content-Transfer-Encoding: binary');
-                header('Content-Length: ' . filesize($file));
-                header('Accept-Ranges: bytes');
+          {
+            header('Content-type: application/pdf');
+            header('Content-Disposition: inline; filename='.basename($file));
+            header('Content-Transfer-Encoding: binary');
+            header('Content-Length: ' . filesize($file));
+            header('Accept-Ranges: bytes');
 
-                @readfile($file);
-              }
-          } 
-        }        
+            @readfile($file);
+          }
+        } 
+      }        
       
       else{
         exit;
       }
 
-    
 
-  }
-  public function downloadFileAction(){
+
+    }
+    public function downloadFileAction(){
       // print_r($_REQUEST['id']);
       if(isset($_REQUEST['id']) && $_REQUEST['id'] != ""){
         $documento = new Documento();
@@ -458,31 +463,31 @@ class OfcPartesController
           $dir = $objDoc->ruta; // trailing slash is important
           $file = $dir . $objDoc->nombre . ".pdf";          
           if (file_exists($file))
-              {
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/pdf');
-                header('Content-Disposition: attachment; filename='.basename($file));
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate');
-                header('Pragma: public');
-                header('Content-Length: ' . filesize($file));
-                ob_clean();
-                flush();
-                readfile($file);
-                exit;
-              }
-          } 
-        }        
+          {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename='.basename($file));
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            ob_clean();
+            flush();
+            readfile($file);
+            exit;
+          }
+        } 
+      }        
       
       else{
         exit;
       }
 
-    
 
-  }
 
-  public function buscadorInstitucionAction(){
+    }
+
+    public function buscadorInstitucionAction(){
 
         // print_r($_REQUEST);exit;
 
@@ -493,20 +498,20 @@ class OfcPartesController
 
         foreach ($arrClave as $key => $value) {
 
-            $arrDatos[] = array(
-                'label' => $value->institucion_emisor,
-                'value' => $value->institucion_emisor,
-                'nombre_emisor' => $value->nombre_emisor,
-                'cargo' => $value->cargo
-              );
+          $arrDatos[] = array(
+            'label' => $value->institucion_emisor,
+            'value' => $value->institucion_emisor,
+            'nombre_emisor' => $value->nombre_emisor,
+            'cargo' => $value->cargo
+            );
         }
 
 
         echo json_encode($arrDatos);
       }       
-  }
+    }
 
-  public function buscadorEmisorAction(){
+    public function buscadorEmisorAction(){
 
         // print_r($_REQUEST);exit;
 
@@ -517,20 +522,20 @@ class OfcPartesController
 
         foreach ($arrClave as $key => $value) {
 
-            $arrDatos[] = array(
-                'label' => $value->nombre_emisor,
-                'value' => $value->nombre_emisor,
-                'institucion_emisor' => $value->institucion_emisor,
-                'cargo' => $value->cargo
-              );
+          $arrDatos[] = array(
+            'label' => $value->nombre_emisor,
+            'value' => $value->nombre_emisor,
+            'institucion_emisor' => $value->institucion_emisor,
+            'cargo' => $value->cargo
+            );
         }
 
 
         echo json_encode($arrDatos);
       }       
-  }
+    }
 
-  public function buscadorCargoAction(){
+    public function buscadorCargoAction(){
 
         // print_r($_REQUEST);exit;
 
@@ -541,72 +546,72 @@ class OfcPartesController
 
         foreach ($arrClave as $key => $value) {
 
-            $arrDatos[] = array(
-                'label' => $value->cargo,
-                'value' => $value->cargo,
-                'nombre_emisor' => $value->nombre_emisor,
-                'institucion_emisor' => $value->institucion_emisor,
-              );
+          $arrDatos[] = array(
+            'label' => $value->cargo,
+            'value' => $value->cargo,
+            'nombre_emisor' => $value->nombre_emisor,
+            'institucion_emisor' => $value->institucion_emisor,
+            );
         }
 
 
         echo json_encode($arrDatos);
       }       
-  }
+    }
 
-  public function buscarUsuarioAction(){
+    public function buscarUsuarioAction(){
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      if(isset($_POST['id_area']) && $_POST['id_area'] != ""){
-        $usuario = new Usuario();
-        $usr = $usuario->buscarUsuario($_POST['id_area']);
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST['id_area']) && $_POST['id_area'] != ""){
+          $usuario = new Usuario();
+          $usr = $usuario->buscarUsuario($_POST['id_area']);
 
-        if(!empty($usr)){
+          if(!empty($usr)){
 
-          echo json_encode(array('success' => true,'data' => array('id_usuario' => $usr->id, 'usuario' => $usr->nombre.' '.$usr->apellido)));
+            echo json_encode(array('success' => true,'data' => array('id_usuario' => $usr->id, 'usuario' => $usr->nombre.' '.$usr->apellido)));
             // print_r($usr->correo);exit;
-        }
-        else{
-          echo json_encode(array('success' => false,'msg' => 'No se encontraron usuarios'));
-        }
+          }
+          else{
+            echo json_encode(array('success' => false,'msg' => 'No se encontraron usuarios'));
+          }
 
-      }       
-    }
-    else{
-      echo json_encode(array('success' => false,'msg' => 'Error al procesar'));
-    }
+        }       
+      }
+      else{
+        echo json_encode(array('success' => false,'msg' => 'Error al procesar'));
+      }
       //header('Content-Type: application/json');
 
       // exit;
-  }
+    }
 
-  public function TurnarAction(){
-    try {
-      if( !isset($_POST['check_list_user']) && empty($_POST['check_list_user']) ){
-        throw new Exception('No se ha seleccionado ningun usuario.');
-      }
-      else
-      {
+    public function TurnarAction(){
+      try {
+        if( !isset($_POST['check_list_user']) && empty($_POST['check_list_user']) ){
+          throw new Exception('No se ha seleccionado ningun usuario.');
+        }
+        else
+        {
 
-        $id_usuario = $_SESSION['data_user']['id'];
+          $id_usuario = $_SESSION['data_user']['id'];
 
-        $ofc = new Oficio();
+          $ofc = new Oficio();
 
         //Buscar el oficio original y obtener sus datos
-        $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
+          $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
 
         // print_r($objOficio);exit;
 
 
          //Guardar Registro del oficio con documento
-         $ofc_doc = new OficioDocumento();
+          $ofc_doc = new OficioDocumento();
 
-         $ofc_doc->setIdOficio($objOficio->id_oficio);    
-         $ofc_doc->setParentId(null);    
-         $ofc_doc->setIdDocumentos($objOficio->id_documento);
-         $ofc_doc->setFechaVisto('');  
-         $ofc_doc->setEstatusInicial($objOficio->estatus_inicial);
-         $ofc_doc->setEstatusFinal($objOficio->estatus_final);
+          $ofc_doc->setIdOficio($objOficio->id_oficio);    
+          $ofc_doc->setParentId(null);    
+          $ofc_doc->setIdDocumentos($objOficio->id_documento);
+          $ofc_doc->setFechaVisto('');  
+          $ofc_doc->setEstatusInicial($objOficio->estatus_inicial);
+          $ofc_doc->setEstatusFinal($objOficio->estatus_final);
          $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
          $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
 
@@ -626,14 +631,14 @@ class OfcPartesController
 
       }
 
-     } catch (Exception $e) {
+    } catch (Exception $e) {
         //Trabajar en un sistema de manejo de errores
       // print_r("aqui");exit;
       $_SESSION['flash-message-error'] =  $e->getMessage();
       $id= $_POST['id_oficio'];
 
       $location = "Location: sigi.php?c=OfcPartes&a=view&id=$id";
-       header($location);
+      header($location);
     }
 
   }
@@ -645,7 +650,7 @@ class OfcPartesController
       }
       else
       {
-        print_r($_FILES);
+        // print_r($_FILES);
           // throw new Exception('No se ha seleccionado ningun archivo.');
           // print_r($_POST);exit;
         $origen = ($_POST['select_origen'] == 1) ? 'I': 'E';
@@ -701,23 +706,23 @@ class OfcPartesController
                 "documentos/" . $newfilename)){
 
               }
-              else{
-                print_r("no se subio archivo");
-                exit;
-              }
+            else{
+              print_r("no se subio archivo");
+              exit;
             }
           }
         }
-        else{
+      }
+      else{
              //Archivo no valido
-          throw new Exception('Archivo no valido');
-        }
+        throw new Exception('Archivo no valido');
+      }
 
           //Guardar referencia al archivo
-        $documento =  new Documento();
-        $documento->setNombre($folio_archivo);
-        $documento->setRespuesta(0);
-        $documento->setRuta('documentos/');
+      $documento =  new Documento();
+      $documento->setNombre($folio_archivo);
+      $documento->setRespuesta(0);
+      $documento->setRuta('documentos/');
           $documento->setCreatedBy($id_usuario); //Asignar el user logeado
           $documento->setUpdatedBy ($id_usuario); //Asingar el user logeado;
           $id_documento = $documento->RegistrarDocumento();
@@ -795,15 +800,15 @@ class OfcPartesController
       }
       else
       {
-        print_r($_FILES);
-        print_r($_REQUEST);
+        // print_r($_FILES);
+        // print_r($_REQUEST);
         // exit;
 
-         //Buscar el oficio original y obtener sus datos
-        $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
-        $ofc = new Oficio();
-          $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
-          print_r($objOficio);exit;
+        //Buscar el oficio original y obtener sus datos
+        // $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
+        // $ofc = new Oficio();
+        // $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
+        // print_r($objOficio);exit;
           // throw new Exception('No se ha seleccionado ningun archivo.');
           // print_r($_POST['origen']);exit;
         
@@ -840,7 +845,7 @@ class OfcPartesController
 
         $limite = 500 * 1024;
 
-        if( $ext_correcta && $tipo_correcto && $tamano <= $limite ){
+        if( $ext_correcta && $tipo_correcto ){//&& $tamano <= $limite ){
           if( $_FILES['archivo']['error'] > 0 ){
                 //Error al subir el archivo, tipo incorrecto o tamaño excesido
             throw new Exception('Error al subir el archivo');
@@ -850,106 +855,137 @@ class OfcPartesController
                   //Archivo ya existente
             }else{
                   //crear archivo
-              move_uploaded_file($nombre_tmp,
-                "documentos/" . $newfilename);
+              if(move_uploaded_file($nombre_tmp,
+                "documentos/" . $newfilename)){
 
-                  //
+              }
+            else{
+              print_r("no se subio archivo");
+              exit;
             }
           }
         }
-        else{
+      }
+      else{
              //Archivo no valido
-          throw new Exception('Archivo no valido');
-        }
+        throw new Exception('Archivo no valido');
+      }
 
           //Guardar referencia al archivo
-        $documento =  new Documento();
-        $documento->setNombre($folio_archivo);
-        $documento->setRespuesta(0);
-        $documento->setRuta('documentos/');
-          $documento->setCreatedBy($id_usuario); //Asignar el user logeado
-          $documento->setUpdatedBy ($id_usuario); //Asingar el user logeado;
-          $id_documento = $documento->RegistrarDocumento();
-
-
-          
-
-          $ofc = new Oficio();
-
-          //Buscar el oficio original y obtener sus datos
-          $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
-          
-          //cambiar el estatus final a cerrado
-          $objOficioDoc =  new OficioDocumento();
-          $objOficioDoc->setEstatusFinal('Cerrado');
-          $objOficioDoc->setIdOficio($_POST['id_oficio']);
-          $objOficioDoc->ActualizarEstatusFinal();
-
-          $ofc->_setId($objOficio->id_oficio);
-          $ofc->setRespondido(1);
-          $ofc->marcarRespuesta();
+      $documento =  new Documento();
+      $documento->setNombre($folio_archivo);
+      $documento->setRespuesta(0);
+      $documento->setRuta('documentos/');
+        $documento->setCreatedBy($id_usuario); //Asignar el user logeado
+        $documento->setUpdatedBy ($id_usuario); //Asingar el user logeado;
+        $id_documento = $documento->RegistrarDocumento();
 
 
 
-          //Guardar oficio
-          $ofc->_setOrigen($_POST["origen"]);
-          $ofc->setTipoOficio("RESPUESTA");
-          $ofc->setFolio($folio);
-          $ofc->setFolioInstitucion($folio); //Folio de institucion cambiar
-          $ofc->_setIdUsuarioEmisor($id_usuario);
-          $ofc->_setNombreEmisor($objOficio->nombre_emisor);
-          $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
-          $ofc->_setCargo($objOficio->cargo);
-          $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
-          $ofc->_setAsuntoReceptor("");
-          $ofc->_setRespuesta(1);
-          $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
-          $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
-          $id_ofc = $ofc->RegistrarOficio();
+
+        $ofc = new Oficio();
+        $objOficioDoc =  new OficioDocumento();
+
+        //Buscar el oficio del mensaje recibido y obtener sus datos
+        $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
+        if($objOficio->tipo_oficio == 'SOLICITUD'){
+          //Si es solicitud marcarlo como respondido y cambiar estatus global a cerrado
+          //marcar como respondido
+           $ofc->_setId($objOficio->id_oficio);
+           $ofc->setRespondido(1);
+           $ofc->marcarRespuesta();
+
+           //cambiar el estatus final 
+           if($objOficio->estatus_final == 'Cerrado')
+             $objOficioDoc->setEstatusFinal('Abierto');
+           else
+             $objOficioDoc->setEstatusFinal('Cerrado');
 
 
-          //Guardar Registro del oficio con documento
-          $ofc_doc = new OficioDocumento();
+           $objOficioDoc->setIdOficio($_POST['id_oficio']);
+           $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+           $objOficioDoc->ActualizarEstatusFinal();
+        }
+        else{
+          //Sie es la respuesta de una respuesta, marcar la respuesta recibida como respondido y cambiar el estatus de la solicitud principal
+           $ofc->_setId($objOficio->id_oficio);
+           $ofc->setRespondido(1);
+           $ofc->marcarRespuesta();
 
-          $ofc_doc->setIdOficio($id_ofc);    
-          $ofc_doc->setParentId($objOficio->id_oficio);    
-          $ofc_doc->setIdDocumentos($id_documento);
-          $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);   
-          $ofc_doc->setCcp(0);         
-          $ofc_doc->setFechaVisto('');  
-          $ofc_doc->setEstatusInicial(($_POST['respuesta'] == 0) ? 2: 1);
-          $ofc_doc->setEstatusFinal(2);
-          $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
-          $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
-          
-          $ofc_doc->RegistrarOficioDocumento();
+           //Buscar el oficio original
+           $objOficioOriginal = $ofc->getOficio($_POST['id_oficio'],$objOficio->parent_id);
+
+           //cambiar el estatus final 
+           if($objOficioOriginal->estatus_final == 'Cerrado')
+             $objOficioDoc->setEstatusFinal('Abierto');
+           else
+             $objOficioDoc->setEstatusFinal('Cerrado');
+
+           $objOficioDoc->setIdOficio($objOficioOriginal->id_oficio);
+           $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+           $objOficioDoc->ActualizarEstatusFinal();
+
+
+        }
+        //Guardar oficio
+        $ofc->_setOrigen($_POST["origen"]);
+        $ofc->setTipoOficio("RESPUESTA");
+        $ofc->setFolio($folio);
+        $ofc->setFolioInstitucion($folio); //Folio de institucion cambiar
+        $ofc->_setIdUsuarioEmisor($id_usuario);
+        $ofc->_setNombreEmisor($objOficio->nombre_emisor);
+        $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
+        $ofc->_setCargo($objOficio->cargo);
+        $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
+        $ofc->_setAsuntoReceptor("");
+        $ofc->_setRespuesta(1);
+        $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
+        $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
+        $id_ofc = $ofc->RegistrarOficio();
+
+
+        //Guardar Registro del oficio con documento
+        $ofc_doc = new OficioDocumento();
+
+        $ofc_doc->setIdOficio($id_ofc);    
+        $ofc_doc->setParentId( ($objOficio->tipo_oficio == "RESPUESTA") ? $objOficio->parent_id : $objOficio->id_oficio );    
+        $ofc_doc->setIdDocumentos($id_documento);
+        $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);   
+        $ofc_doc->setCcp(0);         
+        $ofc_doc->setFechaVisto('');  
+        $ofc_doc->setEstatusInicial(($_POST['respuesta'] == 0) ? 2: 1);
+        $ofc_doc->setEstatusFinal(1);
+        $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
+        $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+        
+        $ofc_doc->RegistrarOficioDocumento();
 
 
 
-          //Enviar copia solo si se selecciono de la lista de usuarios
-          $arr_ccp = $_POST['check_list_user'];
-          if(!empty($arr_ccp)){
-            foreach ($arr_ccp as $ids) {
-              //Hacer el guardado por id;
-             $ofc_doc->setIdUsuario($ids);   
-             $ofc_doc->setCcp(1); 
-             $ofc_doc->RegistrarOficioDocumento();
-           }            
-         }
-         $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
-         header('Location: sigi.php');
-
+        //Enviar copia solo si se selecciono de la lista de usuarios
+        $arr_ccp = $_POST['check_list_user'];
+        if(!empty($arr_ccp)){
+          foreach ($arr_ccp as $ids) {
+            //Hacer el guardado por id;
+           $ofc_doc->setIdUsuario($ids);   
+           $ofc_doc->setCcp(1); 
+           $ofc_doc->RegistrarOficioDocumento();
+         }            
        }
+       $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+       header('Location: sigi.php');
 
-     } catch (Exception $e) {
+     }
+
+   } catch (Exception $e) {
         //Trabajar en un sistema de manejo de errores
-      $_SESSION['flash-message-error'] = 'Error al guardar la información';
-      header('Location: sigi.php?c=OfcPartes&a=add');
-    }
-
-
-
+    $_SESSION['flash-message-error'] = 'Error al guardar la información';
+    header('Location: sigi.php?c=OfcPartes&a=add');
   }
+
+
+
+}
 }
 
 

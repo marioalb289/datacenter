@@ -50,7 +50,7 @@
 							<p class="form-control-static" ><?php echo $data['oficio']->origen ?></p>
 						</div>
 						<input type="hidden" name="origen" value = "<?php echo $data['oficio']->origen ?>">
-						<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio ?>">
+						<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio;?>">
 					</div>
 					<?php 	if($data['oficio']->origen == "EXTERNO") {?>
 					<div id="formExterno">

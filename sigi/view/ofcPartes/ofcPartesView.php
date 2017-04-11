@@ -29,10 +29,10 @@
 		<div class="row">
 			<div class="col-md-4"><h4><strong>Folio de Oficio: <?php echo $data['oficio']->folio ?></strong></h4></div>
 			<div class="col-md-8 text-right">
-				<?php if($_SESSION['data_user']['privilegios'] == 3 && $data['oficio']->tipo_oficio == "RESPUESTA" && $data['oficio']->id_usuario_emisor != $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 ){ ?>
+				<?php if($_SESSION['data_user']['privilegios'] == 3 && $data['oficio']->tipo_oficio == "SOLICITUD" && $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 && $data['oficio']->estatus_final == 'Cerrado'){ ?>
 				<a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href="#warning" data-toggle="modal" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Cancelar</a>
-				<?php } elseif ($_SESSION['data_user']['privilegios'] == 3 && $data['oficio']->respuesta && $data['oficio']->id_usuario_emisor != $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 && $data['oficio']->estatus_final != 'Cerrado'){
+				<?php } elseif ($_SESSION['data_user']['privilegios'] == 3 && $data['oficio']->respuesta && $data['oficio']->id_usuario_emisor != $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){
 					# code...
 				 ?>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='?c=OfcPartes&a=response&id=<?php echo $data['oficio']->id_oficio ?>' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Responder</a>
@@ -256,7 +256,6 @@
 						        <th>Area</th>
 						        <th>Persona que Responde</th>
 						        <th>Asunto</th>
-						        <th>Estatus</th>
 						        <th>Fecha Enviado</th>
 						        <th>Visto</th>
 						        <th></th>
@@ -270,7 +269,6 @@
 										<td><?php echo $r->area; ?></td>
 										<td><?php echo $r->persona_responde; ?></td>
 										<td><?php echo $r->asunto_emisor; ?></td>
-										<td><?php echo $r->estatus_inicial; ?></td>
 										<td><?php echo $r->fecha_recibido; ?></td>
 										<td><?php echo $r->fecha_visto; ?></td>
 										<td></td>

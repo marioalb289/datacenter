@@ -528,6 +528,7 @@ class Oficio
                 ofc.tipo_oficio as tipo_oficio,
                 ofc.folio AS folio,
                 ofc.folio_institucion AS folio_institucion,
+                ofc.respondido AS respondido,
                 ofc.id_usuario_emisor AS id_usuario_emisor,
                 odr.id_usuario AS id_usuario_receptor,
                 ofc.nombre_emisor AS nombre_emisor,
