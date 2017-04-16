@@ -291,7 +291,7 @@ class OfcPartesController
           $id_usuario = $_SESSION['data_user']['id'];
         }
         // print_r($id_oficio);
-        // print_r($id_usuario);
+        // print_r($id_usuario);exit;
         $oficio = new Oficio();
         $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
         if(empty($objOficio)){
@@ -806,6 +806,7 @@ class OfcPartesController
 
         //Buscar el oficio original y obtener sus datos
         // $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
+        // print_r($id_usuario);
         // $ofc = new Oficio();
         // $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
         // print_r($objOficio);exit;
@@ -888,6 +889,60 @@ class OfcPartesController
 
         //Buscar el oficio del mensaje recibido y obtener sus datos
         $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
+        
+        //Guardar oficio
+        $ofc->_setOrigen($_POST["origen"]);
+        $ofc->setTipoOficio("RESPUESTA");
+        $ofc->setFolio($folio);
+        $ofc->setFolioInstitucion($folio); //Folio de institucion cambiar
+        $ofc->_setIdUsuarioEmisor($id_usuario);
+        $ofc->_setNombreEmisor($objOficio->nombre_emisor);
+        $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
+        $ofc->_setCargo($objOficio->cargo);
+        $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
+        $ofc->_setAsuntoReceptor("");
+        $ofc->_setRespuesta(1);
+        //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta
+        if($objOficio->tipo_oficio == "SOLICITUD" && !$objOficio->respondido)
+          $ofc->setRespondido(1);
+        //Si es una solicitud el objoficio y ya fue respondida marcar como no respondido para que el receptor pueda responder la respuesta de la respuesta
+        elseif($objOficio->tipo_oficio == "SOLICITUD" && $objOficio->respondido)
+          $ofc->setRespondido(0);
+        //si es una respuesta el objfocio marcar como respondido para terminar de cerrar el oficio y evitar que respondan sin reabirl el oficio
+        else
+           $ofc->setRespondido(1);
+        $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
+        $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
+        $id_ofc = $ofc->RegistrarOficio();
+
+
+        //Guardar Registro del oficio con documento
+        $ofc_doc = new OficioDocumento();
+
+        $ofc_doc->setIdOficio($id_ofc);    
+        $ofc_doc->setParentId( ($objOficio->tipo_oficio == "RESPUESTA") ? $objOficio->parent_id : $objOficio->id_oficio );    
+        $ofc_doc->setIdDocumentos($id_documento);
+
+        //Si es el oficio original y no esta respondido, utilizar el id usuario emisor del oficio objOficioOriginal 
+        if($objOficio->tipo_oficio == "SOLICITUD" && !$objOficio->respondido)
+          $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);   
+        //Si es el oficio original y esta responido lo cual indica que se intenta reabrir el oficio, utilizar el id del usuario recpetor
+        elseif($objOficio->tipo_oficio == "SOLICITUD" && $objOficio->respondido)
+          $ofc_doc->setIdUsuario($objOficio->id_usuario_receptor);
+        //Si es la respuesta de una respuesta utilizar el id usuario emisor
+        else
+          $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);
+        $ofc_doc->setCcp(0);         
+        $ofc_doc->setFechaVisto('');  
+        $ofc_doc->setEstatusInicial(($_POST['respuesta'] == 0) ? 2: 1);
+        $ofc_doc->setEstatusFinal(1);
+        $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
+        $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+        
+        $ofc_doc->RegistrarOficioDocumento();
+
+
+        //Cambiar el estatus
         if($objOficio->tipo_oficio == 'SOLICITUD'){
           //Si es solicitud marcarlo como respondido y cambiar estatus global a cerrado
           //marcar como respondido
@@ -913,7 +968,8 @@ class OfcPartesController
            $ofc->marcarRespuesta();
 
            //Buscar el oficio original
-           $objOficioOriginal = $ofc->getOficio($_POST['id_oficio'],$objOficio->parent_id);
+           $arr = $ofc_doc->getOficioDocumento($objOficio->parent_id);
+           $objOficioOriginal = $ofc->getOficio($arr->id_oficio,$id_usuario);
 
            //cambiar el estatus final 
            if($objOficioOriginal->estatus_final == 'Cerrado')
@@ -927,38 +983,6 @@ class OfcPartesController
 
 
         }
-        //Guardar oficio
-        $ofc->_setOrigen($_POST["origen"]);
-        $ofc->setTipoOficio("RESPUESTA");
-        $ofc->setFolio($folio);
-        $ofc->setFolioInstitucion($folio); //Folio de institucion cambiar
-        $ofc->_setIdUsuarioEmisor($id_usuario);
-        $ofc->_setNombreEmisor($objOficio->nombre_emisor);
-        $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
-        $ofc->_setCargo($objOficio->cargo);
-        $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
-        $ofc->_setAsuntoReceptor("");
-        $ofc->_setRespuesta(1);
-        $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
-        $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
-        $id_ofc = $ofc->RegistrarOficio();
-
-
-        //Guardar Registro del oficio con documento
-        $ofc_doc = new OficioDocumento();
-
-        $ofc_doc->setIdOficio($id_ofc);    
-        $ofc_doc->setParentId( ($objOficio->tipo_oficio == "RESPUESTA") ? $objOficio->parent_id : $objOficio->id_oficio );    
-        $ofc_doc->setIdDocumentos($id_documento);
-        $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);   
-        $ofc_doc->setCcp(0);         
-        $ofc_doc->setFechaVisto('');  
-        $ofc_doc->setEstatusInicial(($_POST['respuesta'] == 0) ? 2: 1);
-        $ofc_doc->setEstatusFinal(1);
-        $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
-        $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
-        
-        $ofc_doc->RegistrarOficioDocumento();
 
 
 

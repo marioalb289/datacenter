@@ -113,7 +113,7 @@
 			</div>
 			<div class="col-md-6 form-horizontal">					
 				<div class="form-group">
-					<img src="/admin/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; width: 108px;height: 108px; ">
+					<img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; width: 108px;height: 108px; ">
 				</div>
 				<div class="form-group" style="text-align: center; ">
 					<p><?php echo $data['oficio']->nombre_emisor ?></p>

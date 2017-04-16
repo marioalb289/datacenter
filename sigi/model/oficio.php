@@ -477,8 +477,8 @@ class Oficio
     {
         try 
         {
-            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,created_at,created_by,updated_at,updated_by)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,created_at,created_by,updated_at,updated_by)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //print_r($sql);exit;
 
@@ -496,6 +496,7 @@ class Oficio
                         $this->getAsuntoEmisor(),
                         $this->getAsuntoReceptor(),
                         $this->getRespuesta(),
+                        $this->getRespondido(),
                         date('Y-m-d H:i:s'), 
                         $this->getCreatedBy(),
                         date('Y-m-d H:i:s'), 

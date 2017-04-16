@@ -401,6 +401,31 @@ class OficioDocumento
 
     }
 
+
+    public function getOficioDocumento($id){
+        try
+        {
+
+            $stm = $this->pdo->prepare("
+               SELECT *
+               FROM
+                sigi_oficios_documentos_recepcion odr
+               WHERE
+                odr.id = ?
+            ");
+            // print_r($stm);exit;
+
+            $stm->execute(array($id));
+
+            return $stm->fetch(PDO::FETCH_OBJ);
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
     public function ActualizarEstatusFinal(){
         try 
         {
