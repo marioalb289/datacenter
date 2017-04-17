@@ -541,6 +541,7 @@ class Oficio
                 odr.ccp AS ccp,
                 odr.estatus_final AS estatus_final,
                 doc.id as id_documento,
+                doc.nombre as doc_nombre,
                 odr.parent_id as parent_id
                FROM
                 sigi_oficios ofc

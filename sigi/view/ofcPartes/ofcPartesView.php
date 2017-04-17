@@ -116,7 +116,7 @@
 					<img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; width: 108px;height: 108px; ">
 				</div>
 				<div class="form-group" style="text-align: center; ">
-					<p><?php echo $data['oficio']->nombre_emisor ?></p>
+					<p><?php echo $data['oficio']->doc_nombre ?></p>
 				</div>
 				<div class="form-group" style="text-align: center;">
 					<!-- <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal">Descargar</button> -->
