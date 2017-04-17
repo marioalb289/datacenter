@@ -528,7 +528,7 @@ class Oficio
                 ofc.origen as origen,
                 ofc.tipo_oficio as tipo_oficio,
                 ofc.folio AS folio,
-                ofc.folio_institucion AS folio_institucion,
+                ofc.folio_institucion AS folio_iepc,
                 ofc.respondido AS respondido,
                 ofc.id_usuario_emisor AS id_usuario_emisor,
                 odr.id_usuario AS id_usuario_receptor,

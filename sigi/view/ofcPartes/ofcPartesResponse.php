@@ -42,103 +42,115 @@
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-md-6 form-horizontal">
-
+				<div class="col-md-6 ">
 					<div class="form-group">
-						<label class="col-sm-4 control-label">Origen:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['oficio']->origen ?></p>
-						</div>
-						<input type="hidden" name="origen" value = "<?php echo $data['oficio']->origen ?>">
+					    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->origen; ?>" />
+					    <span class="text-danger"></span>
+					    <input type="hidden" name="origen" value = "<?php echo $data['oficio']->origen ?>">
 						<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio;?>">
 					</div>
+
 					<?php 	if($data['oficio']->origen == "EXTERNO") {?>
 					<div id="formExterno">
+
 						<div class="form-group">
-							<label class="col-sm-4 control-label">Nombre de quien Suscribe:</label>
-							<div class="col-sm-8">
-								<p class="form-control-static" ><?php echo $data['oficio']->nombre_emisor ?></p>
-							</div>
+						    <label >Nombre de quien Suscribe:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
+						    <span class="text-danger"></span>
 						</div>
 
-						<div class="form-group" >
-							<label class="col-sm-4 control-label">Cargo:</label>
-							<div class="col-sm-8">
-								<p class="form-control-static" ><?php echo $data['oficio']->cargo ?></p>
-							</div>
+
+
+						<div class="form-group">
+						   <label for="recepciones_nombreEmisor" class="required">Cargo:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->cargo; ?>" />
+						    <span class="text-danger"></span>
 						</div>
 
-						<div class="form-group" >
-							<label class="col-sm-4 control-label">Institución:</label>
-							<div class="col-sm-8">
-								<p class="form-control-static" ><?php echo $data['oficio']->institucion_emisor ?></p>
-							</div>
+						<div class="form-group">
+						   <label for="recepciones_nombreEmisor" class="required">Institución:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
+						    <span class="text-danger"></span>
 						</div>
 					</div>
 					<?php 	} else { ?>
 					<div id="formInterno" >
-						<div class="form-group" >
-							<label class="col-sm-4 control-label">Área Origen:</label>
-							<div class="col-sm-8">
-								<p class="form-control-static" ><?php echo $data['usuario_emisor']->area ?></p>
-							</div>
+						<div class="form-group">
+						   <label for="recepciones_nombreEmisor" class="required">Área Origen:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['usuario_emisor']->area; ?>" />
+						    <span class="text-danger"></span>
+						</div>
+						
+						<div class="form-group">
+						   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
+						    <span class="text-danger"></span>
 						</div>
 
-						<div class="form-group" >
-							<label class="col-sm-4 control-label">Usuario Origen:</label>
-							<div class="col-sm-8">
-								<p class="form-control-static" ><?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?></p>
-							</div>
-						</div>
 					</div>
 					<?php 	} ?>
 
-
-					<div class="form-group" >
-						<label class="col-sm-4 control-label">Área Destino:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['usuario_receptor']->area ?></p>
-						</div>
-					</div>
-
-					<div class="form-group" >
-						<label class="col-sm-4 control-label">Usuario Destino:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ; ?></p>
-						</div>
-					</div>
-
-					<div class="form-group" >
-						<label class="col-sm-4 control-label">Asuto Emisor:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['oficio']->asunto_emisor ?></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 form-horizontal">					
+					
 					<div class="form-group">
-						<img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; width: 102px;height: 102px; ">
+					   <label for="recepciones_nombreEmisor" class="required">Área Destino:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
+					    <span class="text-danger"></span>
 					</div>
-					<div class="form-group" style="text-align: center; ">
-						<span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
-						
-				      <!-- <span class="fileinput-filename"></span><span class="fileinput-new">No se eligió archivo</span>
-				      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal">Ver</button> -->
-				      <!-- <p class="help-block">Example block-level help text here.</p> -->
-				  </div>
-				  <div class="form-group" style="text-align: center;">
-				  	<span class="fileinput-filename"></span><span class="fileinput-new">No se eligió archivo</span>
 
-				  </div>
-				  <div class="form-group" style="text-align: center;">
-				  	<button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Ver</button>
-				  </div>
-				  <div class="form-group">
-				  	<label for="exampleInputFile">Asunto:</label>			      
-				  	<!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				  	<textarea class="form-control" rows="5" name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio"></textarea>
-				  </div>
+					<div class="form-group">
+					   <label for="recepciones_nombreEmisor" class="required">Usuario Destino:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
+					    <span class="text-danger"></span>
+					</div>
 
+					<?php if($data['oficio']->folio_iepc != '') { ?>
+				    <div class="form-group" id="box_cargo">
+				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
+				        <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php echo $data['oficio']->folio_iepc; ?>" />
+				        <span class="text-danger"></span>
+				    </div>
+				    <?php } ?>
+
+
+					<div class="form-group">
+						   <label for="recepciones_nombreEmisor" class="required">Asunto Emisor:</label>
+						    <textarea type="text" id="usuario_receptor" readonly="" class="form-control" ><?php  echo $data['oficio']->asunto_emisor; ?></textarea>
+						    <span class="text-danger"></span>
+						</div>
+					
+				</div>
+
+
+				<div class="col-md-6">					
+				    
+				    <div class="form-group">
+				      <label for="exampleInputFile">Asunto:</label>			      
+				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+				      <textarea class="form-control"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="50" style="height: 108px;"></textarea>
+				    </div>
+
+				    <?php if($data['privilegios'] == 3) { ?>
+				    <div class="form-group" id="box_cargo">
+				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
+				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control" placeholder="Folio Institucional" />
+				        <span class="text-danger"></span>
+				    </div>
+				    <?php } ?>
+
+				    <div class="form-group">
+				    
+				      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
+				    </div>
+				    <div class="form-group" style="text-align: center; ">
+				      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
+				      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
+				    </div>
+				    <div class="form-group" style="text-align: center;">
+				    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
+				    	
+				    </div>
+					
 				</div>
 
 				<div class="col-md-12">
@@ -157,39 +169,10 @@
 							</label>
 						</div>
 
-						<div class="checkbox"  >
-							<label>
-								<input type="checkbox" id="ccp">
-								Para acuerdo con:
-							</label>
-						</div>
-
 			        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
 		            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
 		            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
 		            <!-- <span class="text-danger"></span> -->
-		        </div>
-		        <div class="form-group" id="lista_usuarios" style="display: none">
-		        	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-		        		<thead>
-		        			<tr>
-		        				<th></th>
-		        				<th></th>
-		        				<th>Nombre</th>
-		        				<th>Area</th>
-		        			</tr>
-		        		</thead>
-		        		<tbody>
-		        			<?php foreach($data['usuarios'] as $u): ?>
-		        				<tr>
-		        					<td></td>
-		        					<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
-		        					<td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
-		        					<td><?php echo $u->area; ?></td>
-		        				</tr>
-		        			<?php endforeach; ?>
-		        		</tbody>
-		        	</table>
 		        </div>
 
 		    </div>

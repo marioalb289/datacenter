@@ -381,6 +381,8 @@ class OfcPartesController
           exit;
         }
 
+        $privilegios = $_SESSION['data_user']['privilegios'];
+
         // print_r($objOficio);exit;
 
         $usuario = new Usuario();
@@ -409,7 +411,7 @@ class OfcPartesController
           }
           
         }
-        $this->layout->renderVista("ofcPartes","ofcPartesResponse",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr));
+        $this->layout->renderVista("ofcPartes","ofcPartesResponse",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr, 'privilegios' => $privilegios));
 
       }
 
@@ -426,6 +428,20 @@ class OfcPartesController
         $objOficioDoc->setIdDocumentos($_REQUEST['id']);
         $objOficioDoc->setIdUsuario($_SESSION['data_user']['id']);
         $objOficioDoc->FechaVistoActualizar();
+
+        //Buscar el oficio al que pertenece el docmuento y si es un externo y no requiere responder cambiar estatus global a cerrado
+        $oficio = new oficio();
+        $objOficio = $oficio->getOficio($_REQUEST['idofc'],$_SESSION['data_user']['id']);
+        if(!empty($objOficio)){
+          if(!$objOficio->respuesta && $objOficio->origen == "EXTERNO"){
+
+             $objOficioDoc->setEstatusFinal('Cerrado');
+             $objOficioDoc->setIdOficio($objOficio->id_oficio);
+             $objOficioDoc->setUpdatedBy($_SESSION['data_user']['id']); //Cambair por el usuario logeado
+             $objOficioDoc->ActualizarEstatusFinal();
+
+          }
+        }
 
         // print_r($objDoc);exit;
         if(!empty($objDoc)){
@@ -735,7 +751,7 @@ class OfcPartesController
           $ofc->_setOrigen($_POST["select_origen"]);
           $ofc->setTipoOficio("SOLICITUD");
           $ofc->setFolio($folio);
-          $ofc->setFolioInstitucion($folio); //Folio de institucion cambiar
+          $ofc->setFolioInstitucion( isset($_POST['folio_iepc']) ? $_POST['folio_iepc']: ''); //Folio de institucion cambiar
           $ofc->_setIdUsuarioEmisor(($_POST["id_usuario_origen"] == '') ? 0: $_POST["id_usuario_origen"]);
           $ofc->_setNombreEmisor( isset($_POST["nombre_emisor"]) ? $_POST["nombre_emisor"] : "");
           $ofc->_setInstitucionEmisor( isset( $_POST["institucion_emisor"]) ? $_POST["institucion_emisor"]: "" );
@@ -894,7 +910,7 @@ class OfcPartesController
         $ofc->_setOrigen($_POST["origen"]);
         $ofc->setTipoOficio("RESPUESTA");
         $ofc->setFolio($folio);
-        $ofc->setFolioInstitucion($folio); //Folio de institucion cambiar
+        $ofc->setFolioInstitucion( isset($_POST['folio_iepc']) ? $_POST['folio_iepc']: ''); //Folio de institucion cambiar
         $ofc->_setIdUsuarioEmisor($id_usuario);
         $ofc->_setNombreEmisor($objOficio->nombre_emisor);
         $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);

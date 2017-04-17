@@ -46,91 +46,101 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-md-6 form-horizontal">
+			<div class="col-md-6 ">
+
 
 				<div class="form-group">
-					<label class="col-sm-4 control-label">Origen:</label>
-					<div class="col-sm-8">
-						<p class="form-control-static" ><?php echo $data['oficio']->origen ?></p>
-					</div>
+				    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
+				    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->origen; ?>" />
+				    <span class="text-danger"></span>
 				</div>
 				<?php 	if($data['oficio']->origen == "EXTERNO") {?>
 				<div id="formExterno">
+
 					<div class="form-group">
-						<label class="col-sm-4 control-label">Nombre de quien Suscribe:</label>
-						<div class="col-sm-8">
-							<p class="form-contr	ol-static" ><?php echo $data['oficio']->nombre_emisor ?></p>
-						</div>
+					    <label >Nombre de quien Suscribe:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
+					    <span class="text-danger"></span>
 					</div>
 
-					<div class="form-group" >
-						<label class="col-sm-4 control-label">Cargo:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['oficio']->cargo ?></p>
-						</div>
+
+
+					<div class="form-group">
+					   <label for="recepciones_nombreEmisor" class="required">Cargo:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->cargo; ?>" />
+					    <span class="text-danger"></span>
 					</div>
 
-					<div class="form-group" >
-						<label class="col-sm-4 control-label">Institución:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['oficio']->institucion_emisor ?></p>
-						</div>
+					<div class="form-group">
+					   <label for="recepciones_nombreEmisor" class="required">Institución:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
+					    <span class="text-danger"></span>
 					</div>
 				</div>
 				<?php 	} else { ?>
 				<div id="formInterno" >
-					<div class="form-group" >
-						<label class="col-sm-4 control-label">Área Origen:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['usuario_emisor']->area ?></p>
-						</div>
+					<div class="form-group">
+					   <label for="recepciones_nombreEmisor" class="required">Área Origen:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['usuario_emisor']->area; ?>" />
+					    <span class="text-danger"></span>
+					</div>
+					
+					<div class="form-group">
+					   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
+					    <span class="text-danger"></span>
 					</div>
 
-					<div class="form-group" >
-						<label class="col-sm-4 control-label">Usuario Origen:</label>
-						<div class="col-sm-8">
-							<p class="form-control-static" ><?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?></p>
-						</div>
-					</div>
 				</div>
 				<?php 	} ?>
 
-
-				<div class="form-group" >
-					<label class="col-sm-4 control-label">Área Destino:</label>
-					<div class="col-sm-8">
-
-						<p class="form-control-static" ><?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?></p>
-					</div>
-				</div>
-
-				<div class="form-group" >
-					<label class="col-sm-4 control-label">Usuario Destino:</label>
-					<div class="col-sm-8">
-						<p class="form-control-static" ><?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 form-horizontal">					
+				
 				<div class="form-group">
-					<img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; width: 108px;height: 108px; ">
-				</div>
-				<div class="form-group" style="text-align: center; ">
-					<p><?php echo $data['oficio']->doc_nombre ?></p>
-				</div>
-				<div class="form-group" style="text-align: center;">
-					<!-- <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal">Descargar</button> -->
-					<a href='?c=OfcPartes&a=viewFile&id=<?php echo $data['oficio']->id_documento ?>' class='btn btn-default'  style="width: 100px;">Ver</a>
-					<a href='?c=OfcPartes&a=downloadFile&id=<?php echo $data['oficio']->id_documento ?>' class='btn btn-default' style="width: 100px;">Descargar</a>
+				   <label for="recepciones_nombreEmisor" class="required">Área Destino:</label>
+				    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
+				    <span class="text-danger"></span>
 				</div>
 
-				<div class="form-group" >
-					<label class="col-sm-2 control-label">Asunto:</label>
-					<div class="col-sm-10">
-						<p class="form-control-static" ><?php echo $data['oficio']->asunto_emisor ?></p>
-					</div>
+				<div class="form-group">
+				   <label for="recepciones_nombreEmisor" class="required">Usuario Destino:</label>
+				    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
+				    <span class="text-danger"></span>
 				</div>
+				
+				
+			</div>
 
+			<div class="col-md-6">
+
+				<?php if($data['oficio']->folio_iepc != '') { ?>
+			    <div class="form-group" id="box_cargo">
+			        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
+			        <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php echo $data['oficio']->folio_iepc; ?>" />
+			        <span class="text-danger"></span>
+			    </div>
+			    <?php } ?>					
+			    
+			    <div class="form-group">
+			      <label for="exampleInputFile">Asunto:</label>			      
+			      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+			      <textarea class="form-control"  name="asunto_oficio" readonly placeholder="Asunto del Oficio" style="height: 108px;"><?php echo $data['oficio']->asunto_emisor ?></textarea>
+			    </div>
+
+			    
+
+			    <div class="form-group">
+			    
+			      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
+			    </div>
+			    <div class="form-group" style="text-align: center; ">
+			      <a href='?c=OfcPartes&a=viewFile&id=<?php echo $data['oficio']->id_documento ?>&idofc=<?php  echo $data['oficio']->id_oficio?>' class='btn btn-default'  style="width: 100px;">Ver</a>
+				  <a href='?c=OfcPartes&a=downloadFile&id=<?php echo $data['oficio']->id_documento ?>' class='btn btn-default' style="width: 100px;">Descargar</a>
+			    </div>
+			    <div class="form-group" style="text-align: center;">
+			    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;"><?php echo $data['oficio']->doc_nombre ?></span>
+			    	
+			    </div>
+				
 			</div>
 
 			<div class="col-md-12">
@@ -183,7 +193,7 @@
 		</div>
 	</div>
 </div>
-<?php if(!empty($data['usuarios_turnar']) && $data['oficio']->estatus_final!= 'Cerrado' ) { ?>
+<?php if(!empty($data['usuarios_turnar']) && $data['oficio']->estatus_final!= 'Cerrado' &&  $data['oficio']->tipo_oficio == 'SOLICITUD') { ?>
 <form name="recepciones" method="post" action="?c=OfcPartes&a=Turnar" role="form" enctype="multipart/form-data">
 <div class="panel panel-default">
 	<div class="panel-heading">

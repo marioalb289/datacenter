@@ -28,12 +28,12 @@
             <span class="icon-bar"></span>
           </button>
           <a style="display: block; font-weight: 600; color: white; margin-top: 10px; text-decoration: none;" href="sigi.php">
-            <img src="AI/image/logoAI.png" style="width: 27px;height: 21px;">
+            <img src="AI/image/sigi_blanco.png" style="width: 100px;padding-top: 7px;">
           </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Listar Oficios</a></li>
+            <li class="active"><a href="sigi.php">Listar Oficios</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registrar Oficio <span class="caret"></span></a>
               <ul class="dropdown-menu">

@@ -423,7 +423,7 @@ class OficioDocumento
         {
             die($e->getMessage());
         }
-
+ 
     }
 
     public function ActualizarEstatusFinal(){

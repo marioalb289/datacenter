@@ -99,6 +99,8 @@
 					        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
 					        <span class="text-danger"></span>
 					    </div>
+
+
 		            </div>
 		            <?php } ?>
 
@@ -120,29 +122,36 @@
 				        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor">
 				        <span class="text-danger"></span>
 				    </div>
+					
+					
 				</div>
 				<div class="col-md-6">					
-				    <div class="form-group">
 				    
-				      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; width: 108px;height: 108px; ">
-				    </div>
-				    <div class="form-group" style="text-align: center; ">
-				      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
-				      <!-- <span class="fileinput-filename"></span><span class="fileinput-new">No se eligió archivo</span>
-				      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal">Ver</button> -->
-				      <!-- <p class="help-block">Example block-level help text here.</p> -->
-				    </div>
-				    <div class="form-group" style="text-align: center;">
-				    	<span class="fileinput-filename"></span><span class="fileinput-new">No se eligió archivo</span>
-				    	
-				    </div>
-				    <div class="form-group" style="text-align: center;">
-				    	<button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Ver</button>
-				    </div>
 				    <div class="form-group">
 				      <label for="exampleInputFile">Asunto:</label>			      
 				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control" rows="5" name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio"></textarea>
+				      <textarea class="form-control"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;"></textarea>
+				    </div>
+
+				    <?php if($data['privilegios'] == 3) { ?>
+				    <div class="form-group" id="box_cargo">
+				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
+				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control" placeholder="Folio Institucional" />
+				        <span class="text-danger"></span>
+				    </div>
+				    <?php } ?>
+
+				    <div class="form-group">
+				    
+				      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
+				    </div>
+				    <div class="form-group" style="text-align: center; ">
+				      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
+				      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
+				    </div>
+				    <div class="form-group" style="text-align: center;">
+				    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
+				    	
 				    </div>
 					
 				</div>
