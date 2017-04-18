@@ -89,7 +89,7 @@ class Usuario
 		}
 	}
 
-	public function ListarUsuarios($cond=array())
+	public function ListarUsuarios($cond=array(),$cond2= "")
 	{
 		try
 		{	
@@ -100,13 +100,15 @@ class Usuario
 				$stm = $this->pdo->prepare("
 				SELECT us.id as id_usuario, us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
 				JOIN areas ar ON ar.id = us.area WHERE us.id NOT IN($plist)
+				$cond2
 				");
 				$stm->execute($parms);
 			}
 			else{
 				$stm = $this->pdo->prepare("
 				SELECT us.id as id_usuario, us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
-				JOIN areas ar ON ar.id = us.area 
+				JOIN areas ar ON ar.id = us.area
+				$cond2 
 				");
 				$stm->execute();
 
@@ -116,6 +118,32 @@ class Usuario
 			
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function userOfcPartes()
+	{
+		try
+		{						
+			$stm = $this->pdo->prepare("
+			SELECT
+				us.id AS id_usuario,
+				us.nombre AS nombre_usuario,
+				us.apellido AS apellido_usuario,
+				us.correo AS email,
+				ar.nombre AS area,
+				us.titular
+			FROM
+				usuarios us
+			JOIN areas ar ON ar.id = us.area
+			WHERE us.titular = 1 AND ar.abreviatura = 'UTOE' 
+			");
+			$stm->execute();
+			return $stm->fetch(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
 		{

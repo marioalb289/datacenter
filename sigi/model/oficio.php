@@ -5,19 +5,20 @@
 */
 class Oficio 
 {
-	private $pdo;
-	private $id;
-	private $origen;
+    private $pdo;
+    private $id;
+    private $origen;
     private $tipo_oficio;
-	private $id_usuario_emisor;
-	private $nombre_emisor;
-	private $institucion_emisor;
+    private $id_usuario_emisor;
+    private $nombre_emisor;
+    private $institucion_emisor;
     private $folio_institucion;
-	private $cargo;
-	private $asunto_emisor;
-	private $asunto_receptor;
-	private $respuesta;
+    private $cargo;
+    private $asunto_emisor;
+    private $asunto_receptor;
+    private $respuesta;
     private $respondido;
+    private $destino;
 	private $created_at;
 	private $updated_at;
 	private $created_by;
@@ -473,11 +474,35 @@ class Oficio
         return $this;
     }
 
+     /**
+     * Gets the value of destino.
+     *
+     * @return mixed
+     */
+    public function getDestino()
+    {
+        return $this->destino;
+    }
+
+    /**
+     * Sets the value of destino.
+     *
+     * @param mixed $destino the destino
+     *
+     * @return self
+     */
+    public function setDestino($destino)
+    {
+        $this->destino = $destino;
+
+        return $this;
+    }
+
     public function RegistrarOficio()
     {
         try 
         {
-            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,created_at,created_by,updated_at,updated_by)
+            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,created_at,created_by,updated_at,updated_by)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //print_r($sql);exit;
@@ -497,6 +522,7 @@ class Oficio
                         $this->getAsuntoReceptor(),
                         $this->getRespuesta(),
                         $this->getRespondido(),
+                        $this->getDestino(),
                         date('Y-m-d H:i:s'), 
                         $this->getCreatedBy(),
                         date('Y-m-d H:i:s'), 
@@ -710,6 +736,10 @@ class Oficio
 
     
 
+
+   
+
+   
 }
 
 

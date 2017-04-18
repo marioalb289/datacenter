@@ -31,6 +31,19 @@ $(document).ready(function(){
         dateFormat: 'yy-mm-dd'
     });	
 
+    /*Evento que ejecuta el modal de cancelar solicitd*/
+    $('#cancelar_solicitud').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('whatever') // Extract info from data-* attributes
+      // console.log('aqui datos button', recipient);
+      $('#btn-confirmar').attr("href", recipient);
+      // // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      // var modal = $(this)
+      // modal.find('.modal-title').text('New message to ' + recipient)
+      // modal.find('.modal-body input').val(recipient)
+    })
+
     /*Evento que muestra los campos necesarios para un oficio externo o interno*/
     /*$( "#select_origen" )
       .change(function () {
@@ -68,9 +81,11 @@ $(document).ready(function(){
               "className": "dt-center",
               "render": function ( data, type, row ) {
                     if(row.estatus_final == 'Cerrado')
-                      return  "<button type='button' class='btn btn-success btn-xs' style='width:60px'>"+row.estatus_final+"</button>";
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else if(row.estatus_final == 'Cancelado')
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
                     else
-                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:60px'>"+row.estatus_final+"</button>";  
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
                 },
             },
             { "data": "fecha_recibido",
@@ -104,6 +119,20 @@ $(document).ready(function(){
                     return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
             },
+            // {
+            //     "targets": -1,
+            //     "data": null, 
+            //     "visible": ocultarColumnas(USER_PRIV),
+            //     "orderable" : false,
+            //     "className": "dt-center",
+            //     "render": function ( data, type, row ) {
+            //         console.log(row);
+            //         if(row.tipo_oficio=="RESPUESTA")
+            //           return "";
+            //         else
+            //           return  "<a href='?c=OfcPartes&a=edit&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Editar</a>";
+            //     },
+            // },
             {
                 "targets": -1,
                 "data": null, 
@@ -111,24 +140,10 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    console.log(row);
                     if(row.tipo_oficio=="RESPUESTA")
                       return "";
                     else
-                      return  "<a href='?c=OfcPartes&a=edit&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Editar</a>";
-                },
-            },
-            {
-                "targets": -1,
-                "data": null, 
-                "visible": ocultarColumnas(USER_PRIV),
-                "orderable" : false,
-                "className": "dt-center",
-                "render": function ( data, type, row ) {
-                    if(row.tipo_oficio=="RESPUESTA")
-                      return "";
-                    else
-                      return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
             }
         ] ,       
@@ -158,11 +173,12 @@ $(document).ready(function(){
               "orderable": true,
               "className": "dt-center",
               "render": function ( data, type, row ) {
-                    console.log(row);
                     if(row.estatus_final == 'Cerrado')
-                      return  "<button type='button' class='btn btn-success btn-xs' style='width:60px'>"+row.estatus_final+"</button>";
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else if(row.estatus_final == 'Cancelado')
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
                     else
-                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:60px'>"+row.estatus_final+"</button>";  
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
                 },
             },
             { "data": "fecha_recibido",
@@ -195,18 +211,18 @@ $(document).ready(function(){
                     return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
             },
-            {
-                "targets": -1,
-                "data": "", 
-                "visible": true,
-                "orderable" : false,
-                "render": function ( data, type, row ) {
-                    if(row.id_usuario_emisor==ID_USER)
-                      return "<a href='?c=OfcPartes&a=edit&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Editar</a>";
-                    else
-                      return  "";
-                },
-            },
+            // {
+            //     "targets": -1,
+            //     "data": "", 
+            //     "visible": true,
+            //     "orderable" : false,
+            //     "render": function ( data, type, row ) {
+            //         if(row.id_usuario_emisor==ID_USER)
+            //           return "<a href='?c=OfcPartes&a=edit&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Editar</a>";
+            //         else
+            //           return  "";
+            //     },
+            // },
             {
                 "targets": -1,
                 "data": null,
@@ -214,7 +230,7 @@ $(document).ready(function(){
                 "orderable" : false, 
                 "render": function ( data, type, row ) {
                     if(row.id_usuario_emisor==ID_USER)
-                      return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      return  "<a href='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                     else
                       return  "";
                 },
@@ -264,25 +280,6 @@ $(document).ready(function(){
                   "orderable" : false,
                   "render": function ( data, type, row ) {
                       return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
-                  },
-              },
-              {
-                  "targets": -1,
-                  "data": "", 
-                  "visible": true,
-                  "orderable" : false,
-                  "render": function ( data, type, row ) {
-                      return  "<a href='?c=OfcPartes&a=edit&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Editar</a>";
-                  },
-              },
-              {
-                  "targets": -1,
-                  "data": null,
-                  "visible": true,
-                  "orderable" : false, 
-                  "width": "1%",
-                  "render": function ( data, type, row ) {
-                      return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                   },
               }
           ],

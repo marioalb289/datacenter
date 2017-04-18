@@ -43,7 +43,7 @@ class OfcPartesController
 
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
-      $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario ";
+      $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario AND sigi_vw_oficios_externos.estatus_final <> 'Cancelado' ";
     }
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     else{
@@ -90,7 +90,13 @@ class OfcPartesController
 
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
-      $cond = " sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_internos.id_usuario_emisor = $id_usuario GROUP BY id_oficio  ";
+      // $cond = " sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_internos.id_usuario_emisor = $id_usuario GROUP BY id_oficio  ";
+      $cond = " (
+        sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario
+        AND sigi_vw_oficios_internos.estatus_final <> 'Cancelado'
+      )
+        OR (id_usuario_emisor = $id_usuario)
+        GROUP BY id_oficio";
     }
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     else{
@@ -241,13 +247,34 @@ class OfcPartesController
 
   }
 
+  public function addExternoAction(){
+     $usuario = new Usuario();
+    $usr = $usuario->ListarUsuarios(array($_SESSION['data_user']['id']), " AND ar.abreviatura <>'UTOE'");
+    $area =  new Area();
+    $ar = $area->ListarAreas();
+    $area_usuario = $usuario->getUsuarioArea($_SESSION['data_user']['id']);
+    $privilegios = $_SESSION['data_user']['privilegios'];
+
+        //require_once ("/../view/header.php");
+        //require_once '/../view/ofcPartes/ofcPartesAdd.php';
+    $this->layout->renderVista("ofcPartes","ofcPartesAddExterno",array('usuarios' => $usr, 'areas' => $ar,'privilegios' => $privilegios,'area_usuario'=>$area_usuario));
+
+  }
+
   public function editAction(){
-
-
     //Buscar oficio
     if(isset($_REQUEST['id'])){
       $id_oficio = $_REQUEST['id'];
         $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
+
+        //si eres un usuario receptor, buscar solo el oficio que te correponse
+        if($_SESSION['data_user']['privilegios'] == 3){
+          $id_usuario = $_SESSION['data_user']['id'];
+        }
+        else{
+          header('Location: sigi.php');
+          exit;
+        }
 
         $oficio = new Oficio();
         $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
@@ -257,22 +284,39 @@ class OfcPartesController
           exit;
         }
 
+        $privilegios = $_SESSION['data_user']['privilegios'];
+
+        // print_r($objOficio);exit;
+
         $usuario = new Usuario();
-        $usr = $usuario->ListarUsuarios();
+        $usr = array(); 
         $area =  new Area();
         $ar = $area->ListarAreas();
+        $usuarios_ccp = array();
 
         $objUserReceptor = $usuario->getUsuarioArea($objOficio->id_usuario_receptor);
         $objUserEmisor = $usuario->getUsuarioArea($objOficio->id_usuario_emisor);
-        $arrUsrccp = $usuario->ListarUsuariosCcp($objOficio->id_oficio);
-        // print_r($objOficio);
-        // print_r($objUserReceptor);
-        // print_r($objUserEmisor);
-        // exit;
-        $this->layout->renderVista("ofcPartes","ofcPartesEdit",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $arrUsrccp));
+
+        $arrUsrccp = array();
+        //Si eres un usuario receptor cargar los usuarios que tambien recibieron el mensaje solo si eres el titular del mensaje, y solo el titular puede turnar a otros usuarios
+        if($_SESSION['data_user']['privilegios'] == 3){
+          if($objOficio->ccp == 0){
+
+            //en caso de ser un oficio interno quitar el usuario que lo emitio
+            if($objOficio->origen == "INTERNO")
+              $usuarios_ccp[] = $objOficio->id_usuario_emisor;
+            //quitar de la lista de usuarios el usuario logeado
+            $usuarios_ccp[] = $id_usuario;
+
+
+            $usr = $usuario->ListarUsuarios($usuarios_ccp);
+
+          }
+          
+        }
+        $this->layout->renderVista("ofcPartes","ofcPartesEdit",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr, 'privilegios' => $privilegios));
 
       }
-
     }
 
     public function viewAction(){
@@ -356,6 +400,37 @@ class OfcPartesController
 
     }
 
+    public function cancelAction(){
+      if(isset($_REQUEST['id'])){
+        try {
+          $objOficioDoc =  new OficioDocumento();
+          $objOficioDoc->setEstatusFinal('Cancelado');
+          $objOficioDoc->setIdOficio($_REQUEST['id']);
+          $objOficioDoc->setUpdatedBy($_SESSION['data_user']['id']); //Cambair por el usuario logeado
+          $objOficioDoc->ActualizarEstatusFinal();
+
+          $_SESSION['flash-message-success'] = 'Solicitud Cancelada';
+          header('Location: sigi.php');
+          
+        } catch (Exception $e) {
+
+          $_SESSION['flash-message-error'] = 'Error al cambiar el estatus';
+          header('Location: sigi.php');
+          exit;
+          
+        }
+
+      }
+      else{
+        $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+        header('Location: sigi.php');
+        exit;
+      }
+
+    }
+
+
+
     public function responseAction(){
 
 
@@ -433,18 +508,18 @@ class OfcPartesController
         $oficio = new oficio();
         $objOficio = $oficio->getOficio($_REQUEST['idofc'],$_SESSION['data_user']['id']);
         if(!empty($objOficio)){
-          if(!$objOficio->respuesta && $objOficio->origen == "EXTERNO"){
+          if(!$objOficio->respuesta ){
 
-             $objOficioDoc->setEstatusFinal('Cerrado');
-             $objOficioDoc->setIdOficio($objOficio->id_oficio);
+           $objOficioDoc->setEstatusFinal('Cerrado');
+           $objOficioDoc->setIdOficio($objOficio->id_oficio);
              $objOficioDoc->setUpdatedBy($_SESSION['data_user']['id']); //Cambair por el usuario logeado
              $objOficioDoc->ActualizarEstatusFinal();
 
-          }
-        }
+           }
+         }
 
         // print_r($objDoc);exit;
-        if(!empty($objDoc)){
+         if(!empty($objDoc)){
 
           $dir = $objDoc->ruta; // trailing slash is important
           $file = $dir . $objDoc->nombre . ".pdf";          
@@ -669,6 +744,7 @@ class OfcPartesController
         // print_r($_FILES);
           // throw new Exception('No se ha seleccionado ningun archivo.');
           // print_r($_POST);exit;
+
         $origen = ($_POST['select_origen'] == 1) ? 'I': 'E';
         $area = new Area();
         $objArea = $area->ListarAreasById($_POST['area_destino'])['0'];
@@ -759,6 +835,7 @@ class OfcPartesController
           $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
           $ofc->_setAsuntoReceptor("");
           $ofc->_setRespuesta($_POST["respuesta"]);
+          $ofc->setDestino( isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
           $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
           $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
           $id_ofc = $ofc->RegistrarOficio();
@@ -770,7 +847,17 @@ class OfcPartesController
           $ofc_doc->setIdOficio($id_ofc);    
           $ofc_doc->setParentId(null);    
           $ofc_doc->setIdDocumentos($id_documento);
-          $ofc_doc->setIdUsuario($_POST['id_usuario_receptor']);   
+
+          //Si es un oficio con destino a dependencia externa buscar y asingar el usuario titular de ofc de partes
+          if(isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO'){
+            $usr = new Usuario();
+            $objUsr = $usr->userOfcPartes();
+            $ofc_doc->setIdUsuario($objUsr->id_usuario);
+
+          }
+          else{
+            $ofc_doc->setIdUsuario($_POST['id_usuario_receptor']);   
+          }
           $ofc_doc->setCcp(0);         
           $ofc_doc->setFechaVisto('');  
           $ofc_doc->setEstatusInicial(($_POST['respuesta'] == 0) ? 2: 1);
@@ -828,7 +915,7 @@ class OfcPartesController
         // print_r($objOficio);exit;
           // throw new Exception('No se ha seleccionado ningun archivo.');
           // print_r($_POST['origen']);exit;
-        
+
         $origen = ($_POST['origen'] == 'INTERNO') ? 'I': 'E';
         $area = new Area();
         $objArea = $area->ListarAreasById($_SESSION['data_user']['area'])['0'];
@@ -926,7 +1013,7 @@ class OfcPartesController
           $ofc->setRespondido(0);
         //si es una respuesta el objfocio marcar como respondido para terminar de cerrar el oficio y evitar que respondan sin reabirl el oficio
         else
-           $ofc->setRespondido(1);
+         $ofc->setRespondido(1);
         $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
         $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
         $id_ofc = $ofc->RegistrarOficio();
@@ -962,22 +1049,22 @@ class OfcPartesController
         if($objOficio->tipo_oficio == 'SOLICITUD'){
           //Si es solicitud marcarlo como respondido y cambiar estatus global a cerrado
           //marcar como respondido
-           $ofc->_setId($objOficio->id_oficio);
-           $ofc->setRespondido(1);
-           $ofc->marcarRespuesta();
+         $ofc->_setId($objOficio->id_oficio);
+         $ofc->setRespondido(1);
+         $ofc->marcarRespuesta();
 
            //cambiar el estatus final 
-           if($objOficio->estatus_final == 'Cerrado')
-             $objOficioDoc->setEstatusFinal('Abierto');
-           else
-             $objOficioDoc->setEstatusFinal('Cerrado');
+         if($objOficio->estatus_final == 'Cerrado')
+           $objOficioDoc->setEstatusFinal('Abierto');
+         else
+           $objOficioDoc->setEstatusFinal('Cerrado');
 
 
-           $objOficioDoc->setIdOficio($_POST['id_oficio']);
+         $objOficioDoc->setIdOficio($_POST['id_oficio']);
            $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
            $objOficioDoc->ActualizarEstatusFinal();
-        }
-        else{
+         }
+         else{
           //Sie es la respuesta de una respuesta, marcar la respuesta recibida como respondido y cambiar el estatus de la solicitud principal
            $ofc->_setId($objOficio->id_oficio);
            $ofc->setRespondido(1);
@@ -998,13 +1085,13 @@ class OfcPartesController
            $objOficioDoc->ActualizarEstatusFinal();
 
 
-        }
+         }
 
 
 
         //Enviar copia solo si se selecciono de la lista de usuarios
-        $arr_ccp = $_POST['check_list_user'];
-        if(!empty($arr_ccp)){
+         $arr_ccp = $_POST['check_list_user'];
+         if(!empty($arr_ccp)){
           foreach ($arr_ccp as $ids) {
             //Hacer el guardado por id;
            $ofc_doc->setIdUsuario($ids);   

@@ -453,6 +453,33 @@ class OficioDocumento
 
     }
 
+    public function CancelarSolicitud(){
+        try 
+        {
+            $sql = "UPDATE sigi_oficios_documentos_recepcion SET 
+                        estatus_final = ?, update_at = ? , updated_by = ?
+                    WHERE id_oficio = ? OR parent_id = ? ";
+
+                    // print_r($sql);exit;
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getEstatusFinal(),
+                        date('Y-m-d H:i:s'), 
+                        $this->getUpdatedBy(),
+                        intval($this->getIdOficio()),
+                        intval($this->getIdOficio())
+                    )
+                );
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+
     public function getRespuestas($id_oficio){
         try
         {

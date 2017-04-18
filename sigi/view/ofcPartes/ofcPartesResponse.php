@@ -169,10 +169,39 @@
 							</label>
 						</div>
 
+						<div class="checkbox"  >
+							<label>
+								<input type="checkbox" id="ccp">
+								Para acuerdo con:
+							</label>
+						</div>
+
 			        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
 		            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
 		            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
 		            <!-- <span class="text-danger"></span> -->
+		        </div>
+		        <div class="form-group" id="lista_usuarios" >
+		        	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+		        		<thead>
+		        			<tr>
+		        				<th></th>
+		        				<th></th>
+		        				<th>Nombre</th>
+		        				<th>Area</th>
+		        			</tr>
+		        		</thead>
+		        		<tbody>
+		        			<?php foreach($data['usuarios'] as $u): ?>
+		        				<tr>
+		        					<td></td>
+		        					<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
+		        					<td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
+		        					<td><?php echo $u->area; ?></td>
+		        				</tr>
+		        			<?php endforeach; ?>
+		        		</tbody>
+		        	</table>
 		        </div>
 
 		    </div>
@@ -181,6 +210,7 @@
 </div>
 </form>
 <script>
+
 	//Evento para visualizar pdf al crear registro
 	$(function(){
 		$("#verPdf").click(loadPreviews_click);
