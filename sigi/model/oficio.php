@@ -503,7 +503,7 @@ class Oficio
         try 
         {
             $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,created_at,created_by,updated_at,updated_by)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //print_r($sql);exit;
 

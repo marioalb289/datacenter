@@ -35,6 +35,7 @@
           <?php if($_SESSION['data_user']['privilegios'] == 3){ ?>
           <li><a href="#respuestas_enviadas" data-toggle="tab">Respuestas Enviadas</a></li>
           <?php } ?>
+          <li><a href="#oficios_destino_externo" data-toggle="tab">Listar Oficios con Destino Externo</a></li>
         </ul>
       </div>
       <div class="panel-body">
@@ -96,6 +97,29 @@
                       <th>Fecha Enviado</th>
                       <th>Visto</th>
                       <th style="width: 60px;"></th>
+                    </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="oficios_destino_externo">
+            <!-- contenido tab interno -->
+            <div class="col-md-12">
+              <table id="lista_oficios_destino_externo" class="table  table-bordered table-hover display dt-center " cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                      <th>Folio</th>
+                      <th>Folio Institucional</th>
+                      <th>Area</th>
+                      <th>Usuario</th>
+                      <th>Dependencia</th>
+                      <th>Asunto</th>
+                      <!-- <th>Estatus Inicial</th> -->
+                      <th>Estatus Final</th>
+                      <th>Fecha Recibido</th>
+                      <th>Visto</th>
+                      <th ></th>
+                      <th ></th>
                     </tr>
                 </thead>
               </table>

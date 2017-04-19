@@ -111,7 +111,7 @@ body {
 
 
 
-#lista_oficios_externos, #lista_oficios_internos, #lista_respuestas{
+#lista_oficios_externos, #lista_oficios_internos, #lista_respuestas, #lista_oficios_destino_externo{
 	font-size: 12px;
 }
 

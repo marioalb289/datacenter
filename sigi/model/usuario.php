@@ -135,6 +135,7 @@ class Usuario
 				us.nombre AS nombre_usuario,
 				us.apellido AS apellido_usuario,
 				us.correo AS email,
+				ar.id as id_area,
 				ar.nombre AS area,
 				us.titular
 			FROM

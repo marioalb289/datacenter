@@ -241,6 +241,93 @@ $(document).ready(function(){
 
     });
 
+    //Evento del paginador de oficios con destino externo
+    var destino_externo =  $('#lista_oficios_destino_externo').DataTable({
+      processing: true,
+        serverSide: true,
+        "autoWidth": false,
+        ajax: {
+            "url": "?c=OfcPartes&a=listarOficiosDestinoExterno",
+            "type": "POST"
+        },
+        "columns": [
+            { "data": "folio", "searchable": true,"orderable": true},
+            { "data": "folio_institucion", "searchable": true,"orderable": false},
+            { "data": "area", "searchable": false,"orderable": false },
+            { "data": "usuario", "searchable": false,"orderable": false },
+            { 
+              "data": "institucion_destino", 
+              "searchable": false,
+              "orderable": false,
+              "render": function ( data, type, row ) {
+                return  row.nombre_destino + " " + row.cargo_destino + " de " + row.institucion_destino;
+              },
+
+            },
+            { "data": "asunto_emisor", "searchable": false,"orderable": false },
+            //{ "data": "estatus_inicial", "searchable": false,"orderable": false },
+            { 
+              "data": "estatus_final" , 
+              "searchable": false,
+              "orderable": true,
+              "className": "dt-center",
+              "render": function ( data, type, row ) {
+                    if(row.estatus_final == 'Cerrado')
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else if(row.estatus_final == 'Cancelado')
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
+                },
+            },
+            { "data": "fecha_recibido",
+              "className": "capitalize",
+              "render": function ( data, type, row ) {
+                    moment.locale('es');
+                    return  moment(row.fecha_recibido).format('MMMM Do YYYY, h:mm:ss a');
+                },
+            },
+            {
+                "targets": -1,
+                "data": null, 
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                  if(row.fecha_visto == "0000-00-00 00:00:00")
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                  else 
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+
+                },
+            },
+            {
+                "targets": -1,
+                "data": null, 
+                "visible": true,
+                "orderable" : false,
+                "render": function ( data, type, row ) {
+                    return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                },
+            },
+            {
+                "targets": -1,
+                "data": null,
+                "visible": true,
+                "orderable" : false, 
+                "render": function ( data, type, row ) {
+                    if(row.id_usuario_emisor==ID_USER)
+                      return  "<a href='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                    else
+                      return  "";
+                },
+            }
+        ],
+      language: language,
+      "order": [[ 7, 'desc' ]]
+
+    });
+
     if(USER_PRIV == 3){
       //Evento del paginador de respuestas enviadas externos
       var respuestas =  $('#lista_respuestas').DataTable({
