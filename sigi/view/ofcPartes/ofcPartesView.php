@@ -32,7 +32,7 @@
 				<?php if($_SESSION['data_user']['privilegios'] == 3 && $data['oficio']->tipo_oficio == "SOLICITUD" && $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 && $data['oficio']->estatus_final == 'Cerrado'){ ?>
 				<a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href="#warning" data-toggle="modal" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Cancelar</a>
-				<?php } elseif ($_SESSION['data_user']['privilegios'] == 3 && $data['oficio']->respuesta && $data['oficio']->id_usuario_emisor != $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){
+				<?php } elseif ( $data['oficio']->respuesta && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){
 					# code...
 				 ?>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='?c=OfcPartes&a=response&id=<?php echo $data['oficio']->id_oficio ?>' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Responder</a>
@@ -51,15 +51,31 @@
 
 				<div class="form-group">
 				    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
-				    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->origen; ?>" />
+				    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->origen; ?>" />
 				    <span class="text-danger"></span>
 				</div>
-				<?php 	if($data['oficio']->origen == "EXTERNO") {?>
+				<?php 	if ($data['oficio']->origen == "INTERNO") { ?>
+				<div id="formInterno" >
+					<div class="form-group">
+					   <label for="recepciones_nombreEmisor" class="required">Área Origen:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['usuario_emisor']->area; ?>" />
+					    <span class="text-danger"></span>
+					</div>
+					
+					<div class="form-group">
+					   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
+					    <span class="text-danger"></span>
+					</div>
+
+				</div>
+				
+				<?php } 	if($data['oficio']->origen == "EXTERNO" || $data['oficio']->destino == "EXTERNO") {?>
 				<div id="formExterno">
 
 					<div class="form-group">
-					    <label >Nombre de quien Suscribe:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
+					    <label ><?php if($data['oficio']->destino == "EXTERNO") echo "Nombre Destino:"; else echo "Nombre de quien Suscribe:" ?></label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
 					    <span class="text-danger"></span>
 					</div>
 
@@ -67,45 +83,31 @@
 
 					<div class="form-group">
 					   <label for="recepciones_nombreEmisor" class="required">Cargo:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->cargo; ?>" />
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->cargo; ?>" />
 					    <span class="text-danger"></span>
 					</div>
 
 					<div class="form-group">
-					   <label for="recepciones_nombreEmisor" class="required">Institución:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
+					   <label for="recepciones_nombreEmisor" class="required"><?php if($data['oficio']->destino == "EXTERNO") echo "Institución	Destino:"; else echo "Institución:" ?></label>
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
 					    <span class="text-danger"></span>
 					</div>
-				</div>
-				<?php 	} else { ?>
-				<div id="formInterno" >
-					<div class="form-group">
-					   <label for="recepciones_nombreEmisor" class="required">Área Origen:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php  echo $data['usuario_emisor']->area; ?>" />
-					    <span class="text-danger"></span>
-					</div>
-					
-					<div class="form-group">
-					   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
-					    <span class="text-danger"></span>
-					</div>
-
 				</div>
 				<?php 	} ?>
 
-				
+				<?php  if($data['oficio']->destino != "EXTERNO") { ?>
 				<div class="form-group">
 				   <label for="recepciones_nombreEmisor" class="required">Área Destino:</label>
-				    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
+				    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
 				    <span class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 				   <label for="recepciones_nombreEmisor" class="required">Usuario Destino:</label>
-				    <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
+				    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
 				    <span class="text-danger"></span>
 				</div>
+				<?php } ?>
 				
 				
 			</div>
@@ -115,7 +117,7 @@
 				<?php if($data['oficio']->folio_iepc != '') { ?>
 			    <div class="form-group" id="box_cargo">
 			        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-			        <input type="text" id="usuario_receptor" readonly="" class="form-control" value="<?php echo $data['oficio']->folio_iepc; ?>" />
+			        <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['oficio']->folio_iepc; ?>" />
 			        <span class="text-danger"></span>
 			    </div>
 			    <?php } ?>					
@@ -123,7 +125,7 @@
 			    <div class="form-group">
 			      <label for="exampleInputFile">Asunto:</label>			      
 			      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-			      <textarea class="form-control"  name="asunto_oficio" readonly placeholder="Asunto del Oficio" style="height: 108px;"><?php echo $data['oficio']->asunto_emisor ?></textarea>
+			      <textarea class="form-control input-sm"  name="asunto_oficio" readonly placeholder="Asunto del Oficio" style="height: 108px;"><?php echo $data['oficio']->asunto_emisor ?></textarea>
 			    </div>
 
 			    

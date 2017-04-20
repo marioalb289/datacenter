@@ -52,7 +52,7 @@
 				<div class="col-md-6">
 		            <div class="form-group">
 		                <label for="recepciones_nombreEmisor" class="required">Origen</label>
-		                <select class="form-control" name="origen" id="origen" disabled >
+		                <select class="form-control input-sm" name="origen" id="origen" disabled >
 		                  <option value="2" <?php if($data['privilegios'] == 1) echo "selected" ?>>Externo</option>
 		                  <option value="1" <?php if($data['privilegios'] == 3) echo "selected" ?>>Interno</option>
 		                </select>
@@ -63,19 +63,19 @@
 		            <div id="formExterno">
 			            <div class="form-group">
 			                <label for="recepciones_nombreEmisor" class="required" id="lbl_nombre_emisor">Nombre quien Suscribe:</label>
-			                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control" placeholder="Nombre del Titular del Oficio" />
+			                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" />
 			                <span class="text-danger"></span>
 			            </div>
 			            
 					    <div class="form-group" id="box_cargo">
 					        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
-					        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control" placeholder="Nombre del cargo del Titular" />
+					        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" />
 					        <span class="text-danger"></span>
 					    </div>
 
-					    <div class="form-group ui-widget">
+					    <div class="form-group">
 					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Institución:</label>
-					        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control" placeholder="Institucion del Titular" />
+					        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institucion del Titular" />
 					        <span class="text-danger"></span>
 					        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
 					          Result:
@@ -87,7 +87,7 @@
 		            <div id="formInterno" >
 		    		    <div class="form-group">
 		    		        <label for="" class="required">Área Origen:</label>
-		    		        <select class="form-control" name="area_origen" id="area_origen" disabled>
+		    		        <select class="form-control input-sm" name="area_origen" id="area_origen" disabled>
 		        			    <option value=""><?php echo $data['area_usuario']->area; ?></option>
 		                    </select>
 		    		        <span class="text-danger"></span>
@@ -95,7 +95,7 @@
 
 					    <div class="form-group">
 					        <label for="recepciones_institucionEmisor" class="required">Usuario Origen:</label>
-					        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control" placeholder="Usuario Destino" value="<?php echo $data['area_usuario']->nombre_usuario. ' '. $data['area_usuario']->apellido_usuario ?>" />
+					        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo $data['area_usuario']->nombre_usuario. ' '. $data['area_usuario']->apellido_usuario ?>" />
 					        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
 					        <span class="text-danger"></span>
 					    </div>
@@ -107,7 +107,7 @@
 
 				    <div class="form-group">
 				        <label for="" class="required">Área Destino:</label>
-				        <select class="form-control" id="area_destino" name="area_destino">
+				        <select class="form-control input-sm" id="area_destino" name="area_destino">
 		    			    <option value="">Selecccionar Area de Destino</option>
 				        	<?php foreach($data['areas'] as $area): ?>
 		    			        <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
@@ -118,7 +118,7 @@
 
 				    <div class="form-group">
 				        <label for="recepciones_institucionEmisor" class="required">Usuario Destino:</label>
-				        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control" placeholder="Usuario Destino" />
+				        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" />
 				        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor">
 				        <span class="text-danger"></span>
 				    </div>
@@ -130,13 +130,13 @@
 				    <div class="form-group">
 				      <label for="exampleInputFile">Asunto:</label>			      
 				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;"></textarea>
+				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;"></textarea>
 				    </div>
 
 				    <?php if($data['privilegios'] == 3) { ?>
 				    <div class="form-group" id="box_cargo">
 				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control" placeholder="Folio Institucional" />
+				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control input-sm" placeholder="Folio Institucional" />
 				        <span class="text-danger"></span>
 				    </div>
 				    <?php } ?>

@@ -8,6 +8,7 @@
 body {
   padding-top: 70px;
   padding-bottom: 30px;
+  background:  url("../img/crossword.png");
 }
 
 .theme-dropdown .dropdown-menu {
@@ -139,6 +140,7 @@ body {
     overflow-y: auto;
     /* prevent horizontal scrollbar */
     overflow-x: hidden;
+    font-size: 12px;
   }
   /* IE 6 doesn't support max-height
    * we use height instead, but this forces the menu to always be this tall
@@ -153,6 +155,10 @@ body {
     font: normal 11px arial,tahoma,helvetica,sans-serif;
     padding: 0px 0px 0px 20px!important;
     font-size:14px;
+}
+
+tbody td{
+  color: #758697!important;
 }
 
 th.dt-center, td.dt-center { text-align: center; }

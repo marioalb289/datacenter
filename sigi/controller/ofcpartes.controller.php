@@ -96,7 +96,9 @@ class OfcPartesController
       AND sigi_vw_oficios_internos.estatus_final <> 'Cancelado'
       )
       OR (id_usuario_emisor = $id_usuario)
-      GROUP BY id_oficio";
+      ";
+
+      $group_by = ' GROUP BY id_oficio ';
     }
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     else{
@@ -153,7 +155,8 @@ class OfcPartesController
       AND sigi_vw_oficios_des_externo.estatus_final <> 'Cancelado'
       )
       OR (sigi_vw_oficios_des_externo.id_usuario_emisor = $id_usuario)
-      GROUP BY id_oficio";
+      ";
+      $group_by = ' GROUP BY id_oficio ';
     //}
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     // else{
@@ -208,7 +211,8 @@ class OfcPartesController
 
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
-      $cond = " sigi_vw_respuestas_enviadas.id_usuario_emisor = $id_usuario   GROUP BY id_oficio";
+      $cond = " sigi_vw_respuestas_enviadas.id_usuario_emisor = $id_usuario ";
+       $group_by = ' GROUP BY id_oficio ';
     }
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     else{
@@ -501,13 +505,13 @@ class OfcPartesController
         $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
 
         //si eres un usuario receptor, buscar solo el oficio que te correponse
-        if($_SESSION['data_user']['privilegios'] == 3){
+        //if($_SESSION['data_user']['privilegios'] == 3){
           $id_usuario = $_SESSION['data_user']['id'];
-        }
-        else{
-          header('Location: sigi.php');
-          exit;
-        }
+        //}
+        // else{
+        //   header('Location: sigi.php');
+        //   exit;
+        // }
 
         $oficio = new Oficio();
         $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
@@ -532,7 +536,7 @@ class OfcPartesController
 
         $arrUsrccp = array();
         //Si eres un usuario receptor cargar los usuarios que tambien recibieron el mensaje solo si eres el titular del mensaje, y solo el titular puede turnar a otros usuarios
-        if($_SESSION['data_user']['privilegios'] == 3){
+        //if($_SESSION['data_user']['privilegios'] == 3){
           if($objOficio->ccp == 0){
 
             //en caso de ser un oficio interno quitar el usuario que lo emitio
@@ -546,7 +550,7 @@ class OfcPartesController
 
           }
           
-        }
+        //}
         $this->layout->renderVista("ofcPartes","ofcPartesResponse",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr, 'privilegios' => $privilegios));
 
       }
@@ -1067,6 +1071,7 @@ public function guardarRespuestaAction(){
         $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
         $ofc->_setCargo($objOficio->cargo);
         $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
+        $ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
         $ofc->_setAsuntoReceptor("");
         $ofc->_setRespuesta(1);
         //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta

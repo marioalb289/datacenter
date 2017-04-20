@@ -552,6 +552,7 @@ class Oficio
                SELECT
                 ofc.id AS id_oficio,
                 ofc.origen as origen,
+                ofc.destino as destino,
                 ofc.tipo_oficio as tipo_oficio,
                 ofc.folio AS folio,
                 ofc.folio_institucion AS folio_iepc,

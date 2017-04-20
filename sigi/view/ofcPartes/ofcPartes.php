@@ -20,9 +20,8 @@
 </div><!-- /.modal -->
 <!-- Modal -->
 
-<div class=" jumbotron sigi-welcome" style="margin-top: 25px;">
-  <h1>SIGI</h1>
-  <p>Sistema de Gestion de Información</p>
+<div class=" jumbotron sigi-welcome" style="margin-top: 10px; padding: 30px 15px; background-color: #8c1b67;">
+  <img src="AI/image/sigi_blanco.png" style="height: 75px;">
 </div>
 <div class="row">
 
