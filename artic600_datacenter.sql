@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-20 15:38:17
+Date: 2017-04-25 15:54:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `sigi_contador_folios`;
 CREATE TABLE `sigi_contador_folios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_contador_folios
@@ -115,6 +115,14 @@ INSERT INTO `sigi_contador_folios` VALUES ('33');
 INSERT INTO `sigi_contador_folios` VALUES ('34');
 INSERT INTO `sigi_contador_folios` VALUES ('35');
 INSERT INTO `sigi_contador_folios` VALUES ('36');
+INSERT INTO `sigi_contador_folios` VALUES ('37');
+INSERT INTO `sigi_contador_folios` VALUES ('38');
+INSERT INTO `sigi_contador_folios` VALUES ('39');
+INSERT INTO `sigi_contador_folios` VALUES ('40');
+INSERT INTO `sigi_contador_folios` VALUES ('41');
+INSERT INTO `sigi_contador_folios` VALUES ('42');
+INSERT INTO `sigi_contador_folios` VALUES ('43');
+INSERT INTO `sigi_contador_folios` VALUES ('44');
 
 -- ----------------------------
 -- Table structure for sigi_documentos
@@ -130,47 +138,55 @@ CREATE TABLE `sigi_documentos` (
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_documentos
 -- ----------------------------
-INSERT INTO `sigi_documentos` VALUES ('1', 'S000000012017-04-17-10-33-58CONT', '0', 'documentos/', '2017-04-17 10:33:58', '8', '2017-04-17 10:33:58', '8');
-INSERT INTO `sigi_documentos` VALUES ('2', 'R000000022017-04-17-10-35-17', '0', 'documentos/', '2017-04-17 10:35:17', '9', '2017-04-17 10:35:17', '9');
-INSERT INTO `sigi_documentos` VALUES ('3', 'R000000032017-04-17-10-36-08', '0', 'documentos/', '2017-04-17 10:36:08', '8', '2017-04-17 10:36:08', '8');
-INSERT INTO `sigi_documentos` VALUES ('4', 'R000000042017-04-17-10-37-06', '0', 'documentos/', '2017-04-17 10:37:06', '9', '2017-04-17 10:37:06', '9');
-INSERT INTO `sigi_documentos` VALUES ('5', 'R000000052017-04-17-10-40-20', '0', 'documentos/', '2017-04-17 10:40:20', '8', '2017-04-17 10:40:20', '8');
-INSERT INTO `sigi_documentos` VALUES ('6', 'R000000062017-04-17-10-41-27', '0', 'documentos/', '2017-04-17 10:41:27', '9', '2017-04-17 10:41:27', '9');
-INSERT INTO `sigi_documentos` VALUES ('7', 'S000000072017-04-17-10-52-06', '0', 'documentos/', '2017-04-17 10:52:06', '8', '2017-04-17 10:52:06', '8');
-INSERT INTO `sigi_documentos` VALUES ('8', 'S000000082017-04-17-10-55-09CONT', '0', 'documentos/', '2017-04-17 10:55:09', '8', '2017-04-17 10:55:09', '8');
-INSERT INTO `sigi_documentos` VALUES ('9', 'S000000092017-04-17-13-14-44CONT', '0', 'documentos/', '2017-04-17 13:14:44', '10', '2017-04-17 13:14:44', '10');
-INSERT INTO `sigi_documentos` VALUES ('10', 'S000000102017-04-17-15-02-54SE', '0', 'documentos/', '2017-04-17 15:02:54', '9', '2017-04-17 15:02:54', '9');
-INSERT INTO `sigi_documentos` VALUES ('11', 'S000000112017-04-18-09-11-09CONT', '0', 'documentos/', '2017-04-18 09:11:09', '10', '2017-04-18 09:11:09', '10');
-INSERT INTO `sigi_documentos` VALUES ('12', 'S000000122017-04-18-10-29-00SE', '0', 'documentos/', '2017-04-18 10:29:00', '9', '2017-04-18 10:29:00', '9');
-INSERT INTO `sigi_documentos` VALUES ('13', 'R000000132017-04-18-10-38-28', '0', 'documentos/', '2017-04-18 10:38:28', '7', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_documentos` VALUES ('14', 'S000000142017-04-18-10-44-56CONT', '0', 'documentos/', '2017-04-18 10:44:56', '9', '2017-04-18 10:44:56', '9');
-INSERT INTO `sigi_documentos` VALUES ('15', 'S000000152017-04-18-11-02-01SE', '0', 'documentos/', '2017-04-18 11:02:01', '9', '2017-04-18 11:02:01', '9');
-INSERT INTO `sigi_documentos` VALUES ('16', 'S000000162017-04-18-12-01-28CONT', '0', 'documentos/', '2017-04-18 12:01:28', '10', '2017-04-18 12:01:28', '10');
-INSERT INTO `sigi_documentos` VALUES ('17', 'R000000172017-04-18-12-47-57', '0', 'documentos/', '2017-04-18 12:47:57', '9', '2017-04-18 12:47:57', '9');
-INSERT INTO `sigi_documentos` VALUES ('18', 'S000000182017-04-18-13-11-04SE', '0', 'documentos/', '2017-04-18 13:11:04', '9', '2017-04-18 13:11:04', '9');
-INSERT INTO `sigi_documentos` VALUES ('19', 'S000000192017-04-18-14-43-18SE', '0', 'documentos/', '2017-04-18 14:43:18', '10', '2017-04-18 14:43:18', '10');
-INSERT INTO `sigi_documentos` VALUES ('20', 'S000000202017-04-18-15-43-27', '0', 'documentos/', '2017-04-18 15:43:27', '9', '2017-04-18 15:43:27', '9');
-INSERT INTO `sigi_documentos` VALUES ('21', 'S000000212017-04-18-15-54-56', '0', 'documentos/', '2017-04-18 15:54:56', '9', '2017-04-18 15:54:56', '9');
-INSERT INTO `sigi_documentos` VALUES ('22', 'S000000222017-04-19-09-37-46UTOE', '0', 'documentos/', '2017-04-19 09:37:46', '9', '2017-04-19 09:37:46', '9');
-INSERT INTO `sigi_documentos` VALUES ('23', 'S000000232017-04-19-09-40-16UTOE', '0', 'documentos/', '2017-04-19 09:40:16', '9', '2017-04-19 09:40:16', '9');
-INSERT INTO `sigi_documentos` VALUES ('24', 'S000000242017-04-19-09-44-34SE', '0', 'documentos/', '2017-04-19 09:44:34', '9', '2017-04-19 09:44:34', '9');
-INSERT INTO `sigi_documentos` VALUES ('25', 'S000000252017-04-19-09-46-32SE', '0', 'documentos/', '2017-04-19 09:46:32', '10', '2017-04-19 09:46:32', '10');
-INSERT INTO `sigi_documentos` VALUES ('26', 'R000000262017-04-19-13-15-41', '0', 'documentos/', '2017-04-19 13:15:41', '10', '2017-04-19 13:15:41', '10');
-INSERT INTO `sigi_documentos` VALUES ('27', 'S000000272017-04-19-13-24-15UTOE', '0', 'documentos/', '2017-04-19 13:24:15', '9', '2017-04-19 13:24:15', '9');
-INSERT INTO `sigi_documentos` VALUES ('28', 'R000000282017-04-19-13-28-41', '0', 'documentos/', '2017-04-19 13:28:41', '10', '2017-04-19 13:28:41', '10');
-INSERT INTO `sigi_documentos` VALUES ('29', 'S000000292017-04-19-13-51-19UTOE', '0', 'documentos/', '2017-04-19 13:51:19', '9', '2017-04-19 13:51:19', '9');
-INSERT INTO `sigi_documentos` VALUES ('30', 'S000000302017-04-19-14-41-50CONT', '0', 'documentos/', '2017-04-19 14:41:50', '10', '2017-04-19 14:41:50', '10');
-INSERT INTO `sigi_documentos` VALUES ('31', 'S000000312017-04-19-14-42-23CONT', '0', 'documentos/', '2017-04-19 14:42:23', '10', '2017-04-19 14:42:23', '10');
-INSERT INTO `sigi_documentos` VALUES ('32', 'S000000322017-04-19-14-43-07CONT', '0', 'documentos/', '2017-04-19 14:43:07', '10', '2017-04-19 14:43:07', '10');
-INSERT INTO `sigi_documentos` VALUES ('33', 'S000000332017-04-19-15-20-13SE', '0', 'documentos/', '2017-04-19 15:20:13', '9', '2017-04-19 15:20:13', '9');
-INSERT INTO `sigi_documentos` VALUES ('34', 'R000000342017-04-19-15-22-57', '0', 'documentos/', '2017-04-19 15:22:57', '7', '2017-04-19 15:22:57', '7');
-INSERT INTO `sigi_documentos` VALUES ('35', 'R000000352017-04-19-15-35-34', '0', 'documentos/', '2017-04-19 15:35:34', '9', '2017-04-19 15:35:34', '9');
-INSERT INTO `sigi_documentos` VALUES ('36', 'R000000362017-04-19-15-38-25', '0', 'documentos/', '2017-04-19 15:38:25', '7', '2017-04-19 15:38:25', '7');
+INSERT INTO `sigi_documentos` VALUES ('1', 'S000000012017-04-24-13-45-19CONT', '0', 'documentos/', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
+INSERT INTO `sigi_documentos` VALUES ('2', 'S000000022017-04-24-14-33-27SE', '0', 'documentos/', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
+INSERT INTO `sigi_documentos` VALUES ('3', 'S000000032017-04-25-13-15-05SE', '0', 'documentos/', '2017-04-25 13:15:05', '10', '2017-04-25 13:15:05', '10');
+INSERT INTO `sigi_documentos` VALUES ('4', 'R000000042017-04-25-13-20-18', '0', 'documentos/', '2017-04-25 13:20:18', '7', '2017-04-25 13:20:18', '7');
+INSERT INTO `sigi_documentos` VALUES ('5', 'S000000052017-04-25-13-25-35SE', '0', 'documentos/', '2017-04-25 13:25:35', '10', '2017-04-25 13:25:35', '10');
+INSERT INTO `sigi_documentos` VALUES ('6', 'S000000062017-04-25-13-28-37SE', '0', 'documentos/', '2017-04-25 13:28:37', '10', '2017-04-25 13:28:37', '10');
+INSERT INTO `sigi_documentos` VALUES ('7', 'S000000072017-04-25-13-34-46CONT', '0', 'documentos/', '2017-04-25 13:34:46', '10', '2017-04-25 13:34:46', '10');
+INSERT INTO `sigi_documentos` VALUES ('8', 'R000000082017-04-25-13-35-42', '0', 'documentos/', '2017-04-25 13:35:42', '9', '2017-04-25 13:35:42', '9');
+INSERT INTO `sigi_documentos` VALUES ('9', 'S000000092017-04-25-13-37-07SE', '0', 'documentos/', '2017-04-25 13:37:07', '10', '2017-04-25 13:37:07', '10');
+INSERT INTO `sigi_documentos` VALUES ('10', 'S000000102017-04-25-13-39-34SE', '0', 'documentos/', '2017-04-25 13:39:34', '10', '2017-04-25 13:39:34', '10');
+INSERT INTO `sigi_documentos` VALUES ('11', 'S000000112017-04-25-13-50-42SE', '0', 'documentos/', '2017-04-25 13:50:42', '10', '2017-04-25 13:50:42', '10');
+INSERT INTO `sigi_documentos` VALUES ('12', 'R000000122017-04-25-13-55-32', '0', 'documentos/', '2017-04-25 13:55:32', '7', '2017-04-25 13:55:32', '7');
+INSERT INTO `sigi_documentos` VALUES ('13', 'S000000132017-04-25-13-57-09SE', '0', 'documentos/', '2017-04-25 13:57:09', '9', '2017-04-25 13:57:09', '9');
+INSERT INTO `sigi_documentos` VALUES ('14', 'R000000142017-04-25-13-58-45', '0', 'documentos/', '2017-04-25 13:58:45', '7', '2017-04-25 13:58:45', '7');
+INSERT INTO `sigi_documentos` VALUES ('15', 'R000000152017-04-25-14-02-39', '0', 'documentos/', '2017-04-25 14:02:39', '9', '2017-04-25 14:02:39', '9');
+INSERT INTO `sigi_documentos` VALUES ('16', 'R000000162017-04-25-14-04-27', '0', 'documentos/', '2017-04-25 14:04:27', '7', '2017-04-25 14:04:27', '7');
+INSERT INTO `sigi_documentos` VALUES ('17', 'R000000172017-04-25-14-07-47', '0', 'documentos/', '2017-04-25 14:07:47', '9', '2017-04-25 14:07:47', '9');
+INSERT INTO `sigi_documentos` VALUES ('18', 'R000000182017-04-25-14-18-02', '0', 'documentos/', '2017-04-25 14:18:02', '7', '2017-04-25 14:18:02', '7');
+INSERT INTO `sigi_documentos` VALUES ('19', 'R000000192017-04-25-14-21-04', '0', 'documentos/', '2017-04-25 14:21:04', '9', '2017-04-25 14:21:04', '9');
+INSERT INTO `sigi_documentos` VALUES ('20', 'R000000202017-04-25-14-21-46', '0', 'documentos/', '2017-04-25 14:21:47', '7', '2017-04-25 14:21:47', '7');
+INSERT INTO `sigi_documentos` VALUES ('21', 'R000000212017-04-25-14-29-00CONT', '0', 'documentos/', '2017-04-25 14:29:00', '9', '2017-04-25 14:29:00', '9');
+INSERT INTO `sigi_documentos` VALUES ('22', 'R000000222017-04-25-14-29-48SE', '0', 'documentos/', '2017-04-25 14:29:48', '7', '2017-04-25 14:29:48', '7');
+INSERT INTO `sigi_documentos` VALUES ('23', 'R000000232017-04-25-14-34-35CONT', '0', 'documentos/', '2017-04-25 14:34:35', '9', '2017-04-25 14:34:35', '9');
+INSERT INTO `sigi_documentos` VALUES ('24', 'R000000242017-04-25-14-35-45SE', '0', 'documentos/', '2017-04-25 14:35:45', '7', '2017-04-25 14:35:45', '7');
+INSERT INTO `sigi_documentos` VALUES ('25', 'R000000252017-04-25-14-40-31CONT', '0', 'documentos/', '2017-04-25 14:40:31', '9', '2017-04-25 14:40:31', '9');
+INSERT INTO `sigi_documentos` VALUES ('26', 'R000000262017-04-25-14-43-04SE', '0', 'documentos/', '2017-04-25 14:43:04', '7', '2017-04-25 14:43:04', '7');
+INSERT INTO `sigi_documentos` VALUES ('27', 'R000000272017-04-25-14-46-18CONT', '0', 'documentos/', '2017-04-25 14:46:18', '9', '2017-04-25 14:46:18', '9');
+INSERT INTO `sigi_documentos` VALUES ('28', 'R000000282017-04-25-14-46-44SE', '0', 'documentos/', '2017-04-25 14:46:44', '7', '2017-04-25 14:46:44', '7');
+INSERT INTO `sigi_documentos` VALUES ('29', 'R000000292017-04-25-14-49-20CONT', '0', 'documentos/', '2017-04-25 14:49:20', '9', '2017-04-25 14:49:20', '9');
+INSERT INTO `sigi_documentos` VALUES ('30', 'R000000302017-04-25-14-50-04SE', '0', 'documentos/', '2017-04-25 14:50:04', '7', '2017-04-25 14:50:04', '7');
+INSERT INTO `sigi_documentos` VALUES ('31', 'R000000312017-04-25-14-56-57CONT', '0', 'documentos/', '2017-04-25 14:56:57', '9', '2017-04-25 14:56:57', '9');
+INSERT INTO `sigi_documentos` VALUES ('32', 'R000000322017-04-25-15-07-45SE', '0', 'documentos/', '2017-04-25 15:07:45', '7', '2017-04-25 15:07:45', '7');
+INSERT INTO `sigi_documentos` VALUES ('33', 'R000000332017-04-25-15-21-45CONT', '0', 'documentos/', '2017-04-25 15:21:45', '9', '2017-04-25 15:21:45', '9');
+INSERT INTO `sigi_documentos` VALUES ('34', 'R000000342017-04-25-15-22-21SE', '0', 'documentos/', '2017-04-25 15:22:21', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_documentos` VALUES ('35', 'S000000352017-04-25-15-23-22SE', '0', 'documentos/', '2017-04-25 15:23:22', '9', '2017-04-25 15:23:22', '9');
+INSERT INTO `sigi_documentos` VALUES ('36', 'R000000362017-04-25-15-23-49SE', '0', 'documentos/', '2017-04-25 15:23:49', '7', '2017-04-25 15:23:49', '7');
+INSERT INTO `sigi_documentos` VALUES ('37', 'R000000372017-04-25-15-25-30CONT', '0', 'documentos/', '2017-04-25 15:25:30', '9', '2017-04-25 15:25:30', '9');
+INSERT INTO `sigi_documentos` VALUES ('38', 'R000000382017-04-25-15-26-07SE', '0', 'documentos/', '2017-04-25 15:26:07', '7', '2017-04-25 15:26:07', '7');
+INSERT INTO `sigi_documentos` VALUES ('39', 'S000000392017-04-25-15-27-41CONT', '0', 'documentos/', '2017-04-25 15:27:41', '10', '2017-04-25 15:27:41', '10');
+INSERT INTO `sigi_documentos` VALUES ('40', 'R000000402017-04-25-15-28-41CONT', '0', 'documentos/', '2017-04-25 15:28:41', '9', '2017-04-25 15:28:41', '9');
+INSERT INTO `sigi_documentos` VALUES ('41', 'S000000412017-04-25-15-29-56CONT', '0', 'documentos/', '2017-04-25 15:29:56', '10', '2017-04-25 15:29:56', '10');
+INSERT INTO `sigi_documentos` VALUES ('42', 'R000000422017-04-25-15-30-25CONT', '0', 'documentos/', '2017-04-25 15:30:25', '9', '2017-04-25 15:30:25', '9');
+INSERT INTO `sigi_documentos` VALUES ('43', 'S000000432017-04-25-15-31-01CONT', '0', 'documentos/', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:01', '10');
+INSERT INTO `sigi_documentos` VALUES ('44', 'S000000442017-04-25-15-33-12UTOE', '0', 'documentos/', '2017-04-25 15:33:12', '9', '2017-04-25 15:33:12', '9');
 
 -- ----------------------------
 -- Table structure for sigi_oficios
@@ -196,45 +212,55 @@ CREATE TABLE `sigi_oficios` (
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios
 -- ----------------------------
-INSERT INTO `sigi_oficios` VALUES ('1', 'SOLICITUD', '00000001', 'IEPC-987654678', 'INTERNO', '8', '', '', '', 'se solicita informe de gastos 2016', '', '1', '1', 'INTERNO', '2017-04-17 10:33:58', '8', '2017-04-17 10:33:58', '8');
-INSERT INTO `sigi_oficios` VALUES ('2', 'RESPUESTA', '00000002', '34565RFSD', 'INTERNO', '9', '', '', '', 'informe de gastos 2016', '', '1', '1', 'INTERNO', '2017-04-17 10:35:17', '9', '2017-04-17 10:35:17', '9');
-INSERT INTO `sigi_oficios` VALUES ('3', 'RESPUESTA', '00000003', 'DSFG456', 'INTERNO', '8', '', '', '', 'se envio el informe del 2017, se pidio el 2016', '', '1', '1', 'INTERNO', '2017-04-17 10:36:08', '8', '2017-04-17 10:36:08', '8');
-INSERT INTO `sigi_oficios` VALUES ('4', 'RESPUESTA', '00000004', 'DSFGD4565', 'INTERNO', '9', '', '', '', 'se envia el informe de gastos 2016', '', '1', '1', 'INTERNO', '2017-04-17 10:37:06', '9', '2017-04-17 10:37:06', '9');
-INSERT INTO `sigi_oficios` VALUES ('5', 'RESPUESTA', '00000005', '456RDGFD', 'INTERNO', '8', '', '', '', 'MENSAJE 3', '', '1', '1', 'INTERNO', '2017-04-17 10:40:20', '8', '2017-04-17 10:40:20', '8');
-INSERT INTO `sigi_oficios` VALUES ('6', 'RESPUESTA', '00000006', 'SDFGHGF456754', 'INTERNO', '9', '', '', '', 'respuesta mensaje 3', '', '1', '1', 'INTERNO', '2017-04-17 10:41:27', '9', '2017-04-17 10:41:27', '9');
-INSERT INTO `sigi_oficios` VALUES ('7', 'SOLICITUD', '00000007', 'IPEC78765434678', 'INTERNO', '8', '', '', '', 'mensaje 1', '', '1', null, 'INTERNO', '2017-04-17 10:52:07', '8', '2017-04-17 10:52:07', '8');
-INSERT INTO `sigi_oficios` VALUES ('8', 'SOLICITUD', '00000008', 'IEPJDS8943', 'INTERNO', '8', '', '', '', 'MENSAJE 1', '', '1', null, 'INTERNO', '2017-04-17 10:55:09', '8', '2017-04-17 10:55:09', '8');
-INSERT INTO `sigi_oficios` VALUES ('9', 'SOLICITUD', '00000009', '345654RTFD', 'EXTERNO', '0', 'ALBERTO RODRIGUEZ', 'OEA', 'DIRECTOR', 'MENSAJE 1', '', '1', '1', 'INTERNO', '2017-04-17 13:14:45', '10', '2017-04-17 13:14:45', '10');
-INSERT INTO `sigi_oficios` VALUES ('10', 'SOLICITUD', '00000010', '53RSTDS', 'INTERNO', '9', '', '', '', 'MENSAJE 1', '', '1', null, 'INTERNO', '2017-04-17 15:02:54', '9', '2017-04-17 15:02:54', '9');
-INSERT INTO `sigi_oficios` VALUES ('11', 'SOLICITUD', '00000011', 'DFGHF56', 'EXTERNO', '0', 'ALBERTO RODRIGUEZ', 'OEA', 'DIRECTOR', 'MENSAJE 1 PARA SU CONOCIMIENTO Y ARCHIVO', '', '0', null, 'INTERNO', '2017-04-18 09:11:09', '10', '2017-04-18 09:11:09', '10');
-INSERT INTO `sigi_oficios` VALUES ('12', 'SOLICITUD', '00000012', '34567654SDFDS', 'INTERNO', '9', '', '', '', 'INFORME DE GASTOS EN PROYECTO', '', '1', '1', 'INTERNO', '2017-04-18 10:29:00', '9', '2017-04-18 10:29:00', '9');
-INSERT INTO `sigi_oficios` VALUES ('13', 'RESPUESTA', '00000013', '3456754DSFGD', 'INTERNO', '7', '', '', '', 'SE ENVIA INFORME DE GASTOS DEL PROYECTO', '', '1', '1', 'INTERNO', '2017-04-18 10:38:28', '7', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_oficios` VALUES ('14', 'SOLICITUD', '00000014', 'sadfg45654', 'INTERNO', '9', '', '', '', 'mensaje 1', '', '1', null, 'INTERNO', '2017-04-18 10:44:56', '9', '2017-04-18 10:44:56', '9');
-INSERT INTO `sigi_oficios` VALUES ('15', 'SOLICITUD', '00000015', 'asd1232333', 'INTERNO', '9', '', '', '', 'mensaje 1', '', '1', null, 'INTERNO', '2017-04-18 11:02:01', '9', '2017-04-18 11:02:01', '9');
-INSERT INTO `sigi_oficios` VALUES ('16', 'SOLICITUD', '00000016', '', 'EXTERNO', '0', 'ALBERTO RODRIGUEZ', 'OEA', 'DIRECTOR', 'MENSAJE EXTERNO PRUEBA 1', '', '1', null, 'INTERNO', '2017-04-18 12:01:28', '10', '2017-04-18 12:01:28', '10');
-INSERT INTO `sigi_oficios` VALUES ('17', 'RESPUESTA', '00000017', '5435ASSAS', 'EXTERNO', '9', 'ALBERTO RODRIGUEZ', 'OEA', 'DIRECTOR', 'RESPUESTA AL MENSAJE 1 DE ORIGEN EXTERNO', '', '1', '1', 'INTERNO', '2017-04-18 12:47:57', '9', '2017-04-18 12:47:57', '9');
-INSERT INTO `sigi_oficios` VALUES ('18', 'SOLICITUD', '00000018', 'YT65R21ERTGHGFD', 'INTERNO', '9', '', '', '', 'MENSAJE 1', '', '1', null, 'INTERNO', '2017-04-18 13:11:04', '9', '2017-04-18 13:11:04', '9');
-INSERT INTO `sigi_oficios` VALUES ('19', 'SOLICITUD', '00000019', '', 'EXTERNO', '0', 'ALBERTO RODRIGUEZ', 'OEA', 'DIRECTOR', 'mensaje externo 1', '', '1', null, 'INTERNO', '2017-04-18 14:43:19', '10', '2017-04-18 14:43:19', '10');
-INSERT INTO `sigi_oficios` VALUES ('20', 'SOLICITUD', '00000020', '34567DSDFG', 'INTERNO', '9', 'ALBERTO RODRIGUEZ', 'OEA', 'DIRECTOR', 'MENSAJE PARA DEPENDENCIA EXTERNA 1', '', '1', null, 'EXTERNO', '2017-04-18 15:43:27', '9', '2017-04-18 15:43:27', '9');
-INSERT INTO `sigi_oficios` VALUES ('21', 'SOLICITUD', '00000023', '78387HJSJHSA', 'INTERNO', '9', 'FERNANDO DAVILA GONZALES', 'CONTRALORIA DEL ESTADO', 'DIRECTOR DE FINANZAS', 'SE ENVIA INFORME DE GASTOS', '', '1', '1', 'EXTERNO', '2017-04-19 09:40:16', '9', '2017-04-19 09:40:16', '9');
-INSERT INTO `sigi_oficios` VALUES ('22', 'SOLICITUD', '00000024', 'IEPC-2018-0001', 'INTERNO', '9', '', '', '', 'mensaje 1', '', '1', null, 'INTERNO', '2017-04-19 09:44:34', '9', '2017-04-19 09:44:34', '9');
-INSERT INTO `sigi_oficios` VALUES ('23', 'SOLICITUD', '00000025', '', 'INTERNO', '0', 'FERNANDO DAVILA GONZALES', 'CONTRALORIA DEL ESTADO', 'DIRECTOR DE FINANZAS', 'SE LE INVITA AL EVENTO DE INFORME', '', '0', null, 'INTERNO', '2017-04-19 09:46:32', '10', '2017-04-19 09:46:32', '10');
-INSERT INTO `sigi_oficios` VALUES ('24', 'RESPUESTA', '00000026', '', 'INTERNO', '10', 'FERNANDO DAVILA GONZALES', 'CONTRALORIA DEL ESTADO', 'DIRECTOR DE FINANZAS', 'SE ENVIA RESPUESTA AL INFORME DE GASTOS', '', '1', '1', 'EXTERNO', '2017-04-19 13:15:41', '10', '2017-04-19 13:15:41', '10');
-INSERT INTO `sigi_oficios` VALUES ('25', 'SOLICITUD', '00000027', 'IEPC-2016-12426', 'INTERNO', '9', 'RUBER MOREIRA MORALES', 'CONTRALORIA DEL MUNICIPIO', 'DIRECTOR DE FINANZAS DEL MUNICIPIO', 'SE SOLICITA INFORME DE GASTOS DE CAMPAÑA NO SE HAG', '', '1', '1', 'EXTERNO', '2017-04-19 13:24:15', '9', '2017-04-19 13:24:15', '9');
-INSERT INTO `sigi_oficios` VALUES ('26', 'RESPUESTA', '00000028', '', 'INTERNO', '10', 'RUBER MOREIRA MORALES', 'CONTRALORIA DEL MUNICIPIO', 'DIRECTOR DE FINANZAS DEL MUNICIPIO', 'AHI SE LOS MANDO', '', '1', '1', 'EXTERNO', '2017-04-19 13:28:41', '10', '2017-04-19 13:28:41', '10');
-INSERT INTO `sigi_oficios` VALUES ('27', 'SOLICITUD', '00000029', '2343ADAS', 'INTERNO', '9', 'RUBER MOREIRA MORALES', 'CONTRALORIA DEL MUNICIPIO', 'DIRECTOR DE FINANZAS DEL MUNICIPIO', 'MENSAJE DE PRUEBA 1 CANCELAR', '', '1', null, 'EXTERNO', '2017-04-19 13:51:19', '9', '2017-04-19 13:51:19', '9');
-INSERT INTO `sigi_oficios` VALUES ('28', 'SOLICITUD', '00000030', '', 'EXTERNO', '0', 'RUBER MOREIRA MORALES', 'CONTRALORIA DEL MUNICIPIO', 'DIRECTOR DE FINANZAS DEL MUNICIPIO', 'MENSAJE 1', '', '1', null, 'INTERNO', '2017-04-19 14:41:50', '10', '2017-04-19 14:41:50', '10');
-INSERT INTO `sigi_oficios` VALUES ('29', 'SOLICITUD', '00000031', '', 'EXTERNO', '0', 'RUBER MOREIRA MORALES', 'CONTRALORIA DEL MUNICIPIO', 'DIRECTOR DE FINANZAS DEL MUNICIPIO', 'MENSAJE 2', '', '1', null, 'INTERNO', '2017-04-19 14:42:23', '10', '2017-04-19 14:42:23', '10');
-INSERT INTO `sigi_oficios` VALUES ('30', 'SOLICITUD', '00000032', '', 'EXTERNO', '0', 'FERNANDO DAVILA GONZALES', 'CONTRALORIA DEL ESTADO', 'DIRECTOR DE FINANZAS', 'mensaje 4', '', '1', null, 'INTERNO', '2017-04-19 14:43:07', '10', '2017-04-19 14:43:07', '10');
-INSERT INTO `sigi_oficios` VALUES ('31', 'SOLICITUD', '00000033', 'IEPC-201889287', 'INTERNO', '9', '', '', '', 'MENSAJE DE PRUEBA 1', '', '1', '1', 'INTERNO', '2017-04-19 15:20:13', '9', '2017-04-19 15:20:13', '9');
-INSERT INTO `sigi_oficios` VALUES ('32', 'RESPUESTA', '00000034', 'IEPC-2812762', 'INTERNO', '7', '', '', '', 'RESPUESTA AL MENSAJE 1', '', '1', '1', 'INTERNO', '2017-04-19 15:22:57', '7', '2017-04-19 15:22:57', '7');
-INSERT INTO `sigi_oficios` VALUES ('33', 'RESPUESTA', '00000035', '34567', 'INTERNO', '9', '', '', '', 'mensaje 2', '', '1', '1', 'INTERNO', '2017-04-19 15:35:34', '9', '2017-04-19 15:35:34', '9');
-INSERT INTO `sigi_oficios` VALUES ('34', 'RESPUESTA', '00000036', '7766ttt', 'INTERNO', '7', '', '', '', 'respuesta mensaj 2', '', '1', '1', 'INTERNO', '2017-04-19 15:38:25', '7', '2017-04-19 15:38:25', '7');
+INSERT INTO `sigi_oficios` VALUES ('1', 'SOLICITUD', '00000001', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE SOLICITA INFORME DE GASTOS DEL INSTITUTO', '', '1', null, 'INTERNO', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
+INSERT INTO `sigi_oficios` VALUES ('2', 'SOLICITUD', '00000002', 'IEPC-2012-123-12', 'INTERNO', '9', '', '', '', 'INFORME DE GASTOS 2012', '', '1', null, 'INTERNO', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
+INSERT INTO `sigi_oficios` VALUES ('3', 'SOLICITUD', '00000003', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'SE SOLICITA INFORME DEL ESTADO DE EXTINTORES', '', '1', '1', 'INTERNO', '2017-04-25 13:15:05', '10', '2017-04-25 13:15:05', '10');
+INSERT INTO `sigi_oficios` VALUES ('4', 'RESPUESTA', '00000004', 'IEPC-0019283', 'EXTERNO', '7', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'Se envía informe del estado de los extintores', '', '1', '1', 'INTERNO', '2017-04-25 13:20:18', '7', '2017-04-25 13:20:18', '7');
+INSERT INTO `sigi_oficios` VALUES ('5', 'SOLICITUD', '00000005', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'Se le invita a un evento', '', '0', null, 'INTERNO', '2017-04-25 13:25:35', '10', '2017-04-25 13:25:35', '10');
+INSERT INTO `sigi_oficios` VALUES ('6', 'SOLICITUD', '00000006', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE INVITA DE NUEVO', '', '0', null, 'INTERNO', '2017-04-25 13:28:37', '10', '2017-04-25 13:28:37', '10');
+INSERT INTO `sigi_oficios` VALUES ('7', 'SOLICITUD', '00000007', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'INFORME DE GASTOS', '', '1', '1', 'INTERNO', '2017-04-25 13:34:46', '10', '2017-04-25 13:34:46', '10');
+INSERT INTO `sigi_oficios` VALUES ('8', 'RESPUESTA', '00000008', 'IEPC-13124345', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'se envía informe', '', '1', '1', 'INTERNO', '2017-04-25 13:35:42', '9', '2017-04-25 13:35:42', '9');
+INSERT INTO `sigi_oficios` VALUES ('9', 'SOLICITUD', '00000009', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'SE NOTIFICA', '', '0', null, 'INTERNO', '2017-04-25 13:37:07', '10', '2017-04-25 13:37:07', '10');
+INSERT INTO `sigi_oficios` VALUES ('10', 'SOLICITUD', '00000010', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'SE NOTIFICA2', '', '0', null, 'INTERNO', '2017-04-25 13:39:34', '10', '2017-04-25 13:39:34', '10');
+INSERT INTO `sigi_oficios` VALUES ('11', 'SOLICITUD', '00000011', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE ENVIA MENSAJE 2 ESPERANDO RESPUESTA', '', '1', '1', 'INTERNO', '2017-04-25 13:50:43', '10', '2017-04-25 13:50:43', '10');
+INSERT INTO `sigi_oficios` VALUES ('12', 'RESPUESTA', '00000012', 'wet546655', 'EXTERNO', '7', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'se envia respuesta al mensaje 2', '', '1', '1', 'INTERNO', '2017-04-25 13:55:32', '7', '2017-04-25 13:55:32', '7');
+INSERT INTO `sigi_oficios` VALUES ('13', 'SOLICITUD', '00000013', 'IEPC-2012-12', 'INTERNO', '9', '', '', '', 'MENSAJE INTERNO 1', '', '1', '1', 'INTERNO', '2017-04-25 13:57:09', '9', '2017-04-25 13:57:09', '9');
+INSERT INTO `sigi_oficios` VALUES ('14', 'RESPUESTA', '00000014', 'ISOR29F84', 'INTERNO', '7', '', '', '', 'Se envía respuesta al mensaje interno 1', '', '1', '1', 'INTERNO', '2017-04-25 13:58:45', '7', '2017-04-25 13:58:45', '7');
+INSERT INTO `sigi_oficios` VALUES ('15', 'RESPUESTA', '00000015', 'IEPC201823', 'INTERNO', '9', '', '', '', 'No es la respuesta que se esperaba, esperando nuev', '', '1', '1', 'INTERNO', '2017-04-25 14:02:39', '9', '2017-04-25 14:02:39', '9');
+INSERT INTO `sigi_oficios` VALUES ('16', 'RESPUESTA', '00000016', 'IEP893893', 'INTERNO', '7', '', '', '', 'Se envía respuesta correcta al mensaje 2', '', '1', '1', 'INTERNO', '2017-04-25 14:04:27', '7', '2017-04-25 14:04:27', '7');
+INSERT INTO `sigi_oficios` VALUES ('17', 'RESPUESTA', '00000017', '2345675ewedds', 'INTERNO', '9', '', '', '', 'nuevo mensaje 3', '', '1', '1', 'INTERNO', '2017-04-25 14:07:47', '9', '2017-04-25 14:07:47', '9');
+INSERT INTO `sigi_oficios` VALUES ('18', 'RESPUESTA', '00000018', '453sasssa', 'INTERNO', '7', '', '', '', 'respuesta al mensaje 3', '', '1', '1', 'INTERNO', '2017-04-25 14:18:02', '7', '2017-04-25 14:18:02', '7');
+INSERT INTO `sigi_oficios` VALUES ('19', 'RESPUESTA', '00000019', '123456543asdfgh', 'INTERNO', '9', '', '', '', 'nuevo mensaje 4', '', '1', '1', 'INTERNO', '2017-04-25 14:21:04', '9', '2017-04-25 14:21:04', '9');
+INSERT INTO `sigi_oficios` VALUES ('20', 'RESPUESTA', '00000020', 'asdfg435675', 'INTERNO', '7', '', '', '', 'respuesta mensaje4', '', '1', '1', 'INTERNO', '2017-04-25 14:21:47', '7', '2017-04-25 14:21:47', '7');
+INSERT INTO `sigi_oficios` VALUES ('21', 'RESPUESTA', '00000021', '2345685732jhdff', 'INTERNO', '9', '', '', '', 'mensaje 5 nuevo', '', '1', '1', 'INTERNO', '2017-04-25 14:29:00', '9', '2017-04-25 14:29:00', '9');
+INSERT INTO `sigi_oficios` VALUES ('22', 'RESPUESTA', '00000022', '23456edsds', 'INTERNO', '7', '', '', '', 'respuesta mensaje 5', '', '1', '1', 'INTERNO', '2017-04-25 14:29:48', '7', '2017-04-25 14:29:48', '7');
+INSERT INTO `sigi_oficios` VALUES ('23', 'RESPUESTA', '00000023', '8948954uifdjkdf', 'INTERNO', '9', '', '', '', 'mensaje 6 nuevo', '', '1', '1', 'INTERNO', '2017-04-25 14:34:35', '9', '2017-04-25 14:34:35', '9');
+INSERT INTO `sigi_oficios` VALUES ('24', 'RESPUESTA', '00000024', '44589djkdkjds', 'INTERNO', '7', '', '', '', 'respuesta mensaje 6', '', '1', '1', 'INTERNO', '2017-04-25 14:35:45', '7', '2017-04-25 14:35:45', '7');
+INSERT INTO `sigi_oficios` VALUES ('25', 'RESPUESTA', '00000025', '1234567654wdfg', 'INTERNO', '9', '', '', '', 'nuevo mensaje 7', '', '1', '1', 'INTERNO', '2017-04-25 14:40:31', '9', '2017-04-25 14:40:31', '9');
+INSERT INTO `sigi_oficios` VALUES ('26', 'RESPUESTA', '00000026', '23456ewdfgsd', 'INTERNO', '7', '', '', '', 'respuesta mensaje 7', '', '1', '1', 'INTERNO', '2017-04-25 14:43:04', '7', '2017-04-25 14:43:04', '7');
+INSERT INTO `sigi_oficios` VALUES ('27', 'RESPUESTA', '00000027', '789878ssas', 'INTERNO', '9', '', '', '', 'nuevo mensaje 8', '', '1', '1', 'INTERNO', '2017-04-25 14:46:18', '9', '2017-04-25 14:46:18', '9');
+INSERT INTO `sigi_oficios` VALUES ('28', 'RESPUESTA', '00000028', '8938932hjhsasaas', 'INTERNO', '7', '', '', '', 'respuesta mensaje 8', '', '1', '1', 'INTERNO', '2017-04-25 14:46:44', '7', '2017-04-25 14:46:44', '7');
+INSERT INTO `sigi_oficios` VALUES ('29', 'RESPUESTA', '00000029', '234567esdf', 'INTERNO', '9', '', '', '', 'nuevo mensaje 9', '', '1', '1', 'INTERNO', '2017-04-25 14:49:20', '9', '2017-04-25 14:49:20', '9');
+INSERT INTO `sigi_oficios` VALUES ('30', 'RESPUESTA', '00000030', '234wesds', 'INTERNO', '7', '', '', '', 'responder mensaje 9', '', '1', '1', 'INTERNO', '2017-04-25 14:50:04', '7', '2017-04-25 14:50:04', '7');
+INSERT INTO `sigi_oficios` VALUES ('31', 'RESPUESTA', '00000031', '89438943djdssd', 'INTERNO', '9', '', '', '', 'nuevo mensaje 10', '', '1', '1', 'INTERNO', '2017-04-25 14:56:57', '9', '2017-04-25 14:56:57', '9');
+INSERT INTO `sigi_oficios` VALUES ('32', 'RESPUESTA', '00000032', '323aasss', 'INTERNO', '7', '', '', '', 'respuesta mensaje 10', '', '1', '1', 'INTERNO', '2017-04-25 15:07:45', '7', '2017-04-25 15:07:45', '7');
+INSERT INTO `sigi_oficios` VALUES ('33', 'RESPUESTA', '00000033', '9858945DFDFDF', 'INTERNO', '9', '', '', '', 'mensaje 11', '', '1', '1', 'INTERNO', '2017-04-25 15:21:45', '9', '2017-04-25 15:21:45', '9');
+INSERT INTO `sigi_oficios` VALUES ('34', 'RESPUESTA', '00000034', '456fdsfd', 'INTERNO', '7', '', '', '', 'RESPUESTA MENSAJE 11', '', '1', '1', 'INTERNO', '2017-04-25 15:22:21', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios` VALUES ('35', 'SOLICITUD', '00000035', '123456543', 'INTERNO', '9', '', '', '', 'MENSAJE NUEVO 1 DE PRUEBA', '', '1', '1', 'INTERNO', '2017-04-25 15:23:22', '9', '2017-04-25 15:23:22', '9');
+INSERT INTO `sigi_oficios` VALUES ('36', 'RESPUESTA', '00000036', '48348943', 'INTERNO', '7', '', '', '', 'RESPUESTA AL MENSAJE 1', '', '1', '1', 'INTERNO', '2017-04-25 15:23:50', '7', '2017-04-25 15:23:50', '7');
+INSERT INTO `sigi_oficios` VALUES ('37', 'RESPUESTA', '00000037', '2389328923', 'INTERNO', '9', '', '', '', 'NUEVO MENSAJE 2', '', '1', '1', 'INTERNO', '2017-04-25 15:25:30', '9', '2017-04-25 15:25:30', '9');
+INSERT INTO `sigi_oficios` VALUES ('38', 'RESPUESTA', '00000038', '478437843', 'INTERNO', '7', '', '', '', 'RESPUESTA AL MENSAJE 2', '', '1', '1', 'INTERNO', '2017-04-25 15:26:07', '7', '2017-04-25 15:26:07', '7');
+INSERT INTO `sigi_oficios` VALUES ('39', 'SOLICITUD', '00000039', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'MENSAJE EXTERNO 1', '', '1', '1', 'INTERNO', '2017-04-25 15:27:41', '10', '2017-04-25 15:27:41', '10');
+INSERT INTO `sigi_oficios` VALUES ('40', 'RESPUESTA', '00000040', '2345678654RTFDF', 'EXTERNO', '9', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'RESPUESTA AL MENSAJE EXTERNO 1', '', '1', '1', 'INTERNO', '2017-04-25 15:28:41', '9', '2017-04-25 15:28:41', '9');
+INSERT INTO `sigi_oficios` VALUES ('41', 'SOLICITUD', '00000041', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE SIN RESPUESTA 1', '', '1', '1', 'INTERNO', '2017-04-25 15:29:56', '10', '2017-04-25 15:29:56', '10');
+INSERT INTO `sigi_oficios` VALUES ('42', 'RESPUESTA', '00000042', '7378327832872', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SI RESPONDI', '', '1', '1', 'INTERNO', '2017-04-25 15:30:25', '9', '2017-04-25 15:30:25', '9');
+INSERT INTO `sigi_oficios` VALUES ('43', 'SOLICITUD', '00000043', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE SIN RESPUESTA 1', '', '0', null, 'INTERNO', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:01', '10');
+INSERT INTO `sigi_oficios` VALUES ('44', 'SOLICITUD', '00000044', '2345676543', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'PROBANDO DESTINO EXTERNO 1', '', '1', null, 'EXTERNO', '2017-04-25 15:33:12', '9', '2017-04-25 15:33:12', '9');
 
 -- ----------------------------
 -- Table structure for sigi_oficios_documentos_recepcion
@@ -255,65 +281,69 @@ CREATE TABLE `sigi_oficios_documentos_recepcion` (
   `update_at` datetime DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios_documentos_recepcion
 -- ----------------------------
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('1', null, '1', '1', '9', '0', '2017-04-17 10:34:32', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 10:33:58', '8', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('2', null, '1', '1', '3', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 10:33:58', '8', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('3', null, '1', '1', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 10:33:58', '8', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('4', null, '1', '1', '6', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 10:34:21', '9', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('5', '1', '2', '2', '8', '0', '2017-04-17 10:35:37', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 10:35:17', '9', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('6', '1', '3', '3', '9', '0', '2017-04-17 10:36:33', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 10:36:08', '8', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('7', '1', '4', '4', '8', '0', '2017-04-17 10:38:14', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 10:37:06', '9', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('8', '1', '5', '5', '9', '0', '2017-04-17 10:41:12', 'Para conocimiento y archivo', 'Cerrado', '2017-04-17 10:40:20', '8', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('9', '1', '6', '6', '8', '0', '2017-04-17 10:41:48', 'Para conocimiento y archivo', 'Cerrado', '2017-04-17 10:41:27', '9', '2017-04-17 10:41:28', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('10', null, '7', '7', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-17 10:52:07', '8', '2017-04-17 10:52:07', '8');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('11', null, '8', '8', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-17 10:55:09', '8', '2017-04-17 10:55:09', '8');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('12', null, '9', '9', '9', '0', '2017-04-17 14:33:11', 'Para el trámite que corresponda', 'Cerrado', '2017-04-17 13:14:45', '10', '2017-04-18 12:47:57', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('13', null, '10', '10', '7', '0', '2017-04-17 15:48:56', 'Para el trámite que corresponda', 'Abierto', '2017-04-17 15:02:54', '9', '2017-04-17 15:02:54', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('14', null, '10', '10', '8', '1', '2017-04-17 15:06:01', 'Para el trámite que corresponda', 'Abierto', '2017-04-17 15:03:43', '7', '2017-04-17 15:03:43', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('15', null, '11', '11', '9', '0', '2017-04-18 09:16:22', 'Para conocimiento y archivo', 'Cerrado', '2017-04-18 09:11:09', '10', '2017-04-18 09:16:22', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('16', null, '12', '12', '7', '0', '2017-04-18 13:09:46', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 10:29:00', '9', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('17', null, '12', '12', '1', '1', '2017-04-18 13:08:04', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 10:29:00', '9', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('18', null, '12', '12', '2', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 10:29:00', '9', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('19', null, '12', '12', '3', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 10:29:00', '9', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('20', null, '12', '12', '4', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 10:29:00', '9', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('21', '12', '13', '13', '9', '0', '2017-04-18 13:07:07', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 10:38:28', '7', '2017-04-18 10:38:28', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('22', null, '14', '14', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 10:44:56', '9', '2017-04-18 10:51:21', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('23', null, '14', '14', '1', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 10:44:56', '9', '2017-04-18 10:51:21', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('24', null, '14', '14', '3', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 10:44:56', '9', '2017-04-18 10:51:21', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('25', null, '14', '14', '4', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 10:44:57', '9', '2017-04-18 10:51:21', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('26', null, '14', '14', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 10:44:57', '9', '2017-04-18 10:51:21', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('27', null, '14', '14', '10', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 10:44:57', '9', '2017-04-18 10:51:21', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('28', null, '15', '15', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 11:02:01', '9', '2017-04-18 11:02:06', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('29', null, '15', '15', '1', '1', '2017-04-18 11:59:44', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 11:02:01', '9', '2017-04-18 11:02:06', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('30', null, '15', '15', '2', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 11:02:01', '9', '2017-04-18 11:02:06', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('31', null, '16', '16', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 12:01:28', '10', '2017-04-19 15:38:25', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('32', null, '16', '16', '7', '1', '2017-04-18 12:01:41', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 12:01:28', '10', '2017-04-19 15:38:25', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('33', null, '16', '16', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 12:01:28', '10', '2017-04-19 15:38:25', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('34', '9', '17', '17', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-18 12:47:57', '9', '2017-04-18 12:47:57', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('35', null, '18', '18', '7', '0', '2017-04-18 13:11:16', 'Para el trámite que corresponda', 'Abierto', '2017-04-18 13:11:05', '9', '2017-04-18 13:11:05', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('36', null, '18', '18', '1', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-18 13:11:05', '9', '2017-04-18 13:11:05', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('37', null, '18', '18', '8', '1', '2017-04-18 13:12:29', 'Para el trámite que corresponda', 'Abierto', '2017-04-18 13:11:59', '7', '2017-04-18 13:11:59', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('38', null, '19', '19', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-18 14:43:19', '10', '2017-04-18 15:10:07', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('39', null, '20', '20', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-18 15:43:27', '9', '2017-04-18 15:43:27', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('40', null, '21', '23', '10', '0', '2017-04-19 11:56:12', 'Para el trámite que corresponda', 'Cerrado', '2017-04-19 09:40:16', '9', '2017-04-19 13:15:41', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('41', null, '22', '24', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 09:44:34', '9', '2017-04-19 09:44:34', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('42', null, '23', '25', '7', '0', '2017-04-19 09:46:48', 'Para conocimiento y archivo', 'Cerrado', '2017-04-19 09:46:32', '10', '2017-04-19 09:46:48', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('43', '21', '24', '26', '9', '0', '2017-04-19 13:21:46', 'Para el trámite que corresponda', 'Cerrado', '2017-04-19 13:15:41', '10', '2017-04-19 13:15:41', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('44', null, '25', '27', '10', '0', '2017-04-19 13:26:26', 'Para el trámite que corresponda', 'Cerrado', '2017-04-19 13:24:15', '9', '2017-04-19 13:28:41', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('45', '25', '26', '28', '9', '0', '2017-04-19 13:29:35', 'Para el trámite que corresponda', 'Cerrado', '2017-04-19 13:28:41', '10', '2017-04-19 13:28:41', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('46', null, '27', '29', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-19 13:51:20', '9', '2017-04-19 13:51:37', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('47', null, '28', '30', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 14:41:50', '10', '2017-04-19 14:41:50', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('48', null, '29', '31', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 14:42:23', '10', '2017-04-19 14:42:23', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('49', null, '30', '32', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 14:43:07', '10', '2017-04-19 14:43:07', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('50', null, '31', '33', '7', '0', '2017-04-19 15:21:47', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 15:20:13', '9', '2017-04-19 15:35:34', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('51', null, '31', '33', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 15:20:13', '9', '2017-04-19 15:35:34', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('52', '31', '32', '34', '9', '0', '2017-04-19 15:32:57', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 15:22:57', '7', '2017-04-19 15:35:34', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('53', '31', '33', '35', '7', '0', '2017-04-19 15:37:37', 'Para el trámite que corresponda', 'Abierto', '2017-04-19 15:35:34', '9', '2017-04-19 15:35:34', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('54', '31', '34', '36', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-19 15:38:25', '7', '2017-04-19 15:38:25', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('1', null, '1', '1', '9', '0', '2017-04-24 14:33:35', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('2', null, '1', '1', '2', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('3', null, '1', '1', '7', '1', '2017-04-24 14:46:41', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('4', null, '2', '2', '7', '0', '2017-04-25 12:47:49', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('5', null, '2', '2', '5', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('6', null, '3', '3', '7', '0', '2017-04-25 13:15:34', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:15:05', '10', '2017-04-25 13:20:18', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('7', '3', '4', '4', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:20:18', '7', '2017-04-25 13:20:18', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('8', null, '5', '5', '7', '0', '2017-04-25 13:27:32', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:25:35', '10', '2017-04-25 13:27:32', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('9', null, '5', '5', '9', '1', '2017-04-25 13:26:18', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:25:35', '10', '2017-04-25 13:27:32', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('10', null, '6', '6', '7', '0', '2017-04-25 13:34:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:28:37', '10', '2017-04-25 13:34:00', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('11', null, '6', '6', '9', '1', '2017-04-25 13:29:02', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:28:37', '10', '2017-04-25 13:34:00', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('12', null, '7', '7', '9', '0', '2017-04-25 13:35:14', 'Para el trámite que corresponda', 'Abierto', '2017-04-25 13:34:46', '10', '2017-04-25 14:35:45', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('13', null, '7', '7', '9', '1', '2017-04-25 13:35:14', 'Para el trámite que corresponda', 'Abierto', '2017-04-25 13:34:46', '10', '2017-04-25 14:35:45', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('14', '7', '8', '8', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-25 13:35:42', '9', '2017-04-25 14:35:45', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('15', null, '9', '9', '7', '0', '2017-04-25 13:38:57', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:37:07', '10', '2017-04-25 13:38:57', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('16', null, '9', '9', '9', '1', '2017-04-25 13:38:03', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:37:07', '10', '2017-04-25 13:38:57', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('17', null, '10', '10', '7', '0', '2017-04-25 13:49:50', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:39:34', '10', '2017-04-25 13:49:50', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('18', null, '10', '10', '9', '1', '2017-04-25 13:49:29', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:39:51', '7', '2017-04-25 13:49:29', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('19', null, '11', '11', '7', '0', '2017-04-25 13:51:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:50:43', '10', '2017-04-25 13:55:32', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('20', null, '11', '11', '9', '1', '2017-04-25 13:51:19', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:50:43', '10', '2017-04-25 13:55:32', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('21', '11', '12', '12', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:55:32', '7', '2017-04-25 13:55:32', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('22', null, '13', '13', '7', '0', '2017-04-25 13:57:59', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:57:09', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('23', null, '13', '13', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:57:09', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('24', '13', '14', '14', '9', '0', '2017-04-25 14:00:09', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:58:45', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('25', '13', '15', '15', '7', '0', '2017-04-25 14:03:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:02:39', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('26', '13', '16', '16', '9', '0', '2017-04-25 14:07:16', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:04:27', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('27', '13', '17', '17', '7', '0', '2017-04-25 14:11:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:07:47', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('28', '13', '18', '18', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:18:02', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('29', '13', '19', '19', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:21:04', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('30', '13', '20', '20', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:21:47', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('31', '13', '21', '21', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:29:00', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('32', '13', '22', '22', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:29:48', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('33', '13', '23', '23', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:34:35', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('34', '13', '24', '24', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:35:45', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('35', '13', '25', '25', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:40:32', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('36', '13', '26', '26', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:43:04', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('37', '13', '27', '27', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:46:18', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('38', '13', '28', '28', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:46:44', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('39', '13', '29', '29', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:49:20', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('40', '13', '30', '30', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:50:04', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('41', '13', '31', '31', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:56:57', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('42', '13', '32', '32', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:07:45', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('43', '13', '33', '33', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:21:45', '9', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('44', '13', '34', '34', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:22:21', '7', '2017-04-25 15:22:21', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('45', null, '35', '35', '7', '0', '2017-04-25 15:24:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:23:22', '9', '2017-04-25 15:26:07', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('46', null, '35', '35', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:23:22', '9', '2017-04-25 15:26:07', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('47', '35', '36', '36', '9', '0', '2017-04-25 15:25:01', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:23:50', '7', '2017-04-25 15:26:07', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('48', '35', '37', '37', '7', '0', '2017-04-25 15:25:51', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:25:30', '9', '2017-04-25 15:26:07', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('49', '35', '38', '38', '9', '0', '2017-04-25 15:26:43', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:26:07', '7', '2017-04-25 15:26:07', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('50', null, '39', '39', '9', '0', '2017-04-25 15:28:17', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:27:41', '10', '2017-04-25 15:28:41', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('51', null, '39', '39', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:27:41', '10', '2017-04-25 15:28:41', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('52', '39', '40', '40', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:28:41', '9', '2017-04-25 15:28:41', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('53', null, '41', '41', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:29:57', '10', '2017-04-25 15:30:25', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('54', null, '41', '41', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:29:57', '10', '2017-04-25 15:30:25', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('55', '41', '42', '42', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:30:25', '9', '2017-04-25 15:30:25', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('56', null, '43', '43', '9', '0', '2017-04-25 15:31:16', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:16', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('57', null, '43', '43', '7', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:01', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('58', null, '44', '44', '10', '0', '2017-04-25 15:49:03', 'Para el trámite que corresponda', 'Abierto', '2017-04-25 15:33:12', '9', '2017-04-25 15:33:12', '9');
 
 -- ----------------------------
 -- Table structure for siu_coga

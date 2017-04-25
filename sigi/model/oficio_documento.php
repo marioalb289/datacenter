@@ -411,7 +411,7 @@ class OficioDocumento
                FROM
                 sigi_oficios_documentos_recepcion odr
                WHERE
-                odr.id = ?
+                odr.id_oficio = ?
             ");
             // print_r($stm);exit;
 
@@ -452,6 +452,33 @@ class OficioDocumento
         }
 
     }
+    public function ActualizarEstatusFinalByUsr(){
+        try 
+        {
+            $sql = "UPDATE sigi_oficios_documentos_recepcion SET 
+                        estatus_final = ?, update_at = ? , updated_by = ?
+                    WHERE (id_oficio = ? OR parent_id = ?) AND id_usuario = ? ";
+
+                    // print_r($sql);exit;
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getEstatusFinal(),
+                        date('Y-m-d H:i:s'), 
+                        $this->getUpdatedBy(),
+                        intval($this->getIdOficio()),
+                        intval($this->getIdOficio()),
+                        intval($this->getIdUsuario()),
+                    )
+                );
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }   
 
     public function CancelarSolicitud(){
         try 

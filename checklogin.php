@@ -35,7 +35,7 @@ session_start();
           'correo' =>  $user,
           'privilegios' =>  $tusu,
           'id' =>  $idx,
-          'area' =>  $area,
+          'area' =>  $are,
       );
 
 

@@ -4,25 +4,14 @@ include_once 'vendor/vlucas/phpdotenv/src/Dotenv.php';
 
 $controller = 'ofcpartes';
 session_start();
-//echo exec('whoami');exit;
-// if( empty($_SESSION['data_user'])){
-//     header('Location: index.php');
-// }
-//print_r(__DIR__);exit;
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-// print_r(getenv('HOST'));exit;
-
-        // print_r($dotenv);exit;
-
-// $_SESSION['err'] = '';
 //Validar primero que exista una sesion
 if( !empty($_SESSION['data_user'])){
 
 
     // Todo esta lógica hara el papel de un FrontController
-    // require_once 'sigi/view/header.php';
 
 
     if(!isset($_REQUEST['c']))
@@ -37,9 +26,29 @@ if( !empty($_SESSION['data_user'])){
         try
         {
             // Obtenemos el controlador que queremos cargar
-            $controller = strtolower($_REQUEST['c']);;
-            $accion = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'Index';
+
+            /*$controller = "mario alberto";
+            $regex = "/^((([a-zA-Z Ññ áéíóú ÁÉÍÓÚ 0-9- .,()])+)? ?([a-zA-Z Ññ áéíóú ÁÉÍÓÚ 0-9- .,()]))+$/i";
+            if (!preg_match($regex, $controller))
+                print_r("not ok");
+            else
+                print_r("ok");
+            exit;*/
+
+            $regex = "/^[a-zA-Z 0-9]+$/i";
+            if (!preg_match($regex, $controller))
+                throw new Exception("Accion no encontrada");
             
+            $controller = strtolower($_REQUEST['c']);
+            $accion = "";
+            if (isset($_REQUEST['a'])) {
+                if (!preg_match($regex, $controller))
+                    throw new Exception("Accion no encontrada");
+                $accion = $_REQUEST['a'];
+            } else {
+                 throw new Exception("Accion no encontrada");
+            }
+                        
             // Instanciamos el controlador si es que exsiste
             if (!file_exists(__DIR__ ."/sigi/controller/$controller.controller.php" )){
                 //echo "no existe";
@@ -49,19 +58,25 @@ if( !empty($_SESSION['data_user'])){
                 require_once "sigi/controller/$controller.controller.php";
                 $controller = ucwords($controller) . 'Controller';
                 $controller = new $controller;
-                // Llama la accion
-                $x = call_user_func( array( $controller, $accion."Action" ) );
+                // Llama la accion si existe
+                if(is_callable(array( $controller, $accion."Action" ))) {
+                    call_user_func( array( $controller, $accion."Action" ) );
+                } else {
+                    throw new Exception("Accion no encontrada");
+                }
+
             }
             
                
         }
         catch(Exception $e)
         {
-            // print_r(__DIR__ ."/sigi/controller/$controller.controller.php");
-            // print_r($e->getMessage());exit;
             /*Nota: deberia redireccionar a un status 404*/
-            header('Location: sigi.php');
+            //header('Location: sigi.php');
             //die($e->getMessage());
+
+            http_response_code(404);
+            die();
         }
         
     }

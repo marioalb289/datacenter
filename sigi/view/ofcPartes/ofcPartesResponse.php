@@ -129,13 +129,13 @@
 				    <div class="form-group">
 				      <label for="exampleInputFile">Asunto:</label>			      
 				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="50" style="height: 108px;"></textarea>
+				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="50" style="height: 108px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 				    </div>
 
 				    <?php if($data['privilegios'] == 3) { ?>
 				    <div class="form-group" id="box_cargo">
 				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control input-sm" placeholder="Folio Institucional" />
+				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control input-sm" placeholder="Folio Institucional" data-validacion-tipo="alfa-numerico|requerido|min:5"/>
 				        <span class="text-danger"></span>
 				    </div>
 				    <?php } ?>
@@ -191,7 +191,13 @@
 </div>
 </form>
 <script>
-
+	//Evento para validar campos
+	$("form").submit(function(){
+            return $(this).validate();
+    });
+	$('.form-control').bind('blur', function () {
+	    return $(this).validateBlur();
+	});
 	//Evento para visualizar pdf al crear registro
 	$(function(){
 		$("#verPdf").click(loadPreviews_click);

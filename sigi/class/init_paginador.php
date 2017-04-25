@@ -91,6 +91,7 @@ class InitPaginador
 		$arr = $clase->simple( $_POST, $sql_details, $table, $primaryKey, $columns ,$extracond,$group_by);
 
 		// print_r($arr);exit;
+		header("Content-type:application/json");
 		echo json_encode($arr,JSON_UNESCAPED_UNICODE );
 
 		exit;

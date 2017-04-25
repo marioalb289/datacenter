@@ -81,19 +81,19 @@
 		            <div id="formExterno">
 			            <div class="form-group">
 			                <label for="recepciones_nombreEmisor" class="required" id="lbl_nombre_emisor">Nombre quien Recibe:</label>
-			                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" />
+			                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio"  data-validacion-tipo="alfa|requerido|min:10"/>
 			                <span class="text-danger"></span>
 			            </div>
 			            
 					    <div class="form-group" id="box_cargo">
 					        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
-					        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" />
+					        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" />
 					        <span class="text-danger"></span>
 					    </div>
 
 					    <div class="form-group ">
 					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Institución:</label>
-					        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institucion del Titular" />
+					        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institucion del Titular" data-validacion-tipo="alfa|requerido|min:5" />
 					        <span class="text-danger"></span>
 					        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
 					          Result:
@@ -109,13 +109,13 @@
 				    <div class="form-group">
 				      <label for="exampleInputFile">Asunto:</label>			      
 				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;"></textarea>
+				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 				    </div>
 
 				    <?php if($data['privilegios'] == 3) { ?>
 				    <div class="form-group" id="box_cargo">
 				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control input-sm" placeholder="Folio Institucional" />
+				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control input-sm" placeholder="Folio Institucional"  data-validacion-tipo="alfa-numerico|requerido|min:5"/>
 				        <span class="text-danger"></span>
 				    </div>
 				    <?php } ?>
@@ -192,8 +192,14 @@
 </div>
 </form>
 <script>
-
-		//Evento para visualizar pdf al crear registro
+	//Evento para validar campos
+	$("form").submit(function(){
+            return $(this).validate();
+    });
+	$('.form-control').bind('blur', function () {
+	    return $(this).validateBlur();
+	});
+	//Evento para visualizar pdf al crear registro
     $(function(){
         $("#verPdf").click(loadPreviews_click);
     })

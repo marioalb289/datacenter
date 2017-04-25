@@ -18,5 +18,6 @@
         <script src="sigi/assets/js/pdf/pdf.js"></script>
         <script src="sigi/assets/js/pdf/pdf.worker.js"></script>
         <script src="sigi/assets/js/moment.min.js"></script>
+        <script src="sigi/assets/js/validate.js"></script>
     </body>
 </html>
