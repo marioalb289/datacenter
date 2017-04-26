@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : iepc
+Source Server         : prueba
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : artic600_datacenter
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-25 15:54:59
+Date: 2017-04-25 20:54:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -486,7 +486,7 @@ JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 JOIN usuarios us ON us.id = ofc.id_usuario_emisor
 JOIN areas ar ON ar.id = us.area
 WHERE
-	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'EXTERNO' ;
+	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'EXTERNO' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_oficios_externos
@@ -513,7 +513,7 @@ FROM
 	sigi_oficios ofc
 JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
 JOIN sigi_documentos doc ON doc.id = odr.id_documentos
-WHERE origen = 'EXTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ;
+WHERE origen = 'EXTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_oficios_internos
@@ -542,7 +542,7 @@ JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 JOIN usuarios us ON us.id = ofc.id_usuario_emisor
 JOIN areas ar ON ar.id = us.area
 WHERE
-	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ;
+	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_respuestas_enviadas
@@ -558,7 +558,7 @@ IF (
 	ofc.origen = 'INTERNO',
 	CONCAT(us.nombre,' ',us.apellido, ' de ', ar.abreviatura),
 	CONCAT(ofc.nombre_emisor,' de ',ofc.institucion_emisor)
-) AS persona_recibe,
+) COLLATE utf8_general_ci AS persona_recibe,
  odr.id_usuario AS id_usuario_receptor,
  ofc.asunto_emisor AS asunto_emisor,
  odr.estatus_inicial as estatus_inicial,
@@ -583,7 +583,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	odr.parent_id as parent_id,
 	ofc.id_usuario_emisor AS id_usuario_emisor,
 	ar.nombre as area,
-	CONCAT(us.nombre,' ',us.apellido) as persona_responde,
+	CONCAT(us.nombre,' ',us.apellido) COLLATE utf8_general_ci as persona_responde,
 	odr.id_usuario AS id_usuario_receptor,
 	ofc.asunto_emisor AS asunto_emisor,
 	odr.estatus_inicial AS estatus_inicial,
