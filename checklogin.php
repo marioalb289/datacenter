@@ -33,7 +33,7 @@ session_start();
           'nombre' =>  $nombre,
           'apellido' =>  $apelli,
           'correo' =>  $user,
-          'privilegios' =>  $tusu,
+          'privilegios' => $mostrarx['priv_sigi'],
           'id' =>  $idx,
           'area' =>  $are,
       );
