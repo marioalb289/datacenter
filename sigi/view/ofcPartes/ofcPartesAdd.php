@@ -54,7 +54,7 @@
 		                <label for="recepciones_nombreEmisor" class="required">Origen</label>
 		                <select class="form-control input-sm" name="origen" id="origen" disabled >
 		                  <option value="2" <?php if($data['privilegios'] == 1) echo "selected" ?>>Externo</option>
-		                  <option value="1" <?php if($data['privilegios'] == 3) echo "selected" ?>>Interno</option>
+		                  <option value="1" <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) echo "selected" ?>>Interno</option>
 		                </select>
 		                <input type="hidden" id="select_origen" name="select_origen" value="<?php if($data['privilegios'] == 1) echo "2"; else echo "1"  ?>">
 		                <span class="text-danger"></span>
@@ -133,7 +133,7 @@
 				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 				    </div>
 
-				    <?php if($data['privilegios'] == 3) { ?>
+				    <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) { ?>
 				    <div class="form-group" id="box_cargo">
 				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
 				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Folio Institucional"  data-validacion-tipo="alfa-numerico|requerido|min:5"/>

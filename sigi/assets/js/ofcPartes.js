@@ -207,6 +207,7 @@ $(document).ready(function(){
                 "data": null, 
                 "visible": true,
                 "orderable" : false,
+                "className": "dt-center",
                 "render": function ( data, type, row ) {
                     return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
@@ -227,12 +228,13 @@ $(document).ready(function(){
                 "targets": -1,
                 "data": null,
                 "visible": true,
-                "orderable" : false, 
+                "orderable" : false,
+                "className": "dt-center", 
                 "render": function ( data, type, row ) {
-                    if(row.id_usuario_emisor==ID_USER)
-                      return  "<a href='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                    if(parseInt(row.id_usuario_emisor)!=ID_USER)
+                      return "";
                     else
-                      return  "";
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
             }
         ],
@@ -306,6 +308,7 @@ $(document).ready(function(){
                 "data": null, 
                 "visible": true,
                 "orderable" : false,
+                "className": "dt-center",
                 "render": function ( data, type, row ) {
                     return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
@@ -315,11 +318,12 @@ $(document).ready(function(){
                 "data": null,
                 "visible": true,
                 "orderable" : false, 
+                "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    if(row.id_usuario_emisor==ID_USER)
-                      return  "<a href='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                    if(parseInt(row.id_usuario_emisor)!=ID_USER)
+                      return "";
                     else
-                      return  "";
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
             }
         ],
@@ -328,7 +332,7 @@ $(document).ready(function(){
 
     });
 
-    if(USER_PRIV == 3){
+    if(USER_PRIV == 3 || USER_PRIV == 2){
       //Evento del paginador de respuestas enviadas externos
       var respuestas =  $('#lista_respuestas').DataTable({
         processing: true,
@@ -365,6 +369,7 @@ $(document).ready(function(){
                   "data": null, 
                   "visible": true,
                   "orderable" : false,
+                  "className": "dt-center",
                   "render": function ( data, type, row ) {
                       return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                   },

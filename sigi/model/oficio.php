@@ -569,7 +569,8 @@ class Oficio
                 odr.estatus_final AS estatus_final,
                 doc.id as id_documento,
                 doc.nombre as doc_nombre,
-                odr.parent_id as parent_id
+                odr.parent_id as parent_id,
+                odr.fecha_visto as fecha_visto
                FROM
                 sigi_oficios ofc
                JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
@@ -585,6 +586,31 @@ class Oficio
                  $stm->execute(array($id_oficio));
 
             return $stm->fetch(PDO::FETCH_OBJ);
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function buscaUsuarioEnSolicitud($id_oficio,$id_usuario){
+        try
+        {
+
+            $stm = $this->pdo->prepare("
+               SELECT
+                id
+               FROM
+                sigi_oficios_documentos_recepcion
+               WHERE
+                id_oficio = ?
+               AND id_usuario = ?
+            ");
+            // print_r($stm);exit;
+
+            $stm->execute(array($id_oficio,$id_usuario));
+            return $stm->fetchAll(PDO::FETCH_OBJ);
         }
         catch(Exception $e)
         {

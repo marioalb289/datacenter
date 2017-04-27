@@ -34,6 +34,7 @@ class OfcPartesController
 
 
   public function IndexAction(){
+    // print_r($_SESSION);
     $this->layout->renderVista("ofcPartes","ofcPartes");
   }
 
@@ -47,6 +48,12 @@ class OfcPartesController
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
       $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario AND sigi_vw_oficios_externos.estatus_final <> 'Cancelado' ";
+    }
+    //si eres un alto directivo
+    elseif ($_SESSION['data_user']['privilegios'] == 2) {
+       $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_externos.origen = 'Externo' ";
+       $group_by = ' GROUP BY id_oficio ';
+
     }
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     else{
@@ -102,6 +109,17 @@ class OfcPartesController
       ";
 
       $group_by = ' GROUP BY id_oficio ';
+    }
+    //si eres un alto directivo
+    elseif ($_SESSION['data_user']['privilegios'] == 2) {
+       $cond = " (
+      sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario
+      AND sigi_vw_oficios_internos.estatus_final <> 'Cancelado'
+      )
+      OR (id_usuario_emisor = $id_usuario) 
+      OR origen = 'Interno'";
+       $group_by = ' GROUP BY id_oficio ';
+
     }
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     else{
@@ -159,6 +177,11 @@ class OfcPartesController
       )
       OR (sigi_vw_oficios_des_externo.id_usuario_emisor = $id_usuario)
       ";
+      //Si eres directivo ademas de tus oficios, mostrar todos los demas oficios
+      if($_SESSION['data_user']['privilegios'] == 2){
+        $cond = $cond." OR origen = 'Interno'";
+      }
+
       $group_by = ' GROUP BY id_oficio ';
     //}
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
@@ -212,8 +235,8 @@ class OfcPartesController
     $group_by = '';
     $id_usuario = $_SESSION['data_user']['id'];
 
-    //si eres un usuario receptor, buscar solo los mensajes que te corresponden
-    if($_SESSION['data_user']['privilegios'] == 3){
+    //si eres un usuario receptor o un alto directivo, buscar solo los mensajes que te corresponden
+    if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){
       $cond = " sigi_vw_respuestas_enviadas.id_usuario_emisor = $id_usuario ";
        $group_by = ' GROUP BY id_oficio ';
     }
@@ -405,10 +428,18 @@ class OfcPartesController
         // print_r($id_usuario);exit;
         $oficio = new Oficio();
         $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
-        if(empty($objOficio)){
-          $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-          header('Location: sigi.php');
-          exit;
+        //Si esta vacio verificar que el usuario este en la lista de usuarios a los que se les envio copia
+        if(empty($objOficio) && $id_usuario != ''){
+          $objOficioTemp = $oficio->getOficio($id_oficio);
+          $objSolicitud = $oficio->buscaUsuarioEnSolicitud($objOficioTemp->parent_id,$id_usuario);
+          if(empty($objSolicitud)){
+            $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+            header('Location: sigi.php');
+            exit;
+          }
+          else{
+            $objOficio = $objOficioTemp;
+          }
         }
 
         // print_r($objOficio);exit;
@@ -430,7 +461,7 @@ class OfcPartesController
 
         $arrUsrccp = array();
         //Si eres un usuario receptor cargar los usuarios que tambien recibieron el mensaje solo si eres el titular del mensaje, y solo el titular puede turnar a otros usuarios
-        if($_SESSION['data_user']['privilegios'] == 3){
+        if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2 ){
           if($objOficio->ccp == 0 ){
             //Obtener lista de usuarios a los que se les envio el mensaje
             $arrUsrccp = $usuario->ListarUsuariosCcp($objOficio->id_oficio);
@@ -1031,17 +1062,17 @@ class OfcPartesController
           } else {
 
             // print_r($_FILES);
-                    // print_r($_REQUEST);
-                    // exit;
+            // print_r($_REQUEST);
+            // exit;
 
-                    //Buscar el oficio original y obtener sus datos
-                    // $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
-                    // print_r($id_usuario);
-                    // $ofc = new Oficio();
-                    // $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
-                    // print_r($objOficio);exit;
-                      // throw new Exception('No se ha seleccionado ningun archivo.');
-                      // print_r($_POST['origen']);exit;
+            //Buscar el oficio original y obtener sus datos
+            // $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
+            // print_r($id_usuario);
+            // $ofc = new Oficio();
+            // $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
+            // print_r($objOficio);exit;
+              // throw new Exception('No se ha seleccionado ningun archivo.');
+              // print_r($_POST['origen']);exit;
 
               $origen = ($_POST['origen'] == 'INTERNO') ? 'I': 'E';
               $area = new Area();

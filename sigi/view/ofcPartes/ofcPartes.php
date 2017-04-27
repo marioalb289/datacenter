@@ -31,7 +31,7 @@
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab1default" data-toggle="tab">Listar Oficios Externos</a></li>
           <li><a href="#tab2default" data-toggle="tab">Listar Oficios Internos</a></li>
-          <?php if($_SESSION['data_user']['privilegios'] == 3){ ?>
+          <?php if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){ ?>
           <li><a href="#respuestas_enviadas" data-toggle="tab">Respuestas Enviadas</a></li>
           <?php } ?>
           <li><a href="#oficios_destino_externo" data-toggle="tab">Listar Oficios con Destino Externo</a></li>
@@ -41,6 +41,9 @@
         <div class="tab-content">
           <div class="tab-pane fade in active" id="tab1default">
             <!-- contenido tab externo -->
+            <div class="col-md-12" style="text-align: center;">
+              <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_limpiar">Recargar</button>
+            </div>
             <div class="col-md-12">
               <table id="lista_oficios_externos" class="table  table-bordered table-hover display" cellspacing="0" width="100%">
                 <thead>
@@ -83,7 +86,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="respuestas_enviadas">
-            <!-- contenido tab interno -->
+            <!-- contenido tab respuestas enviadas -->
             <div class="col-md-12">
               <table id="lista_respuestas" class="table table-bordered table-hover display compact" cellspacing="0" width="100%">
                 <thead>
@@ -102,7 +105,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="oficios_destino_externo">
-            <!-- contenido tab interno -->
+            <!-- contenido tab oficios externos -->
             <div class="col-md-12">
               <table id="lista_oficios_destino_externo" class="table  table-bordered table-hover display dt-center " cellspacing="0" width="100%">
                 <thead>

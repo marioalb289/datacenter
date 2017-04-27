@@ -195,7 +195,7 @@
 		</div>
 	</div>
 </div>
-<?php if(!empty($data['usuarios_turnar']) && $data['oficio']->estatus_final!= 'Cerrado' &&  $data['oficio']->tipo_oficio == 'SOLICITUD') { ?>
+<?php if(!empty($data['usuarios_turnar']) && $data['oficio']->estatus_final!= 'Cerrado' &&  $data['oficio']->tipo_oficio == 'SOLICITUD' && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id']) { ?>
 <form name="recepciones" method="post" action="?c=OfcPartes&a=Turnar" role="form" enctype="multipart/form-data">
 <div class="panel panel-default">
 	<div class="panel-heading">
