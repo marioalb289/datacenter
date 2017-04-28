@@ -6,7 +6,7 @@
         <div class="modal-content">
             <div class="modal-header modal-header-warning">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h1><i class="glyphicon glyphicon-question-sign"></i> Advertencia</h1>
+                <h1><i class="glyphicon glyphicon-exclamation-sign"></i> Advertencia</h1>
             </div>
             <div class="modal-body">
             	<p>Este oficio se encuentra en Estatus cerrado. Al responder se cambiara su estatus a abierto. </p>
@@ -21,6 +21,23 @@
 </div><!-- /.modal -->
 <!-- Modal -->
 
+<!-- Modal -->
+<div class="modal fade" id="warning2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-warning">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h1><i class="glyphicon glyphicon-exclamation-sign"></i> Advertencia</h1>
+            </div>
+            <div class="modal-body">
+            	<p>Aún no se ha revisado el documento adjunto a esta solicitud.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 <h1 class="page-header">Oficialia de Partes ver Detalle Oficio</h1>
@@ -32,14 +49,10 @@
 				<?php if($_SESSION['data_user']['privilegios'] == 3 && $data['oficio']->tipo_oficio == "SOLICITUD" && $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 && $data['oficio']->estatus_final == 'Cerrado'){ ?>
 				<a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href="#warning" data-toggle="modal" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Cancelar</a>
-				<?php } elseif ( $data['oficio']->respuesta && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){
-					# code...
-				 ?>
-				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='?c=OfcPartes&a=response&id=<?php echo $data['oficio']->id_oficio ?>' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Responder</a>
+				<?php } elseif ( $data['oficio']->respuesta && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){ ?>
+				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php if($data['oficio']->fecha_visto != '0000-00-00 00:00:00') {echo "href='?c=OfcPartes&a=response&id=".$data['oficio']->id_oficio."'";} else {echo "href='#warning2' data-toggle='modal'";} ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Responder</a>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Cancelar</a>
-				<?php } ?>
-
-				
+				<?php } ?>		
 
 			</div>
 		</div>
