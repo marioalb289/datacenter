@@ -57,6 +57,9 @@ $(document).ready(function(){
       })
       .change();*/
 
+    
+
+
 
     //Evento del paginador de oficios externos
     var externos =  $('#lista_oficios_externos').DataTable({
@@ -64,6 +67,8 @@ $(document).ready(function(){
         "autoWidth": false,
         processing: true,
         serverSide: true,
+        "deferRender": true,
+        searchDelay: 1000,
         ajax: {
             "url": "?c=OfcPartes&a=listarOficiosExternos",
             "type": "POST"
@@ -148,7 +153,16 @@ $(document).ready(function(){
             }
         ] ,       
       language: language,
-      "order": [[ 6, 'desc' ]]
+      "order": [[ 6, 'desc' ]],
+      "initComplete": function(settings, json) {
+          //console.log( 'DataTables has finished its initialisation.' );
+          //$("#div_recargar_externos").show();
+          $( "#lista_oficios_externos_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_externos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#btn_recargar_externos" ).click(function() {
+            $('#lista_oficios_externos').DataTable().ajax.reload();
+          });
+        }
+
 
     });
 
@@ -157,6 +171,8 @@ $(document).ready(function(){
       processing: true,
         serverSide: true,
         "autoWidth": false,
+        "deferRender": true,
+        searchDelay: 1000,
         ajax: {
             "url": "?c=OfcPartes&a=listarOficiosInternos",
             "type": "POST"
@@ -239,7 +255,15 @@ $(document).ready(function(){
             }
         ],
       language: language,
-      "order": [[ 6, 'desc' ]]
+      "order": [[ 6, 'desc' ]],
+      "initComplete": function(settings, json) {
+          //console.log( 'DataTables has finished its initialisation.' );
+          //$("#div_recargar_externos").show();
+          $( "#lista_oficios_internos_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_internos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#btn_recargar_internos" ).click(function() {
+            $('#lista_oficios_internos').DataTable().ajax.reload();
+          });
+        }
 
     });
 
@@ -248,6 +272,8 @@ $(document).ready(function(){
       processing: true,
         serverSide: true,
         "autoWidth": false,
+        "deferRender": true,
+        searchDelay: 1000,
         ajax: {
             "url": "?c=OfcPartes&a=listarOficiosDestinoExterno",
             "type": "POST"
@@ -328,7 +354,15 @@ $(document).ready(function(){
             }
         ],
       language: language,
-      "order": [[ 7, 'desc' ]]
+      "order": [[ 7, 'desc' ]],
+      "initComplete": function(settings, json) {
+          //console.log( 'DataTables has finished its initialisation.' );
+          //$("#div_recargar_externos").show();
+          $( "#lista_oficios_destino_externo_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_destino_externo' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#btn_recargar_destino_externo" ).click(function() {
+            $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+          });
+        }
 
     });
 
@@ -338,6 +372,8 @@ $(document).ready(function(){
         processing: true,
           serverSide: true,
           "autoWidth": false,
+          "deferRender": true,
+        searchDelay: 1000,
           ajax: {
               "url": "?c=OfcPartes&a=listarRespuestasEnviadas",
               "type": "POST"
@@ -376,7 +412,15 @@ $(document).ready(function(){
               }
           ],
         language: language,
-        "order": [[ 5, 'desc' ]]
+        "order": [[ 5, 'desc' ]],
+        "initComplete": function(settings, json) {
+          //console.log( 'DataTables has finished its initialisation.' );
+          //$("#div_recargar_externos").show();
+          $( "#lista_respuestas_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_respuestas' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#btn_recargar_respuestas" ).click(function() {
+            $('#lista_respuestas').DataTable().ajax.reload();
+          });
+        }        
 
       });
 
