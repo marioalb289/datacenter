@@ -7,7 +7,9 @@
                 </div>    
             </div> -->
         </div>
-
+        
+        <script src="sigi/assets/js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+        <script src="sigi/assets/js/jquery.gritter.min.js"></script>
         <script src="sigi/assets/js/bootstrap.min.js"></script>
         <script src="sigi/assets/js/jasny-bootstrap.js"></script>
         <script src="sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>

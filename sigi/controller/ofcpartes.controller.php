@@ -897,6 +897,7 @@ class OfcPartesController
 }
   public function guardarAction(){
       try {
+          $success = true;
           if( !isset($_FILES['archivo']) ){
             throw new Exception('No se ha seleccionado ningun archivo.');
           }
@@ -992,7 +993,12 @@ class OfcPartesController
                $ofc->setTipoOficio("SOLICITUD");
                $ofc->setFolio($folio);
                $ofc->setFolioInstitucion( isset($_POST['folio_iepc']) ? $_POST['folio_iepc']: ''); //Folio de institucion cambiar
-               $ofc->_setIdUsuarioEmisor(($_POST["id_usuario_origen"] == '') ? 0: $_POST["id_usuario_origen"]);
+
+               if(isset($_POST['id_usuario_origen']))
+                $ofc->_setIdUsuarioEmisor(( $_POST["id_usuario_origen"] == '') ? 0: $_POST["id_usuario_origen"]);
+              else
+                $ofc->_setIdUsuarioEmisor(0);
+
                $ofc->_setNombreEmisor( isset($_POST["nombre_emisor"]) ? $_POST["nombre_emisor"] : "");
                $ofc->_setInstitucionEmisor( isset( $_POST["institucion_emisor"]) ? $_POST["institucion_emisor"]: "" );
                $ofc->_setCargo( isset($_POST["cargo_emisor"]) ? $_POST["cargo_emisor"]: "");
@@ -1034,17 +1040,23 @@ class OfcPartesController
 
 
                //Enviar copia solo si se selecciono de la lista de usuarios
-               $arr_ccp = $_POST['check_list_user'];
-               if(!empty($arr_ccp)){
-                 foreach ($arr_ccp as $ids) {
-                   //Hacer el guardado por id;
-                  $ofc_doc->setIdUsuario($ids);   
-                  $ofc_doc->setCcp(1); 
-                  $ofc_doc->RegistrarOficioDocumento();
-                }            
-              }
+               if(isset($_POST['check_list_user'])){
+                 $arr_ccp = $_POST['check_list_user'];
+                 if(!empty($arr_ccp)){
+                   foreach ($arr_ccp as $ids) {
+                     //Hacer el guardado por id;
+                    $ofc_doc->setIdUsuario($ids);   
+                    $ofc_doc->setCcp(1); 
+                    $ofc_doc->RegistrarOficioDocumento();
+                  }            
+                }
+               }
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
-              header('Location: sigi.php');
+
+              // header("Content-type:application/json");
+              echo json_encode(array("success"=>$success));
+              exit;
+              //header('Location: sigi.php');
           }
           
       } catch (Exception $e) {
@@ -1252,15 +1264,18 @@ class OfcPartesController
               }
 
               //Enviar copia solo si se selecciono de la lista de usuarios
-              $arr_ccp = $_POST['check_list_user'];
-              if(!empty($arr_ccp)){
-                  foreach ($arr_ccp as $ids) {
-                      //Hacer el guardado por id;
-                      $ofc_doc->setIdUsuario($ids);   
-                      $ofc_doc->setCcp(1); 
-                      $ofc_doc->RegistrarOficioDocumento();
-                  }            
+              if(isset($_POST['check_list_user'])){
+                $arr_ccp = $_POST['check_list_user'];
+                if(!empty($arr_ccp)){
+                    foreach ($arr_ccp as $ids) {
+                        //Hacer el guardado por id;
+                        $ofc_doc->setIdUsuario($ids);   
+                        $ofc_doc->setCcp(1); 
+                        $ofc_doc->RegistrarOficioDocumento();
+                    }            
+                }
               }
+              
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
               header('Location: sigi.php');
 

@@ -11,6 +11,7 @@
         <!-- <link rel="stylesheet" href="sigi/assets/css/bootstrap-theme.min.css" />         -->
         <link rel="stylesheet" href="sigi/assets/js/jquery-ui/jquery-ui.min.css" />
         <link rel="stylesheet" href="sigi/assets/css/style.css" />
+        <link rel="stylesheet" href="sigi/assets/css/jquery.gritter.css" />
         
         <script src="sigi/assets/js/jquery.js"></script>
         <script src="sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>

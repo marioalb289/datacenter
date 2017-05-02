@@ -27,7 +27,7 @@
 
 
 <h1 class="page-header">Oficialia de Partes</h1>
-<form name="recepciones" method="post" action="?c=OfcPartes&a=Guardar" role="form" enctype="multipart/form-data">
+<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="row">
@@ -215,7 +215,25 @@
 <script>
 	//Evento para validar campos
 	$("form").submit(function(){
-            return $(this).validate();
+		var formData = new FormData($(this)[0]);
+
+	    $.ajax({
+	        url: '?c=OfcPartes&a=Guardar',
+	        type: 'POST',
+	        data: formData,
+	        async: false,
+	        success: function (data) {
+	        	respuesta = JSON.parse(data); 
+	        	if(respuesta.success){
+	        		window.location.href = "sigi.php";
+	        	}
+	        },
+	        cache: false,
+	        contentType: false,
+	        processData: false
+	    });
+
+	    return false;
     });
 	$('.form-control').bind('blur', function () {
 	    return $(this).validateBlur();
