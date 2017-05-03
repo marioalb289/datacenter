@@ -213,7 +213,7 @@
 </div>
 </form>
 <script>
-	//Evento para validar campos
+	//Evento para validar campos y enviar notificaciones por sokect io
 	$("form").submit(function(){
 		var formData = new FormData($(this)[0]);
 
@@ -225,6 +225,7 @@
 	        success: function (data) {
 	        	respuesta = JSON.parse(data); 
 	        	if(respuesta.success){
+	        		socket.emit( 'notification', respuesta.notificacion );
 	        		window.location.href = "sigi.php";
 	        	}
 	        },

@@ -409,6 +409,44 @@ class OfcPartesController
     }
   }
 
+  //Obteenr datos del oficio para la notificacion
+  public function getOficioNotificacionAction(){
+
+    if(isset($_REQUEST['id_oficio'])){
+      try {
+        if (!$this->validate->numero($_REQUEST['id_oficio']))
+          throw new Exception("Accion no encontrada");
+
+        $id_usuario = '';
+        if($_SESSION['data_user']['privilegios'] == 3){
+          $id_usuario = $_SESSION['data_user']['id'];
+        }
+
+        $id_oficio = $_REQUEST['id_oficio'];
+        $oficio = new Oficio();
+        $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+
+        if(!empty($objOficio))
+          echo json_encode(array('success' => true,'msg' => 'Se econtrro datos','data' => $objOficio));
+        else
+          echo json_encode(array('success' => false,'msg' => 'No se encontraron datos'));
+        exit;
+
+
+        
+      } catch (Exception $e) {
+        echo json_encode(array('success' => false,'msg' => 'Error al recuperar datos'));
+        exit;
+        
+      }
+
+    }
+    else{
+      echo json_encode(array('success' => false,'msg' => 'No se encontraron Datos'));
+      exit;
+    }
+  }
+
     public function viewAction(){
 
 
@@ -905,6 +943,7 @@ class OfcPartesController
                // print_r($_FILES);
                  // throw new Exception('No se ha seleccionado ningun archivo.');
                  // print_r($_POST);exit;
+               $usr_notificar = array();
                $objUsr = array();
                if(isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO'){
                  $usr = new Usuario();
@@ -1005,7 +1044,7 @@ class OfcPartesController
                $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
                $ofc->_setAsuntoReceptor("");
                $ofc->_setRespuesta($_POST["respuesta"]);
-               $ofc->setDestino( isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
+               $ofc->setDestino( isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO' ? 'EXTERNO': 'INTERNO' ) ;
                $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
                $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
                $id_ofc = $ofc->RegistrarOficio();
@@ -1018,15 +1057,16 @@ class OfcPartesController
                $ofc_doc->setParentId(null);    
                $ofc_doc->setIdDocumentos($id_documento);
 
-               //Si es un oficio con destino a dependencia externa buscar y asingar el usuario titular de ofc de partes
+               //Si es un oficio con destino a dependencia externa buscar y asingar el usuario con privilegios 1 de ofc de partes
                if(isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO'){
                  $usr = new Usuario();
                  $objUsr = $usr->userOfcPartes();
                  $ofc_doc->setIdUsuario($objUsr->id_usuario);
-
+                 array_push($usr_notificar, $objUsr->id_usuario); 
                }
                else{
                  $ofc_doc->setIdUsuario($_POST['id_usuario_receptor']);   
+                 array_push($usr_notificar, $_POST['id_usuario_receptor']);
                }
                $ofc_doc->setCcp(0);         
                $ofc_doc->setFechaVisto('');  
@@ -1048,13 +1088,24 @@ class OfcPartesController
                     $ofc_doc->setIdUsuario($ids);   
                     $ofc_doc->setCcp(1); 
                     $ofc_doc->RegistrarOficioDocumento();
+
+                    array_push($usr_notificar, $ids); 
                   }            
                 }
                }
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
 
+              //Armar arreglo de datos para los usuarios que se les notificara el oficio
+              $usr = new Usuario();
+              $objUsr = $usr->getUsuarioArea($_SESSION['data_user']['id']);
+
+              $origen = ($_POST['select_origen'] == 1) ? 'INTERNO': 'EXTERNO';
+              $destino = isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO' ? 'EXTERNO': 'INTERNO';
+
+              $data = array('id_oficio' => $id_ofc,'nombre_usuario' => $objUsr->nombre_usuario.' '.$objUsr->apellido_usuario.' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino,'ids_usuario_receptor' => $usr_notificar);
+
               // header("Content-type:application/json");
-              echo json_encode(array("success"=>$success));
+              echo json_encode(array("success"=>$success,"notificacion" => $data));
               exit;
               //header('Location: sigi.php');
           }
@@ -1072,7 +1123,7 @@ class OfcPartesController
          if( !isset($_FILES['archivo']) ){
                throw new Exception('No se ha seleccionado ningun archivo.');
           } else {
-
+            $success = true;
             // print_r($_FILES);
             // print_r($_REQUEST);
             // exit;
@@ -1172,6 +1223,7 @@ class OfcPartesController
               $ofc->_setCargo($objOficio->cargo);
               $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
               $ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
+              $destino_notf = ($objOficio->destino == 'EXTERNO') ? 'EXTERNO': 'INTERNO';
               $ofc->_setAsuntoReceptor("");
               $ofc->_setRespuesta(1);
               //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta
@@ -1212,6 +1264,7 @@ class OfcPartesController
               
               $ofc_doc->RegistrarOficioDocumento();
 
+              $obj_usr_not = array();
               if($objOficio->tipo_oficio == 'SOLICITUD'){
 
                   //Si es solicitud marcarlo como respondido y cambiar estatus global a cerrado
@@ -1230,6 +1283,8 @@ class OfcPartesController
                   $objOficioDoc->setIdOficio($_POST['id_oficio']);
                   $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
                   $objOficioDoc->ActualizarEstatusFinal();
+
+                  $obj_usr_not = $objOficioDoc->getUsuariosEnDocumentos($_POST['id_oficio'],$_SESSION['data_user']['id']);
               }
               else{
                   //Sie es la respuesta de una respuesta, marcar la respuesta recibida como respondido y cambiar el estatus de la solicitud principal
@@ -1259,6 +1314,8 @@ class OfcPartesController
                   $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
                   $objOficioDoc->ActualizarEstatusFinal();
 
+                  $obj_usr_not = $objOficioDoc->getUsuariosEnDocumentos($arr->id_oficio,$_SESSION['data_user']['id']);
+
 
                   
               }
@@ -1277,7 +1334,24 @@ class OfcPartesController
               }
               
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
-              header('Location: sigi.php');
+              //header('Location: sigi.php');
+
+              //Armar arreglo de datos para los usuarios que se les notificara el oficio
+              $usr = new Usuario();
+              $objUsr = $usr->getUsuarioArea($_SESSION['data_user']['id']);
+
+              $origen = ($_POST['origen'] == "INTERNO") ? 'INTERNO': 'EXTERNO';
+              $usr_notificar = array();
+
+              foreach ($obj_usr_not as $value) {
+                array_push($usr_notificar,$value->id_usuario);
+              }
+
+              $data = array('id_oficio' => $id_ofc,'nombre_usuario' => $objUsr->nombre_usuario.' '.$objUsr->apellido_usuario.' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino_notf,'ids_usuario_receptor' => $usr_notificar);
+
+              // header("Content-type:application/json");
+              echo json_encode(array("success"=>$success,"notificacion" => $data));
+              exit;
 
 
           }

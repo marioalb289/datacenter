@@ -426,6 +426,35 @@ class OficioDocumento
  
     }
 
+    public function getUsuariosEnDocumentos($id_oficio,$id_usuario){
+        try
+        {
+
+            $stm = $this->pdo->prepare("
+               SELECT
+                id_usuario
+               FROM
+                sigi_oficios_documentos_recepcion odr
+               WHERE
+                (id_oficio = ?
+               OR parent_id = ?)
+               AND id_usuario NOT IN (?)
+               GROUP BY
+                id_usuario
+            ");
+            // print_r($stm);exit;
+
+            $stm->execute(array($id_oficio,$id_oficio,$id_usuario));
+
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+ 
+    }
+
     public function ActualizarEstatusFinal(){
         try 
         {

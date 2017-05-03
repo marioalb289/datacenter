@@ -15,6 +15,8 @@
         
         <script src="sigi/assets/js/jquery.js"></script>
         <script src="sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>
+        <script src="sigi/assets/js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+
 	</head>
     <body style="min-width: 960px !important;">
 
@@ -71,6 +73,101 @@
     <script type="text/javascript">
     var USER_PRIV = <?php echo $_SESSION['data_user']['privilegios']; ?>;
     var ID_USER = <?php echo $_SESSION['data_user']['id']; ?>;
+
+    var audio = new Audio('AI/image/presence_changed.wav');
+
+    var socket = io.connect( 'http://localhost:8181' );
+
+    socket.on( 'notification', function( data ) {
+      var actualuser = ID_USER;
+      for (var i = data.ids_usuario_receptor.length - 1; i >= 0; i--) {
+        if(actualuser==data.ids_usuario_receptor[i])
+        {
+           notifyMe(data.asunto,'AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
+
+           if(data.origen == "EXTERNO" && data.destino == "INTERNO"){
+            $('#lista_oficios_externos').DataTable().ajax.reload();
+           }
+           if(data.origen == "INTERNO" && data.destino == "INTERNO"){
+            $('#lista_oficios_internos').DataTable().ajax.reload();
+
+           }
+           if(data.origen == "INTERNO" && data.destino == "EXTERNO"){
+            $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+           }
+
+        }
+      }
+
+      
+      
+    });
+
+    function notifyMe(theBody,theIcon,theTitle,theText,id_oficio) {
+      // Let's check if the browser supports notifications
+      if (!("Notification" in window)) {
+       notiIE(theIcon,theTitle,theText);
+      }
+
+      // Let's check whether notification permissions have already been granted
+      else if (Notification.permission === "granted") {
+        // If it's okay let's create a notification
+        spawnNotification(theBody,theIcon,theTitle,id_oficio);
+      }
+
+      // Otherwise, we need to ask the user for permission
+      else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+          // If the user accepts, let's create a notification
+          if (permission === "granted") {
+            var notification = new Notification("Hi there!");
+          }
+        });
+      }
+
+      // At last, if the user has denied notifications, and you 
+      // want to be respectful there is no need to bother them any more.
+    }Notification.requestPermission().then(function(result) {
+      console.log(result);
+    });
+    function spawnNotification(theBody,theIcon,theTitle,id_oficio) {
+      var options = {
+          body: theBody,
+          icon: theIcon,
+          sound: 'AI/image/presence_changed.wav'
+      }
+      var n = new Notification(theTitle,options);
+
+
+      audio.play();
+
+      n.onclick = function () {
+           window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;      
+         };
+      n.sound;
+    }
+
+    function notiIE(image,theTitle,theText)
+    {
+         $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: theTitle,
+            // (string | mandatory) the text inside the notification
+            text:theText,
+            // (string | optional) the image to display on the left
+            image: image,
+            // (bool | optional) if you want it to fade out on its own or just sit there
+            sticky: false,
+            // (function) before the gritter notice is opened
+            before_open: function(){
+                if($('.gritter-item-wrapper').length == 3)
+                {
+                    // Returning false prevents a new gritter from opening
+                    return false;
+                }
+            }
+        });
+    }
 
   </script>
     <!-- <div class="alert alert-success">

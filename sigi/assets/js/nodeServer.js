@@ -15,14 +15,9 @@ io.sockets.on( 'connection', function( client ) {
 	});
 	client.on( 'notification', function( data ) {
 		console.log(data);
-		io.sockets.emit( 'notification', { 
-			user: data.idUser,
-			notifications: data.notification,
-			tarea:data.tarea,
-			comentario:data.comentario,
-			nombrUser:data.nombrUser } );
+		io.sockets.emit( 'notification', data );
 	});
 	
 });
 
-server.listen( 8080 );
+server.listen( 8181 );

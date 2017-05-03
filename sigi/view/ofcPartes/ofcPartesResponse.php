@@ -193,7 +193,26 @@
 <script>
 	//Evento para validar campos
 	$("form").submit(function(){
-            return $(this).validate();
+		var formData = new FormData($(this)[0]);
+
+	    $.ajax({
+	        url: '?c=OfcPartes&a=guardarRespuesta',
+	        type: 'POST',
+	        data: formData,
+	        async: false,
+	        success: function (data) {
+	        	respuesta = JSON.parse(data); 
+	        	if(respuesta.success){
+	        		socket.emit( 'notification', respuesta.notificacion );
+	        		window.location.href = "sigi.php";
+	        	}
+	        },
+	        cache: false,
+	        contentType: false,
+	        processData: false
+	    });
+
+	    return false;
     });
 	$('.form-control').bind('blur', function () {
 	    return $(this).validateBlur();
