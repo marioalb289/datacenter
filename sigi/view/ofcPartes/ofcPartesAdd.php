@@ -243,10 +243,10 @@
 	        	console.log('add respuesta', data);
 	        	if(respuesta.success){
 	        		socket.emit( 'notification', respuesta.notificacion );
-	        		// window.location.href = "sigi.php";
+	        		window.location.href = "sigi.php";
 	        	}
 	        	else{
-	        		// window.location.href = "sigi.php?c=OfcPartes&a=add";
+	        		window.location.href = "sigi.php?c=OfcPartes&a=add";
 	        	}
 	        },
 	        cache: false,
