@@ -598,7 +598,9 @@ $(document).ready(function(){
           data: { id_area : id_area }
         })
           .done(function( res ) {
-            var respuesta = jQuery.parseJSON(res);
+            
+            var respuesta = JSON.parse(res);
+            console.log(respuesta);
             if(respuesta.success){
                 // console.log(respuesta);
                 $("#"+selector).val(respuesta.data.usuario);

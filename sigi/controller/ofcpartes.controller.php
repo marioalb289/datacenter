@@ -1112,8 +1112,10 @@ class OfcPartesController
           
       } catch (Exception $e) {
           //Trabajar en un sistema de manejo de errores
-      $_SESSION['flash-message-error'] = $e->getMessage();
-      header('Location: sigi.php?c=OfcPartes&a=add');
+        $_SESSION['flash-message-error'] = $e->getMessage();
+        echo json_encode(array("success"=>false));
+        exit;
+      //header('Location: sigi.php?c=OfcPartes&a=add');
       }
   }
 
@@ -1339,9 +1341,19 @@ class OfcPartesController
               //Armar arreglo de datos para los usuarios que se les notificara el oficio
               $usr = new Usuario();
               $objUsr = $usr->getUsuarioArea($_SESSION['data_user']['id']);
-
-              $origen = ($_POST['origen'] == "INTERNO") ? 'INTERNO': 'EXTERNO';
               $usr_notificar = array();
+
+              if ($_POST['origen'] == "INTERNO"){
+                $origen = 'INTERNO';
+              }
+              else{
+                $origen = 'EXTERNO';
+                $objUsrPartes = $usr->userOfcPartes();
+                array_push($usr_notificar,$objUsrPartes->id_usuario);
+              }
+
+              //$origen = ($_POST['origen'] == "INTERNO") ? 'INTERNO': 'EXTERNO';
+              
 
               foreach ($obj_usr_not as $value) {
                 array_push($usr_notificar,$value->id_usuario);
@@ -1360,7 +1372,9 @@ class OfcPartesController
       } catch (Exception $e) {
           //Trabajar en un sistema de manejo de errores
           $_SESSION['flash-message-error'] = 'Error al guardar la información';
-          header('Location: sigi.php?c=OfcPartes&a=add');            
+          echo json_encode(array("success"=>false));
+          exit;
+          //header('Location: sigi.php?c=OfcPartes&a=add');            
       }
   }
 

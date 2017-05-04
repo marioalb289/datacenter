@@ -202,6 +202,7 @@
 	        async: false,
 	        success: function (data) {
 	        	respuesta = JSON.parse(data); 
+	        	console.log('response respuesta', data);
 	        	if(respuesta.success){
 	        		socket.emit( 'notification', respuesta.notificacion );
 	        		window.location.href = "sigi.php";

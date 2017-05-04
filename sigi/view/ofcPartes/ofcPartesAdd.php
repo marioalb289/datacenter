@@ -213,6 +213,22 @@
 </div>
 </form>
 <script>
+	// var prueba = {  
+	//    "success":true,
+	//    "notificacion":{  
+	//       "id_oficio":"117",
+	//       "nombre_usuario":"Larry Vargas de Unidad T\u00e9cnica de Computo",
+	//       "asunto":"MENSAJE DE PRRUEBA",
+	//       "origen":"INTERNO",
+	//       "destino":"INTERNO",
+	//       "ids_usuario_receptor":[  
+	//          "8"
+	//       ]
+	//    }
+	// };
+	// console.log(prueba.notificacion);
+	// socket.emit( 'notification', prueba.notificacion );
+
 	//Evento para validar campos y enviar notificaciones por sokect io
 	$("form").submit(function(){
 		var formData = new FormData($(this)[0]);
@@ -224,9 +240,13 @@
 	        async: false,
 	        success: function (data) {
 	        	respuesta = JSON.parse(data); 
+	        	console.log('add respuesta', data);
 	        	if(respuesta.success){
 	        		socket.emit( 'notification', respuesta.notificacion );
-	        		window.location.href = "sigi.php";
+	        		// window.location.href = "sigi.php";
+	        	}
+	        	else{
+	        		// window.location.href = "sigi.php?c=OfcPartes&a=add";
 	        	}
 	        },
 	        cache: false,

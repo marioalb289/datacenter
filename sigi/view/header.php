@@ -74,11 +74,12 @@
     var USER_PRIV = <?php echo $_SESSION['data_user']['privilegios']; ?>;
     var ID_USER = <?php echo $_SESSION['data_user']['id']; ?>;
 
-    var audio = new Audio('AI/image/presence_changed.wav');
+    var audio = new Audio('AI/image/presence_changed.mp3');
 
     var socket = io.connect( 'http://localhost:8181' );
 
     socket.on( 'notification', function( data ) {
+      // console.log(data);
       var actualuser = ID_USER;
       for (var i = data.ids_usuario_receptor.length - 1; i >= 0; i--) {
         if(actualuser==data.ids_usuario_receptor[i])
@@ -106,7 +107,7 @@
     function notifyMe(theBody,theIcon,theTitle,theText,id_oficio) {
       // Let's check if the browser supports notifications
       if (!("Notification" in window)) {
-       notiIE(theIcon,theTitle,theText);
+       notiIE(theIcon,theTitle,theText,id_oficio);
       }
 
       // Let's check whether notification permissions have already been granted
@@ -141,13 +142,14 @@
 
       audio.play();
 
-      n.onclick = function () {
-           window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;      
-         };
-      n.sound;
+      n.onclick = function(event) {
+        event.preventDefault(); // prevent the browser from focusing the Notification's tab
+        window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;   
+      }
+      //n.sound;
     }
 
-    function notiIE(image,theTitle,theText)
+    function notiIE(image,theTitle,theText,id_oficio)
     {
          $.gritter.add({
             // (string | mandatory) the heading of the notification
@@ -156,6 +158,8 @@
             text:theText,
             // (string | optional) the image to display on the left
             image: image,
+            // (int | optional) the time you want it to be alive for before fading out (milliseconds)
+            time: 8000,
             // (bool | optional) if you want it to fade out on its own or just sit there
             sticky: false,
             // (function) before the gritter notice is opened
@@ -165,7 +169,18 @@
                     // Returning false prevents a new gritter from opening
                     return false;
                 }
-            }
+            },
+            // (function | optional) function called after it opens
+            after_open: function(e){
+              audio.play();
+              console.log($(e));
+              $(e).click(function() {
+                window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;  
+              });
+              // $.gritter.onclick = function () {
+              //      window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;      
+              //    };
+            },
         });
     }
 
