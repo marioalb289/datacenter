@@ -1,0 +1,17 @@
+{
+  "name": "system_notf",
+  "version": "1.0.0",
+  "description": "notificaciones sistema",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.4.0",
+    "socket.io": "^1.7.4"
+  }
+}

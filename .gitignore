@@ -8,4 +8,5 @@ Servers/
 target/
 /vendor
 /documentos
+/system_notf/node_modules
 .env

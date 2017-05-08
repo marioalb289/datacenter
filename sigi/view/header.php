@@ -15,7 +15,8 @@
         
         <script src="sigi/assets/js/jquery.js"></script>
         <script src="sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>
-        <script src="sigi/assets/js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+        <!-- <script src="sigi/assets/js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script> -->
+        <script src="sigi/assets/js/socket.io.js"></script>
 
 	</head>
     <body style="min-width: 960px !important;">
@@ -76,7 +77,17 @@
 
     var audio = new Audio('AI/image/presence_changed.mp3');
 
-    var socket = io.connect( 'http://localhost:8181' );
+    var socket = io('http://localhost:8181');
+
+    socket.on('connect', function () {
+      //send the jwt
+      // console.log('send jwt');
+      socket.emit('authenticate', {token: '<?php echo $_SESSION['token'] ?>'});
+    });
+
+    socket.on('connect', function () {
+      console.log('authenticated');
+    });
 
     socket.on( 'notification', function( data ) {
       // console.log(data);
@@ -103,6 +114,40 @@
       
       
     });
+
+
+    // socket.on('news', function (data) {
+    //   console.log(data);
+    //   socket.emit('my other event', { my: 'data' });
+    // });
+
+    // var socket = io.connect( 'http://localhost:8181' );
+
+    // socket.on( 'notification', function( data ) {
+    //   // console.log(data);
+    //   var actualuser = ID_USER;
+    //   for (var i = data.ids_usuario_receptor.length - 1; i >= 0; i--) {
+    //     if(actualuser==data.ids_usuario_receptor[i])
+    //     {
+    //        notifyMe(data.asunto,'AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
+
+    //        if(data.origen == "EXTERNO" && data.destino == "INTERNO"){
+    //         $('#lista_oficios_externos').DataTable().ajax.reload();
+    //        }
+    //        if(data.origen == "INTERNO" && data.destino == "INTERNO"){
+    //         $('#lista_oficios_internos').DataTable().ajax.reload();
+
+    //        }
+    //        if(data.origen == "INTERNO" && data.destino == "EXTERNO"){
+    //         $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+    //        }
+
+    //     }
+    //   }
+
+      
+      
+    // });
 
     function notifyMe(theBody,theIcon,theTitle,theText,id_oficio) {
       // Let's check if the browser supports notifications

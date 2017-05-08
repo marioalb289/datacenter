@@ -1,6 +1,8 @@
 <?php
 session_start();
   include('AI/detalles/class/classAsistencias.php');
+  require __DIR__ . '/vendor/autoload.php';
+  use Firebase\JWT\JWT;
   $clase = new sistema;
   $clase->conexion();
   $u = md5($_POST['username']);
@@ -37,6 +39,17 @@ session_start();
           'id' =>  $idx,
           'area' =>  $are,
       );
+
+      $time = time();
+      $secret_key = 'Sdw1s9x8784455gtykifd335@';
+      
+      $token = array(
+          'iat' => $time,
+          'exp' => $time + (60*60),
+          'data' => $_SESSION['data_user']
+      );
+
+      $_SESSION['token'] = JWT::encode($token, $secret_key);
 
 
       /*
