@@ -1,6 +1,10 @@
 <?php
 require_once 'sigi/model/database.php';
 include_once 'vendor/vlucas/phpdotenv/src/Dotenv.php';
+require_once ("sigi/class/validate.class.php");
+require_once ("sigi/model/usuario.php");
+require __DIR__ . '/vendor/autoload.php';
+  use Firebase\JWT\JWT;
 
 $controller = 'ofcpartes';
 session_start();
@@ -84,6 +88,70 @@ if( !empty($_SESSION['data_user'])){
     //require_once 'sigi/view/footer.php';
 }
 else{
-    header('Location: index.php');
+    if( (isset($_REQUEST['usuario']) && $_REQUEST['usuario'] != '') && (isset($_REQUEST['contrasena']) && $_REQUEST['contrasena'] != '')){
+        print_r($_REQUEST);
+        $validate = new Validate();
+        // print_r($validate);exit;
+        if (!$validate->alfanumerico($_REQUEST['usuario']))
+          header('Location: index.php'); 
+        if (!$validate->alfanumerico($_REQUEST['contrasena']))
+            header('Location: index.php'); 
+
+        $usuario = new Usuario();
+        $objUser = $usuario->reLoginUser($_REQUEST['usuario'],$_REQUEST['contrasena']);
+        // print_r($objUser);exit;
+        if(!empty($objUser)){
+
+            $user = $objUser->correo;
+            $tusu = $objUser->privilegios;
+            $nombre = $objUser->nombre;
+            $apelli = $objUser->apellido;
+            $idx = $objUser->id;
+            $are = $objUser->area;
+            $_SESSION['loggedin'] = true;
+            $_SESSION['nom'] = $nombre;
+            $_SESSION['ape'] = $apelli;
+            $_SESSION['cor'] = $user;
+            $_SESSION['prv'] = $tusu;
+            $_SESSION['idx'] = $idx;
+            $_SESSION['are'] = $idx;
+            $_SESSION['con'] = md5($_REQUEST['contrasena']);
+
+            $_SESSION['start'] = time();
+            $_SESSION['expire'] = $_SESSION['start'];
+
+            $_SESSION['data_user'] = array(
+                'nombre' =>  $nombre,
+                'apellido' =>  $apelli,
+                'correo' =>  $user,
+                'privilegios' => $objUser->priv_sigi,
+                'id' =>  $idx,
+                'area' =>  $are,
+            );
+
+            $time = time();
+            $secret_key = 'Sdw1s9x8784455gtykifd335@';
+            
+            $token = array(
+                'iat' => $time,
+                'exp' => $time + (60*60),
+                'data' => $_SESSION['data_user']
+            );
+
+            $_SESSION['token'] = JWT::encode($token, $secret_key);
+            header('Location: sigi.php'); 
+
+        }
+        else{
+            header('Location: index.php'); 
+
+        }
+
+        
+
+    }
+    else{
+        header('Location: index.php');        
+    }
 }
 

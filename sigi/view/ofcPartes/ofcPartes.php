@@ -99,7 +99,7 @@
                       <th>Usuario</th>
                       <th>Dependencia</th>
                       <th>Asunto</th>
-                      <!-- <th>Estatus Inicial</th> -->
+                      <th>Estatus Inicial</th>
                       <th>Estatus Final</th>
                       <th>Fecha Recibido</th>
                       <th>Visto</th>

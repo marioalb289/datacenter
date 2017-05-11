@@ -89,6 +89,31 @@ class Usuario
 		}
 	}
 
+	public function reLoginUser($correo,$contrasena)
+	{
+		try
+		{
+			$result = array();
+			
+
+			$stm = $this->pdo->prepare("
+				SELECT * FROM usuarios 
+				WHERE estado = 1
+				AND correo = ? AND contrasena = ?
+			");
+			$stm->execute(array(
+				$correo,
+				$contrasena
+				));
+
+			return $stm->fetch(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function ListarUsuarios($cond=array(),$cond2= "")
 	{
 		try

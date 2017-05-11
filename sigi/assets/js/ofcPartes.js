@@ -77,8 +77,8 @@ $(document).ready(function(){
             { "data": "folio","searchable": true,"orderable": true },
             { "data": "nombre_emisor","searchable": true,"orderable": true },
             { "data": "institucion_emisor","searchable": true,"orderable": true },
-            { "data": "asunto_emisor" ,"searchable": false,"orderable": false},
-            { "data": "estatus_inicial", "searchable": true,"orderable": false },
+            { "data": "asunto_emisor" ,"searchable": true,"orderable": false},
+            { "data": "estatus_inicial", "searchable": false,"orderable": false },
             { 
               "data": "estatus_final" ,
               "searchable": false,
@@ -181,7 +181,7 @@ $(document).ready(function(){
             { "data": "folio", "searchable": true,"orderable": true},
             { "data": "area", "searchable": true,"orderable": true },
             { "data": "usuario", "searchable": true,"orderable": true },
-            { "data": "asunto_emisor", "searchable": false,"orderable": false },
+            { "data": "asunto_emisor", "searchable": true,"orderable": false },
             { "data": "estatus_inicial", "searchable": false,"orderable": false },
             { 
               "data": "estatus_final" , 
@@ -292,8 +292,8 @@ $(document).ready(function(){
               },
 
             },
-            { "data": "asunto_emisor", "searchable": false,"orderable": false },
-            //{ "data": "estatus_inicial", "searchable": false,"orderable": false },
+            { "data": "asunto_emisor", "searchable": true,"orderable": false },
+            { "data": "estatus_inicial", "searchable": false,"orderable": false },
             { 
               "data": "estatus_final" , 
               "searchable": false,

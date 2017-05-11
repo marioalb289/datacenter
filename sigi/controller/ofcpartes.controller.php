@@ -10,7 +10,7 @@ require_once ("sigi/model/contador.php");
 require_once ("sigi/model/documento.php");
 require_once ("sigi/model/oficio_documento.php");
 include ("sigi/class/init_paginador.php");
-include ("sigi/class/validate.class.php");
+require_once ("sigi/class/validate.class.php");
 //require_once ("/../view/header.php");
 
 
