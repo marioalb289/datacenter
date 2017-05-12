@@ -189,6 +189,7 @@
 
       n.onclick = function(event) {
         event.preventDefault(); // prevent the browser from focusing the Notification's tab
+        window.focus();
         window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;   
       }
       //n.sound;
