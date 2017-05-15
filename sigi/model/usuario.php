@@ -177,6 +177,40 @@ class Usuario
 		}
 	}
 
+	public function userTitulares($area,$id_not_usuario)
+	{
+		try
+		{						
+			$stm = $this->pdo->prepare("
+			SELECT
+				us.id AS id_usuario,
+				us.nombre AS nombre_usuario,
+				us.apellido AS apellido_usuario,
+				us.correo AS email,
+				ar.id AS id_area,
+				ar.nombre AS area,
+				us.titular
+			FROM
+				usuarios us
+			JOIN areas ar ON ar.id = us.area
+			WHERE
+				us.area = ?
+				AND us.titular = 1
+				AND us.priv_sigi <> 1
+				AND us.id NOT IN (?)
+			");
+			$stm->execute(array(
+				$area,
+				$id_not_usuario
+				));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function buscarUsuario($id_area)
 	{
 		try

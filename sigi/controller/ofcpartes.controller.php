@@ -943,6 +943,8 @@ class OfcPartesController
                // print_r($_FILES);
                  // throw new Exception('No se ha seleccionado ningun archivo.');
                  // print_r($_POST);exit;
+
+
                $usr_notificar = array();
                $objUsr = array();
                if(isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO'){
@@ -1093,10 +1095,32 @@ class OfcPartesController
                   }            
                 }
                }
+
+              $usr = new Usuario();
+               /*Se añadio que si hay mas de un titular se le enviara mensaje, quitar de la lista el usuario que se selecciono anteriormente*/
+               if(isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO'){
+
+               }
+               else{
+                $obj_usr_titular = $usr->userTitulares($objArea->id,$_POST['id_usuario_receptor']);
+
+                if(!empty($obj_usr_titular)){
+                  foreach ($obj_usr_titular as $ids) {
+                    $ofc_doc->setIdUsuario($ids->id_usuario);   
+                    $ofc_doc->setCcp(0); //Se envia con ccp 0 para permitir que pueda responder 
+                    $ofc_doc->RegistrarOficioDocumento();
+
+                    array_push($usr_notificar, $ids->id_usuario); 
+                    
+                  }
+                }                
+               }
+               /*****************/
+
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
 
               //Armar arreglo de datos para los usuarios que se les notificara el oficio
-              $usr = new Usuario();
+              
               $objUsr = $usr->getUsuarioArea($_SESSION['data_user']['id']);
 
               $origen = ($_POST['select_origen'] == 1) ? 'INTERNO': 'EXTERNO';

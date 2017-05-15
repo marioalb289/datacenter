@@ -230,31 +230,39 @@
 	// socket.emit( 'notification', prueba.notificacion );
 
 	//Evento para validar campos y enviar notificaciones por sokect io
-	$("form").submit(function(){
-		var formData = new FormData($(this)[0]);
+	$("form").submit(function( event ) {
+		var res = $(this).validate();
+		if(res){
 
-	    $.ajax({
-	        url: '?c=OfcPartes&a=Guardar',
-	        type: 'POST',
-	        data: formData,
-	        async: false,
-	        success: function (data) {
-	        	respuesta = JSON.parse(data); 
-	        	console.log('add respuesta', data);
-	        	if(respuesta.success){
-	        		socket.emit( 'notification', respuesta.notificacion );
-	        		window.location.href = "sigi.php";
-	        	}
-	        	else{
-	        		window.location.href = "sigi.php?c=OfcPartes&a=add";
-	        	}
-	        },
-	        cache: false,
-	        contentType: false,
-	        processData: false
-	    });
+			var formData = new FormData($(this)[0]);
 
-	    return false;
+		    $.ajax({
+		        url: '?c=OfcPartes&a=Guardar',
+		        type: 'POST',
+		        data: formData,
+		        async: false,
+		        success: function (data) {
+		        	event.preventDefault();
+		        	respuesta = JSON.parse(data); 
+		        	console.log('add respuesta', data);
+		        	if(respuesta.success){
+		        		socket.emit( 'notification', respuesta.notificacion );
+		        		window.location.href = "sigi.php";
+		        	}
+		        	else{
+		        		window.location.href = "sigi.php?c=OfcPartes&a=add";
+		        	}
+		        },
+		        cache: false,
+		        contentType: false,
+		        processData: false
+		    });
+
+		}
+
+		
+
+	    event.preventDefault();
     });
 	$('.form-control').bind('blur', function () {
 	    return $(this).validateBlur();
