@@ -193,27 +193,36 @@
 <script>
 	//Evento para validar campos
 	$("form").submit(function(){
-		var formData = new FormData($(this)[0]);
 
-	    $.ajax({
-	        url: '?c=OfcPartes&a=guardarRespuesta',
-	        type: 'POST',
-	        data: formData,
-	        async: false,
-	        success: function (data) {
-	        	respuesta = JSON.parse(data); 
-	        	console.log('response respuesta', data);
-	        	if(respuesta.success){
-	        		socket.emit( 'notification', respuesta.notificacion );
-	        		window.location.href = "sigi.php";
-	        	}
-	        },
-	        cache: false,
-	        contentType: false,
-	        processData: false
-	    });
+		var res = $(this).validate();
+		if(res){
+			var formData = new FormData($(this)[0]);
 
-	    return false;
+		    $.ajax({
+		        url: '?c=OfcPartes&a=guardarRespuesta',
+		        type: 'POST',
+		        data: formData,
+		        async: false,
+		        success: function (data) {
+		        	event.preventDefault();
+		        	respuesta = JSON.parse(data); 
+		        	if(respuesta.success){
+		        		socket.emit( 'notification', respuesta.notificacion );
+		        		window.location.href = "sigi.php";
+		        	}
+		        	else{
+		        		window.location.href = "sigi.php?c=OfcPartes&a=response";
+		        	}
+		        },
+		        cache: false,
+		        contentType: false,
+		        processData: false
+		    });
+		}
+
+		 event.preventDefault();
+
+
     });
 	$('.form-control').bind('blur', function () {
 	    return $(this).validateBlur();

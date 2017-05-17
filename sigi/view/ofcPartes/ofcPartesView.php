@@ -105,6 +105,20 @@
 					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
 					    <span class="text-danger"></span>
 					</div>
+
+					<div class="form-group">
+				        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
+				        <div class="row">
+		        	        <div class="col-md-6">
+		        	        	<input type="date" id="fecha_recepcion" readonly name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" value="<?php echo $data['oficio']->fecha_recepcion ; ?>"/>
+		        	        </div>
+		        	        <div class="col-md-6">
+		        		        <input type="time" id="hora_recepcion" readonly name="hora_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" value="<?php echo $data['oficio']->hora_recepcion; ?>"/>
+		        	        </div>
+				        </div>
+				        
+				        <span class="text-danger"></span>
+				    </div>
 				</div>
 				<?php 	} ?>
 

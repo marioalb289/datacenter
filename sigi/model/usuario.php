@@ -216,11 +216,11 @@ class Usuario
 		try
 		{
 			$stm = $this->pdo
-			          ->prepare("SELECT * FROM usuarios us WHERE area = ? AND us.titular = 1 LIMIT 1 ");
+			          ->prepare("SELECT id as id_usuario, nombre, apellido FROM usuarios us WHERE area = ? AND us.titular = 1 AND us.priv_sigi <> 1  ");
 			          
 
 			$stm->execute(array($id_area));
-			return $stm->fetch(PDO::FETCH_OBJ);
+			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
 		{

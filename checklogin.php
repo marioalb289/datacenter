@@ -45,7 +45,7 @@ session_start();
       
       $token = array(
           'iat' => $time,
-          'exp' => $time + (60*60),
+          'exp' => $time + (60*60*12),
           'data' => $_SESSION['data_user']
       );
 

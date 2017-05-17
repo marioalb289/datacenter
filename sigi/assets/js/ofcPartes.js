@@ -515,23 +515,77 @@ $(document).ready(function(){
     
 
     /*Configuracion inicial de la tabla de usuarios*/
+    var temp = [];
     var t =  $('#example').DataTable({
     	language: language,
 
-    	"columnDefs": [ {
+    	"columnDefs": [ 
+        {
     	    "searchable": false,
     	    "orderable": false,
     	    "targets": 0
-    	} ],
+    	  },
+        {
+            "targets": [ 1 ],
+            "className": "dt-center",
+        },{
+            "targets": [ 2 ],
+            "visible": false,
+            "searchable": true
+        },
+
+       ],
     	"order": [[ 1, 'asc' ]]
 
     });
+
 
     t.on( 'order.dt search.dt', function () {
         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
         } );
     } ).draw();
+
+    
+
+    function ocultarUsuarios(data){
+      var arr_remove = [];
+      $('#example').DataTable().rows().flatten().each( function ( colIdx ) {
+
+        var row = $('#example').DataTable().row(colIdx).data();
+        if (typeof row != 'undefined'){
+
+          for (var i = data.length - 1; i >= 0; i--) {
+            if( parseInt(row[2]) == parseInt( data[i].id_usuario)){
+              //Es igual
+              // $('#example').DataTable().row(colIdx).node().remove();
+              // if(prueba < 2){
+                temp.push( $('#example').DataTable().row(colIdx).data() );
+                arr_remove.push(colIdx);
+                // $('#example').DataTable().row(colIdx).remove().draw( true );
+                
+              // }
+              
+            }
+          }
+          
+          
+        }
+
+
+      });
+
+      for (var i = arr_remove.length - 1; i >= 0; i--) {
+        $('#example').DataTable().row(arr_remove[i]).remove().draw( false );
+      }
+
+
+
+    }
+
+
+
+
 
     /*Evento que muestra los ususarios en caso de que sea con copia*/
     $('#ccp').change(function () {
@@ -550,7 +604,6 @@ $(document).ready(function(){
       .change(function () {
         var str = "";
         $( "#area_origen option:selected" ).each(function() {
-          //console.log($(this)[0].value);
            opc = parseInt($(this)[0].value);
            if(opc > 0) {
             cargarUsuario(opc,"usuario_origen","id_usuario_origen")
@@ -564,9 +617,15 @@ $(document).ready(function(){
       .change(function () {
         var str = "";
         $( "#area_destino option:selected" ).each(function() {
-          //console.log($(this)[0].value);
            opc = parseInt($(this)[0].value);
            if(opc > 0) {
+            if(temp.length > 0){
+              for (var i = temp.length - 1; i >= 0; i--) {
+                $('#example').DataTable().row.add(temp[i]).draw( false );
+                temp.pop();
+              }
+              // temp = [];          
+            }
             cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
            }
         });
@@ -591,6 +650,7 @@ $(document).ready(function(){
 
     }
     //Carga el usuario correspondiente
+    // console.log(temp);
     function cargarUsuario(id_area,selector,selector2){
         $.ajax({
           method: "POST",
@@ -598,13 +658,16 @@ $(document).ready(function(){
           data: { id_area : id_area }
         })
           .done(function( res ) {
+
+            
             
             var respuesta = JSON.parse(res);
-            console.log(respuesta);
+            // console.log(respuesta);
             if(respuesta.success){
-                // console.log(respuesta);
-                $("#"+selector).val(respuesta.data.usuario);
-                $("#"+selector2).val(respuesta.data.id_usuario);
+                console.log(respuesta);
+                $("#"+selector).val(respuesta.data[0].nombre + " " + respuesta.data[0].apellido);
+                $("#"+selector2).val(respuesta.data[0].id_usuario);
+                ocultarUsuarios(respuesta.data);
             }
             else{
                 //mensaje de error

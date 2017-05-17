@@ -860,7 +860,7 @@ class OfcPartesController
 
           if(!empty($usr)){
 
-            echo json_encode(array('success' => true,'data' => array('id_usuario' => $usr->id, 'usuario' => $usr->nombre.' '.$usr->apellido)));
+            echo json_encode(array('success' => true,'data' => $usr));
             // print_r($usr->correo);exit;
           }
           else{
@@ -941,8 +941,7 @@ class OfcPartesController
           }
           else{
                // print_r($_FILES);
-                 // throw new Exception('No se ha seleccionado ningun archivo.');
-                 // print_r($_POST);exit;
+               //   print_r($_POST);exit;
 
 
                $usr_notificar = array();
@@ -1047,6 +1046,8 @@ class OfcPartesController
                $ofc->_setAsuntoReceptor("");
                $ofc->_setRespuesta($_POST["respuesta"]);
                $ofc->setDestino( isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO' ? 'EXTERNO': 'INTERNO' ) ;
+               $ofc->setFechaRecepcion($_POST['fecha_recepcion']);
+               $ofc->setHoraRecepcion($_POST['hora_recepcion']);               
                $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
                $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
                $id_ofc = $ofc->RegistrarOficio();

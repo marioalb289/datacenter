@@ -19,6 +19,10 @@ class Oficio
     private $respuesta;
     private $respondido;
     private $destino;
+
+    public $fecha_recepcion;
+    public $hora_recepcion;
+
 	private $created_at;
 	private $updated_at;
 	private $created_by;
@@ -498,12 +502,60 @@ class Oficio
         return $this;
     }
 
+    /**
+     * Gets the value of fecha_recepcion.
+     *
+     * @return mixed
+     */
+    public function getFechaRecepcion()
+    {
+        return $this->fecha_recepcion;
+    }
+
+    /**
+     * Sets the value of fecha_recepcion.
+     *
+     * @param mixed $fecha_recepcion the fecha recepcion
+     *
+     * @return self
+     */
+    public function setFechaRecepcion($fecha_recepcion)
+    {
+        $this->fecha_recepcion = $fecha_recepcion;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of hora_recepcion.
+     *
+     * @return mixed
+     */
+    public function getHoraRecepcion()
+    {
+        return $this->hora_recepcion;
+    }
+
+    /**
+     * Sets the value of hora_recepcion.
+     *
+     * @param mixed $hora_recepcion the hora recepcion
+     *
+     * @return self
+     */
+    public function setHoraRecepcion($hora_recepcion)
+    {
+        $this->hora_recepcion = $hora_recepcion;
+
+        return $this;
+    }
+
     public function RegistrarOficio()
     {
         try 
         {
-            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,created_at,created_by,updated_at,updated_by)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,fecha_recepcion,hora_recepcion,created_at,created_by,updated_at,updated_by)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //print_r($sql);exit;
 
@@ -523,6 +575,8 @@ class Oficio
                         $this->getRespuesta(),
                         $this->getRespondido(),
                         $this->getDestino(),
+                        $this->getFechaRecepcion(),
+                        $this->getHoraRecepcion(),
                         date('Y-m-d H:i:s'), 
                         $this->getCreatedBy(),
                         date('Y-m-d H:i:s'), 
@@ -554,6 +608,8 @@ class Oficio
                 ofc.origen as origen,
                 ofc.destino as destino,
                 ofc.tipo_oficio as tipo_oficio,
+                ofc.fecha_recepcion as fecha_recepcion,
+                ofc.hora_recepcion as hora_recepcion,
                 ofc.folio AS folio,
                 ofc.folio_institucion AS folio_iepc,
                 ofc.respondido AS respondido,
@@ -759,14 +815,6 @@ class Oficio
         }
     }
 
-    
-
-    
-
-
-   
-
-   
 }
 
 

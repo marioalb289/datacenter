@@ -82,6 +82,20 @@
 					          <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
 					        </div> -->
 					    </div>
+
+					    <div class="form-group">
+					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
+					        <div class="row">
+			        	        <div class="col-md-6">
+			        	        	<input type="date" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+			        	        </div>
+			        	        <div class="col-md-6">
+			        		        <input type="time" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+			        	        </div>
+					        </div>
+					        
+					        <span class="text-danger"></span>
+					    </div>
 		            </div>
 					<?php } else{ ?>
 		            <div id="formInterno" >
@@ -190,6 +204,7 @@
 			    	            <tr>
 			    	            	<th></th>
 			    	            	<th></th>
+			    	            	<th></th>
 			    	                <th>Nombre</th>
 			    	                <th>Area</th>
 			    	            </tr>
@@ -199,6 +214,7 @@
 			    	        	    <tr>
 			    	        	    	<td></td>
 			    	        	    	<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
+			    	        	    	<td><?php echo $u->id_usuario; ?></td>
 			    	        	        <td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
 			    	        	        <td><?php echo $u->area; ?></td>
 			    	        	    </tr>
@@ -229,6 +245,12 @@
 	// console.log(prueba.notificacion);
 	// socket.emit( 'notification', prueba.notificacion );
 
+	//fecha y hora del calendario
+	moment.locale('es');
+
+	$("#fecha_recepcion").val(moment().format("YYYY-MM-DD"));
+	$("#hora_recepcion").val(moment().format("hh:mm"));
+
 	//Evento para validar campos y enviar notificaciones por sokect io
 	$("form").submit(function( event ) {
 		var res = $(this).validate();
@@ -244,7 +266,6 @@
 		        success: function (data) {
 		        	event.preventDefault();
 		        	respuesta = JSON.parse(data); 
-		        	console.log('add respuesta', data);
 		        	if(respuesta.success){
 		        		socket.emit( 'notification', respuesta.notificacion );
 		        		window.location.href = "sigi.php";
