@@ -4,6 +4,7 @@ var _mensaje = {
     campo_numerico: 'Este campo no es numérico',
     campo_alfa: 'Este campo sólo debe contener letras',
     campo_alfa_numerico: 'Este campo sólo debe contener letras y números',
+    folio_repetido: 'Este folio ya esta dado de alta en el Sistema',
     campo_correo: 'Este campo no es un correo',
     campo_longitud: 'Este campo debe tener una longitud de {0} caracteres',
     campo_min: 'Este campo debe tener como mínimo {0} caracteres',
@@ -13,7 +14,8 @@ var _mensaje = {
     campo_url: 'Este campo no es una URL válida',
     campo_social_twitter: 'Este campo no es una URL válida de Twitter',
     campo_social_facebook: 'Este campo no es una URL válida de Facebook',
-    campo_social_youtube: 'Este campo no es una URL válida de Youtube'
+    campo_social_youtube: 'Este campo no es una URL válida de Youtube',
+    error_procesar: 'Error al procesar la información',
 };
 
 var errores = 0;
@@ -49,6 +51,8 @@ function validarObjetoForm (control){
 
     /* El control actual del arreglo */
     var obj = control;
+
+    console.log(obj);
 
     /* No nos interesa validar controles con el estado readonly/disabled */
     if (!obj.prop('readonly') || !obj.prop('disabled'))
@@ -128,7 +132,7 @@ function validarObjetoForm (control){
 
                 /* Validamos si es solo letras y numeros */
                 if (v == 'alfa-numerico') {
-                    if (!obj.val().match(/^[a-zA-Z \u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00c1 \u00c9 \u00cd \u00d3 \u00da \u00f1 \u00d1 0-9- .,()]+$/i) && obj.val().length > 0) {
+                    if (!obj.val().match(/^[a-zA-Z \u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00c1 \u00c9 \u00cd \u00d3 \u00da \u00f1 \u00d1 0-9- .,() - /]+$/i) && obj.val().length > 0) {
 
                         errores++;
                         form_group.addClass('has-error');
@@ -323,7 +327,7 @@ jQuery.fn.validateBlur = function ()
 {
     try {
         /* Cuenta los posibles errores encontrados */
-        var errores = 0;
+        errores = 0;
 
         /* Comenzamos a validar cada control */
 
@@ -332,6 +336,112 @@ jQuery.fn.validateBlur = function ()
 
         /* Verificamos si ha sido validado */
         return (errores == 0);
+    } catch (e) {
+        console.error(e);
+        return false;
+    }
+}
+
+jQuery.fn.validateNumOficio = function ()
+{
+    try {
+
+        var obj = $(this);
+        console.log('validateNumOficio',obj);
+        /* El control donde vamos agregar el texto */
+        var small = $('<small />');
+
+        /* El contenedor del control */
+        var form_group = obj.closest('.form-group');
+        form_group.removeClass('has-error'); /* Limpiamos el estado de error */
+
+        $( "#icon-valido" ).remove();
+
+        /* Capturamos el label donde queremos mostrar el mensaje */
+        var label = form_group.find('label');
+        label.find('small').remove(); /* Eliminamos el mensaje anterior */
+        label.append(small);
+
+        if(obj.val().trim() == '' || obj.val().toLowerCase().trim() == 's-n' || obj.val().toLowerCase().trim() == 's/n' || obj.val().trim().length <= 8 ){
+            $("#folio_iepc").val("S/N");
+            $("#btn_guardar_oficio").prop('disabled', false);
+            obj.parent().append($("<span id='icon-valido' class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>") );
+            return;
+        }
+
+
+        if (!obj.val().match(/^[a-zA-Z \u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00c1 \u00c9 \u00cd \u00d3 \u00da \u00f1 \u00d1 0-9- .,() - /]+$/i) && obj.val().length > 0) {
+
+            errores++;
+            form_group.addClass('has-error');
+
+            /* Mostramos el mensaje */
+            if (obj.data('validacion-mensaje') == undefined) {
+                small.text(_mensaje.campo_alfa_numerico);
+            } else {
+                small.text(obj.data('validacion-mensaje'));
+            }
+
+            return false; /* Rompe el bucle */
+        }
+
+        $.ajax({
+          method: "POST",
+          url: "?c=OfcPartes&a=buscarNumOficio",
+          data: { folio_iepc : obj.val() },
+          beforeSend: function( xhr ) {
+              $("#btn_guardar_oficio").prop('disabled', true);
+            }
+        })
+          .done(function( res ) {
+            data = JSON.parse(res);
+            console.log(data);
+            if(data.success){
+                if(data.opc == 1){
+                    //Num de oficio valido
+                    $("#btn_guardar_oficio").prop('disabled', false);
+                    form_group.addClass('has-success');
+                    obj.parent().append($("<span id='icon-valido' class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>") );
+                }
+                else{
+                    //Numero de oficio no valido
+                    errores++;
+                    form_group.addClass('has-error');
+                    obj.parent().append($("<span id='icon-valido' class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>") );
+
+                    /* Mostramos el mensaje */
+                    if (obj.data('validacion-mensaje') == undefined) {
+                        console.log(small);
+                        small.text(_mensaje.folio_repetido);
+                    } else {
+                        small.text(obj.data('validacion-mensaje'));
+                    }
+
+                    return false; /* Rompe el bucle */
+
+                }
+            }
+            else{
+                //Mensaje de error
+                //Numero de oficio no valido
+                errores++;
+                form_group.addClass('has-error');
+
+                /* Mostramos el mensaje */
+                if (obj.data('validacion-mensaje') == undefined) {
+                    small.text(_mensaje.error_procesar);
+                } else {
+                    small.text(obj.data('validacion-mensaje'));
+                }
+
+                return false; /* Rompe el bucle */
+            }
+          })
+          .fail(function( jqXHR, textStatus ) {
+              alert( "Request failed: " + textStatus );
+        });
+
+
     } catch (e) {
         console.error(e);
         return false;

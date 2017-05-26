@@ -23,6 +23,8 @@ class Oficio
     public $fecha_recepcion;
     public $hora_recepcion;
 
+    public $comentarios;
+
 	private $created_at;
 	private $updated_at;
 	private $created_by;
@@ -550,12 +552,36 @@ class Oficio
         return $this;
     }
 
+    /**
+     * Gets the value of comentarios.
+     *
+     * @return mixed
+     */
+    public function getComentarios()
+    {
+        return $this->comentarios;
+    }
+
+    /**
+     * Sets the value of comentarios.
+     *
+     * @param mixed $comentarios the comentarios
+     *
+     * @return self
+     */
+    public function setComentarios($comentarios)
+    {
+        $this->comentarios = $comentarios;
+
+        return $this;
+    }
+
     public function RegistrarOficio()
     {
         try 
         {
-            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,fecha_recepcion,hora_recepcion,created_at,created_by,updated_at,updated_by)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,fecha_recepcion,hora_recepcion,comentarios,created_at,created_by,updated_at,updated_by)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //print_r($sql);exit;
 
@@ -577,6 +603,7 @@ class Oficio
                         $this->getDestino(),
                         $this->getFechaRecepcion(),
                         $this->getHoraRecepcion(),
+                        $this->getComentarios(),
                         date('Y-m-d H:i:s'), 
                         $this->getCreatedBy(),
                         date('Y-m-d H:i:s'), 
@@ -585,6 +612,48 @@ class Oficio
                 );
 
             return $this->pdo->lastInsertId();
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function vincularOficio($id_oficio){
+        try 
+        {
+            $sql = "UPDATE sigi_oficios SET 
+                        origen          = ?, 
+                        tipo_oficio        = ?,
+                        folio        = ?,
+                        folio_institucion            = ?, 
+                        id_usuario_emisor = ?,
+                        respuesta = ?,
+                        respondido = ?,
+                        destino = ?,
+                        updated_by = ?,
+                        updated_at = ?
+                    WHERE id = ?";
+
+            // print_r($sql);exit;
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getOrigen(),
+                        $this->getTipoOficio(),
+                        $this->getFolio(),
+                        $this->getFolioInstitucion(),
+                        $this->getIdUsuarioEmisor(), 
+                        $this->getRespuesta(),
+                        $this->getRespondido(),
+                        $this->getDestino(),
+                        $this->getUpdatedBy(),
+                        date('Y-m-d H:i:s'),
+                        $id_oficio
+                    )
+                );
+
 
         } catch (Exception $e) 
         {
@@ -610,6 +679,7 @@ class Oficio
                 ofc.tipo_oficio as tipo_oficio,
                 ofc.fecha_recepcion as fecha_recepcion,
                 ofc.hora_recepcion as hora_recepcion,
+                ofc.comentarios as comentarios,
                 ofc.folio AS folio,
                 ofc.folio_institucion AS folio_iepc,
                 ofc.respondido AS respondido,
@@ -620,6 +690,7 @@ class Oficio
                 ofc.institucion_emisor AS institucion_emisor,
                 ofc.asunto_emisor AS asunto_emisor,
                 ofc.respuesta AS respuesta,
+                odr.id as id_oficio_documento,
                 odr.estatus_inicial AS estatus_inicial,
                 odr.ccp AS ccp,
                 odr.estatus_final AS estatus_final,
@@ -642,6 +713,30 @@ class Oficio
                  $stm->execute(array($id_oficio));
 
             return $stm->fetch(PDO::FETCH_OBJ);
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function buscarNumOficio($num){
+        try
+        {
+
+            $stm = $this->pdo->prepare("
+               SELECT
+                id
+               FROM
+                sigi_oficios ofc
+               WHERE
+                ofc.folio_institucion = ?
+            ");
+            // print_r($stm);exit;
+
+            $stm->execute(array($num));
+            return $stm->fetchAll(PDO::FETCH_OBJ);
         }
         catch(Exception $e)
         {
@@ -815,6 +910,8 @@ class Oficio
         }
     }
 
+
+    
 }
 
 

@@ -33,7 +33,7 @@
 		<div class="row">
 			<div class="col-md-4"><h4>Registro de Documentos para Dependencia Externa</h4></div>
 			<div class="col-md-8 text-right">
-			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="recepciones_save" name="recepciones[save]" class="btn btn-primary" name="btn_busca">Guardar</button>
+			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca">Guardar</button>
 			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_limpiar">Limpiar</button>
 			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_cancelar">Cancelar</button>
 			</div>
@@ -106,19 +106,23 @@
 				</div>
 				<div class="col-md-6">					
 				    
-				    <div class="form-group">
-				      <label for="exampleInputFile">Asunto:</label>			      
-				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
-				    </div>
-
-				    <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) { ?>
-				    <div class="form-group" id="box_cargo">
-				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control input-sm" placeholder="Folio Institucional"  data-validacion-tipo="alfa-numerico|requerido|min:5"/>
+				    <div class="form-group has-feedback" id="box_num_oficio" >
+				        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
+				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
 				        <span class="text-danger"></span>
 				    </div>
-				    <?php } ?>
+				    <div class="form-group">
+				      <label for="exampleInputFile">Asunto:</label> <span style="font-size: 9px;"> Máximo 50 carácteres</span>			      
+				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+				    </div>
+
+
+				    <div class="form-group">
+				      <label for="exampleInputFile">Comentarios:</label><span style="font-size: 9px;"> Máximo 255 carácteres</span>			      
+				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+				      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico" maxlength="255"></textarea>
+				    </div>
 
 				    <div class="form-group">
 				    
@@ -224,6 +228,9 @@
     });
 	$('.form-control').bind('blur', function () {
 	    return $(this).validateBlur();
+	});
+	$('#folio_iepc').bind('blur', function () {
+	    return $(this).validateNumOficio();
 	});
 	//Evento para visualizar pdf al crear registro
     $(function(){

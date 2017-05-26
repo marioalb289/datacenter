@@ -50,6 +50,7 @@
                 <thead>
                     <tr>
                         <th>Folio</th>
+                        <th>N° Oficio</th>
                         <th>Nombre Suscribe</th>
                         <th>Institucion</th>
                         <th>Asunto</th>
@@ -72,6 +73,7 @@
                 <thead>
                     <tr>
                       <th>Folio</th>
+                      <th>N° Oficio</th>
                       <th>Area</th>
                       <th>Usuario</th>
                       <th>Asunto</th>
@@ -94,7 +96,7 @@
                 <thead>
                     <tr>
                       <th>Folio</th>
-                      <th>Folio Institucional</th>
+                      <th>N° Oficio</th>
                       <th>Area</th>
                       <th>Usuario</th>
                       <th>Dependencia</th>
@@ -117,6 +119,7 @@
                 <thead>
                     <tr>
                       <th>Folio</th>
+                      <th>N° Oficio</th>
                       <th>Origen</th>
                       <th>Persona que Recibe</th>
                       <th>Asunto</th>

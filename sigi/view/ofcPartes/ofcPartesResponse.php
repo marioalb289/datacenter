@@ -1,201 +1,213 @@
-
-
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Verificar PDF</h4>
-			</div>
-			<div class="modal-body" id="modal-pdf-body">
-				<div>
-					<button id="prev">Previous</button>
-					<button id="next">Next</button>
-					&nbsp; &nbsp;
-					<span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+<div>
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Verificar PDF</h4>
 				</div>
-				<canvas id="the-canvas" style="width: 100%;"></canvas>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<div class="modal-body" id="modal-pdf-body">
+					<div>
+						<button id="prev">Previous</button>
+						<button id="next">Next</button>
+						&nbsp; &nbsp;
+						<span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+					</div>
+					<canvas id="the-canvas" style="width: 100%;"></canvas>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
 
-<h1 class="page-header">Oficialia de Partes ver Detalle Oficio <?php echo $data['oficio']->origen ?></h1>
-<form name="recepciones" method="post" action="?c=OfcPartes&a=guardarRespuesta" role="form" enctype="multipart/form-data">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="row">
-				<div class="col-md-4"><h4><strong>Folio de Oficio: <?php echo $data['oficio']->folio ?></strong></h4></div>
-				<div class="col-md-8 text-right">
-					<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" class="btn btn-primary" name="btn_enviar">Enviar</button>
-					<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-cancelar">Cancelar</button>
-					</div>
+	<h1 class="page-header">Responder Oficio <?php echo $data['oficio']->origen ?></h1>
+	<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-4"><h4><strong>Folio: <?php echo $data['oficio']->folio ?></strong></h4></div>
+					<div class="col-md-8 text-right">
+						<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_enviar">Enviar</button>
+						<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-cancelar">Cancelar</button>
+						</div>
+				</div>
 			</div>
-		</div>
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-md-6 ">
-					<div class="form-group">
-					    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->origen; ?>" />
-					    <span class="text-danger"></span>
-					    <input type="hidden" name="origen" value = "<?php echo $data['oficio']->origen ?>">
-						<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio;?>">
-					</div>
-
-					<?php 	if($data['oficio']->origen == "INTERNO") { ?>
-					<div id="formInterno" >
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-6 ">
 						<div class="form-group">
-						   <label for="recepciones_nombreEmisor" class="required">Área Origen:</label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['usuario_emisor']->area; ?>" />
+						    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->origen; ?>" />
 						    <span class="text-danger"></span>
+						    <input type="hidden" name="origen" value = "<?php echo $data['oficio']->origen ?>">
+							<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio;?>">
+						</div>
+
+						<?php 	if($data['oficio']->origen == "INTERNO") { ?>
+						<div id="formInterno" >
+							<div class="form-group">
+							   <label for="recepciones_nombreEmisor" class="required">Área Origen:</label>
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['usuario_emisor']->area; ?>" />
+							    <span class="text-danger"></span>
+							</div>
+							
+							<div class="form-group">
+							   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
+							    <span class="text-danger"></span>
+							</div>
+
+						</div>
+						<?php }	if($data['oficio']->origen == "EXTERNO" || $data['oficio']->destino == "EXTERNO") {?>
+						<div id="formExterno">
+
+							<div class="form-group">
+							    <label ><?php if($data['oficio']->destino == "EXTERNO") echo "Nombre Destino:"; else echo "Nombre de quien Suscribe:" ?></label>
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
+							    <span class="text-danger"></span>
+							</div>
+
+
+
+							<div class="form-group">
+							   <label for="recepciones_nombreEmisor" class="required"><?php if($data['oficio']->destino == "EXTERNO") echo "Institución	Destino:"; else echo "Institución:" ?></label>
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->cargo; ?>" />
+							    <span class="text-danger"></span>
+							</div>
+
+							<div class="form-group">
+							   <label for="recepciones_nombreEmisor" class="required">Institución:</label>
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
+							    <span class="text-danger"></span>
+							</div>
+						</div>
+
+						<?php } ?>
+						
+
+						<?php  if($data['oficio']->destino != "EXTERNO") { ?>
+						<div class="form-group">
+						   <label for="recepciones_nombreEmisor" class="required">Área Destino:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
+						    <span class="text-danger"></span>
+						</div>
+
+						<div class="form-group">
+						   <label for="recepciones_nombreEmisor" class="required">Usuario Destino:</label>
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
+						    <span class="text-danger"></span>
+						</div>
+
+						<?php } ?>
+
+						<?php if($data['oficio']->folio_iepc != '') { ?>
+					    <div class="form-group" id="box_cargo">
+					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
+					        <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['oficio']->folio_iepc; ?>" />
+					        <span class="text-danger"></span>
+					    </div>
+					    <?php } ?>
+
+					    <div class="form-group">
+							   <label for="recepciones_nombreEmisor" class="required">Comentarios:</label>
+							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->comentarios; ?></textarea>
+							    <span class="text-danger"></span>
+						</div>
+
+
+						<div class="form-group">
+							   <label for="recepciones_nombreEmisor" class="required">Asunto Emisor:</label>
+							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->asunto_emisor; ?></textarea>
+							    <span class="text-danger"></span>
 						</div>
 						
-						<div class="form-group">
-						   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
-						    <span class="text-danger"></span>
-						</div>
-
-					</div>
-					<?php }	if($data['oficio']->origen == "EXTERNO" || $data['oficio']->destino == "EXTERNO") {?>
-					<div id="formExterno">
-
-						<div class="form-group">
-						    <label ><?php if($data['oficio']->destino == "EXTERNO") echo "Nombre Destino:"; else echo "Nombre de quien Suscribe:" ?></label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
-						    <span class="text-danger"></span>
-						</div>
-
-
-
-						<div class="form-group">
-						   <label for="recepciones_nombreEmisor" class="required"><?php if($data['oficio']->destino == "EXTERNO") echo "Institución	Destino:"; else echo "Institución:" ?></label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->cargo; ?>" />
-						    <span class="text-danger"></span>
-						</div>
-
-						<div class="form-group">
-						   <label for="recepciones_nombreEmisor" class="required">Institución:</label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
-						    <span class="text-danger"></span>
-						</div>
 					</div>
 
-					<?php } ?>
-					
 
-					<?php  if($data['oficio']->destino != "EXTERNO") { ?>
-					<div class="form-group">
-					   <label for="recepciones_nombreEmisor" class="required">Área Destino:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
-					    <span class="text-danger"></span>
+					<div class="col-md-6">					
+					    
+					    <div class="form-group has-feedback" id="box_num_oficio" >
+					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
+					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+					        <span class="text-danger"></span>
+					    </div>
+					    <div class="form-group">
+					      <label for="exampleInputFile">Asunto:</label><span style="font-size: 9px;"> Máximo 50 carácteres</span>				      
+					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+					      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="50" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+					    </div>
+
+					    <div class="form-group">
+					      <label for="exampleInputFile">Comentarios:</label><span style="font-size: 9px;"> Máximo 255 carácteres</span>				      
+					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+					      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" maxlength="255" style="height: 100px;" data-validacion-tipo="alfa-numerico"></textarea>
+					    </div>
+
+
+					    <div class="form-group">
+					    
+					      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
+					    </div>
+					    <div class="form-group" style="text-align: center; ">
+					      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
+					      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
+					    </div>
+					    <div class="form-group" style="text-align: center;">
+					    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
+					    	
+					    </div>
+						
 					</div>
 
-					<div class="form-group">
-					   <label for="recepciones_nombreEmisor" class="required">Usuario Destino:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
-					    <span class="text-danger"></span>
-					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="radio"  >
+								<label>
+									<input type="radio" name="respuesta" id="respuesta" value="0" checked>
+									Para su Conocimiento y Archivo
+								</label>
+							</div>
 
-					<?php } ?>
+							<div class="radio"  >
+								<label>
+									<input type="radio" name="respuesta" id="respuesta" value="1" checked>
+									Para el tramite que corresponda	
+								</label>
+							</div>
 
-					<?php if($data['oficio']->folio_iepc != '') { ?>
-				    <div class="form-group" id="box_cargo">
-				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-				        <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['oficio']->folio_iepc; ?>" />
-				        <span class="text-danger"></span>
-				    </div>
-				    <?php } ?>
+							<!-- <div class="checkbox"  >
+								<label>
+									<input type="checkbox" id="ccp">
+									Para acuerdo con:
+								</label>
+							</div> -->
 
+				        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
+			            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
+			            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
+			            <!-- <span class="text-danger"></span> -->
+			        </div>
+			        
 
-					<div class="form-group">
-						   <label for="recepciones_nombreEmisor" class="required">Asunto Emisor:</label>
-						    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->asunto_emisor; ?></textarea>
-						    <span class="text-danger"></span>
-						</div>
-					
-				</div>
-
-
-				<div class="col-md-6">					
-				    
-				    <div class="form-group">
-				      <label for="exampleInputFile">Asunto:</label>			      
-				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="50" style="height: 108px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
-				    </div>
-
-				    <?php if($data['privilegios'] == 3) { ?>
-				    <div class="form-group" id="box_cargo">
-				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" required class="form-control input-sm" placeholder="Folio Institucional" data-validacion-tipo="alfa-numerico|requerido|min:5"/>
-				        <span class="text-danger"></span>
-				    </div>
-				    <?php } ?>
-
-				    <div class="form-group">
-				    
-				      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
-				    </div>
-				    <div class="form-group" style="text-align: center; ">
-				      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
-				      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
-				    </div>
-				    <div class="form-group" style="text-align: center;">
-				    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
-				    	
-				    </div>
-					
-				</div>
-
-				<div class="col-md-12">
-					<div class="form-group">
-						<div class="radio"  >
-							<label>
-								<input type="radio" name="respuesta" id="respuesta" value="0" checked>
-								Para su Conocimiento y Archivo
-							</label>
-						</div>
-
-						<div class="radio"  >
-							<label>
-								<input type="radio" name="respuesta" id="respuesta" value="1" checked>
-								Para el tramite que corresponda	
-							</label>
-						</div>
-
-						<!-- <div class="checkbox"  >
-							<label>
-								<input type="checkbox" id="ccp">
-								Para acuerdo con:
-							</label>
-						</div> -->
-
-			        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
-		            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
-		            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
-		            <!-- <span class="text-danger"></span> -->
-		        </div>
-		        
-
-		    </div>
+			    </div>
+			</div>
 		</div>
 	</div>
+	</form>
+	
 </div>
-</form>
+
 <script>
 	//Evento para validar campos
-	$("form").submit(function(){
-
+	$("form").submit(function( event ) {
 		var res = $(this).validate();
 		if(res){
+
 			var formData = new FormData($(this)[0]);
 
 		    $.ajax({
@@ -206,6 +218,7 @@
 		        success: function (data) {
 		        	event.preventDefault();
 		        	respuesta = JSON.parse(data); 
+		        	console.log('aqui respuesta',respuesta);
 		        	if(respuesta.success){
 		        		socket.emit( 'notification', respuesta.notificacion );
 		        		window.location.href = "sigi.php";
@@ -218,14 +231,18 @@
 		        contentType: false,
 		        processData: false
 		    });
+
 		}
 
-		 event.preventDefault();
+		
 
-
+	    event.preventDefault();
     });
 	$('.form-control').bind('blur', function () {
 	    return $(this).validateBlur();
+	});
+	$('#folio_iepc').bind('blur', function () {
+	    return $(this).validateNumOficio();
 	});
 	//Evento para visualizar pdf al crear registro
 	$(function(){

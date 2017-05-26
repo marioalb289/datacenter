@@ -75,6 +75,7 @@ $(document).ready(function(){
         },
         "columns": [
             { "data": "folio","searchable": true,"orderable": true },
+            { "data": "folio_institucion","searchable": true,"orderable": false },
             { "data": "nombre_emisor","searchable": true,"orderable": true },
             { "data": "institucion_emisor","searchable": true,"orderable": true },
             { "data": "asunto_emisor" ,"searchable": true,"orderable": false},
@@ -153,7 +154,7 @@ $(document).ready(function(){
             }
         ] ,       
       language: language,
-      "order": [[ 6, 'desc' ]],
+      "order": [[ 7, 'desc' ]],
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
@@ -179,6 +180,7 @@ $(document).ready(function(){
         },
         "columns": [
             { "data": "folio", "searchable": true,"orderable": true},
+            { "data": "folio_institucion", "searchable": true,"orderable": false},
             { "data": "area", "searchable": true,"orderable": true },
             { "data": "usuario", "searchable": true,"orderable": true },
             { "data": "asunto_emisor", "searchable": true,"orderable": false },
@@ -255,7 +257,7 @@ $(document).ready(function(){
             }
         ],
       language: language,
-      "order": [[ 6, 'desc' ]],
+      "order": [[ 7, 'desc' ]],
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
@@ -354,7 +356,7 @@ $(document).ready(function(){
             }
         ],
       language: language,
-      "order": [[ 7, 'desc' ]],
+      "order": [[ 8, 'desc' ]],
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
@@ -380,6 +382,7 @@ $(document).ready(function(){
           },
           "columns": [
               { "data": "folio", "searchable": true,"orderable": true},
+              { "data": "folio_institucion", "searchable": true,"orderable": false},
               { "data": "origen","searchable": true,"orderable": true },
               { "data": "persona_recibe", "searchable": true,"orderable": true },
               { "data": "asunto_emisor", "searchable": true,"orderable": true },
@@ -412,7 +415,7 @@ $(document).ready(function(){
               }
           ],
         language: language,
-        "order": [[ 5, 'desc' ]],
+        "order": [[ 6, 'desc' ]],
         "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
@@ -482,6 +485,105 @@ $(document).ready(function(){
           } );
       } ).draw(); 
 
+    //Evento del paginador de oficios con destino externo a los que se les puede vincular un ofocio
+    var destino_externo_vincular =  $('#lista_oficios_destino_externo_vincular').DataTable({
+      processing: true,
+        serverSide: true,
+        "autoWidth": false,
+        "deferRender": true,
+        searchDelay: 1000,
+        ajax: {
+            "url": "?c=OfcPartes&a=listarOficiosExternosVincular",
+            "type": "POST"
+        },
+        "columns": [
+            { "data": "folio", "searchable": true,"orderable": true},
+            { "data": "folio_institucion", "searchable": true,"orderable": false},
+            { "data": "area", "searchable": false,"orderable": false },
+            { "data": "usuario", "searchable": false,"orderable": false },
+            { 
+              "data": "institucion_destino", 
+              "searchable": false,
+              "orderable": false,
+              "render": function ( data, type, row ) {
+                return  row.nombre_destino + " " + row.cargo_destino + " de " + row.institucion_destino;
+              },
+
+            },
+            { "data": "asunto_emisor", "searchable": true,"orderable": false },
+            { "data": "estatus_inicial", "searchable": false,"orderable": false },
+            { 
+              "data": "estatus_final" , 
+              "searchable": false,
+              "orderable": true,
+              "className": "dt-center",
+              "render": function ( data, type, row ) {
+                    if(row.estatus_final == 'Cerrado')
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else if(row.estatus_final == 'Cancelado')
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
+                },
+            },
+            { "data": "fecha_recibido",
+              "className": "capitalize",
+              "render": function ( data, type, row ) {
+                    moment.locale('es');
+                    return  moment(row.fecha_recibido).format('MMMM Do YYYY, h:mm:ss a');
+                },
+            },
+            {
+                "targets": -1,
+                "data": null, 
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                  if(row.fecha_visto == "0000-00-00 00:00:00")
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                  else 
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+
+                },
+            },
+            {
+                "targets": -1,
+                "data": null, 
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                    return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                },
+            },
+            {
+                "targets": -1,
+                "data": null,
+                "visible": true,
+                "orderable" : false, 
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                    if(parseInt(row.id_usuario_emisor)!=ID_USER)
+                      return "";
+                    else
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=guardarVinculacion&idVincular="+parseInt( $("#id_oficio").val())+"&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Vincular</a>";
+                },
+            }
+        ],
+      language: language,
+      "order": [[ 8, 'desc' ]],
+      "initComplete": function(settings, json) {
+          //console.log( 'DataTables has finished its initialisation.' );
+          //$("#div_recargar_externos").show();
+          $( "#lista_oficios_destino_externo_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_destino_externo' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#btn_recargar_destino_externo" ).click(function() {
+            $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+          });
+        }
+
+    });
+
 
     //Funcion para habilitar columnas en paginadores dependiendo de los privilegios
     function ocultarColumnas(privilegios){
@@ -530,7 +632,7 @@ $(document).ready(function(){
             "className": "dt-center",
         },{
             "targets": [ 2 ],
-            "visible": false,
+            "visible": true,
             "searchable": true
         },
 

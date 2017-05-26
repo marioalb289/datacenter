@@ -31,7 +31,7 @@ class Validate
 	}
 
 	public function cadena($cadena){
-		$regex = "/^((([a-zA-Z Ññ áéíóú ÁÉÍÓÚ 0-9- .,()])+)? ?([a-zA-Z Ññ áéíóú ÁÉÍÓÚ 0-9- .,()]))+$/i";
+		$regex = "/^((([a-zA-Z Ññ áéíóú ÁÉÍÓÚ 0-9- .,() \/ ])+)? ?([a-zA-Z Ññ áéíóú ÁÉÍÓÚ 0-9- .,() \/]))+$/i";
 		if (!preg_match($regex, $cadena))
 		    return false;
 		else

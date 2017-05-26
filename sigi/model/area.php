@@ -25,7 +25,7 @@ class Area
 			$result = array();
 
 			$stm = $this->pdo->prepare("
-				SELECT * FROM areas
+				SELECT * FROM areas WHERE estado = 1
 			");
 			$stm->execute();
 

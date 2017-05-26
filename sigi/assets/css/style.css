@@ -112,7 +112,7 @@ body {
 
 
 
-#lista_oficios_externos, #lista_oficios_internos, #lista_respuestas, #lista_oficios_destino_externo{
+#lista_oficios_externos, #lista_oficios_internos, #lista_respuestas, #lista_oficios_destino_externo, #lista_oficios_destino_externo_vincular{
 	font-size: 12px;
 }
 
@@ -177,4 +177,6 @@ td.capitalize { text-transform: capitalize; }
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
 }
+
+
 

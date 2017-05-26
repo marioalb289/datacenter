@@ -71,6 +71,7 @@
     </nav>
         
     <div class="container" style="width: auto;">
+
     <?php //print_r($_SESSION); ?>
 
     <script type="text/javascript">
@@ -235,6 +236,10 @@
     }
 
   </script>
+
+  
+
+
     <!-- <div class="alert alert-success">
       <strong>Success!</strong> This alert box could indicate a successful or positive action.
     </div> -->

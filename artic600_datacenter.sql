@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-05-04 15:42:43
+Date: 2017-05-26 15:32:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,13 +25,13 @@ CREATE TABLE `areas` (
   `estado` int(1) NOT NULL,
   `abreviatura` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of areas
 -- ----------------------------
 INSERT INTO `areas` VALUES ('1', 'Presidencia', '1', 'PRES');
-INSERT INTO `areas` VALUES ('2', 'Consejeros Electorales', '1', 'CE');
+INSERT INTO `areas` VALUES ('2', 'Consejeros Electorales', '0', 'CE');
 INSERT INTO `areas` VALUES ('3', 'Secretaria Ejecutiva', '1', 'SE');
 INSERT INTO `areas` VALUES ('4', 'Contraloria', '1', 'CONT');
 INSERT INTO `areas` VALUES ('5', 'Secrearia Técnica', '1', 'ST');
@@ -44,6 +44,12 @@ INSERT INTO `areas` VALUES ('11', 'Unidad Técnica de Computo', '1', 'UTC');
 INSERT INTO `areas` VALUES ('12', 'Unidad Técnica de Comunicación Social', '1', 'UTCS');
 INSERT INTO `areas` VALUES ('13', 'Unidad Técnica de Transparencia y Acceso a la Información', '1', 'UTTAI');
 INSERT INTO `areas` VALUES ('14', 'Unidad Técnica de Oficialía Electoral', '1', 'UTOE');
+INSERT INTO `areas` VALUES ('15', 'Consejera Lic. Laura Fabiola Bringas Sanchez', '1', 'CE');
+INSERT INTO `areas` VALUES ('16', 'Consejero Lic. Francisco Javier Gonzalez Pérez', '1', 'CE');
+INSERT INTO `areas` VALUES ('17', 'Consejera Lic. Mirza Mayela Ramirez Ramirez', '1', 'CE');
+INSERT INTO `areas` VALUES ('18', 'Consejero Lic. Manuel Montoya Del Campo', '1', 'CE');
+INSERT INTO `areas` VALUES ('19', 'Consejero Lic. Fernando De Jesus Roman Quiñones', '1', 'CE');
+INSERT INTO `areas` VALUES ('20', 'Consejera Dra. Esmeralda Valles López', '1', 'CE');
 
 -- ----------------------------
 -- Table structure for lugares
@@ -74,7 +80,7 @@ DROP TABLE IF EXISTS `sigi_contador_folios`;
 CREATE TABLE `sigi_contador_folios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_contador_folios
@@ -118,84 +124,6 @@ INSERT INTO `sigi_contador_folios` VALUES ('36');
 INSERT INTO `sigi_contador_folios` VALUES ('37');
 INSERT INTO `sigi_contador_folios` VALUES ('38');
 INSERT INTO `sigi_contador_folios` VALUES ('39');
-INSERT INTO `sigi_contador_folios` VALUES ('40');
-INSERT INTO `sigi_contador_folios` VALUES ('41');
-INSERT INTO `sigi_contador_folios` VALUES ('42');
-INSERT INTO `sigi_contador_folios` VALUES ('43');
-INSERT INTO `sigi_contador_folios` VALUES ('44');
-INSERT INTO `sigi_contador_folios` VALUES ('45');
-INSERT INTO `sigi_contador_folios` VALUES ('46');
-INSERT INTO `sigi_contador_folios` VALUES ('47');
-INSERT INTO `sigi_contador_folios` VALUES ('48');
-INSERT INTO `sigi_contador_folios` VALUES ('49');
-INSERT INTO `sigi_contador_folios` VALUES ('50');
-INSERT INTO `sigi_contador_folios` VALUES ('51');
-INSERT INTO `sigi_contador_folios` VALUES ('52');
-INSERT INTO `sigi_contador_folios` VALUES ('53');
-INSERT INTO `sigi_contador_folios` VALUES ('54');
-INSERT INTO `sigi_contador_folios` VALUES ('55');
-INSERT INTO `sigi_contador_folios` VALUES ('56');
-INSERT INTO `sigi_contador_folios` VALUES ('57');
-INSERT INTO `sigi_contador_folios` VALUES ('58');
-INSERT INTO `sigi_contador_folios` VALUES ('59');
-INSERT INTO `sigi_contador_folios` VALUES ('60');
-INSERT INTO `sigi_contador_folios` VALUES ('61');
-INSERT INTO `sigi_contador_folios` VALUES ('62');
-INSERT INTO `sigi_contador_folios` VALUES ('63');
-INSERT INTO `sigi_contador_folios` VALUES ('64');
-INSERT INTO `sigi_contador_folios` VALUES ('65');
-INSERT INTO `sigi_contador_folios` VALUES ('66');
-INSERT INTO `sigi_contador_folios` VALUES ('67');
-INSERT INTO `sigi_contador_folios` VALUES ('68');
-INSERT INTO `sigi_contador_folios` VALUES ('69');
-INSERT INTO `sigi_contador_folios` VALUES ('70');
-INSERT INTO `sigi_contador_folios` VALUES ('71');
-INSERT INTO `sigi_contador_folios` VALUES ('72');
-INSERT INTO `sigi_contador_folios` VALUES ('73');
-INSERT INTO `sigi_contador_folios` VALUES ('74');
-INSERT INTO `sigi_contador_folios` VALUES ('75');
-INSERT INTO `sigi_contador_folios` VALUES ('76');
-INSERT INTO `sigi_contador_folios` VALUES ('77');
-INSERT INTO `sigi_contador_folios` VALUES ('78');
-INSERT INTO `sigi_contador_folios` VALUES ('79');
-INSERT INTO `sigi_contador_folios` VALUES ('80');
-INSERT INTO `sigi_contador_folios` VALUES ('81');
-INSERT INTO `sigi_contador_folios` VALUES ('82');
-INSERT INTO `sigi_contador_folios` VALUES ('83');
-INSERT INTO `sigi_contador_folios` VALUES ('84');
-INSERT INTO `sigi_contador_folios` VALUES ('85');
-INSERT INTO `sigi_contador_folios` VALUES ('86');
-INSERT INTO `sigi_contador_folios` VALUES ('87');
-INSERT INTO `sigi_contador_folios` VALUES ('88');
-INSERT INTO `sigi_contador_folios` VALUES ('89');
-INSERT INTO `sigi_contador_folios` VALUES ('90');
-INSERT INTO `sigi_contador_folios` VALUES ('91');
-INSERT INTO `sigi_contador_folios` VALUES ('92');
-INSERT INTO `sigi_contador_folios` VALUES ('93');
-INSERT INTO `sigi_contador_folios` VALUES ('94');
-INSERT INTO `sigi_contador_folios` VALUES ('95');
-INSERT INTO `sigi_contador_folios` VALUES ('96');
-INSERT INTO `sigi_contador_folios` VALUES ('97');
-INSERT INTO `sigi_contador_folios` VALUES ('98');
-INSERT INTO `sigi_contador_folios` VALUES ('99');
-INSERT INTO `sigi_contador_folios` VALUES ('100');
-INSERT INTO `sigi_contador_folios` VALUES ('101');
-INSERT INTO `sigi_contador_folios` VALUES ('102');
-INSERT INTO `sigi_contador_folios` VALUES ('103');
-INSERT INTO `sigi_contador_folios` VALUES ('104');
-INSERT INTO `sigi_contador_folios` VALUES ('105');
-INSERT INTO `sigi_contador_folios` VALUES ('106');
-INSERT INTO `sigi_contador_folios` VALUES ('107');
-INSERT INTO `sigi_contador_folios` VALUES ('108');
-INSERT INTO `sigi_contador_folios` VALUES ('109');
-INSERT INTO `sigi_contador_folios` VALUES ('110');
-INSERT INTO `sigi_contador_folios` VALUES ('111');
-INSERT INTO `sigi_contador_folios` VALUES ('112');
-INSERT INTO `sigi_contador_folios` VALUES ('113');
-INSERT INTO `sigi_contador_folios` VALUES ('114');
-INSERT INTO `sigi_contador_folios` VALUES ('115');
-INSERT INTO `sigi_contador_folios` VALUES ('116');
-INSERT INTO `sigi_contador_folios` VALUES ('117');
 
 -- ----------------------------
 -- Table structure for sigi_documentos
@@ -211,128 +139,66 @@ CREATE TABLE `sigi_documentos` (
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_documentos
 -- ----------------------------
-INSERT INTO `sigi_documentos` VALUES ('1', 'S000000012017-04-24-13-45-19CONT', '0', 'documentos/', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
-INSERT INTO `sigi_documentos` VALUES ('2', 'S000000022017-04-24-14-33-27SE', '0', 'documentos/', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
-INSERT INTO `sigi_documentos` VALUES ('3', 'S000000032017-04-25-13-15-05SE', '0', 'documentos/', '2017-04-25 13:15:05', '10', '2017-04-25 13:15:05', '10');
-INSERT INTO `sigi_documentos` VALUES ('4', 'R000000042017-04-25-13-20-18', '0', 'documentos/', '2017-04-25 13:20:18', '7', '2017-04-25 13:20:18', '7');
-INSERT INTO `sigi_documentos` VALUES ('5', 'S000000052017-04-25-13-25-35SE', '0', 'documentos/', '2017-04-25 13:25:35', '10', '2017-04-25 13:25:35', '10');
-INSERT INTO `sigi_documentos` VALUES ('6', 'S000000062017-04-25-13-28-37SE', '0', 'documentos/', '2017-04-25 13:28:37', '10', '2017-04-25 13:28:37', '10');
-INSERT INTO `sigi_documentos` VALUES ('7', 'S000000072017-04-25-13-34-46CONT', '0', 'documentos/', '2017-04-25 13:34:46', '10', '2017-04-25 13:34:46', '10');
-INSERT INTO `sigi_documentos` VALUES ('8', 'R000000082017-04-25-13-35-42', '0', 'documentos/', '2017-04-25 13:35:42', '9', '2017-04-25 13:35:42', '9');
-INSERT INTO `sigi_documentos` VALUES ('9', 'S000000092017-04-25-13-37-07SE', '0', 'documentos/', '2017-04-25 13:37:07', '10', '2017-04-25 13:37:07', '10');
-INSERT INTO `sigi_documentos` VALUES ('10', 'S000000102017-04-25-13-39-34SE', '0', 'documentos/', '2017-04-25 13:39:34', '10', '2017-04-25 13:39:34', '10');
-INSERT INTO `sigi_documentos` VALUES ('11', 'S000000112017-04-25-13-50-42SE', '0', 'documentos/', '2017-04-25 13:50:42', '10', '2017-04-25 13:50:42', '10');
-INSERT INTO `sigi_documentos` VALUES ('12', 'R000000122017-04-25-13-55-32', '0', 'documentos/', '2017-04-25 13:55:32', '7', '2017-04-25 13:55:32', '7');
-INSERT INTO `sigi_documentos` VALUES ('13', 'S000000132017-04-25-13-57-09SE', '0', 'documentos/', '2017-04-25 13:57:09', '9', '2017-04-25 13:57:09', '9');
-INSERT INTO `sigi_documentos` VALUES ('14', 'R000000142017-04-25-13-58-45', '0', 'documentos/', '2017-04-25 13:58:45', '7', '2017-04-25 13:58:45', '7');
-INSERT INTO `sigi_documentos` VALUES ('15', 'R000000152017-04-25-14-02-39', '0', 'documentos/', '2017-04-25 14:02:39', '9', '2017-04-25 14:02:39', '9');
-INSERT INTO `sigi_documentos` VALUES ('16', 'R000000162017-04-25-14-04-27', '0', 'documentos/', '2017-04-25 14:04:27', '7', '2017-04-25 14:04:27', '7');
-INSERT INTO `sigi_documentos` VALUES ('17', 'R000000172017-04-25-14-07-47', '0', 'documentos/', '2017-04-25 14:07:47', '9', '2017-04-25 14:07:47', '9');
-INSERT INTO `sigi_documentos` VALUES ('18', 'R000000182017-04-25-14-18-02', '0', 'documentos/', '2017-04-25 14:18:02', '7', '2017-04-25 14:18:02', '7');
-INSERT INTO `sigi_documentos` VALUES ('19', 'R000000192017-04-25-14-21-04', '0', 'documentos/', '2017-04-25 14:21:04', '9', '2017-04-25 14:21:04', '9');
-INSERT INTO `sigi_documentos` VALUES ('20', 'R000000202017-04-25-14-21-46', '0', 'documentos/', '2017-04-25 14:21:47', '7', '2017-04-25 14:21:47', '7');
-INSERT INTO `sigi_documentos` VALUES ('21', 'R000000212017-04-25-14-29-00CONT', '0', 'documentos/', '2017-04-25 14:29:00', '9', '2017-04-25 14:29:00', '9');
-INSERT INTO `sigi_documentos` VALUES ('22', 'R000000222017-04-25-14-29-48SE', '0', 'documentos/', '2017-04-25 14:29:48', '7', '2017-04-25 14:29:48', '7');
-INSERT INTO `sigi_documentos` VALUES ('23', 'R000000232017-04-25-14-34-35CONT', '0', 'documentos/', '2017-04-25 14:34:35', '9', '2017-04-25 14:34:35', '9');
-INSERT INTO `sigi_documentos` VALUES ('24', 'R000000242017-04-25-14-35-45SE', '0', 'documentos/', '2017-04-25 14:35:45', '7', '2017-04-25 14:35:45', '7');
-INSERT INTO `sigi_documentos` VALUES ('25', 'R000000252017-04-25-14-40-31CONT', '0', 'documentos/', '2017-04-25 14:40:31', '9', '2017-04-25 14:40:31', '9');
-INSERT INTO `sigi_documentos` VALUES ('26', 'R000000262017-04-25-14-43-04SE', '0', 'documentos/', '2017-04-25 14:43:04', '7', '2017-04-25 14:43:04', '7');
-INSERT INTO `sigi_documentos` VALUES ('27', 'R000000272017-04-25-14-46-18CONT', '0', 'documentos/', '2017-04-25 14:46:18', '9', '2017-04-25 14:46:18', '9');
-INSERT INTO `sigi_documentos` VALUES ('28', 'R000000282017-04-25-14-46-44SE', '0', 'documentos/', '2017-04-25 14:46:44', '7', '2017-04-25 14:46:44', '7');
-INSERT INTO `sigi_documentos` VALUES ('29', 'R000000292017-04-25-14-49-20CONT', '0', 'documentos/', '2017-04-25 14:49:20', '9', '2017-04-25 14:49:20', '9');
-INSERT INTO `sigi_documentos` VALUES ('30', 'R000000302017-04-25-14-50-04SE', '0', 'documentos/', '2017-04-25 14:50:04', '7', '2017-04-25 14:50:04', '7');
-INSERT INTO `sigi_documentos` VALUES ('31', 'R000000312017-04-25-14-56-57CONT', '0', 'documentos/', '2017-04-25 14:56:57', '9', '2017-04-25 14:56:57', '9');
-INSERT INTO `sigi_documentos` VALUES ('32', 'R000000322017-04-25-15-07-45SE', '0', 'documentos/', '2017-04-25 15:07:45', '7', '2017-04-25 15:07:45', '7');
-INSERT INTO `sigi_documentos` VALUES ('33', 'R000000332017-04-25-15-21-45CONT', '0', 'documentos/', '2017-04-25 15:21:45', '9', '2017-04-25 15:21:45', '9');
-INSERT INTO `sigi_documentos` VALUES ('34', 'R000000342017-04-25-15-22-21SE', '0', 'documentos/', '2017-04-25 15:22:21', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_documentos` VALUES ('35', 'S000000352017-04-25-15-23-22SE', '0', 'documentos/', '2017-04-25 15:23:22', '9', '2017-04-25 15:23:22', '9');
-INSERT INTO `sigi_documentos` VALUES ('36', 'R000000362017-04-25-15-23-49SE', '0', 'documentos/', '2017-04-25 15:23:49', '7', '2017-04-25 15:23:49', '7');
-INSERT INTO `sigi_documentos` VALUES ('37', 'R000000372017-04-25-15-25-30CONT', '0', 'documentos/', '2017-04-25 15:25:30', '9', '2017-04-25 15:25:30', '9');
-INSERT INTO `sigi_documentos` VALUES ('38', 'R000000382017-04-25-15-26-07SE', '0', 'documentos/', '2017-04-25 15:26:07', '7', '2017-04-25 15:26:07', '7');
-INSERT INTO `sigi_documentos` VALUES ('39', 'S000000392017-04-25-15-27-41CONT', '0', 'documentos/', '2017-04-25 15:27:41', '10', '2017-04-25 15:27:41', '10');
-INSERT INTO `sigi_documentos` VALUES ('40', 'R000000402017-04-25-15-28-41CONT', '0', 'documentos/', '2017-04-25 15:28:41', '9', '2017-04-25 15:28:41', '9');
-INSERT INTO `sigi_documentos` VALUES ('41', 'S000000412017-04-25-15-29-56CONT', '0', 'documentos/', '2017-04-25 15:29:56', '10', '2017-04-25 15:29:56', '10');
-INSERT INTO `sigi_documentos` VALUES ('42', 'R000000422017-04-25-15-30-25CONT', '0', 'documentos/', '2017-04-25 15:30:25', '9', '2017-04-25 15:30:25', '9');
-INSERT INTO `sigi_documentos` VALUES ('43', 'S000000432017-04-25-15-31-01CONT', '0', 'documentos/', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:01', '10');
-INSERT INTO `sigi_documentos` VALUES ('44', 'S000000442017-04-25-15-33-12UTOE', '0', 'documentos/', '2017-04-25 15:33:12', '9', '2017-04-25 15:33:12', '9');
-INSERT INTO `sigi_documentos` VALUES ('45', 'S000000452017-04-26-09-30-25CONT', '0', 'documentos/', '2017-04-26 09:30:25', '10', '2017-04-26 09:30:25', '10');
-INSERT INTO `sigi_documentos` VALUES ('46', 'R000000462017-04-26-09-36-19CONT', '0', 'documentos/', '2017-04-26 09:36:19', '9', '2017-04-26 09:36:19', '9');
-INSERT INTO `sigi_documentos` VALUES ('47', 'S000000472017-04-26-10-08-29SE', '0', 'documentos/', '2017-04-26 10:08:29', '9', '2017-04-26 10:08:29', '9');
-INSERT INTO `sigi_documentos` VALUES ('48', 'R000000482017-04-26-10-09-25SE', '0', 'documentos/', '2017-04-26 10:09:25', '7', '2017-04-26 10:09:25', '7');
-INSERT INTO `sigi_documentos` VALUES ('49', 'S000000492017-04-26-10-12-08SE', '0', 'documentos/', '2017-04-26 10:12:08', '9', '2017-04-26 10:12:08', '9');
-INSERT INTO `sigi_documentos` VALUES ('50', 'S000000502017-04-26-10-51-21CONT', '0', 'documentos/', '2017-04-26 10:51:21', '10', '2017-04-26 10:51:21', '10');
-INSERT INTO `sigi_documentos` VALUES ('51', 'R000000512017-04-26-11-04-55CONT', '0', 'documentos/', '2017-04-26 11:04:55', '9', '2017-04-26 11:04:55', '9');
-INSERT INTO `sigi_documentos` VALUES ('52', 'S000000522017-04-26-11-17-53SE', '0', 'documentos/', '2017-04-26 11:17:53', '9', '2017-04-26 11:17:53', '9');
-INSERT INTO `sigi_documentos` VALUES ('53', 'S000000532017-04-27-11-50-05UTC', '0', 'documentos/', '2017-04-27 11:50:05', '9', '2017-04-27 11:50:05', '9');
-INSERT INTO `sigi_documentos` VALUES ('54', 'R000000542017-04-27-12-40-52UTC', '0', 'documentos/', '2017-04-27 12:40:52', '1', '2017-04-27 12:40:52', '1');
-INSERT INTO `sigi_documentos` VALUES ('55', 'R000000552017-04-27-13-15-42CONT', '0', 'documentos/', '2017-04-27 13:15:42', '9', '2017-04-27 13:15:42', '9');
-INSERT INTO `sigi_documentos` VALUES ('56', 'R000000562017-04-27-13-37-08UTC', '0', 'documentos/', '2017-04-27 13:37:08', '1', '2017-04-27 13:37:08', '1');
-INSERT INTO `sigi_documentos` VALUES ('57', 'S000000572017-04-27-13-44-42CONT', '0', 'documentos/', '2017-04-27 13:44:42', '1', '2017-04-27 13:44:42', '1');
-INSERT INTO `sigi_documentos` VALUES ('58', 'R000000582017-04-27-13-50-06CONT', '0', 'documentos/', '2017-04-27 13:50:06', '9', '2017-04-27 13:50:06', '9');
-INSERT INTO `sigi_documentos` VALUES ('59', 'S000000592017-04-27-14-53-32UTOE', '0', 'documentos/', '2017-04-27 14:53:32', '9', '2017-04-27 14:53:32', '9');
-INSERT INTO `sigi_documentos` VALUES ('60', 'S000000602017-04-27-15-15-44UTOE', '0', 'documentos/', '2017-04-27 15:15:44', '1', '2017-04-27 15:15:44', '1');
-INSERT INTO `sigi_documentos` VALUES ('61', 'R000000612017-04-27-15-19-38UTOE', '0', 'documentos/', '2017-04-27 15:19:38', '10', '2017-04-27 15:19:38', '10');
-INSERT INTO `sigi_documentos` VALUES ('62', 'S000000622017-04-28-14-36-19CONT', '0', 'documentos/', '2017-04-28 14:36:19', '10', '2017-04-28 14:36:19', '10');
-INSERT INTO `sigi_documentos` VALUES ('63', 'S000000632017-05-02-11-49-18', '0', 'documentos/', '2017-05-02 11:49:18', '10', '2017-05-02 11:49:18', '10');
-INSERT INTO `sigi_documentos` VALUES ('64', 'S000000642017-05-02-12-34-29CONT', '0', 'documentos/', '2017-05-02 12:34:29', '10', '2017-05-02 12:34:29', '10');
-INSERT INTO `sigi_documentos` VALUES ('65', 'S000000652017-05-02-13-56-52SE', '0', 'documentos/', '2017-05-02 13:56:52', '10', '2017-05-02 13:56:52', '10');
-INSERT INTO `sigi_documentos` VALUES ('66', 'S000000662017-05-02-14-08-52CONT', '0', 'documentos/', '2017-05-02 14:08:52', '10', '2017-05-02 14:08:52', '10');
-INSERT INTO `sigi_documentos` VALUES ('67', 'S000000672017-05-02-14-13-09CONT', '0', 'documentos/', '2017-05-02 14:13:09', '10', '2017-05-02 14:13:09', '10');
-INSERT INTO `sigi_documentos` VALUES ('68', 'S000000682017-05-02-14-13-57CONT', '0', 'documentos/', '2017-05-02 14:13:57', '10', '2017-05-02 14:13:57', '10');
-INSERT INTO `sigi_documentos` VALUES ('69', 'S000000692017-05-02-14-18-42CONT', '0', 'documentos/', '2017-05-02 14:18:42', '10', '2017-05-02 14:18:42', '10');
-INSERT INTO `sigi_documentos` VALUES ('70', 'S000000702017-05-02-14-20-10CONT', '0', 'documentos/', '2017-05-02 14:20:10', '10', '2017-05-02 14:20:10', '10');
-INSERT INTO `sigi_documentos` VALUES ('71', 'S000000712017-05-02-14-20-50CONT', '0', 'documentos/', '2017-05-02 14:20:50', '10', '2017-05-02 14:20:50', '10');
-INSERT INTO `sigi_documentos` VALUES ('72', 'S000000722017-05-02-14-21-35CONT', '0', 'documentos/', '2017-05-02 14:21:35', '10', '2017-05-02 14:21:35', '10');
-INSERT INTO `sigi_documentos` VALUES ('73', 'S000000732017-05-02-14-24-03CONT', '0', 'documentos/', '2017-05-02 14:24:03', '10', '2017-05-02 14:24:03', '10');
-INSERT INTO `sigi_documentos` VALUES ('74', 'S000000742017-05-03-09-57-37CONT', '0', 'documentos/', '2017-05-03 09:57:37', '10', '2017-05-03 09:57:37', '10');
-INSERT INTO `sigi_documentos` VALUES ('75', 'S000000752017-05-03-11-54-29CONT', '0', 'documentos/', '2017-05-03 11:54:29', '10', '2017-05-03 11:54:29', '10');
-INSERT INTO `sigi_documentos` VALUES ('76', 'S000000762017-05-03-12-08-23CONT', '0', 'documentos/', '2017-05-03 12:08:23', '10', '2017-05-03 12:08:23', '10');
-INSERT INTO `sigi_documentos` VALUES ('77', 'S000000772017-05-03-12-14-04CONT', '0', 'documentos/', '2017-05-03 12:14:04', '10', '2017-05-03 12:14:04', '10');
-INSERT INTO `sigi_documentos` VALUES ('78', 'S000000782017-05-03-12-23-53CONT', '0', 'documentos/', '2017-05-03 12:23:53', '10', '2017-05-03 12:23:53', '10');
-INSERT INTO `sigi_documentos` VALUES ('79', 'S000000792017-05-03-12-58-08CONT', '0', 'documentos/', '2017-05-03 12:58:08', '10', '2017-05-03 12:58:08', '10');
-INSERT INTO `sigi_documentos` VALUES ('80', 'S000000802017-05-03-12-58-55UTC', '0', 'documentos/', '2017-05-03 12:58:55', '10', '2017-05-03 12:58:55', '10');
-INSERT INTO `sigi_documentos` VALUES ('81', 'S000000812017-05-03-13-00-37UTC', '0', 'documentos/', '2017-05-03 13:00:37', '10', '2017-05-03 13:00:37', '10');
-INSERT INTO `sigi_documentos` VALUES ('82', 'S000000822017-05-03-13-04-04CONT', '0', 'documentos/', '2017-05-03 13:04:04', '10', '2017-05-03 13:04:04', '10');
-INSERT INTO `sigi_documentos` VALUES ('83', 'S000000832017-05-03-13-05-05CONT', '0', 'documentos/', '2017-05-03 13:05:05', '10', '2017-05-03 13:05:05', '10');
-INSERT INTO `sigi_documentos` VALUES ('84', 'S000000842017-05-03-13-13-24CONT', '0', 'documentos/', '2017-05-03 13:13:24', '10', '2017-05-03 13:13:24', '10');
-INSERT INTO `sigi_documentos` VALUES ('85', 'S000000852017-05-03-13-14-01CONT', '0', 'documentos/', '2017-05-03 13:14:01', '10', '2017-05-03 13:14:01', '10');
-INSERT INTO `sigi_documentos` VALUES ('86', 'S000000862017-05-03-13-15-20CONT', '0', 'documentos/', '2017-05-03 13:15:20', '10', '2017-05-03 13:15:20', '10');
-INSERT INTO `sigi_documentos` VALUES ('87', 'S000000872017-05-03-13-17-12UTC', '0', 'documentos/', '2017-05-03 13:17:12', '10', '2017-05-03 13:17:12', '10');
-INSERT INTO `sigi_documentos` VALUES ('88', 'S000000882017-05-03-13-27-44CONT', '0', 'documentos/', '2017-05-03 13:27:44', '10', '2017-05-03 13:27:44', '10');
-INSERT INTO `sigi_documentos` VALUES ('89', 'S000000892017-05-03-13-37-51CONT', '0', 'documentos/', '2017-05-03 13:37:51', '10', '2017-05-03 13:37:51', '10');
-INSERT INTO `sigi_documentos` VALUES ('90', 'S000000902017-05-03-13-43-19CONT', '0', 'documentos/', '2017-05-03 13:43:19', '10', '2017-05-03 13:43:19', '10');
-INSERT INTO `sigi_documentos` VALUES ('91', 'S000000912017-05-03-13-44-52CONT', '0', 'documentos/', '2017-05-03 13:44:52', '10', '2017-05-03 13:44:52', '10');
-INSERT INTO `sigi_documentos` VALUES ('92', 'S000000922017-05-03-13-48-03CONT', '0', 'documentos/', '2017-05-03 13:48:03', '10', '2017-05-03 13:48:03', '10');
-INSERT INTO `sigi_documentos` VALUES ('93', 'S000000932017-05-03-13-54-02SE', '0', 'documentos/', '2017-05-03 13:54:02', '1', '2017-05-03 13:54:02', '1');
-INSERT INTO `sigi_documentos` VALUES ('94', 'S000000942017-05-03-14-09-22SE', '0', 'documentos/', '2017-05-03 14:09:22', '9', '2017-05-03 14:09:22', '9');
-INSERT INTO `sigi_documentos` VALUES ('95', 'S000000952017-05-03-14-12-40CONT', '0', 'documentos/', '2017-05-03 14:12:40', '1', '2017-05-03 14:12:40', '1');
-INSERT INTO `sigi_documentos` VALUES ('96', 'R000000962017-05-03-15-15-32CONT', '0', 'documentos/', '2017-05-03 15:15:32', '9', '2017-05-03 15:15:32', '9');
-INSERT INTO `sigi_documentos` VALUES ('97', 'R000000972017-05-03-15-15-32CONT', '0', 'documentos/', '2017-05-03 15:15:32', '9', '2017-05-03 15:15:32', '9');
-INSERT INTO `sigi_documentos` VALUES ('98', 'S000000982017-05-03-15-19-49CONT', '0', 'documentos/', '2017-05-03 15:19:49', '1', '2017-05-03 15:19:49', '1');
-INSERT INTO `sigi_documentos` VALUES ('99', 'R000000992017-05-03-15-21-24CONT', '0', 'documentos/', '2017-05-03 15:21:24', '9', '2017-05-03 15:21:24', '9');
-INSERT INTO `sigi_documentos` VALUES ('100', 'S000001002017-05-03-15-34-17CONT', '0', 'documentos/', '2017-05-03 15:34:17', '1', '2017-05-03 15:34:17', '1');
-INSERT INTO `sigi_documentos` VALUES ('101', 'R000001012017-05-03-15-35-11CONT', '0', 'documentos/', '2017-05-03 15:35:11', '9', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_documentos` VALUES ('102', 'S000001022017-05-04-09-40-41CONT', '0', 'documentos/', '2017-05-04 09:40:41', '1', '2017-05-04 09:40:41', '1');
-INSERT INTO `sigi_documentos` VALUES ('103', 'S000001032017-05-04-09-44-32SE', '0', 'documentos/', '2017-05-04 09:44:32', '1', '2017-05-04 09:44:32', '1');
-INSERT INTO `sigi_documentos` VALUES ('104', 'R000001042017-05-04-09-45-51CONT', '0', 'documentos/', '2017-05-04 09:45:51', '9', '2017-05-04 09:45:51', '9');
-INSERT INTO `sigi_documentos` VALUES ('105', 'S000001052017-05-04-09-48-54CONT', '0', 'documentos/', '2017-05-04 09:48:54', '1', '2017-05-04 09:48:54', '1');
-INSERT INTO `sigi_documentos` VALUES ('106', 'R000001062017-05-04-09-50-14CONT', '0', 'documentos/', '2017-05-04 09:50:14', '9', '2017-05-04 09:50:14', '9');
-INSERT INTO `sigi_documentos` VALUES ('107', 'R000001072017-05-04-09-51-36SE', '0', 'documentos/', '2017-05-04 09:51:36', '7', '2017-05-04 09:51:36', '7');
-INSERT INTO `sigi_documentos` VALUES ('108', 'S000001082017-05-04-09-52-03', '0', 'documentos/', '2017-05-04 09:52:03', '1', '2017-05-04 09:52:03', '1');
-INSERT INTO `sigi_documentos` VALUES ('109', 'S000001092017-05-04-09-52-47SE', '0', 'documentos/', '2017-05-04 09:52:47', '1', '2017-05-04 09:52:47', '1');
-INSERT INTO `sigi_documentos` VALUES ('110', 'R000001102017-05-04-09-53-42SE', '0', 'documentos/', '2017-05-04 09:53:42', '7', '2017-05-04 09:53:42', '7');
-INSERT INTO `sigi_documentos` VALUES ('111', 'S000001112017-05-04-10-27-50CONT', '0', 'documentos/', '2017-05-04 10:27:50', '1', '2017-05-04 10:27:50', '1');
-INSERT INTO `sigi_documentos` VALUES ('112', 'S000001122017-05-04-10-33-58CONT', '0', 'documentos/', '2017-05-04 10:33:58', '1', '2017-05-04 10:33:58', '1');
-INSERT INTO `sigi_documentos` VALUES ('113', 'S000001132017-05-04-10-36-41CONT', '0', 'documentos/', '2017-05-04 10:36:41', '1', '2017-05-04 10:36:41', '1');
-INSERT INTO `sigi_documentos` VALUES ('114', 'R000001142017-05-04-11-04-53CONT', '0', 'documentos/', '2017-05-04 11:04:53', '9', '2017-05-04 11:04:53', '9');
-INSERT INTO `sigi_documentos` VALUES ('115', 'S000001152017-05-04-11-15-34UTTAI', '0', 'documentos/', '2017-05-04 11:15:34', '10', '2017-05-04 11:15:34', '10');
-INSERT INTO `sigi_documentos` VALUES ('116', 'R000001162017-05-04-12-04-36UTTAI', '0', 'documentos/', '2017-05-04 12:04:36', '8', '2017-05-04 12:04:36', '8');
-INSERT INTO `sigi_documentos` VALUES ('117', 'S000001172017-05-04-12-17-32CONT', '0', 'documentos/', '2017-05-04 12:17:32', '1', '2017-05-04 12:17:32', '1');
+INSERT INTO `sigi_documentos` VALUES ('1', 'S000000012017-05-17-15-04-36CONT', '0', 'documentos/', '2017-05-17 15:04:36', '10', '2017-05-17 15:04:36', '10');
+INSERT INTO `sigi_documentos` VALUES ('2', 'R000000012017-05-17-15-05-20CONT', '0', 'documentos/', '2017-05-17 15:05:20', '9', '2017-05-17 15:05:20', '9');
+INSERT INTO `sigi_documentos` VALUES ('3', 'R000000012017-05-17-15-05-20CONT', '0', 'documentos/', '2017-05-17 15:05:20', '9', '2017-05-17 15:05:20', '9');
+INSERT INTO `sigi_documentos` VALUES ('4', 'R000000022017-05-17-15-06-53CONT', '0', 'documentos/', '2017-05-17 15:06:53', '9', '2017-05-17 15:06:53', '9');
+INSERT INTO `sigi_documentos` VALUES ('5', 'S000000032017-05-17-15-28-08CONT', '0', 'documentos/', '2017-05-17 15:28:08', '10', '2017-05-17 15:28:08', '10');
+INSERT INTO `sigi_documentos` VALUES ('6', 'R000000042017-05-17-15-28-45CONT', '0', 'documentos/', '2017-05-17 15:28:45', '9', '2017-05-17 15:28:45', '9');
+INSERT INTO `sigi_documentos` VALUES ('7', 'S000000052017-05-17-15-32-50CONT', '0', 'documentos/', '2017-05-17 15:32:50', '10', '2017-05-17 15:32:50', '10');
+INSERT INTO `sigi_documentos` VALUES ('8', 'R000000062017-05-17-15-33-34CONT', '0', 'documentos/', '2017-05-17 15:33:34', '9', '2017-05-17 15:33:34', '9');
+INSERT INTO `sigi_documentos` VALUES ('9', 'S000000072017-05-17-15-37-12CONT', '0', 'documentos/', '2017-05-17 15:37:12', '10', '2017-05-17 15:37:12', '10');
+INSERT INTO `sigi_documentos` VALUES ('10', 'R000000082017-05-17-15-38-18CONT', '0', 'documentos/', '2017-05-17 15:38:18', '9', '2017-05-17 15:38:18', '9');
+INSERT INTO `sigi_documentos` VALUES ('11', 'S000000092017-05-17-15-42-12CONT', '0', 'documentos/', '2017-05-17 15:42:12', '10', '2017-05-17 15:42:12', '10');
+INSERT INTO `sigi_documentos` VALUES ('12', 'R000000092017-05-17-15-49-05CONT', '0', 'documentos/', '2017-05-17 15:49:05', '9', '2017-05-17 15:49:05', '9');
+INSERT INTO `sigi_documentos` VALUES ('13', 'S000000102017-05-18-12-08-55CONT', '0', 'documentos/', '2017-05-18 12:08:55', '7', '2017-05-18 12:08:55', '7');
+INSERT INTO `sigi_documentos` VALUES ('14', 'S000000112017-05-18-12-11-04CONT', '0', 'documentos/', '2017-05-18 12:11:04', '7', '2017-05-18 12:11:04', '7');
+INSERT INTO `sigi_documentos` VALUES ('15', 'S000000122017-05-18-12-19-16CONT', '0', 'documentos/', '2017-05-18 12:19:16', '7', '2017-05-18 12:19:16', '7');
+INSERT INTO `sigi_documentos` VALUES ('16', 'R000000122017-05-18-12-19-46CONT', '0', 'documentos/', '2017-05-18 12:19:46', '9', '2017-05-18 12:19:46', '9');
+INSERT INTO `sigi_documentos` VALUES ('17', 'S000000132017-05-18-12-41-15SE', '0', 'documentos/', '2017-05-18 12:41:15', '9', '2017-05-18 12:41:15', '9');
+INSERT INTO `sigi_documentos` VALUES ('18', 'R000000132017-05-18-12-42-07SE', '0', 'documentos/', '2017-05-18 12:42:07', '7', '2017-05-18 12:42:07', '7');
+INSERT INTO `sigi_documentos` VALUES ('19', 'R000000132017-05-18-12-46-48CONT', '0', 'documentos/', '2017-05-18 12:46:48', '9', '2017-05-18 12:46:48', '9');
+INSERT INTO `sigi_documentos` VALUES ('20', 'R000000132017-05-18-12-47-38SE', '0', 'documentos/', '2017-05-18 12:47:38', '7', '2017-05-18 12:47:38', '7');
+INSERT INTO `sigi_documentos` VALUES ('21', 'R000000132017-05-18-12-51-10CONT', '0', 'documentos/', '2017-05-18 12:51:10', '9', '2017-05-18 12:51:10', '9');
+INSERT INTO `sigi_documentos` VALUES ('22', 'R000000132017-05-18-12-52-05SE', '0', 'documentos/', '2017-05-18 12:52:05', '7', '2017-05-18 12:52:05', '7');
+INSERT INTO `sigi_documentos` VALUES ('23', 'S000000142017-05-18-13-08-55CONT', '0', 'documentos/', '2017-05-18 13:08:55', '10', '2017-05-18 13:08:55', '10');
+INSERT INTO `sigi_documentos` VALUES ('24', 'S000000152017-05-18-13-25-05CONT', '0', 'documentos/', '2017-05-18 13:25:05', '7', '2017-05-18 13:25:05', '7');
+INSERT INTO `sigi_documentos` VALUES ('25', 'R000000152017-05-18-13-54-53CONT', '0', 'documentos/', '2017-05-18 13:54:53', '9', '2017-05-18 13:54:53', '9');
+INSERT INTO `sigi_documentos` VALUES ('26', 'S000000162017-05-19-14-40-19CONT', '0', 'documentos/', '2017-05-19 14:40:19', '16', '2017-05-19 14:40:19', '16');
+INSERT INTO `sigi_documentos` VALUES ('27', 'R000000162017-05-19-14-43-28CONT', '0', 'documentos/', '2017-05-19 14:43:28', '9', '2017-05-19 14:43:28', '9');
+INSERT INTO `sigi_documentos` VALUES ('28', 'R000000162017-05-19-14-44-42CE', '0', 'documentos/', '2017-05-19 14:44:42', '16', '2017-05-19 14:44:42', '16');
+INSERT INTO `sigi_documentos` VALUES ('29', 'R000000162017-05-19-14-46-08CONT', '0', 'documentos/', '2017-05-19 14:46:08', '9', '2017-05-19 14:46:08', '9');
+INSERT INTO `sigi_documentos` VALUES ('30', 'S000000172017-05-22-14-37-58SE', '0', 'documentos/', '2017-05-22 14:37:58', '9', '2017-05-22 14:37:58', '9');
+INSERT INTO `sigi_documentos` VALUES ('31', 'S000000182017-05-23-10-46-21PRES', '0', 'documentos/', '2017-05-23 10:46:21', '9', '2017-05-23 10:46:21', '9');
+INSERT INTO `sigi_documentos` VALUES ('32', 'S000000192017-05-23-10-50-22PRES', '0', 'documentos/', '2017-05-23 10:50:22', '9', '2017-05-23 10:50:22', '9');
+INSERT INTO `sigi_documentos` VALUES ('33', 'S000000202017-05-23-11-56-05PRES', '0', 'documentos/', '2017-05-23 11:56:05', '9', '2017-05-23 11:56:05', '9');
+INSERT INTO `sigi_documentos` VALUES ('34', 'R000000202017-05-23-12-35-31PRES', '0', 'documentos/', '2017-05-23 12:35:31', '12', '2017-05-23 12:35:31', '12');
+INSERT INTO `sigi_documentos` VALUES ('35', 'S000000212017-05-23-14-31-15SE', '0', 'documentos/', '2017-05-23 14:31:15', '12', '2017-05-23 14:31:15', '12');
+INSERT INTO `sigi_documentos` VALUES ('36', 'S000000222017-05-23-14-43-55PRES', '0', 'documentos/', '2017-05-23 14:43:55', '10', '2017-05-23 14:43:55', '10');
+INSERT INTO `sigi_documentos` VALUES ('37', 'R000000212017-05-23-14-49-00SE', '0', 'documentos/', '2017-05-23 14:49:00', '10', '2017-05-23 14:49:00', '10');
+INSERT INTO `sigi_documentos` VALUES ('38', 'S000000232017-05-25-10-02-10SE', '0', 'documentos/', '2017-05-25 10:02:10', '9', '2017-05-25 10:02:10', '9');
+INSERT INTO `sigi_documentos` VALUES ('39', 'S000000242017-05-25-11-08-07SE', '0', 'documentos/', '2017-05-25 11:08:07', '9', '2017-05-25 11:08:07', '9');
+INSERT INTO `sigi_documentos` VALUES ('40', 'S000000252017-05-25-14-36-46SE', '0', 'documentos/', '2017-05-25 14:36:46', '9', '2017-05-25 14:36:46', '9');
+INSERT INTO `sigi_documentos` VALUES ('41', 'S000000262017-05-25-14-37-46CONT', '0', 'documentos/', '2017-05-25 14:37:46', '10', '2017-05-25 14:37:46', '10');
+INSERT INTO `sigi_documentos` VALUES ('42', 'S000000272017-05-25-14-51-28SE', '0', 'documentos/', '2017-05-25 14:51:28', '9', '2017-05-25 14:51:28', '9');
+INSERT INTO `sigi_documentos` VALUES ('43', 'S000000282017-05-25-14-52-38CONT', '0', 'documentos/', '2017-05-25 14:52:38', '10', '2017-05-25 14:52:38', '10');
+INSERT INTO `sigi_documentos` VALUES ('44', 'S000000292017-05-26-09-53-23SE', '0', 'documentos/', '2017-05-26 09:53:23', '9', '2017-05-26 09:53:23', '9');
+INSERT INTO `sigi_documentos` VALUES ('45', 'S000000302017-05-26-09-54-51CONT', '0', 'documentos/', '2017-05-26 09:54:51', '10', '2017-05-26 09:54:51', '10');
+INSERT INTO `sigi_documentos` VALUES ('46', 'S000000312017-05-26-10-04-39CONT', '0', 'documentos/', '2017-05-26 10:04:39', '10', '2017-05-26 10:04:39', '10');
+INSERT INTO `sigi_documentos` VALUES ('47', 'S000000322017-05-26-10-33-42SE', '0', 'documentos/', '2017-05-26 10:33:42', '9', '2017-05-26 10:33:42', '9');
+INSERT INTO `sigi_documentos` VALUES ('48', 'S000000332017-05-26-10-40-51CONT', '0', 'documentos/', '2017-05-26 10:40:51', '10', '2017-05-26 10:40:51', '10');
+INSERT INTO `sigi_documentos` VALUES ('49', 'S000000342017-05-26-10-48-30CONT', '0', 'documentos/', '2017-05-26 10:48:30', '10', '2017-05-26 10:48:30', '10');
+INSERT INTO `sigi_documentos` VALUES ('50', 'S000000352017-05-26-10-48-58SE', '0', 'documentos/', '2017-05-26 10:48:58', '9', '2017-05-26 10:48:58', '9');
+INSERT INTO `sigi_documentos` VALUES ('51', 'R000000352017-05-26-11-08-53CONT', '0', 'documentos/', '2017-05-26 11:08:53', '9', '2017-05-26 11:08:53', '9');
+INSERT INTO `sigi_documentos` VALUES ('52', 'S000000362017-05-26-11-13-58CONT', '0', 'documentos/', '2017-05-26 11:13:58', '10', '2017-05-26 11:13:58', '10');
+INSERT INTO `sigi_documentos` VALUES ('53', 'S000000372017-05-26-11-21-50SE', '0', 'documentos/', '2017-05-26 11:21:50', '9', '2017-05-26 11:21:50', '9');
+INSERT INTO `sigi_documentos` VALUES ('54', 'S000000382017-05-26-11-38-18CONT', '0', 'documentos/', '2017-05-26 11:38:18', '77', '2017-05-26 11:38:18', '77');
+INSERT INTO `sigi_documentos` VALUES ('55', 'S000000392017-05-26-12-02-53SE', '0', 'documentos/', '2017-05-26 12:02:53', '9', '2017-05-26 12:02:53', '9');
 
 -- ----------------------------
 -- Table structure for sigi_oficios
@@ -353,133 +219,74 @@ CREATE TABLE `sigi_oficios` (
   `respuesta` tinyint(1) DEFAULT NULL,
   `respondido` int(1) DEFAULT '0',
   `destino` enum('INTERNO','EXTERNO') DEFAULT 'INTERNO',
+  `fecha_recepcion` date DEFAULT NULL,
+  `hora_recepcion` time DEFAULT NULL,
+  `comentarios` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios
 -- ----------------------------
-INSERT INTO `sigi_oficios` VALUES ('1', 'SOLICITUD', '00000001', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE SOLICITA INFORME DE GASTOS DEL INSTITUTO', '', '1', null, 'INTERNO', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
-INSERT INTO `sigi_oficios` VALUES ('2', 'SOLICITUD', '00000002', 'IEPC-2012-123-12', 'INTERNO', '9', '', '', '', 'INFORME DE GASTOS 2012', '', '1', null, 'INTERNO', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
-INSERT INTO `sigi_oficios` VALUES ('3', 'SOLICITUD', '00000003', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'SE SOLICITA INFORME DEL ESTADO DE EXTINTORES', '', '1', '1', 'INTERNO', '2017-04-25 13:15:05', '10', '2017-04-25 13:15:05', '10');
-INSERT INTO `sigi_oficios` VALUES ('4', 'RESPUESTA', '00000004', 'IEPC-0019283', 'EXTERNO', '7', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'Se envía informe del estado de los extintores', '', '1', '1', 'INTERNO', '2017-04-25 13:20:18', '7', '2017-04-25 13:20:18', '7');
-INSERT INTO `sigi_oficios` VALUES ('5', 'SOLICITUD', '00000005', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'Se le invita a un evento', '', '0', null, 'INTERNO', '2017-04-25 13:25:35', '10', '2017-04-25 13:25:35', '10');
-INSERT INTO `sigi_oficios` VALUES ('6', 'SOLICITUD', '00000006', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE INVITA DE NUEVO', '', '0', null, 'INTERNO', '2017-04-25 13:28:37', '10', '2017-04-25 13:28:37', '10');
-INSERT INTO `sigi_oficios` VALUES ('7', 'SOLICITUD', '00000007', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'INFORME DE GASTOS', '', '1', '1', 'INTERNO', '2017-04-25 13:34:46', '10', '2017-04-25 13:34:46', '10');
-INSERT INTO `sigi_oficios` VALUES ('8', 'RESPUESTA', '00000008', 'IEPC-13124345', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'se envía informe', '', '1', '1', 'INTERNO', '2017-04-25 13:35:42', '9', '2017-04-25 13:35:42', '9');
-INSERT INTO `sigi_oficios` VALUES ('9', 'SOLICITUD', '00000009', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'SE NOTIFICA', '', '0', null, 'INTERNO', '2017-04-25 13:37:07', '10', '2017-04-25 13:37:07', '10');
-INSERT INTO `sigi_oficios` VALUES ('10', 'SOLICITUD', '00000010', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'SE NOTIFICA2', '', '0', null, 'INTERNO', '2017-04-25 13:39:34', '10', '2017-04-25 13:39:34', '10');
-INSERT INTO `sigi_oficios` VALUES ('11', 'SOLICITUD', '00000011', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE ENVIA MENSAJE 2 ESPERANDO RESPUESTA', '', '1', '1', 'INTERNO', '2017-04-25 13:50:43', '10', '2017-04-25 13:50:43', '10');
-INSERT INTO `sigi_oficios` VALUES ('12', 'RESPUESTA', '00000012', 'wet546655', 'EXTERNO', '7', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'se envia respuesta al mensaje 2', '', '1', '1', 'INTERNO', '2017-04-25 13:55:32', '7', '2017-04-25 13:55:32', '7');
-INSERT INTO `sigi_oficios` VALUES ('13', 'SOLICITUD', '00000013', 'IEPC-2012-12', 'INTERNO', '9', '', '', '', 'MENSAJE INTERNO 1', '', '1', '1', 'INTERNO', '2017-04-25 13:57:09', '9', '2017-04-25 13:57:09', '9');
-INSERT INTO `sigi_oficios` VALUES ('14', 'RESPUESTA', '00000014', 'ISOR29F84', 'INTERNO', '7', '', '', '', 'Se envía respuesta al mensaje interno 1', '', '1', '1', 'INTERNO', '2017-04-25 13:58:45', '7', '2017-04-25 13:58:45', '7');
-INSERT INTO `sigi_oficios` VALUES ('15', 'RESPUESTA', '00000015', 'IEPC201823', 'INTERNO', '9', '', '', '', 'No es la respuesta que se esperaba, esperando nuev', '', '1', '1', 'INTERNO', '2017-04-25 14:02:39', '9', '2017-04-25 14:02:39', '9');
-INSERT INTO `sigi_oficios` VALUES ('16', 'RESPUESTA', '00000016', 'IEP893893', 'INTERNO', '7', '', '', '', 'Se envía respuesta correcta al mensaje 2', '', '1', '1', 'INTERNO', '2017-04-25 14:04:27', '7', '2017-04-25 14:04:27', '7');
-INSERT INTO `sigi_oficios` VALUES ('17', 'RESPUESTA', '00000017', '2345675ewedds', 'INTERNO', '9', '', '', '', 'nuevo mensaje 3', '', '1', '1', 'INTERNO', '2017-04-25 14:07:47', '9', '2017-04-25 14:07:47', '9');
-INSERT INTO `sigi_oficios` VALUES ('18', 'RESPUESTA', '00000018', '453sasssa', 'INTERNO', '7', '', '', '', 'respuesta al mensaje 3', '', '1', '1', 'INTERNO', '2017-04-25 14:18:02', '7', '2017-04-25 14:18:02', '7');
-INSERT INTO `sigi_oficios` VALUES ('19', 'RESPUESTA', '00000019', '123456543asdfgh', 'INTERNO', '9', '', '', '', 'nuevo mensaje 4', '', '1', '1', 'INTERNO', '2017-04-25 14:21:04', '9', '2017-04-25 14:21:04', '9');
-INSERT INTO `sigi_oficios` VALUES ('20', 'RESPUESTA', '00000020', 'asdfg435675', 'INTERNO', '7', '', '', '', 'respuesta mensaje4', '', '1', '1', 'INTERNO', '2017-04-25 14:21:47', '7', '2017-04-25 14:21:47', '7');
-INSERT INTO `sigi_oficios` VALUES ('21', 'RESPUESTA', '00000021', '2345685732jhdff', 'INTERNO', '9', '', '', '', 'mensaje 5 nuevo', '', '1', '1', 'INTERNO', '2017-04-25 14:29:00', '9', '2017-04-25 14:29:00', '9');
-INSERT INTO `sigi_oficios` VALUES ('22', 'RESPUESTA', '00000022', '23456edsds', 'INTERNO', '7', '', '', '', 'respuesta mensaje 5', '', '1', '1', 'INTERNO', '2017-04-25 14:29:48', '7', '2017-04-25 14:29:48', '7');
-INSERT INTO `sigi_oficios` VALUES ('23', 'RESPUESTA', '00000023', '8948954uifdjkdf', 'INTERNO', '9', '', '', '', 'mensaje 6 nuevo', '', '1', '1', 'INTERNO', '2017-04-25 14:34:35', '9', '2017-04-25 14:34:35', '9');
-INSERT INTO `sigi_oficios` VALUES ('24', 'RESPUESTA', '00000024', '44589djkdkjds', 'INTERNO', '7', '', '', '', 'respuesta mensaje 6', '', '1', '1', 'INTERNO', '2017-04-25 14:35:45', '7', '2017-04-25 14:35:45', '7');
-INSERT INTO `sigi_oficios` VALUES ('25', 'RESPUESTA', '00000025', '1234567654wdfg', 'INTERNO', '9', '', '', '', 'nuevo mensaje 7', '', '1', '1', 'INTERNO', '2017-04-25 14:40:31', '9', '2017-04-25 14:40:31', '9');
-INSERT INTO `sigi_oficios` VALUES ('26', 'RESPUESTA', '00000026', '23456ewdfgsd', 'INTERNO', '7', '', '', '', 'respuesta mensaje 7', '', '1', '1', 'INTERNO', '2017-04-25 14:43:04', '7', '2017-04-25 14:43:04', '7');
-INSERT INTO `sigi_oficios` VALUES ('27', 'RESPUESTA', '00000027', '789878ssas', 'INTERNO', '9', '', '', '', 'nuevo mensaje 8', '', '1', '1', 'INTERNO', '2017-04-25 14:46:18', '9', '2017-04-25 14:46:18', '9');
-INSERT INTO `sigi_oficios` VALUES ('28', 'RESPUESTA', '00000028', '8938932hjhsasaas', 'INTERNO', '7', '', '', '', 'respuesta mensaje 8', '', '1', '1', 'INTERNO', '2017-04-25 14:46:44', '7', '2017-04-25 14:46:44', '7');
-INSERT INTO `sigi_oficios` VALUES ('29', 'RESPUESTA', '00000029', '234567esdf', 'INTERNO', '9', '', '', '', 'nuevo mensaje 9', '', '1', '1', 'INTERNO', '2017-04-25 14:49:20', '9', '2017-04-25 14:49:20', '9');
-INSERT INTO `sigi_oficios` VALUES ('30', 'RESPUESTA', '00000030', '234wesds', 'INTERNO', '7', '', '', '', 'responder mensaje 9', '', '1', '1', 'INTERNO', '2017-04-25 14:50:04', '7', '2017-04-25 14:50:04', '7');
-INSERT INTO `sigi_oficios` VALUES ('31', 'RESPUESTA', '00000031', '89438943djdssd', 'INTERNO', '9', '', '', '', 'nuevo mensaje 10', '', '1', '1', 'INTERNO', '2017-04-25 14:56:57', '9', '2017-04-25 14:56:57', '9');
-INSERT INTO `sigi_oficios` VALUES ('32', 'RESPUESTA', '00000032', '323aasss', 'INTERNO', '7', '', '', '', 'respuesta mensaje 10', '', '1', '1', 'INTERNO', '2017-04-25 15:07:45', '7', '2017-04-25 15:07:45', '7');
-INSERT INTO `sigi_oficios` VALUES ('33', 'RESPUESTA', '00000033', '9858945DFDFDF', 'INTERNO', '9', '', '', '', 'mensaje 11', '', '1', '1', 'INTERNO', '2017-04-25 15:21:45', '9', '2017-04-25 15:21:45', '9');
-INSERT INTO `sigi_oficios` VALUES ('34', 'RESPUESTA', '00000034', '456fdsfd', 'INTERNO', '7', '', '', '', 'RESPUESTA MENSAJE 11', '', '1', '1', 'INTERNO', '2017-04-25 15:22:21', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios` VALUES ('35', 'SOLICITUD', '00000035', '123456543', 'INTERNO', '9', '', '', '', 'MENSAJE NUEVO 1 DE PRUEBA', '', '1', '1', 'INTERNO', '2017-04-25 15:23:22', '9', '2017-04-25 15:23:22', '9');
-INSERT INTO `sigi_oficios` VALUES ('36', 'RESPUESTA', '00000036', '48348943', 'INTERNO', '7', '', '', '', 'RESPUESTA AL MENSAJE 1', '', '1', '1', 'INTERNO', '2017-04-25 15:23:50', '7', '2017-04-25 15:23:50', '7');
-INSERT INTO `sigi_oficios` VALUES ('37', 'RESPUESTA', '00000037', '2389328923', 'INTERNO', '9', '', '', '', 'NUEVO MENSAJE 2', '', '1', '1', 'INTERNO', '2017-04-25 15:25:30', '9', '2017-04-25 15:25:30', '9');
-INSERT INTO `sigi_oficios` VALUES ('38', 'RESPUESTA', '00000038', '478437843', 'INTERNO', '7', '', '', '', 'RESPUESTA AL MENSAJE 2', '', '1', '1', 'INTERNO', '2017-04-25 15:26:07', '7', '2017-04-25 15:26:07', '7');
-INSERT INTO `sigi_oficios` VALUES ('39', 'SOLICITUD', '00000039', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'MENSAJE EXTERNO 1', '', '1', '1', 'INTERNO', '2017-04-25 15:27:41', '10', '2017-04-25 15:27:41', '10');
-INSERT INTO `sigi_oficios` VALUES ('40', 'RESPUESTA', '00000040', '2345678654RTFDF', 'EXTERNO', '9', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'RESPUESTA AL MENSAJE EXTERNO 1', '', '1', '1', 'INTERNO', '2017-04-25 15:28:41', '9', '2017-04-25 15:28:41', '9');
-INSERT INTO `sigi_oficios` VALUES ('41', 'SOLICITUD', '00000041', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE SIN RESPUESTA 1', '', '1', '1', 'INTERNO', '2017-04-25 15:29:56', '10', '2017-04-25 15:29:56', '10');
-INSERT INTO `sigi_oficios` VALUES ('42', 'RESPUESTA', '00000042', '7378327832872', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SI RESPONDI', '', '1', '1', 'INTERNO', '2017-04-25 15:30:25', '9', '2017-04-25 15:30:25', '9');
-INSERT INTO `sigi_oficios` VALUES ('43', 'SOLICITUD', '00000043', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE SIN RESPUESTA 1', '', '0', null, 'INTERNO', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:01', '10');
-INSERT INTO `sigi_oficios` VALUES ('44', 'SOLICITUD', '00000044', '2345676543', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'PROBANDO DESTINO EXTERNO 1', '', '1', null, 'EXTERNO', '2017-04-25 15:33:12', '9', '2017-04-25 15:33:12', '9');
-INSERT INTO `sigi_oficios` VALUES ('45', 'SOLICITUD', '00000045', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'Informe de gastos en materia de seguridad', '', '1', '1', 'INTERNO', '2017-04-26 09:30:25', '10', '2017-04-26 09:30:25', '10');
-INSERT INTO `sigi_oficios` VALUES ('46', 'RESPUESTA', '00000046', '12342asda', 'EXTERNO', '9', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'SE ENVIA RESPUESTA AL MENSAJE 1', '', '1', '1', 'INTERNO', '2017-04-26 09:36:19', '9', '2017-04-26 09:36:19', '9');
-INSERT INTO `sigi_oficios` VALUES ('47', 'SOLICITUD', '00000047', 'IEOS834983', 'INTERNO', '9', '', '', '', 'MENSAJE DE PRUEBA 1', '', '1', '1', 'INTERNO', '2017-04-26 10:08:29', '9', '2017-04-26 10:08:29', '9');
-INSERT INTO `sigi_oficios` VALUES ('48', 'RESPUESTA', '00000048', '123456WET', 'INTERNO', '7', '', '', '', 'RESPUESTA MENSAJE 1', '', '1', '1', 'INTERNO', '2017-04-26 10:09:25', '7', '2017-04-26 10:09:25', '7');
-INSERT INTO `sigi_oficios` VALUES ('49', 'SOLICITUD', '00000049', 'IEPC824372', 'INTERNO', '9', '', '', '', 'mensaje de prueba 1', '', '1', null, 'INTERNO', '2017-04-26 10:12:08', '9', '2017-04-26 10:12:08', '9');
-INSERT INTO `sigi_oficios` VALUES ('50', 'SOLICITUD', '00000050', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'Se solicit informe de gastos', '', '1', '1', 'INTERNO', '2017-04-26 10:51:21', '10', '2017-04-26 10:51:21', '10');
-INSERT INTO `sigi_oficios` VALUES ('51', 'RESPUESTA', '00000051', '5445EYGH', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE ENVIA RESPUESTA', '', '1', '1', 'INTERNO', '2017-04-26 11:04:55', '9', '2017-04-26 11:04:55', '9');
-INSERT INTO `sigi_oficios` VALUES ('52', 'SOLICITUD', '00000052', 'IEPC738547387', 'INTERNO', '9', '', '', '', 'MENSAJE DE PRUEBA INTRNO', '', '1', null, 'INTERNO', '2017-04-26 11:17:53', '9', '2017-04-26 11:17:53', '9');
-INSERT INTO `sigi_oficios` VALUES ('53', 'SOLICITUD', '00000053', '2322QSDDSQE', 'INTERNO', '9', '', '', '', 'MENSAJE DE PRUEBA A SUPER EJECUTIVO', '', '1', '1', 'INTERNO', '2017-04-27 11:50:05', '9', '2017-04-27 11:50:05', '9');
-INSERT INTO `sigi_oficios` VALUES ('54', 'RESPUESTA', '00000054', '', 'INTERNO', '1', '', '', '', 'RESPUESTA AL MENSAJE SUPER EJECUTIVO', '', '1', '1', 'INTERNO', '2017-04-27 12:40:52', '1', '2017-04-27 12:40:52', '1');
-INSERT INTO `sigi_oficios` VALUES ('55', 'RESPUESTA', '00000055', '2376673SSS', 'INTERNO', '9', '', '', '', 'NO ES LA RESPUESTA CORRECTA', '', '1', '1', 'INTERNO', '2017-04-27 13:15:42', '9', '2017-04-27 13:15:42', '9');
-INSERT INTO `sigi_oficios` VALUES ('56', 'RESPUESTA', '00000056', '', 'INTERNO', '1', '', '', '', 'RESPUESTA A SU RESPUESTA', '', '1', '1', 'INTERNO', '2017-04-27 13:37:09', '1', '2017-04-27 13:37:09', '1');
-INSERT INTO `sigi_oficios` VALUES ('57', 'SOLICITUD', '00000057', '23423WERASD', 'INTERNO', '1', '', '', '', 'YO SUPER USUARIO TE ENVIO MENSAJE', '', '1', '1', 'INTERNO', '2017-04-27 13:44:42', '1', '2017-04-27 13:44:42', '1');
-INSERT INTO `sigi_oficios` VALUES ('58', 'RESPUESTA', '00000058', '34567876543wertytrew', 'INTERNO', '9', '', '', '', 'yo usuario mortal, te respondo a ti superusuario', '', '1', '1', 'INTERNO', '2017-04-27 13:50:06', '9', '2017-04-27 13:50:06', '9');
-INSERT INTO `sigi_oficios` VALUES ('59', 'SOLICITUD', '00000059', '12345676543qasdf', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'otra prueba externa', '', '1', null, 'EXTERNO', '2017-04-27 14:53:32', '9', '2017-04-27 14:53:32', '9');
-INSERT INTO `sigi_oficios` VALUES ('60', 'SOLICITUD', '00000060', '123456543SDFGHGFD', 'INTERNO', '1', 'MIGUEL ALEMAN MADRID', 'AYUNTAMIENTO LERDO', 'PRESIDENTE MUNICIPAL', 'MENSAJE NUEVO EXTERNO DE SUPER USUARIOS', '', '1', '1', 'EXTERNO', '2017-04-27 15:15:44', '1', '2017-04-27 15:15:44', '1');
-INSERT INTO `sigi_oficios` VALUES ('61', 'RESPUESTA', '00000061', '', 'INTERNO', '10', 'MIGUEL ALEMAN MADRID', 'AYUNTAMIENTO LERDO', 'PRESIDENTE MUNICIPAL', 'SE ENVIA LA RESPUESTA SUPERUSUARIO ', '', '1', '1', 'EXTERNO', '2017-04-27 15:19:38', '10', '2017-04-27 15:19:38', '10');
-INSERT INTO `sigi_oficios` VALUES ('62', 'SOLICITUD', '00000062', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'MENSAJE DE PRUEBA 1', '', '1', null, 'INTERNO', '2017-04-28 14:36:20', '10', '2017-04-28 14:36:20', '10');
-INSERT INTO `sigi_oficios` VALUES ('63', 'SOLICITUD', '00000063', '', 'EXTERNO', '0', '', '', '', '', '', '1', null, 'INTERNO', '2017-05-02 11:49:18', '10', '2017-05-02 11:49:18', '10');
-INSERT INTO `sigi_oficios` VALUES ('64', 'SOLICITUD', '00000064', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE DE PRUEBA 1', '', '1', null, 'INTERNO', '2017-05-02 12:34:29', '10', '2017-05-02 12:34:29', '10');
-INSERT INTO `sigi_oficios` VALUES ('65', 'SOLICITUD', '00000065', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '876789ykjwqkkjwqjk', '', '1', null, 'INTERNO', '2017-05-02 13:56:52', '10', '2017-05-02 13:56:52', '10');
-INSERT INTO `sigi_oficios` VALUES ('66', 'SOLICITUD', '00000066', '', 'EXTERNO', null, 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'w3e4567876543ertgfhfdd', '', '1', null, 'INTERNO', '2017-05-02 14:08:52', '10', '2017-05-02 14:08:52', '10');
-INSERT INTO `sigi_oficios` VALUES ('67', 'SOLICITUD', '00000067', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'w3e4567876543ertgfhfdd', '', '1', null, 'INTERNO', '2017-05-02 14:13:09', '10', '2017-05-02 14:13:09', '10');
-INSERT INTO `sigi_oficios` VALUES ('68', 'SOLICITUD', '00000068', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'w3e4567876543ertgfhfdd', '', '1', null, 'INTERNO', '2017-05-02 14:13:57', '10', '2017-05-02 14:13:57', '10');
-INSERT INTO `sigi_oficios` VALUES ('69', 'SOLICITUD', '00000069', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'w3e4567876543ertgfhfdd', '', '1', null, 'INTERNO', '2017-05-02 14:18:42', '10', '2017-05-02 14:18:42', '10');
-INSERT INTO `sigi_oficios` VALUES ('70', 'SOLICITUD', '00000070', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '234567876543ertyhgfdsf', '', '1', null, 'INTERNO', '2017-05-02 14:20:10', '10', '2017-05-02 14:20:10', '10');
-INSERT INTO `sigi_oficios` VALUES ('71', 'SOLICITUD', '00000071', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'qwe2343234wwsdsasdsad', '', '1', null, 'INTERNO', '2017-05-02 14:20:50', '10', '2017-05-02 14:20:50', '10');
-INSERT INTO `sigi_oficios` VALUES ('72', 'SOLICITUD', '00000072', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'wertyuiytrew3456786', '', '1', null, 'INTERNO', '2017-05-02 14:21:36', '10', '2017-05-02 14:21:36', '10');
-INSERT INTO `sigi_oficios` VALUES ('73', 'SOLICITUD', '00000073', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'q567876543fdfdfd', '', '1', null, 'INTERNO', '2017-05-02 14:24:03', '10', '2017-05-02 14:24:03', '10');
-INSERT INTO `sigi_oficios` VALUES ('74', 'SOLICITUD', '00000074', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'Mensaje de prueba socket io', '', '1', null, 'INTERNO', '2017-05-03 09:57:37', '10', '2017-05-03 09:57:37', '10');
-INSERT INTO `sigi_oficios` VALUES ('75', 'SOLICITUD', '00000075', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE DE PRUEBA SOCKET IO', '', '1', null, 'INTERNO', '2017-05-03 11:54:29', '10', '2017-05-03 11:54:29', '10');
-INSERT INTO `sigi_oficios` VALUES ('76', 'SOLICITUD', '00000076', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE DE PRUEBA PARA USUARIOS ', '', '1', null, 'INTERNO', '2017-05-03 12:08:23', '10', '2017-05-03 12:08:23', '10');
-INSERT INTO `sigi_oficios` VALUES ('77', 'SOLICITUD', '00000077', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE DE PRUEBA SOCKET', '', '1', null, 'INTERNO', '2017-05-03 12:14:04', '10', '2017-05-03 12:14:04', '10');
-INSERT INTO `sigi_oficios` VALUES ('78', 'SOLICITUD', '00000078', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'mensaje nuevo prueba', '', '1', null, 'INTERNO', '2017-05-03 12:23:53', '10', '2017-05-03 12:23:53', '10');
-INSERT INTO `sigi_oficios` VALUES ('79', 'SOLICITUD', '00000079', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'MENSAJE NUEVO DE PRUEBA SOCKET IO', '', '1', null, 'INTERNO', '2017-05-03 12:58:08', '10', '2017-05-03 12:58:08', '10');
-INSERT INTO `sigi_oficios` VALUES ('80', 'SOLICITUD', '00000080', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE SOKCET IO LARRY', '', '1', null, 'INTERNO', '2017-05-03 12:58:55', '10', '2017-05-03 12:58:55', '10');
-INSERT INTO `sigi_oficios` VALUES ('81', 'SOLICITUD', '00000081', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'MENSAJE NUEVO PRUEBA 1', '', '1', null, 'INTERNO', '2017-05-03 13:00:37', '10', '2017-05-03 13:00:37', '10');
-INSERT INTO `sigi_oficios` VALUES ('82', 'SOLICITUD', '00000082', '', 'EXTERNO', '0', 'MANUEL SOTO HERRERA', 'PROTECCIÓN CIVIL', 'DIRECTOR OPERATIVO', 'mensaje de prueba 1 socket', '', '1', null, 'INTERNO', '2017-05-03 13:04:04', '10', '2017-05-03 13:04:04', '10');
-INSERT INTO `sigi_oficios` VALUES ('83', 'SOLICITUD', '00000083', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE DE SEDECO 1', '', '1', null, 'INTERNO', '2017-05-03 13:05:05', '10', '2017-05-03 13:05:05', '10');
-INSERT INTO `sigi_oficios` VALUES ('84', 'SOLICITUD', '00000084', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE DE PRUEBA 28 O ALGO ASI', '', '1', null, 'INTERNO', '2017-05-03 13:13:24', '10', '2017-05-03 13:13:24', '10');
-INSERT INTO `sigi_oficios` VALUES ('85', 'SOLICITUD', '00000085', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'QWE67898763ERTYHUJKJHGFD', '', '1', null, 'INTERNO', '2017-05-03 13:14:01', '10', '2017-05-03 13:14:01', '10');
-INSERT INTO `sigi_oficios` VALUES ('86', 'SOLICITUD', '00000086', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '2345676543WERFGFDSDFGHJHGF', '', '1', null, 'INTERNO', '2017-05-03 13:15:20', '10', '2017-05-03 13:15:20', '10');
-INSERT INTO `sigi_oficios` VALUES ('87', 'SOLICITUD', '00000087', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '234567876543ertgfdsdfb', '', '1', null, 'INTERNO', '2017-05-03 13:17:12', '10', '2017-05-03 13:17:12', '10');
-INSERT INTO `sigi_oficios` VALUES ('88', 'SOLICITUD', '00000088', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '7878347yewguysuysdfy', '', '1', null, 'INTERNO', '2017-05-03 13:27:44', '10', '2017-05-03 13:27:44', '10');
-INSERT INTO `sigi_oficios` VALUES ('89', 'SOLICITUD', '00000089', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '234567890987654wqwertyhujkjhgfd', '', '1', null, 'INTERNO', '2017-05-03 13:37:51', '10', '2017-05-03 13:37:51', '10');
-INSERT INTO `sigi_oficios` VALUES ('90', 'SOLICITUD', '00000090', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '123456787ewerftghjhgfdsdfgbnm', '', '1', null, 'INTERNO', '2017-05-03 13:43:19', '10', '2017-05-03 13:43:19', '10');
-INSERT INTO `sigi_oficios` VALUES ('91', 'SOLICITUD', '00000091', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '3456787654wdfgfdfgf', '', '1', null, 'INTERNO', '2017-05-03 13:44:52', '10', '2017-05-03 13:44:52', '10');
-INSERT INTO `sigi_oficios` VALUES ('92', 'SOLICITUD', '00000092', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '23456787654323456ewghgfd', '', '1', null, 'INTERNO', '2017-05-03 13:48:03', '10', '2017-05-03 13:48:03', '10');
-INSERT INTO `sigi_oficios` VALUES ('93', 'SOLICITUD', '00000093', 'sdfghgfre787654', 'INTERNO', '1', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', '123456787654wdfghjhgfds', '', '1', null, 'EXTERNO', '2017-05-03 13:54:02', '1', '2017-05-03 13:54:02', '1');
-INSERT INTO `sigi_oficios` VALUES ('94', 'SOLICITUD', '00000094', '2454RQWER', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'MENSAJE NUEVO DE ORIGEN INTERNO A EXTERNO', '', '1', null, 'EXTERNO', '2017-05-03 14:09:22', '9', '2017-05-03 14:09:22', '9');
-INSERT INTO `sigi_oficios` VALUES ('95', 'SOLICITUD', '00000095', '23456543QWERTYTRE', 'INTERNO', '1', '', '', '', 'MENSAJE DE PRUEBA INTERNO', '', '1', '1', 'INTERNO', '2017-05-03 14:12:40', '1', '2017-05-03 14:12:40', '1');
-INSERT INTO `sigi_oficios` VALUES ('96', 'RESPUESTA', '00000096', '3456DSFF', 'INTERNO', '9', '', '', '', 'MENSAJE NUEVO NYEASJDFHJFD', '', '1', '1', 'INTERNO', '2017-05-03 15:15:32', '9', '2017-05-03 15:15:32', '9');
-INSERT INTO `sigi_oficios` VALUES ('97', 'RESPUESTA', '00000097', '3456DSFF', 'INTERNO', '9', '', '', '', 'MENSAJE NUEVO NYEASJDFHJFD', '', '1', '0', 'INTERNO', '2017-05-03 15:15:32', '9', '2017-05-03 15:15:32', '9');
-INSERT INTO `sigi_oficios` VALUES ('98', 'SOLICITUD', '00000098', '123456765432QWERTY', 'INTERNO', '1', '', '', '', 'MENSAJE NUEVO EX1', '', '1', '1', 'INTERNO', '2017-05-03 15:19:49', '1', '2017-05-03 15:19:49', '1');
-INSERT INTO `sigi_oficios` VALUES ('99', 'RESPUESTA', '00000099', '1234565Q', 'INTERNO', '9', '', '', '', 'RESPUESTA MENSAJE EX1', '', '1', '1', 'INTERNO', '2017-05-03 15:21:24', '9', '2017-05-03 15:21:24', '9');
-INSERT INTO `sigi_oficios` VALUES ('100', 'SOLICITUD', '00000100', '123456789876543', 'INTERNO', '1', '', '', '', 'MENSAJE OTRO DE PRUEBA 1', '', '1', '1', 'INTERNO', '2017-05-03 15:34:17', '1', '2017-05-03 15:34:17', '1');
-INSERT INTO `sigi_oficios` VALUES ('101', 'RESPUESTA', '00000101', '1234565432345', 'INTERNO', '9', '', '', '', 'RESPUESTA A TU MENSAJE DE PRUEBA 1', '', '1', '1', 'INTERNO', '2017-05-03 15:35:11', '9', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_oficios` VALUES ('102', 'SOLICITUD', '00000102', '12345676543QWERTYUYT', 'INTERNO', '1', '', '', '', 'ENVIO DE MENSAJE MASIVO PROBANDO', '', '1', '1', 'INTERNO', '2017-05-04 09:40:41', '1', '2017-05-04 09:40:41', '1');
-INSERT INTO `sigi_oficios` VALUES ('103', 'SOLICITUD', '00000103', '1234567654QWERTYUYRE', 'INTERNO', '1', '', '', '', 'MENSAJE DE PRUEBA', '', '1', '1', 'INTERNO', '2017-05-04 09:44:32', '1', '2017-05-04 09:44:32', '1');
-INSERT INTO `sigi_oficios` VALUES ('104', 'RESPUESTA', '00000104', '1234543QWERTREW', 'INTERNO', '9', '', '', '', 'RESPUESTA AL MENSAJE', '', '1', '1', 'INTERNO', '2017-05-04 09:45:51', '9', '2017-05-04 09:45:51', '9');
-INSERT INTO `sigi_oficios` VALUES ('105', 'SOLICITUD', '00000105', '123456543456', 'INTERNO', '1', '', '', '', 'mensaje de prueba 2', '', '1', '1', 'INTERNO', '2017-05-04 09:48:54', '1', '2017-05-04 09:48:54', '1');
-INSERT INTO `sigi_oficios` VALUES ('106', 'RESPUESTA', '00000106', '123456432qwedw', 'INTERNO', '9', '', '', '', 'respuesta al mensaje', '', '1', '1', 'INTERNO', '2017-05-04 09:50:14', '9', '2017-05-04 09:50:14', '9');
-INSERT INTO `sigi_oficios` VALUES ('107', 'RESPUESTA', '00000107', '12345678987654', 'INTERNO', '7', '', '', '', 'respuesta al mensaje otra cez', '', '1', '1', 'INTERNO', '2017-05-04 09:51:36', '7', '2017-05-04 09:51:36', '7');
-INSERT INTO `sigi_oficios` VALUES ('108', 'SOLICITUD', '00000108', '1234543QWERE', 'INTERNO', '1', '', '', '', 'MENSAJE PARA SECRETARIA 1', '', '1', null, 'INTERNO', '2017-05-04 09:52:03', '1', '2017-05-04 09:52:03', '1');
-INSERT INTO `sigi_oficios` VALUES ('109', 'SOLICITUD', '00000109', '123456543ASDFD', 'INTERNO', '1', '', '', '', 'MENSAJE DE PRUEBA 1', '', '1', '1', 'INTERNO', '2017-05-04 09:52:47', '1', '2017-05-04 09:52:47', '1');
-INSERT INTO `sigi_oficios` VALUES ('110', 'RESPUESTA', '00000110', '12345676543qwertyu', 'INTERNO', '7', '', '', '', 'respuesta al mensaje 1', '', '1', '1', 'INTERNO', '2017-05-04 09:53:43', '7', '2017-05-04 09:53:43', '7');
-INSERT INTO `sigi_oficios` VALUES ('111', 'SOLICITUD', '00000111', '123456765QWERTY', 'INTERNO', '1', '', '', '', 'mensaje de prueba 1', '', '1', null, 'INTERNO', '2017-05-04 10:27:50', '1', '2017-05-04 10:27:50', '1');
-INSERT INTO `sigi_oficios` VALUES ('112', 'SOLICITUD', '00000112', '1234565432', 'INTERNO', '1', '', '', '', 'MENSAJE DE PREUBA 22', '', '1', null, 'INTERNO', '2017-05-04 10:33:58', '1', '2017-05-04 10:33:58', '1');
-INSERT INTO `sigi_oficios` VALUES ('113', 'SOLICITUD', '00000113', '1234565432345676543', 'INTERNO', '1', '', '', '', 'mensaje masivo de prueba a todos', '', '1', '1', 'INTERNO', '2017-05-04 10:36:41', '1', '2017-05-04 10:36:41', '1');
-INSERT INTO `sigi_oficios` VALUES ('114', 'RESPUESTA', '00000114', '1234565432', 'INTERNO', '9', '', '', '', 'RESPUESTA AL MENSAJE ', '', '1', '1', 'INTERNO', '2017-05-04 11:04:53', '9', '2017-05-04 11:04:53', '9');
-INSERT INTO `sigi_oficios` VALUES ('115', 'SOLICITUD', '00000115', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'mensaje de prueba', '', '1', '1', 'INTERNO', '2017-05-04 11:15:34', '10', '2017-05-04 11:15:34', '10');
-INSERT INTO `sigi_oficios` VALUES ('116', 'RESPUESTA', '00000116', '1234543QWERTYTRE', 'EXTERNO', '8', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR CMR', 'SE ENVIA RESPUESTA AL OFICIO EXTERNO', '', '1', '1', 'INTERNO', '2017-05-04 12:04:36', '8', '2017-05-04 12:04:36', '8');
-INSERT INTO `sigi_oficios` VALUES ('117', 'SOLICITUD', '00000117', '1234565432345', 'INTERNO', '1', '', '', '', 'MENSAJE DE PRRUEBA', '', '1', null, 'INTERNO', '2017-05-04 12:17:32', '1', '2017-05-04 12:17:32', '1');
+INSERT INTO `sigi_oficios` VALUES ('1', 'SOLICITUD', '00000001', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'MENSAJE DE PRUEBA', '', '1', '1', 'INTERNO', '2017-05-17', '03:03:00', null, '2017-05-17 15:04:37', '10', '2017-05-17 15:04:37', '10');
+INSERT INTO `sigi_oficios` VALUES ('2', 'RESPUESTA', '00000001', '111222333444', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'RESPUESTA AL MENSAJE ', '', '1', '1', 'INTERNO', null, null, null, '2017-05-17 15:05:20', '9', '2017-05-17 15:05:20', '9');
+INSERT INTO `sigi_oficios` VALUES ('3', 'RESPUESTA', '00000001', '111222333444', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'RESPUESTA AL MENSAJE ', '', '1', '0', 'INTERNO', null, null, null, '2017-05-17 15:05:20', '9', '2017-05-17 15:05:20', '9');
+INSERT INTO `sigi_oficios` VALUES ('4', 'RESPUESTA', '00000002', '111222333444', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'RESPUESTA AL MENSAJE ', '', '1', '0', 'INTERNO', null, null, null, '2017-05-17 15:06:53', '9', '2017-05-17 15:06:53', '9');
+INSERT INTO `sigi_oficios` VALUES ('5', 'SOLICITUD', '00000003', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje de prueba', '', '1', '1', 'INTERNO', '2017-05-17', '03:09:00', null, '2017-05-17 15:28:08', '10', '2017-05-17 15:28:08', '10');
+INSERT INTO `sigi_oficios` VALUES ('6', 'RESPUESTA', '00000004', '12345678', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'se da respuesta al mensaje', '', '1', '1', 'INTERNO', null, null, null, '2017-05-17 15:28:45', '9', '2017-05-17 15:28:45', '9');
+INSERT INTO `sigi_oficios` VALUES ('7', 'SOLICITUD', '00000005', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', '1234567wertyxscv', '', '1', '1', 'INTERNO', '2017-05-17', '03:32:00', null, '2017-05-17 15:32:50', '10', '2017-05-17 15:32:50', '10');
+INSERT INTO `sigi_oficios` VALUES ('8', 'RESPUESTA', '00000006', '12343qwer', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'respuesta mensaje', '', '1', '1', 'INTERNO', null, null, null, '2017-05-17 15:33:34', '9', '2017-05-17 15:33:34', '9');
+INSERT INTO `sigi_oficios` VALUES ('9', 'SOLICITUD', '00000007', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', '2345678qwertyu', '', '1', '1', 'INTERNO', '2017-05-17', '03:36:00', null, '2017-05-17 15:37:12', '10', '2017-05-17 15:37:12', '10');
+INSERT INTO `sigi_oficios` VALUES ('10', 'RESPUESTA', '00000008', '123456qwer', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'respueta mensaje', '', '1', '1', 'INTERNO', null, null, null, '2017-05-17 15:38:18', '9', '2017-05-17 15:38:18', '9');
+INSERT INTO `sigi_oficios` VALUES ('11', 'SOLICITUD', '00000009', '', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje de prueba', '', '1', '1', 'INTERNO', '2017-05-17', '03:41:00', null, '2017-05-17 15:42:12', '10', '2017-05-17 15:42:12', '10');
+INSERT INTO `sigi_oficios` VALUES ('12', 'RESPUESTA', '00000009', '1111qqwwweee', 'EXTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'respuesta al mensaje', '', '1', '1', 'INTERNO', null, null, null, '2017-05-17 15:49:05', '9', '2017-05-17 15:49:05', '9');
+INSERT INTO `sigi_oficios` VALUES ('13', 'SOLICITUD', '00000010', 'QQWWW111222', 'INTERNO', '7', '', '', '', 'MENSAJE DE PRUEBA INTERNO', '', '1', '0', 'INTERNO', null, null, null, '2017-05-18 12:08:55', '7', '2017-05-18 12:08:55', '7');
+INSERT INTO `sigi_oficios` VALUES ('14', 'SOLICITUD', '00000011', '11QQ33455', 'INTERNO', '7', '', '', '', 'MENSAJE DE PRUEBA INTERNO', '', '1', '0', 'INTERNO', null, null, null, '2017-05-18 12:11:04', '7', '2017-05-18 12:11:04', '7');
+INSERT INTO `sigi_oficios` VALUES ('15', 'SOLICITUD', '00000012', '1833quyeew', 'INTERNO', '7', '', '', '', 'mensaje de prueba interno', '', '1', '1', 'INTERNO', '0000-00-00', '00:00:00', null, '2017-05-18 12:19:16', '7', '2017-05-18 12:19:16', '7');
+INSERT INTO `sigi_oficios` VALUES ('16', 'RESPUESTA', '00000012', '1234QWERTY', 'INTERNO', '9', '', '', '', 'RESPUESTA AL MENSAJE', '', '1', '1', 'INTERNO', null, null, null, '2017-05-18 12:19:46', '9', '2017-05-18 12:19:46', '9');
+INSERT INTO `sigi_oficios` VALUES ('17', 'SOLICITUD', '00000013', 'S-N', 'INTERNO', '9', '', '', '', 'mensaje de prueba', '', '1', '1', 'INTERNO', '0000-00-00', '00:00:00', null, '2017-05-18 12:41:15', '9', '2017-05-18 12:41:15', '9');
+INSERT INTO `sigi_oficios` VALUES ('18', 'RESPUESTA', '00000013', '1234567QWERTY', 'INTERNO', '7', '', '', '', 'RESPUESTA AL MENSAJE', '', '1', '1', 'INTERNO', null, null, null, '2017-05-18 12:42:07', '7', '2017-05-18 12:42:07', '7');
+INSERT INTO `sigi_oficios` VALUES ('19', 'RESPUESTA', '00000013', '123456qwertyu', 'INTERNO', '9', '', '', '', 'no es la respuesta que se esperaba', '', '1', '1', 'INTERNO', null, null, null, '2017-05-18 12:46:48', '9', '2017-05-18 12:46:48', '9');
+INSERT INTO `sigi_oficios` VALUES ('20', 'RESPUESTA', '00000013', '123456QWERT', 'INTERNO', '7', '', '', '', 'SE ENVIA RESPUESTA REQUERIDA', '', '1', '1', 'INTERNO', null, null, null, '2017-05-18 12:47:38', '7', '2017-05-18 12:47:38', '7');
+INSERT INTO `sigi_oficios` VALUES ('21', 'RESPUESTA', '00000013', '12345qwerasdfzxcv', 'INTERNO', '9', '', '', '', 'otra vez me envio una respuesta incorrecta', '', '1', '1', 'INTERNO', null, null, null, '2017-05-18 12:51:10', '9', '2017-05-18 12:51:10', '9');
+INSERT INTO `sigi_oficios` VALUES ('22', 'RESPUESTA', '00000013', 'QWERTSDFG', 'INTERNO', '7', '', '', '', 'se envia la respuesta correcta', '', '1', '1', 'INTERNO', null, null, null, '2017-05-18 12:52:05', '7', '2017-05-18 12:52:05', '7');
+INSERT INTO `sigi_oficios` VALUES ('23', 'RESPUESTA', '00000024', 'S/N', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'Mnesaje con comentarios', '', '1', '0', 'INTERNO', '2017-05-18', '01:07:00', 'SIN COMENTARIOS', '2017-05-18 13:08:55', '10', '2017-05-25 14:34:47', '9');
+INSERT INTO `sigi_oficios` VALUES ('24', 'SOLICITUD', '00000015', 'IEPC/892872187', 'INTERNO', '7', '', '', '', 'MENSAJE DE PREUBA', '', '1', '1', 'INTERNO', '0000-00-00', '00:00:00', 'PORFA APURENLE A RESPONDER', '2017-05-18 13:25:05', '7', '2017-05-18 13:25:05', '7');
+INSERT INTO `sigi_oficios` VALUES ('25', 'RESPUESTA', '00000015', 'IEPC-2847285912WEU43', 'INTERNO', '9', '', '', '', 'MENSAJE DE RESPUESTA', '', '1', '1', 'INTERNO', null, null, 'MMM NADA QUE COMENTAR', '2017-05-18 13:54:53', '9', '2017-05-18 13:54:53', '9');
+INSERT INTO `sigi_oficios` VALUES ('26', 'SOLICITUD', '00000016', 'IEPC-7832783267', 'INTERNO', '16', '', '', '', 'MENSAJE DE CONSEJERO DE PRUEBA', '', '1', '1', 'INTERNO', '0000-00-00', '00:00:00', 'SIGI 2', '2017-05-19 14:40:20', '16', '2017-05-19 14:40:20', '16');
+INSERT INTO `sigi_oficios` VALUES ('27', 'RESPUESTA', '00000016', 'S-N', 'INTERNO', '9', '', '', '', 'Respuesta al mensaje', '', '1', '1', 'INTERNO', null, null, 'SIGI 3', '2017-05-19 14:43:28', '9', '2017-05-19 14:43:28', '9');
+INSERT INTO `sigi_oficios` VALUES ('28', 'RESPUESTA', '00000016', '123234qqe133', 'INTERNO', '16', '', '', '', 'no es la respuesta correcta', '', '1', '1', 'INTERNO', null, null, 'verificar', '2017-05-19 14:44:42', '16', '2017-05-19 14:44:42', '16');
+INSERT INTO `sigi_oficios` VALUES ('29', 'RESPUESTA', '00000016', 'S-N', 'INTERNO', '9', '', '', '', 'respuesta correcta', '', '1', '1', 'INTERNO', null, null, 'ok', '2017-05-19 14:46:08', '9', '2017-05-19 14:46:08', '9');
+INSERT INTO `sigi_oficios` VALUES ('30', 'SOLICITUD', '00000017', 'IEPC/892872187', 'INTERNO', '9', '', '', '', 'qwertghjkjhgfds', '', '1', '0', 'INTERNO', '0000-00-00', '00:00:00', 'asdfghgfds', '2017-05-22 14:37:58', '9', '2017-05-22 14:37:58', '9');
+INSERT INTO `sigi_oficios` VALUES ('31', 'SOLICITUD', '00000018', 'IEPC/00001', 'INTERNO', '9', '', '', '', 'mensaje de prueba folios', '', '1', '0', 'INTERNO', '0000-00-00', '00:00:00', 'probando el guardado de folios', '2017-05-23 10:46:21', '9', '2017-05-23 10:46:21', '9');
+INSERT INTO `sigi_oficios` VALUES ('32', 'SOLICITUD', '00000019', 'IEPC/892872187', 'INTERNO', '9', '', '', '', 'mensaje de prueba', '', '1', '0', 'INTERNO', '0000-00-00', '00:00:00', 'ok', '2017-05-23 10:50:22', '9', '2017-05-23 10:50:22', '9');
+INSERT INTO `sigi_oficios` VALUES ('33', 'SOLICITUD', '00000020', 'IEPC/00002', 'INTERNO', '9', '', '', '', 'MENSAJE DE PREUABA', '', '1', '1', 'INTERNO', '0000-00-00', '00:00:00', 'OK', '2017-05-23 11:56:06', '9', '2017-05-23 11:56:06', '9');
+INSERT INTO `sigi_oficios` VALUES ('34', 'RESPUESTA', '00000020', 'IEPC/00003', 'INTERNO', '12', '', '', '', 'SE ENVIA RESPUESTA', '', '1', '1', 'INTERNO', null, null, 'NINGUNO', '2017-05-23 12:35:31', '12', '2017-05-23 12:35:31', '12');
+INSERT INTO `sigi_oficios` VALUES ('35', 'SOLICITUD', '00000021', 'IEPC/00004', 'INTERNO', '12', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje de prueba', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'sin comentarios', '2017-05-23 14:31:15', '12', '2017-05-23 14:31:15', '12');
+INSERT INTO `sigi_oficios` VALUES ('36', 'SOLICITUD', '00000022', 'IEPC/00005', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'respuesta a la solicitud de brubeck', '', '1', '0', 'INTERNO', '2017-05-23', '02:43:00', 'es la respuesta', '2017-05-23 14:43:55', '10', '2017-05-23 14:43:55', '10');
+INSERT INTO `sigi_oficios` VALUES ('37', 'RESPUESTA', '00000021', 'S/N', 'INTERNO', '10', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'respuesta a la solcitud por parte de phillip', '', '1', '1', 'EXTERNO', null, null, 'ok', '2017-05-23 14:49:00', '10', '2017-05-23 14:49:00', '10');
+INSERT INTO `sigi_oficios` VALUES ('38', 'SOLICITUD', '00000023', 'IEPC/00006', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'MENSAJE DE VINCULACION', '', '1', null, 'EXTERNO', '0000-00-00', '00:00:00', 'SE VINCULARA UN OFICIO', '2017-05-25 10:02:10', '9', '2017-05-25 10:02:10', '9');
+INSERT INTO `sigi_oficios` VALUES ('39', 'SOLICITUD', '00000024', 'IEPC/00007', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje de prueba vincular', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'vincular', '2017-05-25 11:08:07', '9', '2017-05-25 11:08:07', '9');
+INSERT INTO `sigi_oficios` VALUES ('40', 'SOLICITUD', '00000025', 'S/N', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje de vinculacion 1', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'prueba', '2017-05-25 14:36:46', '9', '2017-05-25 14:36:46', '9');
+INSERT INTO `sigi_oficios` VALUES ('41', 'RESPUESTA', '00000025', 'S/N', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje externo de respuesta', '', '1', '0', 'INTERNO', '2017-05-25', '02:37:00', 'vincular', '2017-05-25 14:37:46', '10', '2017-05-25 14:43:53', '9');
+INSERT INTO `sigi_oficios` VALUES ('42', 'SOLICITUD', '00000027', 'S/N', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje de vinculacion 2', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'prueba', '2017-05-25 14:51:28', '9', '2017-05-25 14:51:28', '9');
+INSERT INTO `sigi_oficios` VALUES ('43', 'RESPUESTA', '00000027', 'S/N', 'EXTERNO', '0', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'mensaje de prueba de vinculacion', '', '1', '0', 'INTERNO', '2017-05-25', '02:52:00', '123', '2017-05-25 14:52:38', '10', '2017-05-26 09:34:16', '9');
+INSERT INTO `sigi_oficios` VALUES ('44', 'SOLICITUD', '00000029', 'IEPC/00008', 'INTERNO', '9', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'MENSAJE DE PRUEBA DE VINCULACION', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'VINCULACION DE FOLIOS', '2017-05-26 09:53:23', '9', '2017-05-26 09:53:23', '9');
+INSERT INTO `sigi_oficios` VALUES ('45', 'RESPUESTA', '00000029', 'S/N', 'EXTERNO', '10', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'EN RESPUESTA A LA SOLICITUD DE VINCULACION', '', '1', '0', 'INTERNO', '2017-05-26', '09:53:00', 'VINCULAR', '2017-05-26 09:54:51', '10', '2017-05-26 09:55:46', '9');
+INSERT INTO `sigi_oficios` VALUES ('46', 'SOLICITUD', '00000031', 'S/N', 'EXTERNO', '0', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'MNSAJE DE PRUEBA 1', '', '1', null, 'INTERNO', '2017-05-26', '10:04:00', 'NINGUNO', '2017-05-26 10:04:39', '10', '2017-05-26 10:04:39', '10');
+INSERT INTO `sigi_oficios` VALUES ('47', 'SOLICITUD', '00000032', 'S/N', 'INTERNO', '9', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'Se solicita informe de gastos', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'Ok', '2017-05-26 10:33:42', '9', '2017-05-26 10:33:42', '9');
+INSERT INTO `sigi_oficios` VALUES ('48', 'RESPUESTA', '00000032', 'S/N', 'EXTERNO', '10', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'En respuesta a la solicitud de acceso a informació', '', '1', '0', 'INTERNO', '2017-05-26', '10:37:00', 'ok', '2017-05-26 10:40:51', '10', '2017-05-26 10:46:55', '9');
+INSERT INTO `sigi_oficios` VALUES ('49', 'RESPUESTA', '00000035', 'S/N', 'EXTERNO', '10', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'mensaje de preuba v1', '', '1', '1', 'INTERNO', '2017-05-26', '10:48:00', 'v1', '2017-05-26 10:48:30', '10', '2017-05-26 11:04:17', '9');
+INSERT INTO `sigi_oficios` VALUES ('50', 'SOLICITUD', '00000035', 'S/N', 'INTERNO', '9', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'mensaje de vinculacion v1', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'v1', '2017-05-26 10:48:58', '9', '2017-05-26 10:48:58', '9');
+INSERT INTO `sigi_oficios` VALUES ('51', 'RESPUESTA', '00000035', 'S/N', 'INTERNO', '9', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'La respuesta que llego no es lo que se esperaba', '', '1', '0', 'EXTERNO', null, null, 'ok', '2017-05-26 11:08:54', '9', '2017-05-26 11:08:54', '9');
+INSERT INTO `sigi_oficios` VALUES ('52', 'RESPUESTA', '00000035', 'S/N', 'EXTERNO', '10', 'Manuel Soto Herrera', 'Protección Civil', 'Director', 'se envia la respuesta correcta', '', '1', '1', 'INTERNO', '2017-05-26', '11:13:00', 'ojala sea la correcta', '2017-05-26 11:13:58', '10', '2017-05-26 11:17:54', '9');
+INSERT INTO `sigi_oficios` VALUES ('53', 'SOLICITUD', '00000037', 'IEPC/00009', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'MENSAJE CON DESTINO EXTERNO', '', '1', '1', 'EXTERNO', '0000-00-00', '00:00:00', 'PROBANDO QUE UN AREA INTERNA RESPONDA', '2017-05-26 11:21:50', '9', '2017-05-26 11:21:50', '9');
+INSERT INTO `sigi_oficios` VALUES ('54', 'RESPUESTA', '00000037', 'S/N', 'INTERNO', '77', '', '', '', 'EN RESPUESTA A LA SOLICITUD', '', '1', '1', 'INTERNO', '0000-00-00', '00:00:00', 'EL MENSAJE LLEGO POR CORREO ELECTRONICO', '2017-05-26 11:38:18', '77', '2017-05-26 11:38:53', '9');
+INSERT INTO `sigi_oficios` VALUES ('55', 'SOLICITUD', '00000039', 'IEPC/00010', 'INTERNO', '9', 'PHILLIP BRUBECK GAMBOA', 'SEDECO', 'DIRECTOR', 'SOLICITUD DE GASTOS OPERATIVOS', '', '1', null, 'EXTERNO', '0000-00-00', '00:00:00', 'PROBANDO', '2017-05-26 12:02:53', '9', '2017-05-26 12:02:53', '9');
 
 -- ----------------------------
 -- Table structure for sigi_oficios_documentos_recepcion
@@ -500,163 +307,81 @@ CREATE TABLE `sigi_oficios_documentos_recepcion` (
   `update_at` datetime DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios_documentos_recepcion
 -- ----------------------------
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('1', null, '1', '1', '9', '0', '2017-04-24 14:33:35', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('2', null, '1', '1', '2', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('3', null, '1', '1', '7', '1', '2017-04-24 14:46:41', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 13:45:19', '10', '2017-04-24 13:45:19', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('4', null, '2', '2', '7', '0', '2017-04-25 12:47:49', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('5', null, '2', '2', '5', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-24 14:33:27', '9', '2017-04-24 14:33:27', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('6', null, '3', '3', '7', '0', '2017-04-25 13:15:34', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:15:05', '10', '2017-04-25 13:20:18', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('7', '3', '4', '4', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:20:18', '7', '2017-04-25 13:20:18', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('8', null, '5', '5', '7', '0', '2017-04-25 13:27:32', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:25:35', '10', '2017-04-25 13:27:32', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('9', null, '5', '5', '9', '1', '2017-04-25 13:26:18', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:25:35', '10', '2017-04-25 13:27:32', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('10', null, '6', '6', '7', '0', '2017-04-25 13:34:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:28:37', '10', '2017-04-25 13:34:00', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('11', null, '6', '6', '9', '1', '2017-04-25 13:29:02', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:28:37', '10', '2017-04-25 13:34:00', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('12', null, '7', '7', '9', '0', '2017-04-25 13:35:14', 'Para el trámite que corresponda', 'Abierto', '2017-04-25 13:34:46', '10', '2017-04-25 14:35:45', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('13', null, '7', '7', '9', '1', '2017-04-25 13:35:14', 'Para el trámite que corresponda', 'Abierto', '2017-04-25 13:34:46', '10', '2017-04-25 14:35:45', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('14', '7', '8', '8', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-04-25 13:35:42', '9', '2017-04-25 14:35:45', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('15', null, '9', '9', '7', '0', '2017-04-25 13:38:57', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:37:07', '10', '2017-04-25 13:38:57', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('16', null, '9', '9', '9', '1', '2017-04-25 13:38:03', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:37:07', '10', '2017-04-25 13:38:57', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('17', null, '10', '10', '7', '0', '2017-04-25 13:49:50', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:39:34', '10', '2017-04-25 13:49:50', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('18', null, '10', '10', '9', '1', '2017-04-25 13:49:29', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 13:39:51', '7', '2017-04-25 13:49:29', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('19', null, '11', '11', '7', '0', '2017-04-25 13:51:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:50:43', '10', '2017-04-25 13:55:32', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('20', null, '11', '11', '9', '1', '2017-04-25 13:51:19', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:50:43', '10', '2017-04-25 13:55:32', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('21', '11', '12', '12', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:55:32', '7', '2017-04-25 13:55:32', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('22', null, '13', '13', '7', '0', '2017-04-25 13:57:59', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:57:09', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('23', null, '13', '13', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:57:09', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('24', '13', '14', '14', '9', '0', '2017-04-25 14:00:09', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 13:58:45', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('25', '13', '15', '15', '7', '0', '2017-04-25 14:03:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:02:39', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('26', '13', '16', '16', '9', '0', '2017-04-25 14:07:16', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:04:27', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('27', '13', '17', '17', '7', '0', '2017-04-25 14:11:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:07:47', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('28', '13', '18', '18', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:18:02', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('29', '13', '19', '19', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:21:04', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('30', '13', '20', '20', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:21:47', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('31', '13', '21', '21', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:29:00', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('32', '13', '22', '22', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:29:48', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('33', '13', '23', '23', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:34:35', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('34', '13', '24', '24', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:35:45', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('35', '13', '25', '25', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:40:32', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('36', '13', '26', '26', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:43:04', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('37', '13', '27', '27', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:46:18', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('38', '13', '28', '28', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:46:44', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('39', '13', '29', '29', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:49:20', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('40', '13', '30', '30', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:50:04', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('41', '13', '31', '31', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 14:56:57', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('42', '13', '32', '32', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:07:45', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('43', '13', '33', '33', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:21:45', '9', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('44', '13', '34', '34', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:22:21', '7', '2017-04-25 15:22:21', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('45', null, '35', '35', '7', '0', '2017-04-25 15:24:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:23:22', '9', '2017-04-25 15:26:07', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('46', null, '35', '35', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:23:22', '9', '2017-04-25 15:26:07', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('47', '35', '36', '36', '9', '0', '2017-04-25 15:25:01', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:23:50', '7', '2017-04-25 15:26:07', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('48', '35', '37', '37', '7', '0', '2017-04-25 15:25:51', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:25:30', '9', '2017-04-25 15:26:07', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('49', '35', '38', '38', '9', '0', '2017-04-25 15:26:43', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:26:07', '7', '2017-04-25 15:26:07', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('50', null, '39', '39', '9', '0', '2017-04-25 15:28:17', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:27:41', '10', '2017-04-25 15:28:41', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('51', null, '39', '39', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:27:41', '10', '2017-04-25 15:28:41', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('52', '39', '40', '40', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:28:41', '9', '2017-04-25 15:28:41', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('53', null, '41', '41', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:29:57', '10', '2017-04-25 15:30:25', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('54', null, '41', '41', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:29:57', '10', '2017-04-25 15:30:25', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('55', '41', '42', '42', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-25 15:30:25', '9', '2017-04-25 15:30:25', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('56', null, '43', '43', '9', '0', '2017-04-25 15:31:16', 'Para conocimiento y archivo', 'Cerrado', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:16', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('57', null, '43', '43', '7', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-04-25 15:31:01', '10', '2017-04-25 15:31:01', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('58', null, '44', '44', '10', '0', '2017-04-25 15:49:03', 'Para el trámite que corresponda', 'Cancelado', '2017-04-25 15:33:12', '9', '2017-04-27 15:12:19', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('59', null, '45', '45', '9', '0', '2017-04-26 09:35:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 09:30:25', '10', '2017-04-26 09:36:19', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('60', null, '45', '45', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 09:30:25', '10', '2017-04-26 09:36:19', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('61', '45', '46', '46', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 09:36:19', '9', '2017-04-26 09:36:19', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('62', null, '47', '47', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 10:08:29', '9', '2017-04-26 10:09:25', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('63', '47', '48', '48', '9', '0', '2017-04-26 10:09:51', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 10:09:25', '7', '2017-04-26 10:09:25', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('64', null, '49', '49', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-26 10:12:08', '9', '2017-04-26 10:12:15', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('65', null, '50', '50', '9', '0', '2017-04-26 10:52:23', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 10:51:21', '10', '2017-04-26 11:04:55', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('66', null, '50', '50', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 10:51:21', '10', '2017-04-26 11:04:55', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('67', '50', '51', '51', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-26 11:04:55', '9', '2017-04-26 11:04:55', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('68', null, '52', '52', '7', '0', '2017-04-26 11:18:28', 'Para el trámite que corresponda', 'Cancelado', '2017-04-26 11:17:53', '9', '2017-04-27 15:07:42', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('69', null, '52', '52', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-04-26 15:29:03', '7', '2017-04-27 15:07:42', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('70', null, '53', '53', '1', '0', '2017-04-27 12:25:08', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 11:50:05', '9', '2017-04-27 13:37:09', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('71', null, '53', '53', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 12:24:56', '1', '2017-04-27 13:37:09', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('72', '53', '54', '54', '9', '0', '2017-04-27 12:41:35', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 12:40:52', '1', '2017-04-27 13:37:09', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('73', '53', '55', '55', '1', '0', '2017-04-27 13:36:35', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 13:15:42', '9', '2017-04-27 13:37:09', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('74', '53', '56', '56', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 13:37:09', '1', '2017-04-27 13:37:09', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('75', null, '57', '57', '9', '0', '2017-04-27 13:50:15', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 13:44:42', '1', '2017-04-27 13:50:06', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('76', null, '57', '57', '7', '1', '2017-04-27 13:45:49', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 13:44:42', '1', '2017-04-27 13:50:06', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('77', '57', '58', '58', '1', '0', '2017-04-27 13:50:48', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 13:50:06', '9', '2017-04-27 13:50:06', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('78', null, '59', '59', '10', '0', '2017-04-27 15:20:08', 'Para el trámite que corresponda', 'Abierto', '2017-04-27 14:53:32', '9', '2017-04-27 14:53:32', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('79', null, '60', '60', '10', '0', '2017-04-27 15:18:04', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 15:15:44', '1', '2017-04-27 15:19:38', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('80', null, '60', '60', '7', '1', '2017-04-27 15:16:46', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 15:15:44', '1', '2017-04-27 15:19:38', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('81', '60', '61', '61', '1', '0', '2017-04-27 15:20:02', 'Para el trámite que corresponda', 'Cerrado', '2017-04-27 15:19:38', '10', '2017-04-27 15:19:38', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('82', null, '62', '62', '9', '0', '2017-04-28 15:08:52', 'Para el trámite que corresponda', 'Cancelado', '2017-04-28 14:36:20', '10', '2017-05-02 12:46:00', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('83', null, '63', '63', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 11:49:18', '10', '2017-05-02 11:49:26', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('84', null, '64', '64', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 12:34:29', '10', '2017-05-02 12:34:44', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('85', null, '65', '65', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 13:56:52', '10', '2017-05-02 14:19:26', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('86', null, '66', '66', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:08:52', '10', '2017-05-02 14:19:22', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('87', null, '67', '67', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:13:09', '10', '2017-05-02 14:19:15', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('88', null, '68', '68', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:13:57', '10', '2017-05-02 14:19:11', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('89', null, '69', '69', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:18:42', '10', '2017-05-02 14:19:07', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('90', null, '70', '70', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:20:10', '10', '2017-05-02 14:24:11', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('91', null, '71', '71', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:20:50', '10', '2017-05-02 14:24:15', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('92', null, '72', '72', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:21:36', '10', '2017-05-02 14:24:18', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('93', null, '73', '73', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-02 14:24:03', '10', '2017-05-02 14:24:22', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('94', null, '74', '74', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 09:57:37', '10', '2017-05-03 09:57:37', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('95', null, '75', '75', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 11:54:29', '10', '2017-05-03 11:54:29', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('96', null, '76', '76', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:08:23', '10', '2017-05-03 12:08:23', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('97', null, '77', '77', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:14:04', '10', '2017-05-03 12:14:04', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('98', null, '77', '77', '1', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:14:04', '10', '2017-05-03 12:14:04', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('99', null, '77', '77', '2', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:14:04', '10', '2017-05-03 12:14:04', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('100', null, '78', '78', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:23:53', '10', '2017-05-03 12:23:53', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('101', null, '79', '79', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:58:08', '10', '2017-05-03 12:58:08', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('102', null, '80', '80', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:58:55', '10', '2017-05-03 12:58:55', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('103', null, '80', '80', '9', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 12:58:55', '10', '2017-05-03 12:58:55', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('104', null, '81', '81', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:00:37', '10', '2017-05-03 13:00:37', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('105', null, '82', '82', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:04:04', '10', '2017-05-03 13:04:04', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('106', null, '82', '82', '1', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:04:04', '10', '2017-05-03 13:04:04', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('107', null, '83', '83', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:05:05', '10', '2017-05-03 13:05:05', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('108', null, '83', '83', '1', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:05:05', '10', '2017-05-03 13:05:05', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('109', null, '84', '84', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:13:24', '10', '2017-05-03 13:13:24', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('110', null, '85', '85', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:14:02', '10', '2017-05-03 13:14:02', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('111', null, '86', '86', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:15:20', '10', '2017-05-03 13:15:20', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('112', null, '87', '87', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:17:12', '10', '2017-05-03 13:17:12', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('113', null, '88', '88', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:27:44', '10', '2017-05-03 13:27:44', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('114', null, '89', '89', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:37:51', '10', '2017-05-03 13:37:51', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('115', null, '90', '90', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:43:19', '10', '2017-05-03 13:43:19', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('116', null, '91', '91', '9', '0', '2017-05-03 13:45:47', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:44:52', '10', '2017-05-03 13:44:52', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('117', null, '92', '92', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:48:03', '10', '2017-05-03 13:48:03', '10');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('118', null, '93', '93', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 13:54:02', '1', '2017-05-03 13:54:02', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('119', null, '94', '94', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 14:09:22', '9', '2017-05-03 14:09:22', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('120', null, '95', '95', '9', '0', '2017-05-03 14:13:19', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 14:12:40', '1', '2017-05-03 15:15:33', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('121', '95', '96', '96', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 15:15:32', '9', '2017-05-03 15:15:33', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('122', '95', '97', '97', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-03 15:15:33', '9', '2017-05-03 15:15:33', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('123', null, '98', '98', '9', '0', '2017-05-03 15:20:17', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:19:49', '1', '2017-05-03 15:21:24', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('124', '98', '99', '99', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:21:24', '9', '2017-05-03 15:21:24', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('125', null, '100', '100', '9', '0', '2017-05-03 15:34:41', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:34:17', '1', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('126', null, '100', '100', '5', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:34:17', '1', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('127', null, '100', '100', '6', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:34:17', '1', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('128', null, '100', '100', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:34:17', '1', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('129', null, '100', '100', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:34:17', '1', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('130', '100', '101', '101', '1', '0', '2017-05-03 15:37:12', 'Para el trámite que corresponda', 'Cerrado', '2017-05-03 15:35:11', '9', '2017-05-03 15:35:11', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('131', null, '102', '102', '9', '0', '2017-05-04 09:45:31', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:40:41', '1', '2017-05-04 09:45:51', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('132', null, '102', '102', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:40:41', '1', '2017-05-04 09:45:51', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('133', null, '102', '102', '8', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:40:41', '1', '2017-05-04 09:45:51', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('134', null, '103', '103', '7', '0', '2017-05-04 09:51:10', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:44:32', '1', '2017-05-04 09:51:36', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('135', '102', '104', '104', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:45:51', '9', '2017-05-04 09:45:51', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('136', null, '105', '105', '9', '0', '2017-05-04 09:49:04', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:48:54', '1', '2017-05-04 09:50:14', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('137', '105', '106', '106', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:50:14', '9', '2017-05-04 09:50:14', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('138', '103', '107', '107', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:51:36', '7', '2017-05-04 09:51:36', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('139', null, '108', '108', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-04 09:52:03', '1', '2017-05-04 09:52:03', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('140', null, '109', '109', '7', '0', '2017-05-04 09:53:19', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:52:47', '1', '2017-05-04 09:53:43', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('141', '109', '110', '110', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 09:53:43', '7', '2017-05-04 09:53:43', '7');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('142', null, '111', '111', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-04 10:27:50', '1', '2017-05-04 10:27:50', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('143', null, '111', '111', '7', '1', '2017-05-04 10:28:24', 'Para el trámite que corresponda', 'Abierto', '2017-05-04 10:27:50', '1', '2017-05-04 10:27:50', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('144', null, '112', '112', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-04 10:33:58', '1', '2017-05-04 10:33:58', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('145', null, '112', '112', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-04 10:33:58', '1', '2017-05-04 10:33:58', '1');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('146', null, '113', '113', '9', '0', '2017-05-04 10:50:14', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 10:36:41', '1', '2017-05-04 11:04:53', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('147', null, '113', '113', '7', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 10:36:41', '1', '2017-05-04 11:04:53', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('148', null, '113', '113', '8', '1', '2017-05-04 10:51:15', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 10:36:41', '1', '2017-05-04 11:04:53', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('149', '113', '114', '114', '1', '0', '2017-05-04 11:05:43', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 11:04:53', '9', '2017-05-04 11:04:53', '9');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('150', null, '115', '115', '8', '0', '2017-05-04 11:15:52', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 11:15:34', '10', '2017-05-04 12:04:36', '8');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('151', '115', '116', '116', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-04 12:04:36', '8', '2017-05-04 12:04:36', '8');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('152', null, '117', '117', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-04 12:17:32', '1', '2017-05-04 12:17:32', '1');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('1', null, '1', '1', '9', '0', '2017-05-17 15:05:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:04:37', '10', '2017-05-17 15:06:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('2', '1', '2', '2', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:05:20', '9', '2017-05-17 15:06:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('3', '1', '3', '3', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:05:20', '9', '2017-05-17 15:06:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('4', '1', '4', '4', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:06:53', '9', '2017-05-17 15:06:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('5', null, '5', '5', '9', '0', '2017-05-17 15:28:23', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:28:08', '10', '2017-05-17 15:28:45', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('6', '5', '6', '6', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:28:45', '9', '2017-05-17 15:28:45', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('7', null, '7', '7', '9', '0', '2017-05-17 15:33:01', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:32:50', '10', '2017-05-17 15:33:34', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('8', '7', '8', '8', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:33:34', '9', '2017-05-17 15:33:34', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('9', null, '9', '9', '9', '0', '2017-05-17 15:37:28', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:37:12', '10', '2017-05-17 15:38:18', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('10', '9', '10', '10', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:38:18', '9', '2017-05-17 15:38:18', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('11', null, '11', '11', '9', '0', '2017-05-17 15:48:39', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:42:12', '10', '2017-05-17 15:49:06', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('12', '11', '12', '12', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-17 15:49:05', '9', '2017-05-17 15:49:06', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('13', null, '13', '13', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-18 12:08:55', '7', '2017-05-18 12:08:55', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('14', null, '14', '14', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-18 12:11:04', '7', '2017-05-18 12:11:04', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('15', null, '15', '15', '9', '0', '2017-05-18 12:19:26', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:19:16', '7', '2017-05-18 12:19:47', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('16', '15', '16', '16', '7', '0', '2017-05-18 12:22:51', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:19:46', '9', '2017-05-18 12:19:47', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('17', null, '17', '17', '7', '0', '2017-05-18 12:41:31', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:41:15', '9', '2017-05-18 12:52:06', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('18', null, '17', '17', '11', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:41:15', '9', '2017-05-18 12:52:06', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('19', '17', '18', '18', '9', '0', '2017-05-18 12:46:22', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:42:07', '7', '2017-05-18 12:52:06', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('20', '17', '19', '19', '7', '0', '2017-05-18 12:47:15', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:46:48', '9', '2017-05-18 12:52:06', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('21', '17', '20', '20', '9', '0', '2017-05-18 12:48:25', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:47:38', '7', '2017-05-18 12:52:06', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('22', '17', '21', '21', '7', '0', '2017-05-18 12:51:46', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 12:51:10', '9', '2017-05-18 12:52:06', '7');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('23', '39', '22', '22', '9', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-18 12:52:06', '7', '2017-05-25 14:34:47', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('24', null, '23', '23', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-18 13:08:55', '10', '2017-05-18 13:08:55', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('25', null, '24', '24', '9', '0', '2017-05-18 13:25:31', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 13:25:05', '7', '2017-05-18 13:54:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('26', '24', '25', '25', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-18 13:54:53', '9', '2017-05-18 13:54:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('27', null, '26', '26', '9', '0', '2017-05-19 14:45:15', 'Para el trámite que corresponda', 'Cerrado', '2017-05-19 14:40:20', '16', '2017-05-19 14:46:08', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('28', null, '26', '26', '39', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-19 14:40:20', '16', '2017-05-19 14:46:08', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('29', '26', '27', '27', '16', '0', '2017-05-19 14:43:37', 'Para el trámite que corresponda', 'Cerrado', '2017-05-19 14:43:28', '9', '2017-05-19 14:46:08', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('30', '26', '28', '28', '9', '0', '2017-05-19 14:45:38', 'Para el trámite que corresponda', 'Cerrado', '2017-05-19 14:44:42', '16', '2017-05-19 14:46:08', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('31', '26', '29', '29', '16', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-19 14:46:08', '9', '2017-05-19 14:46:08', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('32', null, '30', '30', '7', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-22 14:37:58', '9', '2017-05-22 14:37:58', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('33', null, '30', '30', '11', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-22 14:37:58', '9', '2017-05-22 14:37:58', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('34', null, '30', '30', '33', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-22 14:37:58', '9', '2017-05-22 14:37:58', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('35', null, '31', '31', '12', '0', '2017-05-23 10:46:33', 'Para el trámite que corresponda', 'Abierto', '2017-05-23 10:46:21', '9', '2017-05-23 10:46:21', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('36', null, '32', '32', '12', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-23 10:50:22', '9', '2017-05-23 10:50:22', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('37', null, '33', '33', '12', '0', '2017-05-23 12:05:27', 'Para el trámite que corresponda', 'Cerrado', '2017-05-23 11:56:06', '9', '2017-05-23 12:35:31', '12');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('38', '33', '34', '34', '9', '0', '2017-05-23 12:35:43', 'Para el trámite que corresponda', 'Cerrado', '2017-05-23 12:35:31', '12', '2017-05-23 12:35:31', '12');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('39', null, '35', '35', '10', '0', '2017-05-23 14:48:29', 'Para el trámite que corresponda', 'Cerrado', '2017-05-23 14:31:15', '12', '2017-05-23 14:49:00', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('40', null, '36', '36', '12', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-23 14:43:55', '10', '2017-05-23 14:43:55', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('41', '40', '37', '37', '12', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-23 14:49:00', '10', '2017-05-25 14:43:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('42', null, '38', '38', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-05-25 10:02:10', '9', '2017-05-25 12:21:31', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('43', null, '39', '39', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-25 11:08:07', '9', '2017-05-25 14:34:47', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('44', null, '39', '39', '75', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-25 11:08:07', '9', '2017-05-25 14:34:47', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('45', null, '39', '39', '76', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-25 11:08:07', '9', '2017-05-25 14:34:47', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('46', null, '40', '40', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-05-25 14:36:46', '9', '2017-05-25 14:43:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('47', '40', '41', '41', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-25 14:37:46', '10', '2017-05-25 14:37:46', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('48', '40', '41', '41', '39', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-25 14:37:47', '10', '2017-05-25 14:37:47', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('49', null, '42', '42', '10', '0', '2017-05-25 14:51:37', 'Para el trámite que corresponda', 'Cerrado', '2017-05-25 14:51:28', '9', '2017-05-26 09:34:16', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('50', '42', '43', '43', '9', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-25 14:52:38', '10', '2017-05-26 09:34:16', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('51', '42', '43', '43', '39', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-25 14:52:39', '10', '2017-05-26 09:34:16', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('52', null, '44', '44', '10', '0', '2017-05-26 09:53:34', 'Para el trámite que corresponda', 'Cerrado', '2017-05-26 09:53:23', '9', '2017-05-26 09:55:46', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('53', '44', '45', '45', '9', '0', '2017-05-26 09:55:07', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 09:54:51', '10', '2017-05-26 09:55:46', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('54', '44', '45', '45', '39', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 09:54:51', '10', '2017-05-26 09:55:46', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('55', null, '46', '46', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-26 10:04:40', '10', '2017-05-26 10:04:40', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('56', null, '46', '46', '39', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-26 10:04:40', '10', '2017-05-26 10:04:40', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('57', null, '47', '47', '10', '0', '2017-05-26 10:33:50', 'Para el trámite que corresponda', 'Cerrado', '2017-05-26 10:33:42', '9', '2017-05-26 10:46:55', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('58', '47', '48', '48', '9', '0', '2017-05-26 10:42:54', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 10:40:51', '10', '2017-05-26 10:46:55', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('59', '47', '48', '48', '39', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 10:40:52', '10', '2017-05-26 10:46:55', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('60', '50', '49', '49', '9', '0', '2017-05-26 11:04:39', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 10:48:30', '10', '2017-05-26 11:17:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('61', '50', '49', '49', '39', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 10:48:30', '10', '2017-05-26 11:17:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('62', null, '50', '50', '10', '0', '2017-05-26 10:49:04', 'Para el trámite que corresponda', 'Cerrado', '2017-05-26 10:48:58', '9', '2017-05-26 11:17:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('63', '50', '51', '51', '10', '0', '2017-05-26 11:09:41', 'Para el trámite que corresponda', 'Cerrado', '2017-05-26 11:08:54', '9', '2017-05-26 11:17:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('64', '50', '52', '52', '9', '0', '2017-05-26 11:15:40', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 11:13:58', '10', '2017-05-26 11:17:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('65', '50', '52', '52', '39', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 11:13:58', '10', '2017-05-26 11:17:54', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('66', null, '53', '53', '10', '0', '2017-05-26 11:22:01', 'Para el trámite que corresponda', 'Cerrado', '2017-05-26 11:21:50', '9', '2017-05-26 11:38:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('67', '53', '54', '54', '9', '0', '2017-05-26 11:38:35', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 11:38:18', '77', '2017-05-26 11:38:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('68', '53', '54', '54', '39', '0', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Cerrado', '2017-05-26 11:38:18', '77', '2017-05-26 11:38:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('69', null, '55', '55', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-26 12:02:53', '9', '2017-05-26 12:02:53', '9');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('70', null, '55', '55', '77', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-05-26 12:02:53', '9', '2017-05-26 12:02:53', '9');
 
 -- ----------------------------
 -- Table structure for siu_coga
@@ -753,14 +478,14 @@ CREATE TABLE `usuarios` (
   `titular` int(1) NOT NULL,
   `estado` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
 INSERT INTO `usuarios` VALUES ('1', 'Larry', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', '5390db054a81ba9121daa299dc28abc7', '11', '1', '2', '1', '1', '1', '1');
 INSERT INTO `usuarios` VALUES ('2', 'Galo', 'Solano', 'e807f1fcf82d132f9bb018ca6738a19f', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '1', '1', '1', '0', '1');
-INSERT INTO `usuarios` VALUES ('3', 'Cesar', 'Victorino', 'e807f1fcf82d132f9bb018ca6738a19f', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios` VALUES ('3', 'Cesar', 'Victorino', 'e807f1fcf82d132f9bb018ca6738a19f', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '2', '1', '1', '0', '1');
 INSERT INTO `usuarios` VALUES ('4', 'Martin', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', '51dae92dc3c9f6beb89c384399837d8b', '11', '1', '1', '1', '1', '0', '1');
 INSERT INTO `usuarios` VALUES ('5', 'Juan', 'Zamora', 'e807f1fcf82d132f9bb018ca6738a19f', '0426d5d82dc5aa8741562ffb92fd8347', '13', '1', '1', '1', '1', '0', '1');
 INSERT INTO `usuarios` VALUES ('6', 'Abisai', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', 'bf7a21b8aa60e85d309842dd7a202409', '11', '3', '3', '3', '3', '0', '1');
@@ -768,6 +493,516 @@ INSERT INTO `usuarios` VALUES ('7', 'Pedro', 'Perez', 'e807f1fcf82d132f9bb018ca6
 INSERT INTO `usuarios` VALUES ('8', 'Abisai', 'Chavez', 'e807f1fcf82d132f9bb018ca6738a19f', '7b5f522d0fc2673608d633898eac81b3', '13', '3', '3', '0', '0', '1', '1');
 INSERT INTO `usuarios` VALUES ('9', 'Mario', 'Canales', 'e807f1fcf82d132f9bb018ca6738a19f', '23636b9887b68ebaaaf7b25e1af762e4', '4', '3', '3', '0', '0', '1', '1');
 INSERT INTO `usuarios` VALUES ('10', 'Vanessa', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', '0c9d7463e807e2fa2e8e0c369f9be527', '3', '1', '1', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('11', 'Alberto', 'Aguilar', 'e807f1fcf82d132f9bb018ca6738a19f', '385a9c5e42ca78bd169c95a90067a433', '3', '1', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('12', 'Juan', 'Kato', 'e807f1fcf82d132f9bb018ca6738a19f', 'd6140d4e08853d007acdf0555da87ef1', '1', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('13', 'Sofia', 'Campos', 'e807f1fcf82d132f9bb018ca6738a19f', '21fc6902bf4e70909c347034aac7dc4b', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('14', 'Juana', 'Gallegos', 'e807f1fcf82d132f9bb018ca6738a19f', 'e33f1c68bf5e2ddb76f41fc0fb5b31d2', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('15', 'Sergio', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', 'b4435d225d3497d70e236754d81dd1c2', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('16', 'Laura', 'Bringas', 'e807f1fcf82d132f9bb018ca6738a19f', '353deb4f8c9ae4cda4cfc23ae4f60424', '15', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('17', 'Rebeca', 'Diaz', 'e807f1fcf82d132f9bb018ca6738a19f', '2f40453309516893a853beb3129633e7', '15', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('18', 'Maria', 'Pacheco', 'e807f1fcf82d132f9bb018ca6738a19f', 'adecf83a745b4cce85e1dc8d01c7a583', '15', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('19', 'Francisco', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', 'a76dcdaae12b2e011d123b58e04f0dc8', '16', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('20', 'Silvia', 'Garcia', 'e807f1fcf82d132f9bb018ca6738a19f', '9e77a1ce79baabe29b06de224ae25633', '16', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('21', 'Flor', 'Garcia', 'e807f1fcf82d132f9bb018ca6738a19f', '846b59169e5f406f3637c80d7cec6934', '16', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('22', 'Mirza', 'Ramirez', 'e807f1fcf82d132f9bb018ca6738a19f', '2cb93030939a64f7c9359da310d52ecb', '17', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('23', 'Alma', 'Montiel', 'e807f1fcf82d132f9bb018ca6738a19f', '73492577700cbfe006dd5c8123a28586', '17', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('24', 'Honorio', 'Mendia', 'e807f1fcf82d132f9bb018ca6738a19f', '7feee0ea6aaaf0033b17f4523aa144f5', '17', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('25', 'Manuel', 'Montoya', 'e807f1fcf82d132f9bb018ca6738a19f', '171e0e844480ccc34ef5fec46c111667', '18', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('26', 'Jose', 'Colmenero', 'e807f1fcf82d132f9bb018ca6738a19f', '271996fcba34fc0d7c9b4be9221bfa77', '18', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('27', 'Armando', 'Ortiz', 'e807f1fcf82d132f9bb018ca6738a19f', '98c3673f3dbf5074ed4da1389a0c1ec5', '18', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('28', 'Fernando', 'Roman', 'e807f1fcf82d132f9bb018ca6738a19f', 'af49599f26513d545ff4f093ce2f85d5', '19', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('29', 'Maria', 'Garay', 'e807f1fcf82d132f9bb018ca6738a19f', '2e7b207ad0bdc7b1660b1e996f7bccdf', '19', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('30', 'Roberto', 'Herrera', 'e807f1fcf82d132f9bb018ca6738a19f', '72450a13d98b3336d1159bbcfd7eb9ba', '19', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('31', 'Esmeralda', 'Valles', 'e807f1fcf82d132f9bb018ca6738a19f', '79d0985a3f3a01391dbe01da7f47e819', '20', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('32', 'Jose', 'Alferez', 'e807f1fcf82d132f9bb018ca6738a19f', 'f6233069056e2bff39d6ea05b6e29a4c', '20', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('33', 'David', 'Arambula', 'e807f1fcf82d132f9bb018ca6738a19f', 'cee8a68e5925cd5e8f2097168c71d9db', '3', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('34', 'Guadalupe', 'Castro', 'e807f1fcf82d132f9bb018ca6738a19f', '2b19a6e7b9a8d78680a8621a45ba0a78', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('35', 'Beatriz', 'Elguezabal', 'e807f1fcf82d132f9bb018ca6738a19f', '8b4f02421407aa9d327e6f5e11588756', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('36', 'Maritza', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', '6a5f3eb20ab6a1b74332c6c09f3eb65c', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('37', 'Ana', 'Quezada', 'e807f1fcf82d132f9bb018ca6738a19f', '0479b9bd16be50ac3eb7b32ac50ae839', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('38', 'Adolfo', 'Tapia', 'e807f1fcf82d132f9bb018ca6738a19f', '88885b987d507ca1a601e5f1fdcaaa5c', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('39', 'Adriana', 'Maldonado', 'e807f1fcf82d132f9bb018ca6738a19f', '14eb9c49a1f1c994ef9e1772ac36a65e', '4', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('40', 'Maria', 'Muñoz', 'e807f1fcf82d132f9bb018ca6738a19f', 'bc0821509e94ad9bbbc68d87b1b6a468', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('41', 'Diana', 'Villarreal', 'e807f1fcf82d132f9bb018ca6738a19f', '70ee6c55822cbaccef332eebda2af66a', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('42', 'Margarita', 'Pacheco', 'e807f1fcf82d132f9bb018ca6738a19f', '361256ec0ab5f7c293b791a2b34a9136', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('43', 'Raul', 'Velazquez', 'e807f1fcf82d132f9bb018ca6738a19f', 'ac7feb11c892bc8b0be82135a0022536', '5', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('44', 'Ruth', 'Mendoza', 'e807f1fcf82d132f9bb018ca6738a19f', '051ffcf016fa60be1ba56d63d7dd39fb', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('45', 'Celso', 'Villarreal', 'e807f1fcf82d132f9bb018ca6738a19f', '0e8f28acdaf35807c75751671b425fd2', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('46', 'Jesus', 'Enriquez', 'e807f1fcf82d132f9bb018ca6738a19f', 'e3377d939ac12f667fb0adffab6a4d90', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('47', 'Anastacio', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', '02a267425b7901105f3a1d606f6ee7d2', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('48', 'Juana', 'Garay', 'e807f1fcf82d132f9bb018ca6738a19f', '8ca1a26aa767d5f82c951f4aacdda718', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('49', 'Jose', 'Cabral', 'e807f1fcf82d132f9bb018ca6738a19f', '9c1b5331481f584daeb58fbe001484d7', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('50', 'Alejandra', 'Lozano', 'e807f1fcf82d132f9bb018ca6738a19f', '2b1d4d129cdb39f99cab5615c964d5da', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('51', 'Ignacio', 'Ayon', 'e807f1fcf82d132f9bb018ca6738a19f', '0fca1dd06e457ecb07c04d615aeb9390', '6', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('52', 'Susana', 'Gurrola', 'e807f1fcf82d132f9bb018ca6738a19f', '91cdc60a7b15ad3876473330d2e82a12', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('53', 'Cintya', 'Nuñez', 'e807f1fcf82d132f9bb018ca6738a19f', '2b0eb3c3517a8b7c9c41dec8ad7aee65', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('54', 'Jorge', 'Pelagio', 'e807f1fcf82d132f9bb018ca6738a19f', 'a0f77ece0ab1175c62b25c338c5510bf', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('55', 'Karina', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', '4f2c5e5dbc7dca9c7864ab46b167038c', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('56', 'Jose', 'Nuñez', 'e807f1fcf82d132f9bb018ca6738a19f', '22978dbd63d8d001da1341fdda1f02d1', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('57', 'Manuela', 'Bueno', 'e807f1fcf82d132f9bb018ca6738a19f', 'a1955b42460a010449390c87fb7b156d', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('58', 'Jesus', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', '26b1f9f4d7275f47e83fafdb001bce96', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('59', 'Juan', 'Valverde', 'e807f1fcf82d132f9bb018ca6738a19f', '2abe7764d045bbee163feae15398d161', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('60', 'Jose', 'Ramirez', 'e807f1fcf82d132f9bb018ca6738a19f', '4ffd03e9f669540242ad0f6c8ea2eefd', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('61', 'Gerardo', 'Guzman', 'e807f1fcf82d132f9bb018ca6738a19f', 'b98dee7ecb1e444dadf118c64d6f7f17', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('62', 'Mario', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', '069cc7b7ba6d269fec080e36d0b918e2', '7', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('63', 'Julio', 'Torres', 'e807f1fcf82d132f9bb018ca6738a19f', 'e4a95ec638f3d8c9ff296b2db4b739e7', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('64', 'Magdalena', 'Juarez', 'e807f1fcf82d132f9bb018ca6738a19f', '57edbaf9a8e314ba92eebd22a9c49109', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('65', 'Marisol', 'Mancinas', 'e807f1fcf82d132f9bb018ca6738a19f', 'a1fa6d7c51b532a8ae69139ee7f917f7', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('66', 'Ruben', 'Amezcua', 'e807f1fcf82d132f9bb018ca6738a19f', '6364635639069cd5e47b4b235a241990', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('67', 'Brenda', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', '188756f88a55bca746a16d0c84d4fb18', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('68', 'Cesar', 'Loera', 'e807f1fcf82d132f9bb018ca6738a19f', '935d16fd21ba37464ea08f74f1e050ca', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('69', 'Luis', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', 'b7daa07ae6ee438b8c5cb5d83eccc659', '8', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('70', 'Franklin', 'Ake', 'e807f1fcf82d132f9bb018ca6738a19f', 'c52dde2ee6bd2ac06d62e06c0fd88509', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('71', 'Mara', 'Flores', 'e807f1fcf82d132f9bb018ca6738a19f', 'e5a7b885864af6985907011c88d5efd7', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('72', 'Daniel', 'Camacho', 'e807f1fcf82d132f9bb018ca6738a19f', '683e8873b502e97702437fd560a6a695', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('73', 'Jovani', 'Herrera', 'e807f1fcf82d132f9bb018ca6738a19f', '2596dcd18003e9530a02420940a36187', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('74', 'Francisco', 'Tellez', 'e807f1fcf82d132f9bb018ca6738a19f', '896c3502bbb9dddd2c67f5825a0eaa8d', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('75', 'Marisol', 'Herrera', 'e807f1fcf82d132f9bb018ca6738a19f', 'e007794ba0a8926a33d4a57cf8eb4a55', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('76', 'Catalina', 'Benavente', 'e807f1fcf82d132f9bb018ca6738a19f', 'fed70e87c8ab32b5f0adc73272b8c291', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('77', 'Luz', 'Mariscal', 'e807f1fcf82d132f9bb018ca6738a19f', '10c83618ce0db98eacfa1a999e61eed8', '9', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('78', 'Arturo', 'De la rosa', 'e807f1fcf82d132f9bb018ca6738a19f', '69001d61fa8c29377fd8f5578cbf1e5a', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('79', 'Marcela', 'Sarellano', 'e807f1fcf82d132f9bb018ca6738a19f', 'fa9169c05e41a7a3ae99207dd67a8649', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('80', 'Silvia', 'Zepeda', 'e807f1fcf82d132f9bb018ca6738a19f', '899510a9091f3131f405ec1a4b0d21f8', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('81', 'Fernando', 'Flores', 'e807f1fcf82d132f9bb018ca6738a19f', '397fffdd7c40d8208a4bc3908e5792ec', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('82', 'Madeline', 'Palencia', 'e807f1fcf82d132f9bb018ca6738a19f', '10c39d4812529e362d0f9cca7aa730a1', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('83', 'Alejandro', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', 'e3df0983dd9ab4fb572558d5766c0881', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('84', 'Gabriela', 'Rivas', 'e807f1fcf82d132f9bb018ca6738a19f', 'fcc33adf2425e6192a5919c7e7213179', '10', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('85', 'Felipe', 'Correa', 'e807f1fcf82d132f9bb018ca6738a19f', '84730741c63235674782265ab00ed037', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('86', 'Martin', 'Lopez', 'e807f1fcf82d132f9bb018ca6738a19f', '49dd5a2ee7c027b89eab607b58f56649', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('87', 'Juan', 'Saucedo', 'e807f1fcf82d132f9bb018ca6738a19f', '6fac84fb268b18bcfb16a2d0247e3334', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('88', 'Maria', 'Longoria', 'e807f1fcf82d132f9bb018ca6738a19f', 'a2e91f29c85a3c109aba1257c0569b6d', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('89', 'Cesar', 'Victorino', 'e807f1fcf82d132f9bb018ca6738a19f', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '2', '0', '0', '1', '0');
+INSERT INTO `usuarios` VALUES ('90', 'Galo', 'Solano', 'e807f1fcf82d132f9bb018ca6738a19f', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '3', '0', '0', '0', '0');
+INSERT INTO `usuarios` VALUES ('91', 'Abril', 'Cardoza', 'e807f1fcf82d132f9bb018ca6738a19f', '84870b9a8b26c07af1f1b3c1ceef6304', '11', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('92', 'Rodolfo', 'Rojas', 'e807f1fcf82d132f9bb018ca6738a19f', '78e7a6e257b0bc4c72ab9994f07b3d31', '11', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('93', 'Larry', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', '5390db054a81ba9121daa299dc28abc7', '11', '1', '3', '0', '0', '0', '0');
+INSERT INTO `usuarios` VALUES ('94', 'Mario', 'Canalez', 'e807f1fcf82d132f9bb018ca6738a19f', '23636b9887b68ebaaaf7b25e1af762e4', '11', '3', '3', '0', '0', '0', '0');
+INSERT INTO `usuarios` VALUES ('95', 'Luis', 'Pineda', 'e807f1fcf82d132f9bb018ca6738a19f', '7fddf51700ebe643bdaebeb4c8e5e254', '12', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('96', 'Juan', 'Zamora', 'e807f1fcf82d132f9bb018ca6738a19f', '0426d5d82dc5aa8741562ffb92fd8347', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('97', 'Efrain', 'Ramos', 'e807f1fcf82d132f9bb018ca6738a19f', '272d86934506059f2eeb445632ec0878', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('98', 'Martin', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', '51dae92dc3c9f6beb89c384399837d8b', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('99', 'Daniel', 'Zavala', 'e807f1fcf82d132f9bb018ca6738a19f', 'df13976ebd20f0c66c8d458dbeb184b4', '13', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('100', 'Jorge', 'Macias', 'e807f1fcf82d132f9bb018ca6738a19f', '4d7e81523621b980f508a884e956f2cf', '13', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('101', 'Blanca', 'Gallegos', 'e807f1fcf82d132f9bb018ca6738a19f', '30e580fdebbbf0a873671d30f3aeeb8f', '13', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('102', 'Karla', 'Aldaba', 'e807f1fcf82d132f9bb018ca6738a19f', '43b1f015d140755c0b0286e99d009d70', '14', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('103', 'Mayra', 'Esparza', 'e807f1fcf82d132f9bb018ca6738a19f', '7af03a29b56f9025a6f9085fc1676a71', '14', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('104', 'Ernesto', 'Torres', 'e807f1fcf82d132f9bb018ca6738a19f', '02927ba294c5b2f5f646b8dc2f7fe981', '14', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios` VALUES ('105', 'Sandra', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', '58a10ceb32cb8e69b8172f231af3422d', '15', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios` VALUES ('106', 'Sandra', 'Almaraz', 'e807f1fcf82d132f9bb018ca6738a19f', '003153953fc40ea22bb14ff40764160e', '15', '3', '3', '0', '0', '0', '1');
+
+-- ----------------------------
+-- Table structure for usuarios_copy
+-- ----------------------------
+DROP TABLE IF EXISTS `usuarios_copy`;
+CREATE TABLE `usuarios_copy` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `contrasena` text COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `area` int(255) NOT NULL,
+  `privilegios` int(1) NOT NULL,
+  `priv_sigi` int(1) NOT NULL,
+  `priv_sui` int(1) NOT NULL,
+  `priv_sia` int(1) NOT NULL,
+  `titular` int(1) NOT NULL,
+  `estado` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of usuarios_copy
+-- ----------------------------
+INSERT INTO `usuarios_copy` VALUES ('1', 'Larry', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', '5390db054a81ba9121daa299dc28abc7', '11', '1', '2', '1', '1', '1', '1');
+INSERT INTO `usuarios_copy` VALUES ('2', 'Galo', 'Solano', 'e807f1fcf82d132f9bb018ca6738a19f', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy` VALUES ('3', 'Cesar', 'Victorino', 'e807f1fcf82d132f9bb018ca6738a19f', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy` VALUES ('4', 'Martin', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', '51dae92dc3c9f6beb89c384399837d8b', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy` VALUES ('5', 'Juan', 'Zamora', 'e807f1fcf82d132f9bb018ca6738a19f', '0426d5d82dc5aa8741562ffb92fd8347', '13', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy` VALUES ('6', 'Abisai', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', 'bf7a21b8aa60e85d309842dd7a202409', '11', '3', '3', '3', '3', '0', '1');
+INSERT INTO `usuarios_copy` VALUES ('7', 'Pedro', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', 'd9b624e5119506eee9fd10bd6861cd30', '3', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy` VALUES ('8', 'Abisai', 'Chavez', 'e807f1fcf82d132f9bb018ca6738a19f', '7b5f522d0fc2673608d633898eac81b3', '13', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy` VALUES ('9', 'Mario', 'Canales', 'e807f1fcf82d132f9bb018ca6738a19f', '23636b9887b68ebaaaf7b25e1af762e4', '4', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy` VALUES ('10', 'Vanessa', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', '0c9d7463e807e2fa2e8e0c369f9be527', '3', '1', '1', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy` VALUES ('11', 'Alberto', 'Aguilar', 'e807f1fcf82d132f9bb018ca6738a19f', '385a9c5e42ca78bd169c95a90067a433', '3', '1', '3', '0', '0', '1', '1');
+
+-- ----------------------------
+-- Table structure for usuarios_copy1
+-- ----------------------------
+DROP TABLE IF EXISTS `usuarios_copy1`;
+CREATE TABLE `usuarios_copy1` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `contrasena` text COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `area` int(255) NOT NULL,
+  `privilegios` int(1) NOT NULL,
+  `priv_sigi` int(1) NOT NULL,
+  `priv_sui` int(1) NOT NULL,
+  `priv_sia` int(1) NOT NULL,
+  `titular` int(1) NOT NULL,
+  `estado` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of usuarios_copy1
+-- ----------------------------
+INSERT INTO `usuarios_copy1` VALUES ('1', 'Larry', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', '5390db054a81ba9121daa299dc28abc7', '11', '1', '2', '1', '1', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('2', 'Galo', 'Solano', 'e807f1fcf82d132f9bb018ca6738a19f', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('3', 'Cesar', 'Victorino', 'e807f1fcf82d132f9bb018ca6738a19f', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('4', 'Martin', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', '51dae92dc3c9f6beb89c384399837d8b', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('5', 'Juan', 'Zamora', 'e807f1fcf82d132f9bb018ca6738a19f', '0426d5d82dc5aa8741562ffb92fd8347', '13', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('6', 'Abisai', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', 'bf7a21b8aa60e85d309842dd7a202409', '11', '3', '3', '3', '3', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('7', 'Pedro', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', 'd9b624e5119506eee9fd10bd6861cd30', '3', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('8', 'Abisai', 'Chavez', 'e807f1fcf82d132f9bb018ca6738a19f', '7b5f522d0fc2673608d633898eac81b3', '13', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('9', 'Mario', 'Canales', 'e807f1fcf82d132f9bb018ca6738a19f', '23636b9887b68ebaaaf7b25e1af762e4', '4', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('10', 'Vanessa', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', '0c9d7463e807e2fa2e8e0c369f9be527', '3', '1', '1', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('11', 'Alberto', 'Aguilar', 'e807f1fcf82d132f9bb018ca6738a19f', '385a9c5e42ca78bd169c95a90067a433', '3', '1', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('12', 'Juan', 'Kato', 'f62f0ec972409e975f481a87628852f9', 'd6140d4e08853d007acdf0555da87ef1', '1', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('13', 'Sofia', 'Campos', 'cadd809bcce02601f9cc42efe1ff34f2', '21fc6902bf4e70909c347034aac7dc4b', '1', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('14', 'Juana', 'Gallegos', '99a3c545bbf5c3f87296ac6d162b89fa', 'e33f1c68bf5e2ddb76f41fc0fb5b31d2', '1', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('15', 'Sergio', 'Contreras', 'f3b77450a1a35f3d20009bf718c528d1', 'b4435d225d3497d70e236754d81dd1c2', '1', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('16', 'Laura', 'Bringas', 'b3981fdb010803b938632ddd38ad58d8', '353deb4f8c9ae4cda4cfc23ae4f60424', '0', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('17', 'Rebeca', 'Diaz', '3f96734957765213ae99bc1d506b9d51', '2f40453309516893a853beb3129633e7', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('18', 'Maria', 'Pacheco', 'dd45813bb20c817b9e742a15396d9a83', 'adecf83a745b4cce85e1dc8d01c7a583', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('19', 'Francisco', 'Gonzalez', '0f44e9b074af34a21e3a8c82dce639f1', 'a76dcdaae12b2e011d123b58e04f0dc8', '2', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('20', 'Silvia', 'Garcia', '13e7828964f593ee2f453235177e379e', '9e77a1ce79baabe29b06de224ae25633', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('21', 'Flor', 'Garcia', 'ecd823881232a978310c0562761d44c3', '846b59169e5f406f3637c80d7cec6934', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('22', 'Mirza', 'Ramirez', 'ae4679bf20b77c276d9fbf0487e03bc0', '2cb93030939a64f7c9359da310d52ecb', '2', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('23', 'Alma', 'Montiel', 'a8a6dbdc905df7379502f188ebf8ab02', '73492577700cbfe006dd5c8123a28586', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('24', 'Honorio', 'Mendia', '64a6688207fcd1a9a8953addea6a6cf1', '7feee0ea6aaaf0033b17f4523aa144f5', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('25', 'Manuel', 'Montoya', '27bde6a4ca7b2d5a1d573e2a970a606f', '171e0e844480ccc34ef5fec46c111667', '2', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('26', 'Jose', 'Colmenero', '9b84bc5e54858e7bfa221501aaef6c0f', '271996fcba34fc0d7c9b4be9221bfa77', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('27', 'Armando', 'Ortiz', 'a2b61d46377083b2064ce2da0bda743e', '98c3673f3dbf5074ed4da1389a0c1ec5', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('28', 'Fernando', 'Roman', '7dfdaf78b5f572dbb9f8bc016e4ec9c0', 'af49599f26513d545ff4f093ce2f85d5', '2', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('29', 'Maria', 'Garay', '27fc706b7147ca326f0102046217698e', '2e7b207ad0bdc7b1660b1e996f7bccdf', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('30', 'Roberto', 'Herrera', 'e9c3195b1d27ba71f9e8deacde00b26a', '72450a13d98b3336d1159bbcfd7eb9ba', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('31', 'Esmeralda', 'Valles', '7a40d80040f588097c121b18e3c99f6a', '79d0985a3f3a01391dbe01da7f47e819', '2', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('32', 'Jose', 'Alferez', '6c8afbbcfd8fbcdebca6f83b35ffa56e', 'f6233069056e2bff39d6ea05b6e29a4c', '2', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('33', 'David', 'Arambula', 'eef1e678fff03634c8220bca39cae3f4', 'cee8a68e5925cd5e8f2097168c71d9db', '3', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('34', 'Guadalupe', 'Castro', '1eced7864bfc66e922a141f90495d46c', '2b19a6e7b9a8d78680a8621a45ba0a78', '3', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('35', 'Beatriz', 'Elguezabal', '01586826604048b217bbd42af0f7521d', '8b4f02421407aa9d327e6f5e11588756', '3', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('36', 'Maritza', 'Gonzalez', '938a00347a8d9bc998c8a802036d1731', '6a5f3eb20ab6a1b74332c6c09f3eb65c', '3', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('37', 'Ana', 'Quezada', '6f42bdb52cb2249f7c39762ed3d4a870', '0479b9bd16be50ac3eb7b32ac50ae839', '3', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('38', 'Adolfo', 'Tapia', 'ee3b66dd5708b6b379b97d4924b6b354', '88885b987d507ca1a601e5f1fdcaaa5c', '3', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('39', 'Adriana', 'Maldonado', 'aa350a1f36a2c4579746ea9828d72c5f', '14eb9c49a1f1c994ef9e1772ac36a65e', '4', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('40', 'Maria', 'Muñoz', '2460bcd5a13fd5d67116f7370ed9328a', 'bc0821509e94ad9bbbc68d87b1b6a468', '4', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('41', 'Diana', 'Villarreal', '41cd83a14508638da13af60f8ea732fc', '70ee6c55822cbaccef332eebda2af66a', '4', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('42', 'Margarita', 'Pacheco', '5390739456468dc4867b51ff45aa5574', '361256ec0ab5f7c293b791a2b34a9136', '4', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('43', 'Raul', 'Velazquez', '7f93b10d2d634db0193b5b1260c9f63e', 'ac7feb11c892bc8b0be82135a0022536', '5', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('44', 'Ruth', 'Mendoza', 'cbb8395831827d369d94e89da866b19f', '051ffcf016fa60be1ba56d63d7dd39fb', '5', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('45', 'Celso', 'Villarreal', '6dedb002edfb1ef73ab5cfa751201bad', '0e8f28acdaf35807c75751671b425fd2', '5', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('46', 'Jesus', 'Enriquez', '8c7d80bd2f55bf2c883c031e2dee4248', 'e3377d939ac12f667fb0adffab6a4d90', '5', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('47', 'Anastacio', 'Hernandez', 'e06c52c0fa1ac6fead72eb0c18bdc2cc', '02a267425b7901105f3a1d606f6ee7d2', '5', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('48', 'Juana', 'Garay', 'b3f2820417f5cdf3b079b5cd36e60624', '8ca1a26aa767d5f82c951f4aacdda718', '5', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('49', 'Jose', 'Cabral', '8a04ab6681fd2fb370aa7bc4799b169a', '9c1b5331481f584daeb58fbe001484d7', '5', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('50', 'Alejandra', 'Lozano', 'e324a2ad4c740325b52dc03d06354f3b', '2b1d4d129cdb39f99cab5615c964d5da', '5', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('51', 'Ignacio', 'Ayon', '71e8dc05db3ceb2838390b47122ee23f', '0fca1dd06e457ecb07c04d615aeb9390', '6', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('52', 'Susana', 'Gurrola', '74951a9b207e846e9d6be9e2448982d6', '91cdc60a7b15ad3876473330d2e82a12', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('53', 'Cintya', 'Nuñez', '364c0e2a217620a2041f5a536d24a188', '2b0eb3c3517a8b7c9c41dec8ad7aee65', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('54', 'Jorge', 'Pelagio', '1a6120b60e617dcf999acd8756779d54', 'a0f77ece0ab1175c62b25c338c5510bf', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('55', 'Karina', 'Gonzalez', '36e95bd30d9890953f0eb82fcda5cbba', '4f2c5e5dbc7dca9c7864ab46b167038c', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('56', 'Jose', 'Nuñez', '2ed4650a3360a422dc6a461d64a1c229', '22978dbd63d8d001da1341fdda1f02d1', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('57', 'Manuela', 'Bueno', '48b2bd209d39435d85d0dbeae8e08b51', 'a1955b42460a010449390c87fb7b156d', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('58', 'Jesus', 'Hernandez', '00577e26e85bafb45eea39e6e26a525d', '26b1f9f4d7275f47e83fafdb001bce96', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('59', 'Juan', 'Valverde', '28dbb034523c9f0f39df5efc153aefa0', '2abe7764d045bbee163feae15398d161', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('60', 'Jose', 'Ramirez', 'b1e61e853bf7eb72971ce1fd05f7f4d4', '4ffd03e9f669540242ad0f6c8ea2eefd', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('61', 'Gerardo', 'Guzman', '553d400989457f17d7f2961eaf44f2f7', 'b98dee7ecb1e444dadf118c64d6f7f17', '6', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('62', 'Mario', 'Perez', '7ec6078cb2b751f18450e0af1ed8beb5', '069cc7b7ba6d269fec080e36d0b918e2', '7', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('63', 'Julio', 'Torres', 'e48e8aa6e62e66533e10727f243e44d3', 'e4a95ec638f3d8c9ff296b2db4b739e7', '7', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('64', 'Magdalena', 'Juarez', 'a02424dddc85a2d2467b99dbd110cd21', '57edbaf9a8e314ba92eebd22a9c49109', '7', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('65', 'Marisol', 'Mancinas', '8fcded5a4310c56e9ea4c21ecb4d5ea9', 'a1fa6d7c51b532a8ae69139ee7f917f7', '7', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('66', 'Ruben', 'Amezcua', 'caccea352ac17327c2568691609af549', '6364635639069cd5e47b4b235a241990', '7', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('67', 'Brenda', 'Hernandez', '44a1ab185b90dcd37efde2e8689929bf', '188756f88a55bca746a16d0c84d4fb18', '7', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('68', 'Cesar', 'Loera', '575480861a16b24fda7f6011145497d2', '935d16fd21ba37464ea08f74f1e050ca', '7', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('69', 'Luis', 'Hernandez', '3cf741426f68bf0148c2dec4e36d4184', 'b7daa07ae6ee438b8c5cb5d83eccc659', '8', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('70', 'Franklin', 'Ake', '470847618a0ef55751f0aa097406a40a', 'c52dde2ee6bd2ac06d62e06c0fd88509', '8', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('71', 'Mara', 'Flores', 'a4ce2cda6594b47517fc47098ef245bf', 'e5a7b885864af6985907011c88d5efd7', '8', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('72', 'Daniel', 'Camacho', '11e47e521fb1f43384a6aba4659a5c4d', '683e8873b502e97702437fd560a6a695', '8', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('73', 'Jovani', 'Herrera', '59d8fec5bee507c3861950c44d11f138', '2596dcd18003e9530a02420940a36187', '8', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('74', 'Francisco', 'Tellez', '3b528849cbacd7358cec635c05e4c62c', '896c3502bbb9dddd2c67f5825a0eaa8d', '8', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('75', 'Marisol', 'Herrera', 'e8a7bcd7fbe28671e7d329be258e59ec', 'e007794ba0a8926a33d4a57cf8eb4a55', '8', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('76', 'Catalina', 'Benavente', 'cee01acc29b54caca800552b54b0b786', 'fed70e87c8ab32b5f0adc73272b8c291', '8', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('77', 'Luz', 'Mariscal', '41396f90d57e591c6083775526ec8338', '10c83618ce0db98eacfa1a999e61eed8', '9', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('78', 'Arturo', 'De la rosa', '521dc0686a4177bb4fbfa2b8643476cd', '69001d61fa8c29377fd8f5578cbf1e5a', '9', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('79', 'Marcela', 'Sarellano', 'a26de701f5cd31b61434f80d965cf084', 'fa9169c05e41a7a3ae99207dd67a8649', '9', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('80', 'Silvia', 'Zepeda', 'a27a19e1c36a06ba5d7a2cf45e85262b', '899510a9091f3131f405ec1a4b0d21f8', '9', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('81', 'Fernando', 'Flores', 'afa41158b9db48b89aac6f847460ee04', '397fffdd7c40d8208a4bc3908e5792ec', '9', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('82', 'Madeline', 'Palencia', 'e2da0501b0fc5f40e97ee5227d6146fe', '10c39d4812529e362d0f9cca7aa730a1', '9', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('83', 'Alejandro', 'Gonzalez', 'c640afaa6925bbe9ea0d2eccce1b4c17', 'e3df0983dd9ab4fb572558d5766c0881', '9', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('84', 'Gabriela', 'Rivas', '9e7a474b95ff5e0f84fb4f6ffbbcdd27', 'fcc33adf2425e6192a5919c7e7213179', '10', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('85', 'Felipe', 'Correa', '419356a8d30070cb803182d4f0035c75', '84730741c63235674782265ab00ed037', '10', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('86', 'Martin', 'Lopez', '014d63af24be7ac9a6b0b4c4b497d784', '49dd5a2ee7c027b89eab607b58f56649', '10', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('87', 'Juan', 'Saucedo', '71782bc1a00ae0dce891591e55263233', '6fac84fb268b18bcfb16a2d0247e3334', '10', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('88', 'Maria', 'Longoria', 'a7b47da9d719dbb8c3850410a0325802', 'a2e91f29c85a3c109aba1257c0569b6d', '10', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('89', 'Cesar', 'Victorino', '8ab5a1ee749a9b9944812459dc18b605', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('90', 'Galo', 'Solano', 'a11a47ffd28f4759a50fa6bd70e86bbf', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('91', 'Abril', 'Cardoza', '9c83c1482fc9df4de7907a657b5b37d6', '84870b9a8b26c07af1f1b3c1ceef6304', '11', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('92', 'Rodolfo', 'Rojas', '6a3fac3dfa4f3d9541c244cc4395b0e7', '78e7a6e257b0bc4c72ab9994f07b3d31', '11', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('93', 'Larry', 'Vargas', 'a51a802ed1ed197f77ce04eb9b38bec0', '5390db054a81ba9121daa299dc28abc7', '11', '1', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('94', 'Mario', 'Canalez', 'd8e07847c7e03c523c9e434e3b3174fc', '23636b9887b68ebaaaf7b25e1af762e4', '11', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('95', 'Luis', 'Pineda', '9246e111daee49b4ad88a2f984bd36ca', '7fddf51700ebe643bdaebeb4c8e5e254', '12', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('96', 'Juan', 'Zamora', '7e05abca6573ef31b78cd94bc1432540', '0426d5d82dc5aa8741562ffb92fd8347', '12', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('97', 'Efrain', 'Ramos', '43ddcc18a8f8e0a149e3ea6cc93b5658', '272d86934506059f2eeb445632ec0878', '12', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('98', 'Martin', 'Contreras', 'c017d80026046f8b396a337c2e41b108', '51dae92dc3c9f6beb89c384399837d8b', '12', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('99', 'Daniel', 'Zavala', '30e99c402051080030daada1d96f7761', 'df13976ebd20f0c66c8d458dbeb184b4', '13', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('100', 'Jorge', 'Macias', '0329cc424a8a04c2e1186c46ac941c9d', '4d7e81523621b980f508a884e956f2cf', '13', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('101', 'Blanca', 'Gallegos', '2db31fb987062a36d5121e1bdab1d10a', '30e580fdebbbf0a873671d30f3aeeb8f', '13', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('102', 'Karla', 'Aldaba', '907202bdf28dbebc75cc5a8fc09db045', '43b1f015d140755c0b0286e99d009d70', '14', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('103', 'Mayra', 'Esparza', 'f2ab3cf52c638dfd08f3ae50f19f21de', '7af03a29b56f9025a6f9085fc1676a71', '14', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('104', 'Ernesto', 'Torres', '59f032f7e60ae620a8aa8bd3ef2fd7c3', '02927ba294c5b2f5f646b8dc2f7fe981', '14', '3', '0', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy1` VALUES ('105', 'Sandra', 'Gonzalez', '04ff6846b46ca5ed2f3e34091b200e06', '58a10ceb32cb8e69b8172f231af3422d', '15', '2', '0', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy1` VALUES ('106', 'Sandra', 'Almaraz', '2c15f9240b721f80b285f0cf99419a2e', '003153953fc40ea22bb14ff40764160e', '15', '3', '0', '0', '0', '0', '1');
+
+-- ----------------------------
+-- Table structure for usuarios_copy2
+-- ----------------------------
+DROP TABLE IF EXISTS `usuarios_copy2`;
+CREATE TABLE `usuarios_copy2` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `contrasena` text COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `area` int(255) NOT NULL,
+  `privilegios` int(1) NOT NULL,
+  `priv_sigi` int(1) NOT NULL,
+  `priv_sui` int(1) NOT NULL,
+  `priv_sia` int(1) NOT NULL,
+  `titular` int(1) NOT NULL,
+  `estado` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of usuarios_copy2
+-- ----------------------------
+INSERT INTO `usuarios_copy2` VALUES ('12', 'Juan', 'Kato', 'f62f0ec972409e975f481a87628852f9', 'd6140d4e08853d007acdf0555da87ef1', '1', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('13', 'Sofia', 'Campos', 'cadd809bcce02601f9cc42efe1ff34f2', '21fc6902bf4e70909c347034aac7dc4b', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('14', 'Juana', 'Gallegos', '99a3c545bbf5c3f87296ac6d162b89fa', 'e33f1c68bf5e2ddb76f41fc0fb5b31d2', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('15', 'Sergio', 'Contreras', 'f3b77450a1a35f3d20009bf718c528d1', 'b4435d225d3497d70e236754d81dd1c2', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('16', 'Laura', 'Bringas', 'b3981fdb010803b938632ddd38ad58d8', '353deb4f8c9ae4cda4cfc23ae4f60424', '15', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('17', 'Rebeca', 'Diaz', '3f96734957765213ae99bc1d506b9d51', '2f40453309516893a853beb3129633e7', '15', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('18', 'Maria', 'Pacheco', 'dd45813bb20c817b9e742a15396d9a83', 'adecf83a745b4cce85e1dc8d01c7a583', '15', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('19', 'Francisco', 'Gonzalez', '0f44e9b074af34a21e3a8c82dce639f1', 'a76dcdaae12b2e011d123b58e04f0dc8', '16', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('20', 'Silvia', 'Garcia', '13e7828964f593ee2f453235177e379e', '9e77a1ce79baabe29b06de224ae25633', '16', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('21', 'Flor', 'Garcia', 'ecd823881232a978310c0562761d44c3', '846b59169e5f406f3637c80d7cec6934', '16', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('22', 'Mirza', 'Ramirez', 'ae4679bf20b77c276d9fbf0487e03bc0', '2cb93030939a64f7c9359da310d52ecb', '17', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('23', 'Alma', 'Montiel', 'a8a6dbdc905df7379502f188ebf8ab02', '73492577700cbfe006dd5c8123a28586', '17', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('24', 'Honorio', 'Mendia', '64a6688207fcd1a9a8953addea6a6cf1', '7feee0ea6aaaf0033b17f4523aa144f5', '17', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('25', 'Manuel', 'Montoya', '27bde6a4ca7b2d5a1d573e2a970a606f', '171e0e844480ccc34ef5fec46c111667', '18', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('26', 'Jose', 'Colmenero', '9b84bc5e54858e7bfa221501aaef6c0f', '271996fcba34fc0d7c9b4be9221bfa77', '18', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('27', 'Armando', 'Ortiz', 'a2b61d46377083b2064ce2da0bda743e', '98c3673f3dbf5074ed4da1389a0c1ec5', '18', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('28', 'Fernando', 'Roman', '7dfdaf78b5f572dbb9f8bc016e4ec9c0', 'af49599f26513d545ff4f093ce2f85d5', '19', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('29', 'Maria', 'Garay', '27fc706b7147ca326f0102046217698e', '2e7b207ad0bdc7b1660b1e996f7bccdf', '19', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('30', 'Roberto', 'Herrera', 'e9c3195b1d27ba71f9e8deacde00b26a', '72450a13d98b3336d1159bbcfd7eb9ba', '19', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('31', 'Esmeralda', 'Valles', '7a40d80040f588097c121b18e3c99f6a', '79d0985a3f3a01391dbe01da7f47e819', '20', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('32', 'Jose', 'Alferez', '6c8afbbcfd8fbcdebca6f83b35ffa56e', 'f6233069056e2bff39d6ea05b6e29a4c', '20', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('33', 'David', 'Arambula', 'eef1e678fff03634c8220bca39cae3f4', 'cee8a68e5925cd5e8f2097168c71d9db', '3', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('34', 'Guadalupe', 'Castro', '1eced7864bfc66e922a141f90495d46c', '2b19a6e7b9a8d78680a8621a45ba0a78', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('35', 'Beatriz', 'Elguezabal', '01586826604048b217bbd42af0f7521d', '8b4f02421407aa9d327e6f5e11588756', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('36', 'Maritza', 'Gonzalez', '938a00347a8d9bc998c8a802036d1731', '6a5f3eb20ab6a1b74332c6c09f3eb65c', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('37', 'Ana', 'Quezada', '6f42bdb52cb2249f7c39762ed3d4a870', '0479b9bd16be50ac3eb7b32ac50ae839', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('38', 'Adolfo', 'Tapia', 'ee3b66dd5708b6b379b97d4924b6b354', '88885b987d507ca1a601e5f1fdcaaa5c', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('39', 'Adriana', 'Maldonado', 'aa350a1f36a2c4579746ea9828d72c5f', '14eb9c49a1f1c994ef9e1772ac36a65e', '4', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('40', 'Maria', 'Muñoz', '2460bcd5a13fd5d67116f7370ed9328a', 'bc0821509e94ad9bbbc68d87b1b6a468', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('41', 'Diana', 'Villarreal', '41cd83a14508638da13af60f8ea732fc', '70ee6c55822cbaccef332eebda2af66a', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('42', 'Margarita', 'Pacheco', '5390739456468dc4867b51ff45aa5574', '361256ec0ab5f7c293b791a2b34a9136', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('43', 'Raul', 'Velazquez', '7f93b10d2d634db0193b5b1260c9f63e', 'ac7feb11c892bc8b0be82135a0022536', '5', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('44', 'Ruth', 'Mendoza', 'cbb8395831827d369d94e89da866b19f', '051ffcf016fa60be1ba56d63d7dd39fb', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('45', 'Celso', 'Villarreal', '6dedb002edfb1ef73ab5cfa751201bad', '0e8f28acdaf35807c75751671b425fd2', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('46', 'Jesus', 'Enriquez', '8c7d80bd2f55bf2c883c031e2dee4248', 'e3377d939ac12f667fb0adffab6a4d90', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('47', 'Anastacio', 'Hernandez', 'e06c52c0fa1ac6fead72eb0c18bdc2cc', '02a267425b7901105f3a1d606f6ee7d2', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('48', 'Juana', 'Garay', 'b3f2820417f5cdf3b079b5cd36e60624', '8ca1a26aa767d5f82c951f4aacdda718', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('49', 'Jose', 'Cabral', '8a04ab6681fd2fb370aa7bc4799b169a', '9c1b5331481f584daeb58fbe001484d7', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('50', 'Alejandra', 'Lozano', 'e324a2ad4c740325b52dc03d06354f3b', '2b1d4d129cdb39f99cab5615c964d5da', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('51', 'Ignacio', 'Ayon', '71e8dc05db3ceb2838390b47122ee23f', '0fca1dd06e457ecb07c04d615aeb9390', '6', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('52', 'Susana', 'Gurrola', '74951a9b207e846e9d6be9e2448982d6', '91cdc60a7b15ad3876473330d2e82a12', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('53', 'Cintya', 'Nuñez', '364c0e2a217620a2041f5a536d24a188', '2b0eb3c3517a8b7c9c41dec8ad7aee65', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('54', 'Jorge', 'Pelagio', '1a6120b60e617dcf999acd8756779d54', 'a0f77ece0ab1175c62b25c338c5510bf', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('55', 'Karina', 'Gonzalez', '36e95bd30d9890953f0eb82fcda5cbba', '4f2c5e5dbc7dca9c7864ab46b167038c', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('56', 'Jose', 'Nuñez', '2ed4650a3360a422dc6a461d64a1c229', '22978dbd63d8d001da1341fdda1f02d1', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('57', 'Manuela', 'Bueno', '48b2bd209d39435d85d0dbeae8e08b51', 'a1955b42460a010449390c87fb7b156d', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('58', 'Jesus', 'Hernandez', '00577e26e85bafb45eea39e6e26a525d', '26b1f9f4d7275f47e83fafdb001bce96', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('59', 'Juan', 'Valverde', '28dbb034523c9f0f39df5efc153aefa0', '2abe7764d045bbee163feae15398d161', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('60', 'Jose', 'Ramirez', 'b1e61e853bf7eb72971ce1fd05f7f4d4', '4ffd03e9f669540242ad0f6c8ea2eefd', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('61', 'Gerardo', 'Guzman', '553d400989457f17d7f2961eaf44f2f7', 'b98dee7ecb1e444dadf118c64d6f7f17', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('62', 'Mario', 'Perez', '7ec6078cb2b751f18450e0af1ed8beb5', '069cc7b7ba6d269fec080e36d0b918e2', '7', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('63', 'Julio', 'Torres', 'e48e8aa6e62e66533e10727f243e44d3', 'e4a95ec638f3d8c9ff296b2db4b739e7', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('64', 'Magdalena', 'Juarez', 'a02424dddc85a2d2467b99dbd110cd21', '57edbaf9a8e314ba92eebd22a9c49109', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('65', 'Marisol', 'Mancinas', '8fcded5a4310c56e9ea4c21ecb4d5ea9', 'a1fa6d7c51b532a8ae69139ee7f917f7', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('66', 'Ruben', 'Amezcua', 'caccea352ac17327c2568691609af549', '6364635639069cd5e47b4b235a241990', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('67', 'Brenda', 'Hernandez', '44a1ab185b90dcd37efde2e8689929bf', '188756f88a55bca746a16d0c84d4fb18', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('68', 'Cesar', 'Loera', '575480861a16b24fda7f6011145497d2', '935d16fd21ba37464ea08f74f1e050ca', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('69', 'Luis', 'Hernandez', '3cf741426f68bf0148c2dec4e36d4184', 'b7daa07ae6ee438b8c5cb5d83eccc659', '8', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('70', 'Franklin', 'Ake', '470847618a0ef55751f0aa097406a40a', 'c52dde2ee6bd2ac06d62e06c0fd88509', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('71', 'Mara', 'Flores', 'a4ce2cda6594b47517fc47098ef245bf', 'e5a7b885864af6985907011c88d5efd7', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('72', 'Daniel', 'Camacho', '11e47e521fb1f43384a6aba4659a5c4d', '683e8873b502e97702437fd560a6a695', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('73', 'Jovani', 'Herrera', '59d8fec5bee507c3861950c44d11f138', '2596dcd18003e9530a02420940a36187', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('74', 'Francisco', 'Tellez', '3b528849cbacd7358cec635c05e4c62c', '896c3502bbb9dddd2c67f5825a0eaa8d', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('75', 'Marisol', 'Herrera', 'e8a7bcd7fbe28671e7d329be258e59ec', 'e007794ba0a8926a33d4a57cf8eb4a55', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('76', 'Catalina', 'Benavente', 'cee01acc29b54caca800552b54b0b786', 'fed70e87c8ab32b5f0adc73272b8c291', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('77', 'Luz', 'Mariscal', '41396f90d57e591c6083775526ec8338', '10c83618ce0db98eacfa1a999e61eed8', '9', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('78', 'Arturo', 'De la rosa', '521dc0686a4177bb4fbfa2b8643476cd', '69001d61fa8c29377fd8f5578cbf1e5a', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('79', 'Marcela', 'Sarellano', 'a26de701f5cd31b61434f80d965cf084', 'fa9169c05e41a7a3ae99207dd67a8649', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('80', 'Silvia', 'Zepeda', 'a27a19e1c36a06ba5d7a2cf45e85262b', '899510a9091f3131f405ec1a4b0d21f8', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('81', 'Fernando', 'Flores', 'afa41158b9db48b89aac6f847460ee04', '397fffdd7c40d8208a4bc3908e5792ec', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('82', 'Madeline', 'Palencia', 'e2da0501b0fc5f40e97ee5227d6146fe', '10c39d4812529e362d0f9cca7aa730a1', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('83', 'Alejandro', 'Gonzalez', 'c640afaa6925bbe9ea0d2eccce1b4c17', 'e3df0983dd9ab4fb572558d5766c0881', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('84', 'Gabriela', 'Rivas', '9e7a474b95ff5e0f84fb4f6ffbbcdd27', 'fcc33adf2425e6192a5919c7e7213179', '10', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('85', 'Felipe', 'Correa', '419356a8d30070cb803182d4f0035c75', '84730741c63235674782265ab00ed037', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('86', 'Martin', 'Lopez', '014d63af24be7ac9a6b0b4c4b497d784', '49dd5a2ee7c027b89eab607b58f56649', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('87', 'Juan', 'Saucedo', '71782bc1a00ae0dce891591e55263233', '6fac84fb268b18bcfb16a2d0247e3334', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('88', 'Maria', 'Longoria', 'a7b47da9d719dbb8c3850410a0325802', 'a2e91f29c85a3c109aba1257c0569b6d', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('89', 'Cesar', 'Victorino', '8ab5a1ee749a9b9944812459dc18b605', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('90', 'Galo', 'Solano', 'a11a47ffd28f4759a50fa6bd70e86bbf', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('91', 'Abril', 'Cardoza', '9c83c1482fc9df4de7907a657b5b37d6', '84870b9a8b26c07af1f1b3c1ceef6304', '11', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('92', 'Rodolfo', 'Rojas', '6a3fac3dfa4f3d9541c244cc4395b0e7', '78e7a6e257b0bc4c72ab9994f07b3d31', '11', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('93', 'Larry', 'Vargas', 'a51a802ed1ed197f77ce04eb9b38bec0', '5390db054a81ba9121daa299dc28abc7', '11', '1', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('94', 'Mario', 'Canalez', 'd8e07847c7e03c523c9e434e3b3174fc', '23636b9887b68ebaaaf7b25e1af762e4', '11', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('95', 'Luis', 'Pineda', '9246e111daee49b4ad88a2f984bd36ca', '7fddf51700ebe643bdaebeb4c8e5e254', '12', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('96', 'Juan', 'Zamora', '7e05abca6573ef31b78cd94bc1432540', '0426d5d82dc5aa8741562ffb92fd8347', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('97', 'Efrain', 'Ramos', '43ddcc18a8f8e0a149e3ea6cc93b5658', '272d86934506059f2eeb445632ec0878', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('98', 'Martin', 'Contreras', 'c017d80026046f8b396a337c2e41b108', '51dae92dc3c9f6beb89c384399837d8b', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('99', 'Daniel', 'Zavala', '30e99c402051080030daada1d96f7761', 'df13976ebd20f0c66c8d458dbeb184b4', '13', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('100', 'Jorge', 'Macias', '0329cc424a8a04c2e1186c46ac941c9d', '4d7e81523621b980f508a884e956f2cf', '13', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('101', 'Blanca', 'Gallegos', '2db31fb987062a36d5121e1bdab1d10a', '30e580fdebbbf0a873671d30f3aeeb8f', '13', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('102', 'Karla', 'Aldaba', '907202bdf28dbebc75cc5a8fc09db045', '43b1f015d140755c0b0286e99d009d70', '14', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('103', 'Mayra', 'Esparza', 'f2ab3cf52c638dfd08f3ae50f19f21de', '7af03a29b56f9025a6f9085fc1676a71', '14', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('104', 'Ernesto', 'Torres', '59f032f7e60ae620a8aa8bd3ef2fd7c3', '02927ba294c5b2f5f646b8dc2f7fe981', '14', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy2` VALUES ('105', 'Sandra', 'Gonzalez', '04ff6846b46ca5ed2f3e34091b200e06', '58a10ceb32cb8e69b8172f231af3422d', '15', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy2` VALUES ('106', 'Sandra', 'Almaraz', '2c15f9240b721f80b285f0cf99419a2e', '003153953fc40ea22bb14ff40764160e', '15', '3', '3', '0', '0', '0', '1');
+
+-- ----------------------------
+-- Table structure for usuarios_copy3
+-- ----------------------------
+DROP TABLE IF EXISTS `usuarios_copy3`;
+CREATE TABLE `usuarios_copy3` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `contrasena` text COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `area` int(255) NOT NULL,
+  `privilegios` int(1) NOT NULL,
+  `priv_sigi` int(1) NOT NULL,
+  `priv_sui` int(1) NOT NULL,
+  `priv_sia` int(1) NOT NULL,
+  `titular` int(1) NOT NULL,
+  `estado` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of usuarios_copy3
+-- ----------------------------
+INSERT INTO `usuarios_copy3` VALUES ('1', 'Larry', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', '5390db054a81ba9121daa299dc28abc7', '11', '1', '2', '1', '1', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('2', 'Galo', 'Solano', 'e807f1fcf82d132f9bb018ca6738a19f', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('3', 'Cesar', 'Victorino', 'e807f1fcf82d132f9bb018ca6738a19f', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '2', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('4', 'Martin', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', '51dae92dc3c9f6beb89c384399837d8b', '11', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('5', 'Juan', 'Zamora', 'e807f1fcf82d132f9bb018ca6738a19f', '0426d5d82dc5aa8741562ffb92fd8347', '13', '1', '1', '1', '1', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('6', 'Abisai', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', 'bf7a21b8aa60e85d309842dd7a202409', '11', '3', '3', '3', '3', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('7', 'Pedro', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', 'd9b624e5119506eee9fd10bd6861cd30', '3', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('8', 'Abisai', 'Chavez', 'e807f1fcf82d132f9bb018ca6738a19f', '7b5f522d0fc2673608d633898eac81b3', '13', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('9', 'Mario', 'Canales', 'e807f1fcf82d132f9bb018ca6738a19f', '23636b9887b68ebaaaf7b25e1af762e4', '4', '3', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('10', 'Vanessa', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', '0c9d7463e807e2fa2e8e0c369f9be527', '3', '1', '1', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('11', 'Alberto', 'Aguilar', 'e807f1fcf82d132f9bb018ca6738a19f', '385a9c5e42ca78bd169c95a90067a433', '3', '1', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('12', 'Juan', 'Kato', 'e807f1fcf82d132f9bb018ca6738a19f', 'd6140d4e08853d007acdf0555da87ef1', '1', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('13', 'Sofia', 'Campos', 'e807f1fcf82d132f9bb018ca6738a19f', '21fc6902bf4e70909c347034aac7dc4b', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('14', 'Juana', 'Gallegos', 'e807f1fcf82d132f9bb018ca6738a19f', 'e33f1c68bf5e2ddb76f41fc0fb5b31d2', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('15', 'Sergio', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', 'b4435d225d3497d70e236754d81dd1c2', '1', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('16', 'Laura', 'Bringas', 'e807f1fcf82d132f9bb018ca6738a19f', '353deb4f8c9ae4cda4cfc23ae4f60424', '15', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('17', 'Rebeca', 'Diaz', 'e807f1fcf82d132f9bb018ca6738a19f', '2f40453309516893a853beb3129633e7', '15', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('18', 'Maria', 'Pacheco', 'e807f1fcf82d132f9bb018ca6738a19f', 'adecf83a745b4cce85e1dc8d01c7a583', '15', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('19', 'Francisco', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', 'a76dcdaae12b2e011d123b58e04f0dc8', '16', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('20', 'Silvia', 'Garcia', 'e807f1fcf82d132f9bb018ca6738a19f', '9e77a1ce79baabe29b06de224ae25633', '16', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('21', 'Flor', 'Garcia', 'e807f1fcf82d132f9bb018ca6738a19f', '846b59169e5f406f3637c80d7cec6934', '16', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('22', 'Mirza', 'Ramirez', 'e807f1fcf82d132f9bb018ca6738a19f', '2cb93030939a64f7c9359da310d52ecb', '17', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('23', 'Alma', 'Montiel', 'e807f1fcf82d132f9bb018ca6738a19f', '73492577700cbfe006dd5c8123a28586', '17', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('24', 'Honorio', 'Mendia', 'e807f1fcf82d132f9bb018ca6738a19f', '7feee0ea6aaaf0033b17f4523aa144f5', '17', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('25', 'Manuel', 'Montoya', 'e807f1fcf82d132f9bb018ca6738a19f', '171e0e844480ccc34ef5fec46c111667', '18', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('26', 'Jose', 'Colmenero', 'e807f1fcf82d132f9bb018ca6738a19f', '271996fcba34fc0d7c9b4be9221bfa77', '18', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('27', 'Armando', 'Ortiz', 'e807f1fcf82d132f9bb018ca6738a19f', '98c3673f3dbf5074ed4da1389a0c1ec5', '18', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('28', 'Fernando', 'Roman', 'e807f1fcf82d132f9bb018ca6738a19f', 'af49599f26513d545ff4f093ce2f85d5', '19', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('29', 'Maria', 'Garay', 'e807f1fcf82d132f9bb018ca6738a19f', '2e7b207ad0bdc7b1660b1e996f7bccdf', '19', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('30', 'Roberto', 'Herrera', 'e807f1fcf82d132f9bb018ca6738a19f', '72450a13d98b3336d1159bbcfd7eb9ba', '19', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('31', 'Esmeralda', 'Valles', 'e807f1fcf82d132f9bb018ca6738a19f', '79d0985a3f3a01391dbe01da7f47e819', '20', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('32', 'Jose', 'Alferez', 'e807f1fcf82d132f9bb018ca6738a19f', 'f6233069056e2bff39d6ea05b6e29a4c', '20', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('33', 'David', 'Arambula', 'e807f1fcf82d132f9bb018ca6738a19f', 'cee8a68e5925cd5e8f2097168c71d9db', '3', '2', '2', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('34', 'Guadalupe', 'Castro', 'e807f1fcf82d132f9bb018ca6738a19f', '2b19a6e7b9a8d78680a8621a45ba0a78', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('35', 'Beatriz', 'Elguezabal', 'e807f1fcf82d132f9bb018ca6738a19f', '8b4f02421407aa9d327e6f5e11588756', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('36', 'Maritza', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', '6a5f3eb20ab6a1b74332c6c09f3eb65c', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('37', 'Ana', 'Quezada', 'e807f1fcf82d132f9bb018ca6738a19f', '0479b9bd16be50ac3eb7b32ac50ae839', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('38', 'Adolfo', 'Tapia', 'e807f1fcf82d132f9bb018ca6738a19f', '88885b987d507ca1a601e5f1fdcaaa5c', '3', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('39', 'Adriana', 'Maldonado', 'e807f1fcf82d132f9bb018ca6738a19f', '14eb9c49a1f1c994ef9e1772ac36a65e', '4', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('40', 'Maria', 'Muñoz', 'e807f1fcf82d132f9bb018ca6738a19f', 'bc0821509e94ad9bbbc68d87b1b6a468', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('41', 'Diana', 'Villarreal', 'e807f1fcf82d132f9bb018ca6738a19f', '70ee6c55822cbaccef332eebda2af66a', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('42', 'Margarita', 'Pacheco', 'e807f1fcf82d132f9bb018ca6738a19f', '361256ec0ab5f7c293b791a2b34a9136', '4', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('43', 'Raul', 'Velazquez', 'e807f1fcf82d132f9bb018ca6738a19f', 'ac7feb11c892bc8b0be82135a0022536', '5', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('44', 'Ruth', 'Mendoza', 'e807f1fcf82d132f9bb018ca6738a19f', '051ffcf016fa60be1ba56d63d7dd39fb', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('45', 'Celso', 'Villarreal', 'e807f1fcf82d132f9bb018ca6738a19f', '0e8f28acdaf35807c75751671b425fd2', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('46', 'Jesus', 'Enriquez', 'e807f1fcf82d132f9bb018ca6738a19f', 'e3377d939ac12f667fb0adffab6a4d90', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('47', 'Anastacio', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', '02a267425b7901105f3a1d606f6ee7d2', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('48', 'Juana', 'Garay', 'e807f1fcf82d132f9bb018ca6738a19f', '8ca1a26aa767d5f82c951f4aacdda718', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('49', 'Jose', 'Cabral', 'e807f1fcf82d132f9bb018ca6738a19f', '9c1b5331481f584daeb58fbe001484d7', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('50', 'Alejandra', 'Lozano', 'e807f1fcf82d132f9bb018ca6738a19f', '2b1d4d129cdb39f99cab5615c964d5da', '5', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('51', 'Ignacio', 'Ayon', 'e807f1fcf82d132f9bb018ca6738a19f', '0fca1dd06e457ecb07c04d615aeb9390', '6', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('52', 'Susana', 'Gurrola', 'e807f1fcf82d132f9bb018ca6738a19f', '91cdc60a7b15ad3876473330d2e82a12', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('53', 'Cintya', 'Nuñez', 'e807f1fcf82d132f9bb018ca6738a19f', '2b0eb3c3517a8b7c9c41dec8ad7aee65', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('54', 'Jorge', 'Pelagio', 'e807f1fcf82d132f9bb018ca6738a19f', 'a0f77ece0ab1175c62b25c338c5510bf', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('55', 'Karina', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', '4f2c5e5dbc7dca9c7864ab46b167038c', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('56', 'Jose', 'Nuñez', 'e807f1fcf82d132f9bb018ca6738a19f', '22978dbd63d8d001da1341fdda1f02d1', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('57', 'Manuela', 'Bueno', 'e807f1fcf82d132f9bb018ca6738a19f', 'a1955b42460a010449390c87fb7b156d', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('58', 'Jesus', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', '26b1f9f4d7275f47e83fafdb001bce96', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('59', 'Juan', 'Valverde', 'e807f1fcf82d132f9bb018ca6738a19f', '2abe7764d045bbee163feae15398d161', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('60', 'Jose', 'Ramirez', 'e807f1fcf82d132f9bb018ca6738a19f', '4ffd03e9f669540242ad0f6c8ea2eefd', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('61', 'Gerardo', 'Guzman', 'e807f1fcf82d132f9bb018ca6738a19f', 'b98dee7ecb1e444dadf118c64d6f7f17', '6', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('62', 'Mario', 'Perez', 'e807f1fcf82d132f9bb018ca6738a19f', '069cc7b7ba6d269fec080e36d0b918e2', '7', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('63', 'Julio', 'Torres', 'e807f1fcf82d132f9bb018ca6738a19f', 'e4a95ec638f3d8c9ff296b2db4b739e7', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('64', 'Magdalena', 'Juarez', 'e807f1fcf82d132f9bb018ca6738a19f', '57edbaf9a8e314ba92eebd22a9c49109', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('65', 'Marisol', 'Mancinas', 'e807f1fcf82d132f9bb018ca6738a19f', 'a1fa6d7c51b532a8ae69139ee7f917f7', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('66', 'Ruben', 'Amezcua', 'e807f1fcf82d132f9bb018ca6738a19f', '6364635639069cd5e47b4b235a241990', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('67', 'Brenda', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', '188756f88a55bca746a16d0c84d4fb18', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('68', 'Cesar', 'Loera', 'e807f1fcf82d132f9bb018ca6738a19f', '935d16fd21ba37464ea08f74f1e050ca', '7', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('69', 'Luis', 'Hernandez', 'e807f1fcf82d132f9bb018ca6738a19f', 'b7daa07ae6ee438b8c5cb5d83eccc659', '8', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('70', 'Franklin', 'Ake', 'e807f1fcf82d132f9bb018ca6738a19f', 'c52dde2ee6bd2ac06d62e06c0fd88509', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('71', 'Mara', 'Flores', 'e807f1fcf82d132f9bb018ca6738a19f', 'e5a7b885864af6985907011c88d5efd7', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('72', 'Daniel', 'Camacho', 'e807f1fcf82d132f9bb018ca6738a19f', '683e8873b502e97702437fd560a6a695', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('73', 'Jovani', 'Herrera', 'e807f1fcf82d132f9bb018ca6738a19f', '2596dcd18003e9530a02420940a36187', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('74', 'Francisco', 'Tellez', 'e807f1fcf82d132f9bb018ca6738a19f', '896c3502bbb9dddd2c67f5825a0eaa8d', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('75', 'Marisol', 'Herrera', 'e807f1fcf82d132f9bb018ca6738a19f', 'e007794ba0a8926a33d4a57cf8eb4a55', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('76', 'Catalina', 'Benavente', 'e807f1fcf82d132f9bb018ca6738a19f', 'fed70e87c8ab32b5f0adc73272b8c291', '8', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('77', 'Luz', 'Mariscal', 'e807f1fcf82d132f9bb018ca6738a19f', '10c83618ce0db98eacfa1a999e61eed8', '9', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('78', 'Arturo', 'De la rosa', 'e807f1fcf82d132f9bb018ca6738a19f', '69001d61fa8c29377fd8f5578cbf1e5a', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('79', 'Marcela', 'Sarellano', 'e807f1fcf82d132f9bb018ca6738a19f', 'fa9169c05e41a7a3ae99207dd67a8649', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('80', 'Silvia', 'Zepeda', 'e807f1fcf82d132f9bb018ca6738a19f', '899510a9091f3131f405ec1a4b0d21f8', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('81', 'Fernando', 'Flores', 'e807f1fcf82d132f9bb018ca6738a19f', '397fffdd7c40d8208a4bc3908e5792ec', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('82', 'Madeline', 'Palencia', 'e807f1fcf82d132f9bb018ca6738a19f', '10c39d4812529e362d0f9cca7aa730a1', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('83', 'Alejandro', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', 'e3df0983dd9ab4fb572558d5766c0881', '9', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('84', 'Gabriela', 'Rivas', 'e807f1fcf82d132f9bb018ca6738a19f', 'fcc33adf2425e6192a5919c7e7213179', '10', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('85', 'Felipe', 'Correa', 'e807f1fcf82d132f9bb018ca6738a19f', '84730741c63235674782265ab00ed037', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('86', 'Martin', 'Lopez', 'e807f1fcf82d132f9bb018ca6738a19f', '49dd5a2ee7c027b89eab607b58f56649', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('87', 'Juan', 'Saucedo', 'e807f1fcf82d132f9bb018ca6738a19f', '6fac84fb268b18bcfb16a2d0247e3334', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('88', 'Maria', 'Longoria', 'e807f1fcf82d132f9bb018ca6738a19f', 'a2e91f29c85a3c109aba1257c0569b6d', '10', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('89', 'Cesar', 'Victorino', 'e807f1fcf82d132f9bb018ca6738a19f', 'f2ef0011ba570a8e73cb9f8ae59dbcc0', '11', '1', '2', '0', '0', '1', '0');
+INSERT INTO `usuarios_copy3` VALUES ('90', 'Galo', 'Solano', 'e807f1fcf82d132f9bb018ca6738a19f', '84f0c3a18121812c30aef815c9eee92d', '11', '1', '3', '0', '0', '0', '0');
+INSERT INTO `usuarios_copy3` VALUES ('91', 'Abril', 'Cardoza', 'e807f1fcf82d132f9bb018ca6738a19f', '84870b9a8b26c07af1f1b3c1ceef6304', '11', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('92', 'Rodolfo', 'Rojas', 'e807f1fcf82d132f9bb018ca6738a19f', '78e7a6e257b0bc4c72ab9994f07b3d31', '11', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('93', 'Larry', 'Vargas', 'e807f1fcf82d132f9bb018ca6738a19f', '5390db054a81ba9121daa299dc28abc7', '11', '1', '3', '0', '0', '0', '0');
+INSERT INTO `usuarios_copy3` VALUES ('94', 'Mario', 'Canalez', 'e807f1fcf82d132f9bb018ca6738a19f', '23636b9887b68ebaaaf7b25e1af762e4', '11', '3', '3', '0', '0', '0', '0');
+INSERT INTO `usuarios_copy3` VALUES ('95', 'Luis', 'Pineda', 'e807f1fcf82d132f9bb018ca6738a19f', '7fddf51700ebe643bdaebeb4c8e5e254', '12', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('96', 'Juan', 'Zamora', 'e807f1fcf82d132f9bb018ca6738a19f', '0426d5d82dc5aa8741562ffb92fd8347', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('97', 'Efrain', 'Ramos', 'e807f1fcf82d132f9bb018ca6738a19f', '272d86934506059f2eeb445632ec0878', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('98', 'Martin', 'Contreras', 'e807f1fcf82d132f9bb018ca6738a19f', '51dae92dc3c9f6beb89c384399837d8b', '12', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('99', 'Daniel', 'Zavala', 'e807f1fcf82d132f9bb018ca6738a19f', 'df13976ebd20f0c66c8d458dbeb184b4', '13', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('100', 'Jorge', 'Macias', 'e807f1fcf82d132f9bb018ca6738a19f', '4d7e81523621b980f508a884e956f2cf', '13', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('101', 'Blanca', 'Gallegos', 'e807f1fcf82d132f9bb018ca6738a19f', '30e580fdebbbf0a873671d30f3aeeb8f', '13', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('102', 'Karla', 'Aldaba', 'e807f1fcf82d132f9bb018ca6738a19f', '43b1f015d140755c0b0286e99d009d70', '14', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('103', 'Mayra', 'Esparza', 'e807f1fcf82d132f9bb018ca6738a19f', '7af03a29b56f9025a6f9085fc1676a71', '14', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('104', 'Ernesto', 'Torres', 'e807f1fcf82d132f9bb018ca6738a19f', '02927ba294c5b2f5f646b8dc2f7fe981', '14', '3', '3', '0', '0', '0', '1');
+INSERT INTO `usuarios_copy3` VALUES ('105', 'Sandra', 'Gonzalez', 'e807f1fcf82d132f9bb018ca6738a19f', '58a10ceb32cb8e69b8172f231af3422d', '15', '2', '3', '0', '0', '1', '1');
+INSERT INTO `usuarios_copy3` VALUES ('106', 'Sandra', 'Almaraz', 'e807f1fcf82d132f9bb018ca6738a19f', '003153953fc40ea22bb14ff40764160e', '15', '3', '3', '0', '0', '0', '1');
 
 -- ----------------------------
 -- View structure for sigi_vw_oficios_des_externo
@@ -837,6 +1072,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	ofc.origen as origen,
 	ofc.tipo_oficio,
 	ofc.folio AS folio,
+	ofc.folio_institucion as folio_institucion,
 	ofc.id_usuario_emisor AS id_usuario_emisor,
 	odr.ccp,
   #IF(ofc.tipo_oficio = 'RESPUESTA',(SELECT CONCAT(utemp.nombre,' ',utemp.apellido) FROM usuarios utemp WHERE utemp.id = ofc.id_usuario_emisor),'')as persona_responde,
@@ -866,6 +1102,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	odr.parent_id as parent_id,
 	ofc.origen,
 	ofc.folio AS folio,
+	ofc.folio_institucion as folio_institucion,
 	ofc.id_usuario_emisor AS id_usuario_emisor,
 IF (
 	ofc.origen = 'INTERNO',
@@ -893,6 +1130,7 @@ DROP VIEW IF EXISTS `sigi_vw_respuestas_recibidas`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `sigi_vw_respuestas_recibidas` AS SELECT
 	ofc.id AS id_oficio,
 	ofc.folio AS folio,
+	ofc.folio_institucion as folio_institucion,
 	odr.parent_id as parent_id,
 	ofc.id_usuario_emisor AS id_usuario_emisor,
 	ar.nombre as area,

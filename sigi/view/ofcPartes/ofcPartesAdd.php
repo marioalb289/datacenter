@@ -1,233 +1,235 @@
 
-
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Verificar PDF</h4>
-      </div>
-      <div class="modal-body" id="modal-pdf-body">
-      	<div>
-      	  <button id="prev">Previous</button>
-      	  <button id="next">Next</button>
-      	  &nbsp; &nbsp;
-      	  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-      	</div>
-        <canvas id="the-canvas" style="width: 100%;"></canvas>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<h1 class="page-header">Oficialia de Partes</h1>
-<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<div class="row">
-			<div class="col-md-4"><h4>Registro de Documentos</h4></div>
-			<div class="col-md-8 text-right">
-			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="recepciones_save" name="recepciones[save]" class="btn btn-primary" name="btn_busca">Guardar</button>
-			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_limpiar">Limpiar</button>
-			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_cancelar">Cancelar</button>
-			</div>
-		</div>
-		
-		
+<div >
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Verificar PDF</h4>
+	      </div>
+	      <div class="modal-body" id="modal-pdf-body">
+	      	<div>
+	      	  <button id="prev">Previous</button>
+	      	  <button id="next">Next</button>
+	      	  &nbsp; &nbsp;
+	      	  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+	      	</div>
+	        <canvas id="the-canvas" style="width: 100%;"></canvas>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
-	<div class="panel-body">
-		<?php
-			if($result != ''){
-				echo $result;
-			} 
-		?>
-		
+	<h1 class="page-header">Oficialia de Partes</h1>
+	<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
+	<div class="panel panel-default">
+		<div class="panel-heading">
 			<div class="row">
-				<div class="col-md-6">
-		            <div class="form-group">
-		                <label for="recepciones_nombreEmisor" class="required">Origen</label>
-		                <select class="form-control input-sm" name="origen" id="origen" disabled >
-		                  <option value="2" <?php if($data['privilegios'] == 1) echo "selected" ?>>Externo</option>
-		                  <option value="1" <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) echo "selected" ?>>Interno</option>
-		                </select>
-		                <input type="hidden" id="select_origen" name="select_origen" value="<?php if($data['privilegios'] == 1) echo "2"; else echo "1"  ?>">
-		                <span class="text-danger"></span>
-		            </div>
-		            <?php if($data['privilegios'] == 1) { ?>
-		            <div id="formExterno">
+				<div class="col-md-4"><h4>Registro de Documentos</h4></div>
+				<div class="col-md-8 text-right">
+				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca">Guardar</button>
+				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_limpiar">Limpiar</button>
+				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_cancelar">Cancelar</button>
+				</div>
+			</div>
+			
+			
+		</div>
+		<div class="panel-body">
+			<?php
+				if($result != ''){
+					echo $result;
+				} 
+			?>
+			
+				<div class="row">
+					<div class="col-md-6">
 			            <div class="form-group">
-			                <label for="recepciones_nombreEmisor" class="required" id="lbl_nombre_emisor">Nombre quien Suscribe:</label>
-			                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" />
+			                <label for="recepciones_nombreEmisor" class="required">Origen</label>
+			                <select class="form-control input-sm" name="origen" id="origen" disabled >
+			                  <option value="2" <?php if($data['privilegios'] == 1) echo "selected" ?>>Externo</option>
+			                  <option value="1" <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) echo "selected" ?>>Interno</option>
+			                </select>
+			                <input type="hidden" id="select_origen" name="select_origen" value="<?php if($data['privilegios'] == 1) echo "2"; else echo "1"  ?>">
 			                <span class="text-danger"></span>
 			            </div>
-			            
-					    <div class="form-group" id="box_cargo">
-					        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
-					        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" />
+			            <?php if($data['privilegios'] == 1) { ?>
+			            <div id="formExterno">
+				            <div class="form-group">
+				                <label for="recepciones_nombreEmisor" class="required" id="lbl_nombre_emisor">Nombre quien Suscribe:</label>
+				                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" />
+				                <span class="text-danger"></span>
+				            </div>
+				            
+						    <div class="form-group" id="box_cargo">
+						        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
+						        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" />
+						        <span class="text-danger"></span>
+						    </div>
+
+						    <div class="form-group">
+						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Institución:</label>
+						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institucion del Titular" data-validacion-tipo="alfa|requerido|min:5"/>
+						        <span class="text-danger"></span>
+						        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
+						          Result:
+						          <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+						        </div> -->
+						    </div>
+
+						    <div class="form-group">
+						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
+						        <div class="row">
+				        	        <div class="col-md-6">
+				        	        	<input type="date" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+				        	        </div>
+				        	        <div class="col-md-6">
+				        		        <input type="time" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+				        	        </div>
+						        </div>
+						        
+						        <span class="text-danger"></span>
+						    </div>
+			            </div>
+						<?php } else{ ?>
+			            <div id="formInterno" >
+			    		    <div class="form-group">
+			    		        <label for="" class="required">Área Origen:</label>
+			    		        <select class="form-control input-sm" name="area_origen" id="area_origen" disabled>
+			        			    <option value=""><?php echo $data['area_usuario']->area; ?></option>
+			                    </select>
+			    		        <span class="text-danger"></span>
+			    		    </div>
+
+						    <div class="form-group">
+						        <label for="recepciones_institucionEmisor" class="required">Usuario Origen:</label>
+						        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo $data['area_usuario']->nombre_usuario. ' '. $data['area_usuario']->apellido_usuario ?>" />
+						        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
+						        <span class="text-danger"></span>
+						    </div>
+
+
+			            </div>
+			            <?php } ?>
+
+
+					    <div class="form-group">
+					        <label for="" class="required">Área Destino:</label>
+					        <select class="form-control input-sm" id="area_destino" name="area_destino" data-validacion-tipo="requerido">
+			    			    <option value="">Selecccionar Area de Destino</option>
+					        	<?php foreach($data['areas'] as $area): ?>
+			    			        <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
+					        	<?php endforeach; ?>		          
+			                </select>
 					        <span class="text-danger"></span>
 					    </div>
 
 					    <div class="form-group">
-					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Institución:</label>
-					        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institucion del Titular" data-validacion-tipo="alfa|requerido|min:5"/>
+					        <label for="recepciones_institucionEmisor" class="required">Usuario Destino:</label>
+					        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" />
+					        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor">
 					        <span class="text-danger"></span>
-					        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
-					          Result:
-					          <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
-					        </div> -->
+					    </div>
+						
+						
+					</div>
+					<div class="col-md-6">					
+					    
+					    <div class="form-group has-feedback" id="box_num_oficio" >
+					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
+					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+					        <span class="text-danger"></span>
+					    </div>
+					    <div class="form-group">
+					      <label for="exampleInputFile">Asunto:</label>	<span style="font-size: 9px;"> Máximo 50 carácteres</span>			      
+					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+					      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+					    </div>
+
+
+					    <div class="form-group">
+					      <label for="exampleInputFile">Comentarios:</label><span style="font-size: 9px;"> Máximo 255 carácteres</span>				      
+					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
+					      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico" maxlength="255"></textarea>
 					    </div>
 
 					    <div class="form-group">
-					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
-					        <div class="row">
-			        	        <div class="col-md-6">
-			        	        	<input type="date" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
-			        	        </div>
-			        	        <div class="col-md-6">
-			        		        <input type="time" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
-			        	        </div>
-					        </div>
-					        
-					        <span class="text-danger"></span>
+					    
+					      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
 					    </div>
-		            </div>
-					<?php } else{ ?>
-		            <div id="formInterno" >
-		    		    <div class="form-group">
-		    		        <label for="" class="required">Área Origen:</label>
-		    		        <select class="form-control input-sm" name="area_origen" id="area_origen" disabled>
-		        			    <option value=""><?php echo $data['area_usuario']->area; ?></option>
-		                    </select>
-		    		        <span class="text-danger"></span>
-		    		    </div>
+					    <div class="form-group" style="text-align: center; ">
+					      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
+					      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
+					    </div>
+					    <div class="form-group" style="text-align: center;">
+					    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
+					    	
+					    </div>
+						
+					</div>
 
+					<div class="col-md-12">
 					    <div class="form-group">
-					        <label for="recepciones_institucionEmisor" class="required">Usuario Origen:</label>
-					        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo $data['area_usuario']->nombre_usuario. ' '. $data['area_usuario']->apellido_usuario ?>" />
-					        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
-					        <span class="text-danger"></span>
+					    	<div class="radio"  >
+					    	  <label>
+					    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
+					    	    Para su Conocimiento y Archivo
+					    	  </label>
+					    	</div>
+
+					    	<div class="radio"  >
+					    	  <label>
+					    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
+					    	    	Para el tramite que corresponda	
+					    	  </label>
+					    	</div>
+
+					    	<div class="checkbox"  >
+					    	  <label>
+					    	    <input type="checkbox" id="ccp">
+					    	   	Para acuerdo con:
+					    	  </label>
+					    	</div>
+
+					        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
+				            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
+				            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
+					        <!-- <span class="text-danger"></span> -->
 					    </div>
-
-
-		            </div>
-		            <?php } ?>
-
-
-				    <div class="form-group">
-				        <label for="" class="required">Área Destino:</label>
-				        <select class="form-control input-sm" id="area_destino" name="area_destino" data-validacion-tipo="requerido">
-		    			    <option value="">Selecccionar Area de Destino</option>
-				        	<?php foreach($data['areas'] as $area): ?>
-		    			        <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
-				        	<?php endforeach; ?>		          
-		                </select>
-				        <span class="text-danger"></span>
-				    </div>
-
-				    <div class="form-group">
-				        <label for="recepciones_institucionEmisor" class="required">Usuario Destino:</label>
-				        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" />
-				        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor">
-				        <span class="text-danger"></span>
-				    </div>
-					
-					
+					    <div class="form-group" id="lista_usuarios" style="display: none">
+					    	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				    	        <thead>
+				    	            <tr>
+				    	            	<th></th>
+				    	            	<th></th>
+				    	            	<th></th>
+				    	                <th>Nombre</th>
+				    	                <th>Area</th>
+				    	            </tr>
+				    	        </thead>
+				    	        <tbody>
+				    	        	<?php foreach($data['usuarios'] as $u): ?>
+				    	        	    <tr>
+				    	        	    	<td></td>
+				    	        	    	<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
+				    	        	    	<td><?php echo $u->id_usuario; ?></td>
+				    	        	        <td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
+				    	        	        <td><?php echo $u->area; ?></td>
+				    	        	    </tr>
+				    	        	<?php endforeach; ?>
+				    	        </tbody>
+					    	</table>
+					    </div>
+					    
+					</div>
 				</div>
-				<div class="col-md-6">					
-				    
-				    <div class="form-group">
-				      <label for="exampleInputFile">Asunto:</label>			      
-				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 108px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
-				    </div>
-
-				    <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) { ?>
-				    <div class="form-group" id="box_cargo">
-				        <label for="recepciones_institucionEmisor" class="required">Folio Institucional:</label>
-				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Folio Institucional"  data-validacion-tipo="alfa-numerico|requerido|min:5"/>
-				        <span class="text-danger"></span>
-				    </div>
-				    <?php } ?>
-
-				    <div class="form-group">
-				    
-				      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
-				    </div>
-				    <div class="form-group" style="text-align: center; ">
-				      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
-				      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
-				    </div>
-				    <div class="form-group" style="text-align: center;">
-				    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
-				    	
-				    </div>
-					
-				</div>
-
-				<div class="col-md-12">
-				    <div class="form-group">
-				    	<div class="radio"  >
-				    	  <label>
-				    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
-				    	    Para su Conocimiento y Archivo
-				    	  </label>
-				    	</div>
-
-				    	<div class="radio"  >
-				    	  <label>
-				    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
-				    	    	Para el tramite que corresponda	
-				    	  </label>
-				    	</div>
-
-				    	<div class="checkbox"  >
-				    	  <label>
-				    	    <input type="checkbox" id="ccp">
-				    	   	Para acuerdo con:
-				    	  </label>
-				    	</div>
-
-				        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
-			            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
-			            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
-				        <!-- <span class="text-danger"></span> -->
-				    </div>
-				    <div class="form-group" id="lista_usuarios" style="display: none">
-				    	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-			    	        <thead>
-			    	            <tr>
-			    	            	<th></th>
-			    	            	<th></th>
-			    	            	<th></th>
-			    	                <th>Nombre</th>
-			    	                <th>Area</th>
-			    	            </tr>
-			    	        </thead>
-			    	        <tbody>
-			    	        	<?php foreach($data['usuarios'] as $u): ?>
-			    	        	    <tr>
-			    	        	    	<td></td>
-			    	        	    	<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
-			    	        	    	<td><?php echo $u->id_usuario; ?></td>
-			    	        	        <td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
-			    	        	        <td><?php echo $u->area; ?></td>
-			    	        	    </tr>
-			    	        	<?php endforeach; ?>
-			    	        </tbody>
-				    	</table>
-				    </div>
-				    
-				</div>
-			</div>
+		</div>
 	</div>
+	</form>	
 </div>
-</form>
 <script>
 	// var prueba = {  
 	//    "success":true,
@@ -266,6 +268,7 @@
 		        success: function (data) {
 		        	event.preventDefault();
 		        	respuesta = JSON.parse(data); 
+		        	console.log('aqui respuesta',respuesta);
 		        	if(respuesta.success){
 		        		socket.emit( 'notification', respuesta.notificacion );
 		        		window.location.href = "sigi.php";
@@ -287,6 +290,10 @@
     });
 	$('.form-control').bind('blur', function () {
 	    return $(this).validateBlur();
+	});
+
+	$('#folio_iepc').bind('blur', function () {
+	    return $(this).validateNumOficio();
 	});
 		//Evento para visualizar pdf al crear registro
     $(function(){
