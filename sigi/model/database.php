@@ -1,5 +1,4 @@
 <?php
-include_once 'vendor/vlucas/phpdotenv/src/Dotenv.php';
 class Database
 {
     public static function StartUp()

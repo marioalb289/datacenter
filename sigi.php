@@ -1,6 +1,5 @@
 <?php
 require_once 'sigi/model/database.php';
-include_once 'vendor/vlucas/phpdotenv/src/Dotenv.php';
 require_once ("sigi/class/validate.class.php");
 require_once ("sigi/model/usuario.php");
 require __DIR__ . '/vendor/autoload.php';

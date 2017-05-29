@@ -3,7 +3,6 @@
 /**
 * 
 */
-include_once 'vendor/vlucas/phpdotenv/src/Dotenv.php';
 require( 'ssp.class.php' );
 class InitPaginador
 {
