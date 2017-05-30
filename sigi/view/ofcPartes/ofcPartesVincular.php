@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header modal-header-warning">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h1><i class="glyphicon glyphicon-question-sign"></i> Advertencia</h1>
+                <h1><i class="glyphicon glyphicon-info-sign"></i> Advertencia</h1>
             </div>
             <div class="modal-body">
               <p>Al vincular un oficio se haran cambos en la solicitud que recibio. </p>

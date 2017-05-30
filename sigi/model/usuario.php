@@ -166,7 +166,7 @@ class Usuario
 			FROM
 				usuarios us
 			JOIN areas ar ON ar.id = us.area
-			WHERE us.priv_sigi = 1 AND ar.abreviatura = 'SE' 
+			WHERE us.priv_sigi = 1 AND ar.abreviatura = 'SE' and us.estado = 1 
 			");
 			$stm->execute();
 			return $stm->fetch(PDO::FETCH_OBJ);

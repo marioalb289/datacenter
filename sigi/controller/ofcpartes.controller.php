@@ -529,21 +529,36 @@ class OfcPartesController
         $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
 
         //si eres un usuario receptor, buscar solo el oficio que te correponse
-        if($_SESSION['data_user']['privilegios'] == 3){
+        if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){
           $id_usuario = $_SESSION['data_user']['id'];
         }
         // print_r($id_oficio);
         // print_r($id_usuario);exit;
         $oficio = new Oficio();
         $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+        // print_r($objOficio);exit;
         //Si esta vacio verificar que el usuario este en la lista de usuarios a los que se les envio copia
         if(empty($objOficio) && $id_usuario != ''){
           $objOficioTemp = $oficio->getOficio($id_oficio);
           $objSolicitud = $oficio->buscaUsuarioEnSolicitud($objOficioTemp->parent_id,$id_usuario);
           if(empty($objSolicitud)){
-            $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-            header('Location: sigi.php');
-            exit;
+            //Verificar por ultimo, que si tienes privilegios de titular ejecutivo
+            // print_r($_SESSION);exit;
+            if($_SESSION['data_user']['privilegios'] == 2 && intval($_SESSION['data_user']['titular']) == 1){
+              $id_usuario = '';
+              $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+              if(empty($objOficio)){
+                $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+                header('Location: sigi.php');
+                exit;       
+              }
+
+            }
+            else{
+              $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+              header('Location: sigi.php');
+              exit;              
+            }
           }
           else{
             $objOficio = $objOficioTemp;
@@ -1074,7 +1089,10 @@ class OfcPartesController
           }            
         }
         $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
-        header('Location: sigi.php');
+        $id= $_POST['id_oficio'];
+
+        $location = "Location: sigi.php?c=OfcPartes&a=view&id=$id";
+        header($location);
         
 
       }
@@ -1608,6 +1626,28 @@ class OfcPartesController
                     }            
                 }
               }
+
+              //Solo guardar otra respuesta para los usuarios titulares cuando se reabre el oficio
+              $usr_notificar = array();
+              if($objOficio->tipo_oficio == "SOLICITUD" && $objOficio->respondido){
+
+                $usr = new Usuario();
+                $objArea = $area->ListarAreaByIdUser($objOficio->id_usuario_receptor);
+                $obj_usr_titular = $usr->userTitulares($objArea->area,$objOficio->id_usuario_receptor);
+                if(!empty($obj_usr_titular)){
+                  foreach ($obj_usr_titular as $ids) {
+                    $ofc_doc->setIdUsuario($ids->id_usuario);   
+                    $ofc_doc->setCcp(0); //Se envia con ccp 0 para permitir que pueda responder 
+                    $ofc_doc->RegistrarOficioDocumento();
+
+                    array_push($usr_notificar, $ids->id_usuario); 
+                    
+                  }
+                }                
+                 /*****************/
+
+              }
+
               
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
               //header('Location: sigi.php');
@@ -1615,7 +1655,7 @@ class OfcPartesController
               //Armar arreglo de datos para los usuarios que se les notificara el oficio
               $usr = new Usuario();
               $objUsr = $usr->getUsuarioArea($_SESSION['data_user']['id']);
-              $usr_notificar = array();
+              
 
               if ($_POST['origen'] == "INTERNO"){
                 $origen = 'INTERNO';

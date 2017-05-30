@@ -2,7 +2,7 @@
 require_once 'sigi/model/database.php';
 require_once ("sigi/class/validate.class.php");
 require_once ("sigi/model/usuario.php");
-require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
   use Firebase\JWT\JWT;
 
 $controller = 'ofcpartes';
@@ -88,7 +88,7 @@ if( !empty($_SESSION['data_user'])){
 }
 else{
     if( (isset($_REQUEST['usuario']) && $_REQUEST['usuario'] != '') && (isset($_REQUEST['contrasena']) && $_REQUEST['contrasena'] != '')){
-        print_r($_REQUEST);
+        // print_r($_REQUEST);
         $validate = new Validate();
         // print_r($validate);exit;
         if (!$validate->alfanumerico($_REQUEST['usuario']))

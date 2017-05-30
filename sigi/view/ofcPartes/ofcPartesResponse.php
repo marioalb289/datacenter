@@ -131,9 +131,27 @@
 
 					<div class="col-md-6">					
 					    
-					    <div class="form-group has-feedback" id="box_num_oficio" >
+					    <!-- <div class="form-group has-feedback" id="box_num_oficio" >
 					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
 					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+					        <span class="text-danger"></span>
+					    </div> -->
+					    <div class="form-group">
+					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Número de Oficio:</label>
+					        <div class="row">
+			        	        <div class="col-md-8">
+			        	        	<input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+			        	        </div>
+			        	        <div class="col-md-4">
+			        		        <div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;"  >
+			        		        	<label>
+			        		        		<input type="checkbox" >
+			        		        		<strong>Oficio ya vinculado</strong>
+			        		        	</label>
+			        		        </div>
+			        	        </div>
+					        </div>
+					        
 					        <span class="text-danger"></span>
 					    </div>
 					    <div class="form-group">
@@ -164,7 +182,7 @@
 						
 					</div>
 
-					<div class="col-md-12">
+					<!-- <div class="col-md-12">
 						<div class="form-group">
 							<div class="radio"  >
 								<label>
@@ -179,19 +197,7 @@
 									Para el tramite que corresponda	
 								</label>
 							</div>
-
-							<!-- <div class="checkbox"  >
-								<label>
-									<input type="checkbox" id="ccp">
-									Para acuerdo con:
-								</label>
-							</div> -->
-
-				        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
-			            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
-			            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
-			            <!-- <span class="text-danger"></span> -->
-			        </div>
+			        </div> -->
 			        
 
 			    </div>

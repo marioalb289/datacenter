@@ -38,6 +38,7 @@ session_start();
           'privilegios' => $mostrarx['priv_sigi'],
           'id' =>  $idx,
           'area' =>  $are,
+          'titular' => $mostrarx['titular']
       );
 
       $time = time();

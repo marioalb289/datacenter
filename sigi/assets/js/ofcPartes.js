@@ -442,25 +442,25 @@ $(document).ready(function(){
             "targets": 0
         },
         { 
-          "targets": 5,
+          "targets": 6,
           "orderable": false,
           "className": "capitalize",
           "render": function ( data, type, row ) {
                 moment.locale('es');
-                return  moment(row[5]).format('MMMM Do YYYY, h:mm:ss a');
+                return  moment(row[6]).format('MMMM Do YYYY, h:mm:ss a');
             },
         },
         {
-          "targets": 6,
+          "targets": 7,
           "visible": true,
           "orderable" : false,
           "className": "dt-center",
           "render": function ( data, type, row ) {
             moment.locale('es');
-            if(row[6] == "0000-00-00 00:00:00")
+            if(row[7] == "0000-00-00 00:00:00")
               return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
             else 
-              return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row[6]).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+              return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row[7]).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
             },
         },
