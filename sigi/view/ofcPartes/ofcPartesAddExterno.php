@@ -173,6 +173,7 @@
 			    	            <tr>
 			    	            	<th></th>
 			    	            	<th></th>
+			    	            	<th></th>
 			    	                <th>Nombre</th>
 			    	                <th>Area</th>
 			    	            </tr>
@@ -182,6 +183,7 @@
 			    	        	    <tr>
 			    	        	    	<td></td>
 			    	        	    	<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
+			    	        	    	<td><?php echo $u->id_usuario; ?></td>
 			    	        	        <td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
 			    	        	        <td><?php echo $u->area; ?></td>
 			    	        	    </tr>
