@@ -165,7 +165,7 @@
 			    </div>
 
 			    
-
+				<?php if(!$data['oficio']->vinculado){ ?>
 			    <div class="form-group">
 			    
 			      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
@@ -178,6 +178,7 @@
 			    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;"><?php echo $data['oficio']->doc_nombre ?></span>
 			    	
 			    </div>
+			    <?php } ?>
 				
 			</div>
 

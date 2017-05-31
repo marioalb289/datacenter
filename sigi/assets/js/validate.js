@@ -52,7 +52,7 @@ function validarObjetoForm (control){
     /* El control actual del arreglo */
     var obj = control;
 
-    console.log(obj);
+    // console.log(obj);
 
     /* No nos interesa validar controles con el estado readonly/disabled */
     if (!obj.prop('readonly') || !obj.prop('disabled'))

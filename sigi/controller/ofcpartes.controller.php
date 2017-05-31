@@ -1309,6 +1309,7 @@ class OfcPartesController
                }
 
                $ofc->setComentarios(isset($_POST['comentarios']) && $_POST['comentarios'] != '' ? $_POST['comentarios'] : '');
+               $ofc->setVinculado(0);
 
                $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
                $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
@@ -1451,57 +1452,61 @@ class OfcPartesController
               $newfilename = $folio_archivo . '.' . end($temp);
               // exit;
 
+              //Si es un oficio sin vincular se gaurda el documento
+              if(!isset($_POST['ofc_vinculado'])){
+                //Proceder a guardar el arhivo
+                $nombre = $_FILES['archivo']['name'];
+                $nombre_tmp = $_FILES['archivo']['tmp_name'];
+                $tipo = $_FILES['archivo']['type'];
+                $tamano = $_FILES['archivo']['size'];
 
+                $ext_permitidas = array('pdf');
+                $partes_nombre = explode('.', $nombre);
+                $extension = end( $partes_nombre );
+                $ext_correcta = in_array($extension, $ext_permitidas);
 
-              //Proceder a guardar el arhivo
-              $nombre = $_FILES['archivo']['name'];
-              $nombre_tmp = $_FILES['archivo']['tmp_name'];
-              $tipo = $_FILES['archivo']['type'];
-              $tamano = $_FILES['archivo']['size'];
+                $tipo_correcto = preg_match('/^application\/(pdf)$/', $tipo);
 
-              $ext_permitidas = array('pdf');
-              $partes_nombre = explode('.', $nombre);
-              $extension = end( $partes_nombre );
-              $ext_correcta = in_array($extension, $ext_permitidas);
+                $limite = 500 * 1024;
 
-              $tipo_correcto = preg_match('/^application\/(pdf)$/', $tipo);
+                  if( $ext_correcta && $tipo_correcto ){//&& $tamano <= $limite ){
+                    if( $_FILES['archivo']['error'] > 0 ){
+                          //Error al subir el archivo, tipo incorrecto o tamaño excesido
+                      throw new Exception('Error al subir el archivo');
+                    }else{             
 
-              $limite = 500 * 1024;
+                      if( file_exists( 'documentos/'.$folio_archivo) ){
+                            //Archivo ya existente
+                      }else{
+                            //crear archivo
+                        if(move_uploaded_file($nombre_tmp,
+                          "documentos/" . $newfilename)){
 
-                if( $ext_correcta && $tipo_correcto ){//&& $tamano <= $limite ){
-                  if( $_FILES['archivo']['error'] > 0 ){
-                        //Error al subir el archivo, tipo incorrecto o tamaño excesido
-                    throw new Exception('Error al subir el archivo');
-                  }else{             
-
-                    if( file_exists( 'documentos/'.$folio_archivo) ){
-                          //Archivo ya existente
-                    }else{
-                          //crear archivo
-                      if(move_uploaded_file($nombre_tmp,
-                        "documentos/" . $newfilename)){
-
+                        }
+                      else{
+                         throw new Exception('Archivo no valido');
                       }
-                    else{
-                       throw new Exception('Archivo no valido');
                     }
                   }
                 }
+                else{
+                       //Archivo no valido
+                  throw new Exception('Archivo no valido');
+                }
+
+
+                //Guardar referencia al archivo
+                $documento =  new Documento();
+                $documento->setNombre($folio_archivo);
+                $documento->setRespuesta(0);
+                $documento->setRuta('documentos/');
+                $documento->setCreatedBy($id_usuario); //Asignar el user logeado
+                $documento->setUpdatedBy ($id_usuario); //Asingar el user logeado;
+                $id_documento = $documento->RegistrarDocumento();                
               }
               else{
-                     //Archivo no valido
-                throw new Exception('Archivo no valido');
+                $id_documento = 0;
               }
-
-
-              //Guardar referencia al archivo
-              $documento =  new Documento();
-              $documento->setNombre($folio_archivo);
-              $documento->setRespuesta(0);
-              $documento->setRuta('documentos/');
-              $documento->setCreatedBy($id_usuario); //Asignar el user logeado
-              $documento->setUpdatedBy ($id_usuario); //Asingar el user logeado;
-              $id_documento = $documento->RegistrarDocumento();
 
               
 
@@ -1518,6 +1523,7 @@ class OfcPartesController
               $ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
               $destino_notf = ($objOficio->destino == 'EXTERNO') ? 'EXTERNO': 'INTERNO';
               $ofc->setComentarios(isset($_POST['comentarios']) && $_POST['comentarios'] != '' ? $_POST['comentarios'] : '');
+              $ofc->setVinculado(isset($_POST['ofc_vinculado']) && intval($_POST['ofc_vinculado']) == 1 ? 1 : 0);
               $ofc->_setAsuntoReceptor("");
               $ofc->_setRespuesta(1);
               //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta
@@ -1551,7 +1557,7 @@ class OfcPartesController
                 $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);
               $ofc_doc->setCcp(0);         
               $ofc_doc->setFechaVisto('');  
-              $ofc_doc->setEstatusInicial(($_POST['respuesta'] == 0) ? 2: 1);
+              $ofc_doc->setEstatusInicial(1);
               $ofc_doc->setEstatusFinal(1);
               $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
               $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
@@ -1663,7 +1669,8 @@ class OfcPartesController
               else{
                 $origen = 'EXTERNO';
                 $objUsrPartes = $usr->userOfcPartes();
-                array_push($usr_notificar,$objUsrPartes->id_usuario);
+                if(!in_array($objUsrPartes->id_usuario,$usr_notificar))
+                  array_push($usr_notificar,$objUsrPartes->id_usuario);
               }
 
               //$origen = ($_POST['origen'] == "INTERNO") ? 'INTERNO': 'EXTERNO';

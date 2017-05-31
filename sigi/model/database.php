@@ -4,10 +4,10 @@ class Database
     public static function StartUp()
     {
 
-    	$host      = $_ENV['HOST'];
-        $usuario   = $_ENV['USUARIO'];
-        $password   = $_ENV['PASSWORD'];
-        $dataBase   = $_ENV['DATABASE'];
+    	$host      = "localhost";
+        $usuario   = "root";
+        $password   = "";
+        $dataBase   = "artic600_datacenter";
 
         
 

@@ -630,7 +630,12 @@ $(document).ready(function(){
         {
             "targets": [ 1 ],
             "className": "dt-center",
-        },{
+        },
+         {
+            "targets": [ 2 ],
+            "visible": false,
+        },
+        {
             "targets": [ 2 ],
             "visible": true,
             "searchable": true

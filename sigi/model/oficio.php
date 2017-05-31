@@ -20,10 +20,11 @@ class Oficio
     private $respondido;
     private $destino;
 
-    public $fecha_recepcion;
-    public $hora_recepcion;
+    private $fecha_recepcion;
+    private $hora_recepcion;
 
-    public $comentarios;
+    private $comentarios;
+    public $vinculado;
 
 	private $created_at;
 	private $updated_at;
@@ -576,12 +577,36 @@ class Oficio
         return $this;
     }
 
+    /**
+     * Gets the value of vinculado.
+     *
+     * @return mixed
+     */
+    public function getVinculado()
+    {
+        return $this->vinculado;
+    }
+
+    /**
+     * Sets the value of vinculado.
+     *
+     * @param mixed $vinculado the vinculado
+     *
+     * @return self
+     */
+    public function setVinculado($vinculado)
+    {
+        $this->vinculado = $vinculado;
+
+        return $this;
+    }
+
     public function RegistrarOficio()
     {
         try 
         {
-            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,fecha_recepcion,hora_recepcion,comentarios,created_at,created_by,updated_at,updated_by)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,fecha_recepcion,hora_recepcion,comentarios,vinculado,created_at,created_by,updated_at,updated_by)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //print_r($sql);exit;
 
@@ -604,6 +629,7 @@ class Oficio
                         $this->getFechaRecepcion(),
                         $this->getHoraRecepcion(),
                         $this->getComentarios(),
+                        $this->getVinculado(),
                         date('Y-m-d H:i:s'), 
                         $this->getCreatedBy(),
                         date('Y-m-d H:i:s'), 
@@ -690,6 +716,7 @@ class Oficio
                 ofc.institucion_emisor AS institucion_emisor,
                 ofc.asunto_emisor AS asunto_emisor,
                 ofc.respuesta AS respuesta,
+                ofc.vinculado as vinculado,
                 odr.id as id_oficio_documento,
                 odr.estatus_inicial AS estatus_inicial,
                 odr.ccp AS ccp,
@@ -701,7 +728,7 @@ class Oficio
                FROM
                 sigi_oficios ofc
                JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
-               JOIN sigi_documentos doc ON doc.id = odr.id_documentos
+               LEFT JOIN sigi_documentos doc ON doc.id = odr.id_documentos
                WHERE
                 $cond
             ");
@@ -910,6 +937,8 @@ class Oficio
         }
     }
 
+
+    
 
     
 }

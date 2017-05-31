@@ -62,10 +62,10 @@ class InitPaginador
 		//$dotenv = new Dotenv\Dotenv(__DIR__);
         //$dotenv->load();
 
-    	$host      = $_ENV['HOST'];
-		$usuario   = $_ENV['USUARIO'];
-		$password   = $_ENV['PASSWORD'];
-		$dataBase   = $_ENV['DATABASE'];
+    	$host      = "localhost";
+        $usuario   = "root";
+        $password   = "";
+        $dataBase   = "artic600_datacenter";
 
 
 		 

@@ -131,12 +131,13 @@
 
 					<div class="col-md-6">					
 					    
-					    <!-- <div class="form-group has-feedback" id="box_num_oficio" >
+					    <div class="form-group has-feedback" id="box_num_oficio" >
 					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
 					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
 					        <span class="text-danger"></span>
-					    </div> -->
-					    <div class="form-group">
+					    </div>
+					    
+					    <!-- <div class="form-group">
 					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Número de Oficio:</label>
 					        <div class="row">
 			        	        <div class="col-md-8">
@@ -145,7 +146,7 @@
 			        	        <div class="col-md-4">
 			        		        <div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;"  >
 			        		        	<label>
-			        		        		<input type="checkbox" >
+			        		        		<input type="checkbox" id="ofc_vinculado" name="ofc_vinculado" value="1">
 			        		        		<strong>Oficio ya vinculado</strong>
 			        		        	</label>
 			        		        </div>
@@ -153,7 +154,7 @@
 					        </div>
 					        
 					        <span class="text-danger"></span>
-					    </div>
+					    </div> -->
 					    <div class="form-group">
 					      <label for="exampleInputFile">Asunto:</label><span style="font-size: 9px;"> Máximo 50 carácteres</span>				      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
@@ -165,20 +166,29 @@
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
 					      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" maxlength="255" style="height: 100px;" data-validacion-tipo="alfa-numerico"></textarea>
 					    </div>
-
-
-					    <div class="form-group">
-					    
-					      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
-					    </div>
-					    <div class="form-group" style="text-align: center; ">
-					      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
-					      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
-					    </div>
 					    <div class="form-group" style="text-align: center;">
-					    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
-					    	
+					    	<div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;"  >
+					    		<label>
+					    			<input type="checkbox" id="ofc_vinculado" name="ofc_vinculado" value="1">
+					    			<strong>Oficio ya vinculado</strong>
+					    		</label>
+					    	</div>
 					    </div>
+
+						<div id="cargar_archivo">
+						    <div class="form-group" >
+						    
+						      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
+						    </div>
+						    <div class="form-group"  style="text-align: center; ">
+						      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required /></span>
+						      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
+						    </div>
+						    <div class="form-group"  style="text-align: center;">
+						    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
+						    	
+						    </div>							
+						</div>
 						
 					</div>
 
@@ -209,9 +219,27 @@
 </div>
 
 <script>
+	/*Evento para deshabilitar la carga de archivos*/
+    $('#ofc_vinculado').change(function () {
+        if ($(this).is(':checked')) {
+            //Mostrar lista de usuarios
+            $('#cargar_archivo').hide();
+            $("#documento_iepc").prop('required', false);
+            $("#documento_iepc").val('');
+            $(".fileinput-new").text('')
+        }
+        else{
+        	//No mostrar
+        	$('#cargar_archivo').show();
+        	$("#documento_iepc").prop('required', true);
+        	$(".fileinput-new").text('No se eligió archivo')
+        }
+     });
+
 	//Evento para validar campos
 	$("form").submit(function( event ) {
 		var res = $(this).validate();
+		console.log(res);
 		if(res){
 
 			var formData = new FormData($(this)[0]);
