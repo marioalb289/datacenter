@@ -1677,7 +1677,8 @@ class OfcPartesController
               
 
               foreach ($obj_usr_not as $value) {
-                array_push($usr_notificar,$value->id_usuario);
+                if(!in_array($value->id_usuario,$usr_notificar))
+                  array_push($usr_notificar,$value->id_usuario);
               }
 
               $data = array('id_oficio' => $id_ofc,'nombre_usuario' => $objUsr->nombre_usuario.' '.$objUsr->apellido_usuario.' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino_notf,'ids_usuario_receptor' => $usr_notificar);
