@@ -1466,45 +1466,61 @@ class OfcPartesController
               // exit;
 
               //Si es un oficio sin vincular se gaurda el documento
-              if( $ext_correcta && $tipo_correcto ){//&& $tamano <= $limite ){
-                 if( $_FILES['archivo']['error'] > 0 ){
-                       //Error al subir el archivo, tipo incorrecto o tamaño excesido
-                   throw new Exception('Error al subir el archivo');
-                 }
-                 else{
-                  $year = date("Y");
-                  $rutaAnio = "documentos/$year";
-                  $rutaArea = $rutaAnio."/".$objArea->abreviatura;
-                  if (!file_exists($rutaAnio)) {
-                      if(!mkdir($rutaAnio, 0777, true))
-                        throw new Exception('Error al crear carpeta');
+              if(!isset($_POST['ofc_vinculado'])){
+                //Proceder a guardar el arhivo
+                $nombre = $_FILES['archivo']['name'];
+                $nombre_tmp = $_FILES['archivo']['tmp_name'];
+                $tipo = $_FILES['archivo']['type'];
+                $tamano = $_FILES['archivo']['size'];
 
+                $ext_permitidas = array('pdf');
+                $partes_nombre = explode('.', $nombre);
+                $extension = end( $partes_nombre );
+                $ext_correcta = in_array($extension, $ext_permitidas);
+
+                $tipo_correcto = preg_match('/^application\/(pdf)$/', $tipo);
+
+                $limite = 500 * 1024;
+
+                  if( $ext_correcta && $tipo_correcto ){//&& $tamano <= $limite ){
+                    if( $_FILES['archivo']['error'] > 0 ){
+                          //Error al subir el archivo, tipo incorrecto o tamaño excesido
+                      throw new Exception('Error al subir el archivo');
+                    }
+                    else{
+                     $year = date("Y");
+                     $rutaAnio = "documentos/$year";
+                     $rutaArea = $rutaAnio."/".$objArea->abreviatura;
+                     if (!file_exists($rutaAnio)) {
+                         if(!mkdir($rutaAnio, 0777, true))
+                           throw new Exception('Error al crear carpeta');
+
+                     }
+                     if (!file_exists($rutaArea)) {
+                       if(!mkdir($rutaArea, 0777, true))
+                           throw new Exception('Error al crear carpeta');
+
+                     }             
+
+                      if( file_exists( $rutaArea.'/'.$newfilename) ){
+                            //Archivo ya existente
+                      }
+
+                      else{
+                            //crear archivo
+                        if(move_uploaded_file($nombre_tmp,$rutaArea.'/'.$newfilename)){
+
+                        }
+                        else{
+                          throw new Exception('Archivo no valido');
+                        }
+                      }
+                    }
                   }
-                  if (!file_exists($rutaArea)) {
-                    if(!mkdir($rutaArea, 0777, true))
-                        throw new Exception('Error al crear carpeta');
-
-                  }             
-
-                   if( file_exists( $rutaArea.'/'.$newfilename) ){
-                         //Archivo ya existente
-                   }
-
-                   else{
-                         //crear archivo
-                     if(move_uploaded_file($nombre_tmp,$rutaArea.'/'.$newfilename)){
-
-                     }
-                     else{
-                       throw new Exception('Archivo no valido');
-                     }
-                   }
-                 }
-               }
-               else{
-                      //Archivo no valido
-                 throw new Exception('Archivo no valido');
-               }
+                  else{
+                         //Archivo no valido
+                    throw new Exception('Archivo no valido');
+                  }
 
 
                 //Guardar referencia al archivo
