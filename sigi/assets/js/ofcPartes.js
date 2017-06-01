@@ -506,7 +506,7 @@ $(document).ready(function(){
               "searchable": false,
               "orderable": false,
               "render": function ( data, type, row ) {
-                return  row.nombre_destino + " " + row.cargo_destino + " de " + row.institucion_destino;
+                return (row.nombre_destino != '') ? row.nombre_destino + " " + row.cargo_destino + " de " + row.institucion_destino : '';
               },
 
             },

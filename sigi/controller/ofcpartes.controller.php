@@ -240,8 +240,8 @@ class OfcPartesController
     //if($_SESSION['data_user']['privilegios'] == 3){
       // $cond = " sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_internos.id_usuario_emisor = $id_usuario GROUP BY id_oficio  ";
       $cond = " 
-      sigi_vw_oficios_des_externo.id_usuario_emisor = $id_usuario
-      AND sigi_vw_oficios_des_externo.estatus_final = 'Abierto'
+      sigi_vw_oficios_vincular.id_usuario_emisor = $id_usuario
+      AND sigi_vw_oficios_vincular.estatus_final = 'Abierto'
       
       
       ";
@@ -257,7 +257,7 @@ class OfcPartesController
     //   $group_by = ' GROUP BY id_oficio ';
     // }
 
-    $table = 'sigi_vw_oficios_des_externo';
+    $table = 'sigi_vw_oficios_vincular';
     $columns = array(
       array(
         'db' => 'id_oficio',

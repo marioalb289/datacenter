@@ -108,13 +108,13 @@
 				    
 				    <div class="form-group has-feedback" id="box_num_oficio" >
 				        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
-				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+				        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="20" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
 				        <span class="text-danger"></span>
 				    </div>
 				    <div class="form-group">
 				      <label for="exampleInputFile">Asunto:</label> <span style="font-size: 9px;"> Máximo 50 carácteres</span>			      
 				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" maxlength="50" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 				    </div>
 
 
