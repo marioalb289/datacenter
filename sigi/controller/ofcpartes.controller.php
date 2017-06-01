@@ -1243,15 +1243,28 @@ class OfcPartesController
                        //Error al subir el archivo, tipo incorrecto o tamaño excesido
                    throw new Exception('Error al subir el archivo');
                  }
-                 else{             
+                 else{
+                  $year = date("Y");
+                  $rutaAnio = "documentos/$year";
+                  $rutaArea = $rutaAnio."/".$objArea->abreviatura;
+                  if (!file_exists($rutaAnio)) {
+                      if(!mkdir($rutaAnio, 0777, true))
+                        throw new Exception('Error al crear carpeta');
 
-                   if( file_exists( 'documentos/'.$folio_archivo) ){
+                  }
+                  if (!file_exists($rutaArea)) {
+                    if(!mkdir($rutaArea, 0777, true))
+                        throw new Exception('Error al crear carpeta');
+
+                  }             
+
+                   if( file_exists( $rutaArea.'/'.$newfilename) ){
                          //Archivo ya existente
                    }
 
                    else{
                          //crear archivo
-                     if(move_uploaded_file($nombre_tmp,"documentos/" . $newfilename)){
+                     if(move_uploaded_file($nombre_tmp,$rutaArea.'/'.$newfilename)){
 
                      }
                      else{
@@ -1269,7 +1282,7 @@ class OfcPartesController
                $documento =  new Documento();
                $documento->setNombre($folio_archivo);
                $documento->setRespuesta(0);
-               $documento->setRuta('documentos/');
+               $documento->setRuta($rutaArea."/");
                $documento->setCreatedBy($id_usuario); //Asignar el user logeado
                $documento->setUpdatedBy ($id_usuario); //Asingar el user logeado;
                $id_documento = $documento->RegistrarDocumento();

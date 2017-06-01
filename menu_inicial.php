@@ -86,18 +86,18 @@ session_start();
                 </ul>
     <div class="container" style="text-align: center;background: rgba(255, 255, 255, 0.67); margin: 0 auto; padding: 1%;border-radius: 35px;">
         <h2 class="form-signin-heading"><b>Elige un sistema</b></h2>
-        <a style="text-decoration: none; color: white;" href="AI/solicitudes.php">
+        <!-- <a style="text-decoration: none; color: white;" href="AI/solicitudes.php">
             <img src="AI/image/iconoAI.png" class="if-image" title="Agenda Institucional" style="width: 25%; margin: 2% auto;">
-        </a>
-        <a style="text-decoration: none; color: white;" href="http://www.iepcdurango.mx/SIU/1003150041/iepc/2/inicio?0409199127032017=<?echo $_SESSION['cor'];?> ">
+        </a> -->
+        <!-- <a style="text-decoration: none; color: white;" href="http://www.iepcdurango.mx/SIU/1003150041/iepc/2/inicio?0409199127032017=<?echo $_SESSION['cor'];?> ">
             <img src="AI/image/iconoSIU.png" class="if-image" title="Soporte Informatico a Usuarios" style="width: 25%; margin: 2% auto;">
-        </a>
-        <a style="text-decoration: none; color: white;" href="#">
+        </a> -->
+        <!-- <a style="text-decoration: none; color: white;" href="#">
             <img src="AI/image/iconoSIA.png" class="if-image" title="Sistema de Inventario y Administración" style="width: 25%; margin: 2% auto;">
-        </a>
-        <a style="text-decoration: none; color: white;" href="#">
+        </a> -->
+        <!-- <a style="text-decoration: none; color: white;" href="#">
             <img src="AI/image/iconoAE.png" class="if-image" title="Agenda Electoral" style="width: 25%; margin: 2% auto;">
-        </a>
+        </a> -->
         <a style="text-decoration: none; color: white;" href="sigi.php">
             <img src="AI/image/iconoSIGI.png" class="if-image" title="Sistema de Gestión de Información" style="width: 25%; margin: 2% auto;">
         </a>
