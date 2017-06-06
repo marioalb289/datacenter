@@ -108,7 +108,7 @@
 					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
 					    <span class="text-danger"></span>
 					</div>
-
+					<?php if($data['oficio']->origen == "EXTERNO") { ?>
 					<div class="form-group">
 				        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
 				        <div class="row">
@@ -122,6 +122,7 @@
 				        
 				        <span class="text-danger"></span>
 				    </div>
+				    <?php } ?>
 				</div>
 				<?php 	} ?>
 
