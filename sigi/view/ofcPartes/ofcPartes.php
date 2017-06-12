@@ -26,6 +26,68 @@
 <div class="row">
 
   <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-4"><h4>Filtros</h4></div>
+            <div class="col-md-8 text-right">
+                <button style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_remove_filtros">Quitar Filtros</button>
+            </div>
+          </div>    
+        </div>
+        <div class="panel-body">
+        
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                    <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Filtrar por Fecha:</label>
+                    <div class="row">
+                          <div class="col-md-6">
+                            <label for="">Desde:</label>
+                            <input type="date" autofocus id="fecha_inicio" name="fecha_inicio"  class="form-control input-sm" style="display: inline; width: 70%; margin-left: 10px;" />                                  
+                          </div>
+                          <div class="col-md-6">
+                            <label for="">Hasta:</label>
+                            <input type="date" id="fecha_fin" name="fecha_fin"  class="form-control input-sm" style="display: inline; width: 70%; margin-left: 10px;" />
+                          </div>
+                    </div>
+                    
+                    <span class="text-danger"></span>
+                </div>  
+              </div>
+              <div class="col-md-3">        
+                  
+                <div class="form-group">
+                    <label for="" class="required">Filtrar por Área:</label>
+                    <select class="form-control input-sm" id="filtro_area"  >
+                      <option value="">Selecccionar Area</option>
+                      <option value="0">Todas</option>
+                      <?php foreach($data['areas'] as $area): ?>
+                          <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
+                      <?php endforeach; ?>              
+                         </select>
+                    <span class="text-danger"></span>
+                </div> 
+                
+              </div>
+              <div class="col-md-3">        
+                  
+                <div class="form-group">
+                    <label for="" class="required">Filtrar por Estatus Final:</label>
+                    <select class="form-control input-sm" id="filtro_estatus_final"  >
+                        <option value="">Selecccionar</option>
+                        <option value="1">Cerrado</option>
+                        <option value="2">Abierto</option>
+                        <option value="3">Cancelado</option>
+                        <span class="text-danger"></span>
+                      </select>
+                    <span class="text-danger"></span>
+                </div> 
+                
+              </div>               
+            </div>
+        </div>
+      </div>
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
         <ul class="nav nav-tabs">
@@ -45,6 +107,7 @@
             <!-- <div class="col-md-12" style="text-align: center; top: 30px; display: none;" id="div_recargar_externos">
               <button style="" type="button" class="btn btn-default btn-md" name="btn_recargar" id="btn_recargar_externos" style="float: right;height: 30px;font-size: 12px;"><span class="glyphicon glyphicon-refresh" style="color: #5cb85c;font-weight: 900;"></span>Recargar</button>
             </div> -->
+
             <div class="col-md-12">
               <table id="lista_oficios_externos" class="table  table-bordered table-hover display" cellspacing="0" width="100%">
                 <thead>
@@ -54,6 +117,7 @@
                         <th>Nombre Suscribe</th>
                         <th>Institucion</th>
                         <th>Asunto</th>
+                        <th>Area Destino</th>
                         <th>Estatus Inicial</th>
                         <th>Estatus Final</th>
                         <th>Fecha Recibido</th>
@@ -137,3 +201,86 @@
     </div>
   </div>
 </div>
+<script>
+  var fehca_inicio = document.getElementById('fecha_inicio');
+  var fecha_fin = document.getElementById('fecha_fin');
+
+  fehca_inicio.onchange = function(){
+        // console.log(fecha_inicio);
+        // console.log(moment(fehca_inicio.value));
+     if(fecha_fin.value != ""){
+        if(!moment(moment(fecha_fin.value)).isBefore(moment(fecha_inicio.value))){
+          // console.log('filtrar');
+          filtrar();
+        }
+        else{
+          bootbox.alert({ 
+            title: "Error",
+            message: "La fecha de Inicio debe ser Menor a la fecha Final",
+            type: "danger"
+          })
+        }
+     }
+  }
+  fecha_fin.onchange = function(){
+     if(fecha_inicio.value != ""){
+        if(!moment(moment(fecha_fin.value)).isBefore(moment(fecha_inicio.value))){
+          // console.log('filtrar');
+          filtrar();
+        }
+        else{
+          bootbox.alert({ 
+            title: "Error",
+            message: "La fecha de Inicio debe ser Menor a la fecha Final",
+            type: "danger"
+          })
+        }
+     }
+  }
+  //Evento para filtrar por area
+  var filtro_area = document.getElementById('filtro_area');
+  $( "#filtro_area" )
+    .change(function () {
+      var str = "";
+      $( "#filtro_area option:selected" ).each(function() {
+         opc = parseInt($(this)[0].value);
+         if(opc >= 0) {
+          
+          filtrar();
+          // console.log('opc',opc);
+          //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
+         }
+      });
+    })
+    .change();
+  //Evento para filtrar por estatus
+  var filtro_estatus_final = document.getElementById('filtro_estatus_final');
+  $( "#filtro_estatus_final" )
+    .change(function () {
+      var str = "";
+      $( "#filtro_estatus_final option:selected" ).each(function() {
+         opc = parseInt($(this)[0].value);
+         if(opc >= 0) {
+          
+          filtrar();
+          // console.log('opc',opc);
+          //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
+         }
+      });
+    })
+    .change();
+  function filtrar(){
+    $('#lista_oficios_internos').DataTable().ajax.reload();
+    $('#lista_oficios_externos').DataTable().ajax.reload();
+    $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+  }
+
+  $("#btn_remove_filtros").click(function(){
+    $("#fecha_fin").val("");
+    $("#fecha_inicio").val("");
+    $("#filtro_area").val("");
+    $("#filtro_estatus_final").val("");
+    filtrar();
+  })
+
+</script>

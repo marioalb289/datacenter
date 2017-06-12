@@ -57,6 +57,9 @@ $(document).ready(function(){
       })
       .change();*/
 
+      //Evento de filtro por fecha
+      
+
     
 
 
@@ -71,7 +74,13 @@ $(document).ready(function(){
         searchDelay: 1000,
         ajax: {
             "url": "?c=OfcPartes&a=listarOficiosExternos",
-            "type": "POST"
+            "type": "POST",
+            "data": function ( d ) {
+                d.fecha_inicio = fecha_inicio.value,
+                d.fecha_fin = fecha_fin.value,
+                d.area = filtro_area.value,
+                d.estatus_final = filtro_estatus_final.value
+            }            
         },
         "columns": [
             { "data": "folio","searchable": true,"orderable": true },
@@ -176,7 +185,13 @@ $(document).ready(function(){
         searchDelay: 1000,
         ajax: {
             "url": "?c=OfcPartes&a=listarOficiosInternos",
-            "type": "POST"
+            "type": "POST",
+            "data": function ( d ) {
+                d.fecha_inicio = fecha_inicio.value,
+                d.fecha_fin = fecha_fin.value,
+                d.area = filtro_area.value,
+                d.estatus_final = filtro_estatus_final.value
+            }    
         },
         "columns": [
             { "data": "folio", "searchable": true,"orderable": true},
@@ -278,7 +293,13 @@ $(document).ready(function(){
         searchDelay: 1000,
         ajax: {
             "url": "?c=OfcPartes&a=listarOficiosDestinoExterno",
-            "type": "POST"
+            "type": "POST",
+            "data": function ( d ) {
+                d.fecha_inicio = fecha_inicio.value,
+                d.fecha_fin = fecha_fin.value,
+                d.area = filtro_area.value,
+                d.estatus_final = filtro_estatus_final.value
+            }    
         },
         "columns": [
             { "data": "folio", "searchable": true,"orderable": true},

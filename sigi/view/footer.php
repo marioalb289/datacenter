@@ -11,6 +11,7 @@
         
         <script src="sigi/assets/js/jquery.gritter.min.js"></script>
         <script src="sigi/assets/js/bootstrap.min.js"></script>
+        <script src="sigi/assets/js/bootbox.min.js"></script>        
         <script src="sigi/assets/js/jasny-bootstrap.js"></script>
         <script src="sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>
         <script src="sigi/assets/js/ofcPartes.js"></script>

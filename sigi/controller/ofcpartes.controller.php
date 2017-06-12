@@ -35,7 +35,15 @@ class OfcPartesController
 
   public function IndexAction(){
     // print_r($_SESSION);
-    $this->layout->renderVista("ofcPartes","ofcPartes");
+
+    $area =  new Area();
+    $ar = $area->ListarAreas();
+
+        //require_once ("/../view/header.php");
+        //require_once '/../view/ofcPartes/ofcPartesAdd.php';
+
+
+    $this->layout->renderVista("ofcPartes","ofcPartes",array('areas' => $ar));
   }
 
   public function listarOficiosExternosAction(){
@@ -45,6 +53,8 @@ class OfcPartesController
     $group_by = '';
     $id_usuario = $_SESSION['data_user']['id'];
 
+    // print_r($_POST);exit;
+
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
       $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario AND sigi_vw_oficios_externos.estatus_final <> 'Cancelado' ";
@@ -53,12 +63,46 @@ class OfcPartesController
     elseif ($_SESSION['data_user']['privilegios'] == 2) {
        $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_externos.origen = 'Externo' ";
        $group_by = ' GROUP BY id_oficio ';
+       //Filtro por area para usuarios ejecutivos
+       if(isset($_POST['area']) && $_POST['area'] != ''  && intval($_POST['area']) > 0){
+        $id_area = intval($_POST['area']);
+        $cond = $cond . " AND id_area = $id_area";
+       }
 
     }
     //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
     else{
       $group_by = ' GROUP BY id_oficio ';
+      if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
+       $id_area = intval($_POST['area']);
+       $cond = $cond . " id_area = $id_area";
+      }
     }
+
+    //Filtros
+    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
+      //Filtrar por fecha
+      $fecha_inicio = $_POST['fecha_inicio'];
+      $fecha_fin = $_POST['fecha_fin'];
+      if($cond != ''){
+        $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+      else{
+        $cond= $cond." CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+    }
+    //Filtrar por estatus
+    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
+      $estatus_final = $_POST['estatus_final'];
+      if($cond != ''){
+        $cond= $cond."  AND estatus_final = $estatus_final"; 
+      }
+      else{
+        $cond= $cond." estatus_final = $estatus_final"; 
+      }
+    }
+
+    // print_r($cond);exit;
 
     $table = 'sigi_vw_oficios_externos';
     $columns = array(
@@ -77,6 +121,8 @@ class OfcPartesController
       array( 'db' => 'cargo',   'dt' => 'cargo' ),
       array( 'db' => 'institucion_emisor',   'dt' => 'institucion_emisor' ),
       array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
+      array( 'db' => 'id_area',   'dt' => 'id_area' ),
+      array( 'db' => 'area',   'dt' => 'area' ),
       array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
       array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
       array( 'db' => 'fecha_recibido',  'dt' => 'fecha_recibido'),
@@ -98,6 +144,9 @@ class OfcPartesController
     $cond = '';
     $group_by = '';
     $id_usuario = $_SESSION['data_user']['id'];
+
+    $fecha_inicio = '';
+    $fecha_fin = '';
 
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
@@ -126,6 +175,46 @@ class OfcPartesController
     else{
       $group_by = ' GROUP BY id_oficio ';
     }
+
+    //Filtros
+    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
+      //Filtrar por fecha
+      $fecha_inicio = $_POST['fecha_inicio'];
+      $fecha_fin = $_POST['fecha_fin'];
+      if($cond != ''){
+        $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+      else{
+        $cond= $cond." CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+    }
+    //Filtrar por estatus
+    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
+      $estatus_final = $_POST['estatus_final'];
+      if($cond != ''){
+        $cond= $cond."  AND estatus_final = $estatus_final"; 
+      }
+      else{
+        $cond= $cond." estatus_final = $estatus_final"; 
+      }
+    }
+    //Filtrar por area
+    if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
+       $id_area = intval($_POST['area']);
+       //Si eres usuario capturista y solo se filtra por area
+       if($_SESSION['data_user']['privilegios'] == 1 && $fecha_inicio != '' & $fecha_fin != ''){
+          $cond = $cond . " AND id_area = $id_area";
+
+       }
+       //Si eres usuarios capturista y filtras por area y por fecha
+       elseif ($_SESSION['data_user']['privilegios'] == 1 && $fecha_inicio == '' & $fecha_fin == '') {
+          $cond = $cond . " id_area = $id_area";         
+       }
+        else{
+          $cond = $cond . " AND id_area = $id_area";
+        }
+
+      }
 
     $table = 'sigi_vw_oficios_internos';
     $columns = array(
@@ -170,14 +259,12 @@ class OfcPartesController
     $group_by = '';
     $id_usuario = $_SESSION['data_user']['id'];
 
-    //si eres un usuario receptor, buscar solo los mensajes que te corresponden
-    //if($_SESSION['data_user']['privilegios'] == 3){
-      // $cond = " sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_internos.id_usuario_emisor = $id_usuario GROUP BY id_oficio  ";
-      $cond = " (
+    //Traer tosos los oficios con destino externo
+      $cond = " ((
       sigi_vw_oficios_des_externo.id_usuario_receptor = $id_usuario
       AND sigi_vw_oficios_des_externo.estatus_final <> 'Cancelado'
       )
-      OR (sigi_vw_oficios_des_externo.id_usuario_emisor = $id_usuario)
+      OR (sigi_vw_oficios_des_externo.id_usuario_emisor = $id_usuario))
       ";
       //Si eres directivo ademas de tus oficios, mostrar todos los demas oficios
       if($_SESSION['data_user']['privilegios'] == 2){
@@ -185,11 +272,25 @@ class OfcPartesController
       }
 
       $group_by = ' GROUP BY id_oficio ';
-    //}
-    //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
-    // else{
-    //   $group_by = ' GROUP BY id_oficio ';
-    // }
+
+      //Filtros
+    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
+      //Filtrar por fecha
+      $fecha_inicio = $_POST['fecha_inicio'];
+      $fecha_fin = $_POST['fecha_fin'];
+      $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+    }
+    //Filtrar por area
+    if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
+       $id_area = intval($_POST['area']);
+       $cond = $cond . " AND id_area = $id_area";
+    }
+    //Filtrar por estatus
+    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
+      $estatus_final = $_POST['estatus_final'];
+        $cond= $cond."  AND estatus_final = $estatus_final"; 
+    }
+
 
     $table = 'sigi_vw_oficios_des_externo';
     $columns = array(
