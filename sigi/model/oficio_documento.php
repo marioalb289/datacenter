@@ -567,7 +567,7 @@ class OficioDocumento
 
     }
 
-    public function getRespuestas($id_oficio){
+    public function getRespuestas($id_oficio,$limit = ''){
         try
         {
             // print_r($id_oficio);
@@ -582,6 +582,7 @@ class OficioDocumento
                 $cond
                ORDER BY
                 rr.fecha_recibido DESC
+                $limit
             ");
             // print_r($stm);exit;
 
@@ -589,6 +590,36 @@ class OficioDocumento
             $stm->execute(array($id_oficio));
 
             return $stm->fetchAll(PDO::FETCH_OBJ);
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function getPersonaResponde($id_oficio){
+        try
+        {
+            // print_r($id_oficio);
+            $cond = "rr.parent_id = ? GROUP BY rr.id_oficio";
+            
+            $stm = $this->pdo->prepare("
+               SELECT 
+                CONCAT(us.nombre,' ',us.apellido) as usuario,
+                odr.create_at as fecha_respuesta
+               FROM sigi_oficios_documentos_recepcion odr
+               JOIN usuarios us ON us.id = odr.id_usuario
+               WHERE odr.parent_id = ?
+               ORDER BY odr.create_at DESC
+               LIMIT 1
+            ");
+            // print_r($stm);exit;
+
+            
+            $stm->execute(array($id_oficio));
+
+            return $stm->fetch(PDO::FETCH_OBJ);
         }
         catch(Exception $e)
         {

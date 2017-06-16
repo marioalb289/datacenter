@@ -37,33 +37,7 @@ $(document).ready(function(){
       var recipient = button.data('whatever') // Extract info from data-* attributes
       // console.log('aqui datos button', recipient);
       $('#btn-confirmar').attr("href", recipient);
-      // // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-      // // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      // var modal = $(this)
-      // modal.find('.modal-title').text('New message to ' + recipient)
-      // modal.find('.modal-body input').val(recipient)
     })
-
-    /*Evento que muestra los campos necesarios para un oficio externo o interno*/
-    /*$( "#select_origen" )
-      .change(function () {
-        var str = "";
-        $( "#select_origen option:selected" ).each(function() {
-          str += $( this ).text();
-        });
-        if(str != ""){
-            form_tipo_origen(str.trim());  
-        }
-      })
-      .change();*/
-
-      //Evento de filtro por fecha
-      
-
-    
-
-
-
     //Evento del paginador de oficios externos
     var externos =  $('#lista_oficios_externos').DataTable({
         "ordering": true,
@@ -167,9 +141,39 @@ $(document).ready(function(){
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
-          $( "#lista_oficios_externos_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_externos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#lista_oficios_externos_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_recargar_externos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#lista_oficios_externos_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_imprimir_rep_ext' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-print' style='color: #818481;font-weight: 900;'></span>Imprimir</button>" );
           $( "#btn_recargar_externos" ).click(function() {
-            $('#lista_oficios_externos').DataTable().ajax.reload();
+          $('#lista_oficios_externos').DataTable().ajax.reload();
+          });
+          $( "#btn_imprimir_rep_ext" ).click(function() {
+            var params = $('#lista_oficios_externos').DataTable().ajax.params();
+            params.reporte = 1;
+            params.tipo_reporte = "externo";
+            console.log(params);
+            $.ajax({
+              method: "POST",
+              url: "?c=OfcPartes&a=createReportParam",
+              data: params
+            })
+              .done(function( res ) {                
+                
+                var respuesta = JSON.parse(res);
+                if(respuesta.success){
+                  window.location.href = "?c=OfcPartes&a=imprimirReporte";
+                }
+                else{
+                  //mensaje de error
+                  bootbox.alert({ 
+                    title: "Error",
+                    message: "No se pudo Imprimir el Reporte",
+                    type: "danger"
+                  })
+                }
+              })
+              .fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+            });
           });
         }
 
@@ -277,8 +281,38 @@ $(document).ready(function(){
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
           $( "#lista_oficios_internos_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_internos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#lista_oficios_internos_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_imprimir_rep_int' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-print' style='color: #818481;font-weight: 900;'></span>Imprimir</button>" );
           $( "#btn_recargar_internos" ).click(function() {
             $('#lista_oficios_internos').DataTable().ajax.reload();
+          });
+          $( "#btn_imprimir_rep_int" ).click(function() {
+            var params = $('#lista_oficios_internos').DataTable().ajax.params();
+            params.reporte = 1;
+            params.tipo_reporte = "interno";
+            console.log(params);
+            $.ajax({
+              method: "POST",
+              url: "?c=OfcPartes&a=createReportParam",
+              data: params
+            })
+              .done(function( res ) {                
+                
+                var respuesta = JSON.parse(res);
+                if(respuesta.success){
+                  window.location.href = "?c=OfcPartes&a=imprimirReporte";
+                }
+                else{
+                  //mensaje de error
+                  bootbox.alert({ 
+                    title: "Error",
+                    message: "No se pudo Imprimir el Reporte",
+                    type: "danger"
+                  })
+                }
+              })
+              .fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+            });
           });
         }
 
@@ -382,8 +416,38 @@ $(document).ready(function(){
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
           $( "#lista_oficios_destino_externo_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_destino_externo' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#lista_oficios_destino_externo_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_imprimir_rep_des_ext' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-print' style='color: #818481;font-weight: 900;'></span>Imprimir</button>" );
           $( "#btn_recargar_destino_externo" ).click(function() {
             $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+          });
+          $( "#btn_imprimir_rep_des_ext" ).click(function() {
+            var params = $('#lista_oficios_destino_externo').DataTable().ajax.params();
+            params.reporte = 1;
+            params.tipo_reporte = "des_externo";
+            console.log(params);
+            $.ajax({
+              method: "POST",
+              url: "?c=OfcPartes&a=createReportParam",
+              data: params
+            })
+              .done(function( res ) {                
+                
+                var respuesta = JSON.parse(res);
+                if(respuesta.success){
+                  window.location.href = "?c=OfcPartes&a=imprimirReporte";
+                }
+                else{
+                  //mensaje de error
+                  bootbox.alert({ 
+                    title: "Error",
+                    message: "No se pudo Imprimir el Reporte",
+                    type: "danger"
+                  })
+                }
+              })
+              .fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+            });
           });
         }
 

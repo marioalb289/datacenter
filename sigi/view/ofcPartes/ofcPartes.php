@@ -202,85 +202,91 @@
   </div>
 </div>
 <script>
-  var fehca_inicio = document.getElementById('fecha_inicio');
-  var fecha_fin = document.getElementById('fecha_fin');
+  $(document).ready(function(){
 
-  fehca_inicio.onchange = function(){
-        // console.log(fecha_inicio);
-        // console.log(moment(fehca_inicio.value));
-     if(fecha_fin.value != ""){
-        if(!moment(moment(fecha_fin.value)).isBefore(moment(fecha_inicio.value))){
-          // console.log('filtrar');
-          filtrar();
-        }
-        else{
-          bootbox.alert({ 
-            title: "Error",
-            message: "La fecha de Inicio debe ser Menor a la fecha Final",
-            type: "danger"
-          })
-        }
-     }
-  }
-  fecha_fin.onchange = function(){
-     if(fecha_inicio.value != ""){
-        if(!moment(moment(fecha_fin.value)).isBefore(moment(fecha_inicio.value))){
-          // console.log('filtrar');
-          filtrar();
-        }
-        else{
-          bootbox.alert({ 
-            title: "Error",
-            message: "La fecha de Inicio debe ser Menor a la fecha Final",
-            type: "danger"
-          })
-        }
-     }
-  }
-  //Evento para filtrar por area
-  var filtro_area = document.getElementById('filtro_area');
-  $( "#filtro_area" )
-    .change(function () {
-      var str = "";
-      $( "#filtro_area option:selected" ).each(function() {
-         opc = parseInt($(this)[0].value);
-         if(opc >= 0) {
-          
-          filtrar();
-          // console.log('opc',opc);
-          //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
-         }
-      });
-    })
-    .change();
-  //Evento para filtrar por estatus
-  var filtro_estatus_final = document.getElementById('filtro_estatus_final');
-  $( "#filtro_estatus_final" )
-    .change(function () {
-      var str = "";
-      $( "#filtro_estatus_final option:selected" ).each(function() {
-         opc = parseInt($(this)[0].value);
-         if(opc >= 0) {
-          
-          filtrar();
-          // console.log('opc',opc);
-          //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
-         }
-      });
-    })
-    .change();
-  function filtrar(){
-    $('#lista_oficios_internos').DataTable().ajax.reload();
-    $('#lista_oficios_externos').DataTable().ajax.reload();
-    $('#lista_oficios_destino_externo').DataTable().ajax.reload();
-  }
+    var fehca_inicio = document.getElementById('fecha_inicio');
+    var fecha_fin = document.getElementById('fecha_fin');
 
-  $("#btn_remove_filtros").click(function(){
-    $("#fecha_fin").val("");
-    $("#fecha_inicio").val("");
-    $("#filtro_area").val("");
-    $("#filtro_estatus_final").val("");
-    filtrar();
+    fehca_inicio.onchange = function(){
+          // console.log(fecha_inicio);
+          // console.log(moment(fehca_inicio.value));
+       if(fecha_fin.value != ""){
+          if(!moment(moment(fecha_fin.value)).isBefore(moment(fecha_inicio.value))){
+            // console.log('filtrar');
+            filtrar();
+          }
+          else{
+            bootbox.alert({ 
+              title: "Error",
+              message: "La fecha de Inicio debe ser Menor a la fecha Final",
+              type: "danger"
+            })
+          }
+       }
+    }
+    fecha_fin.onchange = function(){
+       if(fecha_inicio.value != ""){
+          if(!moment(moment(fecha_fin.value)).isBefore(moment(fecha_inicio.value))){
+            // console.log('filtrar');
+            filtrar();
+          }
+          else{
+            bootbox.alert({ 
+              title: "Error",
+              message: "La fecha de Inicio debe ser Menor a la fecha Final",
+              type: "danger"
+            })
+          }
+       }
+    }
+    //Evento para filtrar por area
+    var filtro_area = document.getElementById('filtro_area');
+    $( "#filtro_area" )
+      .change(function () {
+        var str = "";
+        $( "#filtro_area option:selected" ).each(function() {
+           opc = parseInt($(this)[0].value);
+           if(opc >= 0) {
+            
+            filtrar();
+            // console.log('opc',opc);
+            //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
+           }
+        });
+      })
+      .change();
+    //Evento para filtrar por estatus
+    var filtro_estatus_final = document.getElementById('filtro_estatus_final');
+    $( "#filtro_estatus_final" )
+      .change(function () {
+        var str = "";
+        $( "#filtro_estatus_final option:selected" ).each(function() {
+           opc = parseInt($(this)[0].value);
+           if(opc >= 0) {
+            
+            filtrar();
+            // console.log('opc',opc);
+            //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
+           }
+        });
+      })
+      .change();
+    function filtrar(){
+      $('#lista_oficios_internos').DataTable().ajax.reload();
+      $('#lista_oficios_externos').DataTable().ajax.reload();
+      $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+    }
+
+    $("#btn_remove_filtros").click(function(){
+      $("#fecha_fin").val("");
+      $("#fecha_inicio").val("");
+      $("#filtro_area").val("");
+      $("#filtro_estatus_final").val("");
+      filtrar();
+    })
+
   })
+
+  
 
 </script>

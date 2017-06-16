@@ -7,7 +7,7 @@ require( 'ssp.class.php' );
 class InitPaginador
 {
 	
-	function construir($table,$columns,$primaryKey,$extracond = '',$group_by = ''){
+	function construir($table,$columns,$primaryKey,$extracond = '',$group_by = '',$rep = false){
 		
 		 
 		/*
@@ -86,14 +86,22 @@ class InitPaginador
 		 */
 		 
 		$clase = new SSP();
+		$arr = $clase->simple( $_POST, $sql_details, $table, $primaryKey, $columns ,$extracond,$group_by,$rep);
 
-		$arr = $clase->simple( $_POST, $sql_details, $table, $primaryKey, $columns ,$extracond,$group_by);
+		if($rep){
 
-		// print_r($arr);exit;
-		header("Content-type:application/json");
-		echo json_encode($arr,JSON_UNESCAPED_UNICODE );
+			return $arr;
+		}
+		else{
+			// print_r($arr);exit;
+			header("Content-type:application/json");
+			echo json_encode($arr,JSON_UNESCAPED_UNICODE );
 
-		exit;
+			exit;
+			
+			return null;
+		}
+
 
 		 
 		/*echo json_encode(

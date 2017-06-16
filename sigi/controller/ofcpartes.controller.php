@@ -9,8 +9,10 @@ require_once ("sigi/model/area.php");
 require_once ("sigi/model/contador.php");
 require_once ("sigi/model/documento.php");
 require_once ("sigi/model/oficio_documento.php");
+require_once ("sigi/model/reportes_param.php");
 include ("sigi/class/init_paginador.php");
 require_once ("sigi/class/validate.class.php");
+
 //require_once ("/../view/header.php");
 
 
@@ -39,14 +41,92 @@ class OfcPartesController
     $area =  new Area();
     $ar = $area->ListarAreas();
 
-        //require_once ("/../view/header.php");
-        //require_once '/../view/ofcPartes/ofcPartesAdd.php';
-
-
     $this->layout->renderVista("ofcPartes","ofcPartes",array('areas' => $ar));
   }
 
-  public function listarOficiosExternosAction(){
+  public function createReportParamAction(){
+    // print_r($_POST);exit;
+    if(isset($_REQUEST['draw'])){
+      try {
+        if (!$this->validate->numero($_REQUEST['draw']))
+          throw new Exception("Accion no encontrada");
+          $_SESSION['reporte_params'] = $_POST;
+          echo json_encode(array('success' => true));
+        exit;
+
+
+        
+      } catch (Exception $e) {
+        echo json_encode(array('success' => false));
+        exit;
+        
+      }
+
+    }
+    else{
+      echo json_encode(array('success' => false));
+      exit;
+    }
+
+  }
+
+  public function imprimirReporteAction(){
+    try {
+      $data = array();
+      if(!isset($_SESSION['reporte_params']))
+        throw new Exception("Error al Generar Reporte");
+
+      $_POST = $_SESSION['reporte_params'];
+      // print_r($_POST);exit;
+      if($_POST['tipo_reporte'] == 'externo')
+        $data['externo'] = $this->listarOficiosExternosAction(true);
+      if($_POST['tipo_reporte'] == 'interno')
+        $data['interno'] = $this->listarOficiosInternosAction(true);
+      if($_POST['tipo_reporte'] == 'des_externo')
+        $data['des_externo'] = $this->listarOficiosDestinoExternoAction(true);
+      
+       $ofc_doc = new OficioDocumento();
+
+       foreach ($data as $key1 => $all) {
+         foreach ($all['data'] as $key2 => $oficio) {
+
+            $data[$key1]['data'][$key2]['fecha_respuesta'] = '';
+            $data[$key1]['data'][$key2]['tiempo_respuesta'] = '';
+            $data[$key1]['data'][$key2]['respondio'] = '';
+              //Obtener la ultima persona que respondio el mensaje y el tiempo de respuesta
+            if($oficio['estatus_final'] == 'Cerrado'){
+             $idOfc= intval( substr($oficio['DT_RowId'], 4)); 
+             $objOficioDoc = $ofc_doc->getRespuestas($idOfc,'LIMIT 1');
+             // print_r($objOficioDoc);exit;
+             $datetime1 = new DateTime($oficio['fecha_recibido']);
+             $datetime2 = new DateTime($objOficioDoc[0]->fecha_recibido);
+             $interval = $datetime1->diff($datetime2);
+
+             $data[$key1]['data'][$key2]['fecha_respuesta'] = $objOficioDoc[0]->fecha_recibido;
+             $data[$key1]['data'][$key2]['tiempo_respuesta'] = $interval->format('%a días %h horas %i minutos');
+             $data[$key1]['data'][$key2]['respondio'] = $objOficioDoc[0]->persona_responde.' de '.$objOficioDoc[0]->area;
+
+            }
+         }
+       }
+       // print_r($data);
+       // exit;
+
+      // $_SESSION['reporte_params'] = array();
+
+      $this->layout->renderVista("reportes","rep_lista_oficios",array('data' => $data));
+      
+    } catch (Exception $e) {
+      echo json_encode(array('success' => false));
+      exit;
+      
+    }
+
+  }
+
+  public function listarOficiosExternosAction($rep = false){
+
+
 
     $initPag = new InitPaginador();
     $cond = '';
@@ -130,12 +210,12 @@ class OfcPartesController
       );
     $primaryKey = 'id_oficio';
 
-    $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
+    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
 
   }
 
 
-  public function listarOficiosInternosAction(){
+  public function listarOficiosInternosAction($rep = false){
 
     // $initPag = new InitPaginador();
 
@@ -245,11 +325,11 @@ class OfcPartesController
       );
     $primaryKey = 'id_oficio';
 
-    $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
+    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
 
   }
 
-  public function listarOficiosDestinoExternoAction(){
+  public function listarOficiosDestinoExternoAction($rep = false){
 
     // $initPag = new InitPaginador();
 
@@ -324,7 +404,7 @@ class OfcPartesController
       );
     $primaryKey = 'id_oficio';
 
-    $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
+    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
 
   }
   public function listarOficiosExternosVincularAction(){

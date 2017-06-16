@@ -189,12 +189,15 @@ class SSP {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
-	static function simple ( $request, $conn, $table, $primaryKey, $columns, $extracond = '' ,$group_by = '')
+	static function simple ( $request, $conn, $table, $primaryKey, $columns, $extracond = '' ,$group_by = '',$rep = false)
 	{
 		$bindings = array();
 		$db = self::db( $conn );
 		// Build the SQL query string from the request
-		$limit = self::limit( $request, $columns );
+		if(!$rep)
+			$limit = self::limit( $request, $columns );
+		else
+			$limit = '';
 		$order = self::order( $request, $columns );
 		$where = self::filter( $request, $columns, $bindings );
 		$consulta_esp = '';

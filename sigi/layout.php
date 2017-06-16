@@ -13,9 +13,16 @@
                 throw new Exception("Controlador no encontrado");
             }else{
                 //echo "existe";
-                require_once ("sigi/view/header.php");
-                require_once "sigi/view/$modulo/$vista.php";
-                require_once ("sigi/view/footer.php");
+                if($modulo == 'reportes'){
+                	// print_r($vista);exit;
+                	require_once "sigi/view/$modulo/$vista.php";
+
+                }else{
+	                require_once ("sigi/view/header.php");
+	                require_once "sigi/view/$modulo/$vista.php";
+	                require_once ("sigi/view/footer.php");
+                	
+                }
             }
 		}
 	}
