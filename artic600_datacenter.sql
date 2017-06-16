@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-06-02 15:47:07
+Date: 2017-06-16 15:50:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -118,7 +118,7 @@ DROP TABLE IF EXISTS `sigi_contador_folios`;
 CREATE TABLE `sigi_contador_folios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_contador_folios
@@ -132,6 +132,22 @@ INSERT INTO `sigi_contador_folios` VALUES ('6');
 INSERT INTO `sigi_contador_folios` VALUES ('7');
 INSERT INTO `sigi_contador_folios` VALUES ('8');
 INSERT INTO `sigi_contador_folios` VALUES ('9');
+INSERT INTO `sigi_contador_folios` VALUES ('10');
+INSERT INTO `sigi_contador_folios` VALUES ('11');
+INSERT INTO `sigi_contador_folios` VALUES ('12');
+INSERT INTO `sigi_contador_folios` VALUES ('13');
+INSERT INTO `sigi_contador_folios` VALUES ('14');
+INSERT INTO `sigi_contador_folios` VALUES ('15');
+INSERT INTO `sigi_contador_folios` VALUES ('16');
+INSERT INTO `sigi_contador_folios` VALUES ('17');
+INSERT INTO `sigi_contador_folios` VALUES ('18');
+INSERT INTO `sigi_contador_folios` VALUES ('19');
+INSERT INTO `sigi_contador_folios` VALUES ('20');
+INSERT INTO `sigi_contador_folios` VALUES ('21');
+INSERT INTO `sigi_contador_folios` VALUES ('22');
+INSERT INTO `sigi_contador_folios` VALUES ('23');
+INSERT INTO `sigi_contador_folios` VALUES ('24');
+INSERT INTO `sigi_contador_folios` VALUES ('25');
 
 -- ----------------------------
 -- Table structure for sigi_documentos
@@ -147,7 +163,7 @@ CREATE TABLE `sigi_documentos` (
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_documentos
@@ -164,6 +180,23 @@ INSERT INTO `sigi_documentos` VALUES ('9', 'S000000062017-06-01-15-49-44SE', '0'
 INSERT INTO `sigi_documentos` VALUES ('10', 'S000000072017-06-01-15-50-37PRES', '0', 'documentos/2017/PRES/', '2017-06-01 15:50:37', '86', '2017-06-01 15:50:37', '86');
 INSERT INTO `sigi_documentos` VALUES ('11', 'S000000082017-06-01-15-54-40PRES', '0', 'documentos/2017/PRES/', '2017-06-01 15:54:40', '10', '2017-06-01 15:54:40', '10');
 INSERT INTO `sigi_documentos` VALUES ('12', 'S000000092017-06-01-15-55-48UVINE', '0', 'documentos/2017/UVINE/', '2017-06-01 15:55:48', '91', '2017-06-01 15:55:48', '91');
+INSERT INTO `sigi_documentos` VALUES ('13', 'R000000082017-06-05-10-05-13PRES', '0', 'documentos/2017/PRES/', '2017-06-05 10:05:13', '91', '2017-06-05 10:05:13', '91');
+INSERT INTO `sigi_documentos` VALUES ('14', 'S000000102017-06-05-14-13-04SE', '0', 'documentos/2017/SE/', '2017-06-05 14:13:04', '91', '2017-06-05 14:13:04', '91');
+INSERT INTO `sigi_documentos` VALUES ('15', 'S000000112017-06-05-14-14-37SE', '0', 'documentos/2017/SE/', '2017-06-05 14:14:37', '91', '2017-06-05 14:14:37', '91');
+INSERT INTO `sigi_documentos` VALUES ('16', 'S000000122017-06-05-14-23-18PRES', '0', 'documentos/2017/PRES/', '2017-06-05 14:23:18', '10', '2017-06-05 14:23:18', '10');
+INSERT INTO `sigi_documentos` VALUES ('17', 'S000000132017-06-05-14-31-01UVINE', '0', 'documentos/2017/UVINE/', '2017-06-05 14:31:01', '10', '2017-06-05 14:31:01', '10');
+INSERT INTO `sigi_documentos` VALUES ('18', 'S000000142017-06-05-14-35-30PRES', '0', 'documentos/2017/PRES/', '2017-06-05 14:35:30', '10', '2017-06-05 14:35:30', '10');
+INSERT INTO `sigi_documentos` VALUES ('19', 'S000000152017-06-05-14-40-57PRES', '0', 'documentos/2017/PRES/', '2017-06-05 14:40:57', '10', '2017-06-05 14:40:57', '10');
+INSERT INTO `sigi_documentos` VALUES ('20', 'S000000162017-06-05-14-44-23PRES', '0', 'documentos/2017/PRES/', '2017-06-05 14:44:23', '10', '2017-06-05 14:44:23', '10');
+INSERT INTO `sigi_documentos` VALUES ('21', 'S000000172017-06-08-14-15-49PRES', '0', 'documentos/2017/PRES/', '2017-06-08 14:15:49', '86', '2017-06-08 14:15:49', '86');
+INSERT INTO `sigi_documentos` VALUES ('22', 'S000000182017-06-08-14-16-53UVINE', '0', 'documentos/2017/UVINE/', '2017-06-08 14:16:53', '17', '2017-06-08 14:16:53', '17');
+INSERT INTO `sigi_documentos` VALUES ('23', 'S000000192017-06-08-14-19-23UVINE', '0', 'documentos/2017/UVINE/', '2017-06-08 14:19:23', '27', '2017-06-08 14:19:23', '27');
+INSERT INTO `sigi_documentos` VALUES ('24', 'S000000202017-06-08-14-20-03ST', '0', 'documentos/2017/ST/', '2017-06-08 14:20:03', '86', '2017-06-08 14:20:03', '86');
+INSERT INTO `sigi_documentos` VALUES ('25', 'S000000212017-06-08-14-30-46PRES', '0', 'documentos/2017/PRES/', '2017-06-08 14:30:46', '86', '2017-06-08 14:30:46', '86');
+INSERT INTO `sigi_documentos` VALUES ('26', 'S000000222017-06-08-14-31-11UVINE', '0', 'documentos/2017/UVINE/', '2017-06-08 14:31:11', '17', '2017-06-08 14:31:11', '17');
+INSERT INTO `sigi_documentos` VALUES ('27', 'S000000232017-06-08-14-32-01PRES', '0', 'documentos/2017/PRES/', '2017-06-08 14:32:01', '27', '2017-06-08 14:32:01', '27');
+INSERT INTO `sigi_documentos` VALUES ('28', 'S000000242017-06-08-14-32-39UTC', '0', 'documentos/2017/UTC/', '2017-06-08 14:32:39', '27', '2017-06-08 14:32:39', '27');
+INSERT INTO `sigi_documentos` VALUES ('29', 'S000000252017-06-08-14-32-59CONT', '0', 'documentos/2017/CONT/', '2017-06-08 14:32:59', '86', '2017-06-08 14:32:59', '86');
 
 -- ----------------------------
 -- Table structure for sigi_oficios
@@ -193,7 +226,7 @@ CREATE TABLE `sigi_oficios` (
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios
@@ -208,8 +241,25 @@ INSERT INTO `sigi_oficios` VALUES ('7', 'SOLICITUD', '00000004', 'S/N', 'INTERNO
 INSERT INTO `sigi_oficios` VALUES ('8', 'RESPUESTA', '00000004', 'S/N', 'EXTERNO', '10', 'Ernesto Cardenas Aguilar', 'Instituto Nacional Electoral', 'Director', 'respuesta a peticion de presidencia', '', '1', '1', 'INTERNO', '0', '2017-06-01', '03:25:00', 'se firmo de recibido el oficio', '2017-06-01 15:26:52', '10', '2017-06-01 15:41:17', '91');
 INSERT INTO `sigi_oficios` VALUES ('9', 'SOLICITUD', '00000006', 'S/N', 'INTERNO', '91', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'Reporte de finanzas del Estado', '', '1', '1', 'EXTERNO', '0', '0000-00-00', '00:00:00', 'Solicitud', '2017-06-01 15:49:44', '91', '2017-06-01 15:49:44', '91');
 INSERT INTO `sigi_oficios` VALUES ('10', 'RESPUESTA', '00000006', 'S/N', 'INTERNO', '86', '', '', '', 'LLego un oficio por correco, en respuesta para pre', '', '1', '1', 'INTERNO', '0', '0000-00-00', '00:00:00', 'Mensaje recibido por correo', '2017-06-01 15:50:37', '86', '2017-06-01 15:57:29', '91');
-INSERT INTO `sigi_oficios` VALUES ('11', 'SOLICITUD', '00000008', 'S/N', 'EXTERNO', '10', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'LLego oficio con destino a presidencia', '', '1', null, 'INTERNO', '0', '2017-06-01', '03:54:00', 'Informe de Gastos', '2017-06-01 15:54:40', '10', '2017-06-01 15:54:40', '10');
+INSERT INTO `sigi_oficios` VALUES ('11', 'SOLICITUD', '00000008', 'S/N', 'EXTERNO', '10', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'LLego oficio con destino a presidencia', '', '1', '1', 'INTERNO', '0', '2017-06-01', '03:54:00', 'Informe de Gastos', '2017-06-01 15:54:40', '10', '2017-06-01 15:54:40', '10');
 INSERT INTO `sigi_oficios` VALUES ('12', 'SOLICITUD', '00000009', 'S/N', 'INTERNO', '91', '', '', '', 'Requisición del personal', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', 'Hacer todas las peticiones necesarias', '2017-06-01 15:55:48', '91', '2017-06-01 15:55:48', '91');
+INSERT INTO `sigi_oficios` VALUES ('13', 'RESPUESTA', '00000008', 'IEPC/00001', 'EXTERNO', '91', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'SE ENVA RESPUESTA AL OFICIO SOLICITADO', '', '1', '1', 'INTERNO', '0', null, null, 'Archivo PDF Adjunto', '2017-06-05 10:05:13', '91', '2017-06-05 10:05:13', '91');
+INSERT INTO `sigi_oficios` VALUES ('14', 'SOLICITUD', '00000010', 'S/N', 'INTERNO', '91', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'Informe de Gastos Semestral', '', '1', null, 'EXTERNO', '0', '0000-00-00', '00:00:00', '', '2017-06-05 14:13:04', '91', '2017-06-05 14:13:04', '91');
+INSERT INTO `sigi_oficios` VALUES ('15', 'SOLICITUD', '00000011', 'IEPC/00002', 'INTERNO', '91', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'Informe de Gastos', '', '1', null, 'EXTERNO', '0', '0000-00-00', '00:00:00', '', '2017-06-05 14:14:37', '91', '2017-06-05 14:14:37', '91');
+INSERT INTO `sigi_oficios` VALUES ('16', 'SOLICITUD', '00000012', 'S/N', 'EXTERNO', '10', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'En respuesta a la solicitud de Información', '', '1', null, 'INTERNO', '0', '2017-06-05', '02:22:00', '', '2017-06-05 14:23:19', '10', '2017-06-05 14:23:19', '10');
+INSERT INTO `sigi_oficios` VALUES ('17', 'SOLICITUD', '00000013', 'S/N', 'EXTERNO', '10', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'Informe de Gastos', '', '1', null, 'INTERNO', '0', '2017-06-05', '02:30:00', '', '2017-06-05 14:31:01', '10', '2017-06-05 14:31:01', '10');
+INSERT INTO `sigi_oficios` VALUES ('18', 'SOLICITUD', '00000014', 'S/N', 'EXTERNO', '10', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'Informe de Gastos ', '', '1', null, 'INTERNO', '0', '2017-06-05', '02:33:00', '', '2017-06-05 14:35:30', '10', '2017-06-05 14:35:30', '10');
+INSERT INTO `sigi_oficios` VALUES ('19', 'SOLICITUD', '00000015', 'S/N', 'EXTERNO', '10', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'Informe de Gastos', '', '1', null, 'INTERNO', '0', '2017-06-05', '02:40:00', '', '2017-06-05 14:40:57', '10', '2017-06-05 14:40:57', '10');
+INSERT INTO `sigi_oficios` VALUES ('20', 'SOLICITUD', '00000016', 'S/N', 'EXTERNO', '10', 'Manuel Herrera Delgado', 'Finanzas del Estado', 'Director', 'Informe de Gastos', '', '1', null, 'INTERNO', '0', '2017-06-05', '02:43:00', '', '2017-06-05 14:44:23', '10', '2017-06-05 14:44:23', '10');
+INSERT INTO `sigi_oficios` VALUES ('21', 'SOLICITUD', '00000017', 'IEPC/00003', 'INTERNO', '86', '', '', '', 'Oficio de prueba Interno', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', 'OK', '2017-06-08 14:15:49', '86', '2017-06-08 14:15:49', '86');
+INSERT INTO `sigi_oficios` VALUES ('22', 'SOLICITUD', '00000018', 'IEPC/00004', 'INTERNO', '17', '', '', '', 'Mensaje de Prueba Interno', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', '', '2017-06-08 14:16:53', '17', '2017-06-08 14:16:53', '17');
+INSERT INTO `sigi_oficios` VALUES ('23', 'SOLICITUD', '00000019', 'S/N', 'INTERNO', '27', '', '', '', 'Mensaje de Prueba Interno de Secretaria Técnica', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', 'ok', '2017-06-08 14:19:23', '27', '2017-06-08 14:19:23', '27');
+INSERT INTO `sigi_oficios` VALUES ('24', 'SOLICITUD', '00000020', 'S/N', 'INTERNO', '86', '', '', '', 'Mensaje de Prueba de Vinculacion 2', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', '', '2017-06-08 14:20:04', '86', '2017-06-08 14:20:04', '86');
+INSERT INTO `sigi_oficios` VALUES ('25', 'SOLICITUD', '00000021', 'S/N', 'INTERNO', '86', '', '', '', 'Mensaje de prueba para presidencia', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', '', '2017-06-08 14:30:46', '86', '2017-06-08 14:30:46', '86');
+INSERT INTO `sigi_oficios` VALUES ('26', 'SOLICITUD', '00000022', 'S/N', 'INTERNO', '17', '', '', '', 'Mensaje de prueba para secretaria ejecutiva', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', '', '2017-06-08 14:31:11', '17', '2017-06-08 14:31:11', '17');
+INSERT INTO `sigi_oficios` VALUES ('27', 'SOLICITUD', '00000023', 'S/N', 'INTERNO', '27', '', '', '', 'oficio para presidencia', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', 'ok', '2017-06-08 14:32:01', '27', '2017-06-08 14:32:01', '27');
+INSERT INTO `sigi_oficios` VALUES ('28', 'SOLICITUD', '00000024', 'S/N', 'INTERNO', '27', '', '', '', 'oficio para unidad técnica de cómputo', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', 'ok', '2017-06-08 14:32:39', '27', '2017-06-08 14:32:39', '27');
+INSERT INTO `sigi_oficios` VALUES ('29', 'SOLICITUD', '00000025', 'S/N', 'INTERNO', '86', '', '', '', 'Mensaje para contraloria de prueba', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', 'ok', '2017-06-08 14:32:59', '86', '2017-06-08 14:32:59', '86');
 
 -- ----------------------------
 -- Table structure for sigi_oficios_documentos_recepcion
@@ -230,7 +280,7 @@ CREATE TABLE `sigi_oficios_documentos_recepcion` (
   `update_at` datetime DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios_documentos_recepcion
@@ -250,8 +300,53 @@ INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('12', null, '7', '7', '8
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('13', '7', '8', '8', '91', '0', '2017-06-01 15:41:45', 'Para conocimiento y archivo', 'Cerrado', '2017-06-01 15:26:52', '10', '2017-06-01 15:41:17', '91');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('14', null, '9', '9', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-06-01 15:49:44', '91', '2017-06-01 15:57:29', '91');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('15', '9', '10', '10', '91', '0', '2017-06-01 15:54:54', 'Para conocimiento y archivo', 'Cerrado', '2017-06-01 15:50:37', '86', '2017-06-01 15:57:29', '91');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('16', null, '11', '11', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-01 15:54:40', '10', '2017-06-01 15:54:40', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('16', null, '11', '11', '91', '0', '2017-06-05 09:52:26', 'Para el trámite que corresponda', 'Cerrado', '2017-06-01 15:54:40', '10', '2017-06-05 10:05:13', '91');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('17', null, '12', '12', '86', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-01 15:55:48', '91', '2017-06-01 15:55:48', '91');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('18', '11', '13', '13', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-06-05 10:05:13', '91', '2017-06-05 10:05:13', '91');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('19', null, '14', '14', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-06-05 14:13:04', '91', '2017-06-05 14:13:54', '91');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('20', null, '15', '15', '10', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-05 14:14:37', '91', '2017-06-05 14:14:37', '91');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('21', null, '16', '16', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-06-05 14:23:19', '10', '2017-06-05 14:41:36', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('22', null, '17', '17', '86', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-06-05 14:31:01', '10', '2017-06-05 14:41:49', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('23', null, '18', '18', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-06-05 14:35:30', '10', '2017-06-05 14:41:45', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('24', null, '19', '19', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cancelado', '2017-06-05 14:40:58', '10', '2017-06-05 14:41:41', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('25', null, '20', '20', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-05 14:44:23', '10', '2017-06-05 14:44:23', '10');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('26', null, '21', '21', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:15:49', '86', '2017-06-08 14:15:49', '86');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('27', null, '21', '21', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:15:49', '86', '2017-06-08 14:15:49', '86');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('28', null, '22', '22', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:16:53', '17', '2017-06-08 14:16:53', '17');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('29', null, '22', '22', '86', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:16:53', '17', '2017-06-08 14:16:53', '17');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('30', null, '23', '23', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:19:23', '27', '2017-06-08 14:19:23', '27');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('31', null, '23', '23', '86', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:19:23', '27', '2017-06-08 14:19:23', '27');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('32', null, '24', '24', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:20:04', '86', '2017-06-08 14:20:04', '86');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('33', null, '24', '24', '27', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:20:04', '86', '2017-06-08 14:20:04', '86');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('34', null, '25', '25', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:30:46', '86', '2017-06-08 14:30:46', '86');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('35', null, '26', '26', '0', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:31:11', '17', '2017-06-08 14:31:11', '17');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('36', null, '26', '26', '86', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:31:11', '17', '2017-06-08 14:31:11', '17');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('37', null, '27', '27', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:32:01', '27', '2017-06-08 14:32:01', '27');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('38', null, '28', '28', '1', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:32:39', '27', '2017-06-08 14:32:39', '27');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('39', null, '28', '28', '73', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:32:39', '27', '2017-06-08 14:32:39', '27');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('40', null, '29', '29', '9', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:32:59', '86', '2017-06-08 14:32:59', '86');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('41', null, '29', '29', '23', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-08 14:32:59', '86', '2017-06-08 14:32:59', '86');
+
+-- ----------------------------
+-- Table structure for sigi_reportes_param
+-- ----------------------------
+DROP TABLE IF EXISTS `sigi_reportes_param`;
+CREATE TABLE `sigi_reportes_param` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) DEFAULT NULL,
+  `params` text,
+  `active` int(1) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of sigi_reportes_param
+-- ----------------------------
+INSERT INTO `sigi_reportes_param` VALUES ('1', '10', '{\"draw\":\"1\",\"columns\":[{\"data\":\"folio\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"folio_institucion\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"nombre_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"institucion_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"asunto_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"estatus_inicial\",\"name\":\"\",\"searchable\":\"false\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"estatus_final\",\"name\":\"\",\"searchable\":\"false\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"fecha_recibido\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}}],\"order\":[{\"column\":\"7\",\"dir\":\"desc\"}],\"start\":\"0\",\"length\":\"10\",\"search\":{\"value\":\"\",\"regex\":\"false\"},\"fecha_inicio\":\"\",\"fecha_fin\":\"\",\"area\":\"\",\"estatus_final\":\"\",\"reporte\":\"1\"}', '1', '2017-06-14', '10');
+INSERT INTO `sigi_reportes_param` VALUES ('2', '10', '{\"draw\":\"1\",\"columns\":[{\"data\":\"folio\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"folio_institucion\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"nombre_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"institucion_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"asunto_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"estatus_inicial\",\"name\":\"\",\"searchable\":\"false\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"estatus_final\",\"name\":\"\",\"searchable\":\"false\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"fecha_recibido\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}}],\"order\":[{\"column\":\"7\",\"dir\":\"desc\"}],\"start\":\"0\",\"length\":\"10\",\"search\":{\"value\":\"\",\"regex\":\"false\"},\"fecha_inicio\":\"\",\"fecha_fin\":\"\",\"area\":\"\",\"estatus_final\":\"\",\"reporte\":\"1\"}', '1', '2017-06-14', '10');
+INSERT INTO `sigi_reportes_param` VALUES ('3', '10', '{\"draw\":\"1\",\"columns\":[{\"data\":\"folio\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"folio_institucion\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"nombre_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"institucion_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"asunto_emisor\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"estatus_inicial\",\"name\":\"\",\"searchable\":\"false\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"estatus_final\",\"name\":\"\",\"searchable\":\"false\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"fecha_recibido\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"true\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}},{\"data\":\"\",\"name\":\"\",\"searchable\":\"true\",\"orderable\":\"false\",\"search\":{\"value\":\"\",\"regex\":\"false\"}}],\"order\":[{\"column\":\"7\",\"dir\":\"desc\"}],\"start\":\"0\",\"length\":\"10\",\"search\":{\"value\":\"\",\"regex\":\"false\"},\"fecha_inicio\":\"\",\"fecha_fin\":\"\",\"area\":\"\",\"estatus_final\":\"\",\"reporte\":\"1\",\"tipo_reporte\":\"externo\"}', '1', '2017-06-14', '10');
 
 -- ----------------------------
 -- Table structure for siu_coga
@@ -626,6 +721,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	ofc.folio_institucion,
 	ofc.id_usuario_emisor AS id_usuario_emisor,
 	odr.ccp,
+	ar.id as id_area,
 	ar.nombre as area,
 	CONCAT(us.nombre,' ',us.apellido) as usuario,
 	odr.id_usuario AS id_usuario_receptor,
@@ -635,7 +731,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	ofc.asunto_emisor AS asunto_emisor,
 	odr.estatus_inicial AS estatus_inicial,
 	odr.estatus_final AS estatus_final,
-	odr.update_at AS fecha_recibido,
+	odr.create_at AS fecha_recibido,
 	odr.fecha_visto as fecha_visto
 FROM
 	sigi_oficios ofc
@@ -663,14 +759,18 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	ofc.cargo AS cargo,
 	ofc.institucion_emisor AS institucion_emisor,
 	ofc.asunto_emisor AS asunto_emisor,
+	ar.id as id_area,
+	ar.nombre as area,
 	odr.estatus_inicial AS estatus_inicial,
 	odr.estatus_final AS estatus_final,
-	odr.update_at as fecha_recibido,
+	odr.create_at as fecha_recibido,
 	odr.fecha_visto as fecha_visto
 FROM
 	sigi_oficios ofc
 JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
 JOIN sigi_documentos doc ON doc.id = odr.id_documentos
+JOIN usuarios us ON us.id = odr.id_usuario
+JOIN areas ar ON ar.id = us.area
 WHERE origen = 'EXTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ;
 
 -- ----------------------------
@@ -686,13 +786,14 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	ofc.id_usuario_emisor AS id_usuario_emisor,
 	odr.ccp,
   #IF(ofc.tipo_oficio = 'RESPUESTA',(SELECT CONCAT(utemp.nombre,' ',utemp.apellido) FROM usuarios utemp WHERE utemp.id = ofc.id_usuario_emisor),'')as persona_responde,
+	ar.id as id_area,
 	ar.nombre as area,
 	CONCAT(us.nombre,' ',us.apellido) as usuario,
 	odr.id_usuario AS id_usuario_receptor,
 	ofc.asunto_emisor AS asunto_emisor,
 	odr.estatus_inicial AS estatus_inicial,
 	odr.estatus_final AS estatus_final,
-	odr.update_at AS fecha_recibido,
+	odr.create_at AS fecha_recibido,
 	odr.fecha_visto as fecha_visto
 FROM
 	sigi_oficios ofc
