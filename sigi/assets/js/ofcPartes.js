@@ -26,6 +26,38 @@ $(document).ready(function(){
 
       };
 
+      $( "#btn_rep_todo" ).click(function() {
+        var params = {
+          externo : $('#lista_oficios_externos').DataTable().ajax.params(),
+          interno : $('#lista_oficios_internos').DataTable().ajax.params(),
+          des_externo : $('#lista_oficios_destino_externo').DataTable().ajax.params()
+        };
+        console.log(params);
+        $.ajax({
+          method: "POST",
+          url: "?c=OfcPartes&a=createReportParam",
+          data: params
+        })
+          .done(function( res ) {                
+            
+            var respuesta = JSON.parse(res);
+            if(respuesta.success){
+              window.location.href = "?c=OfcPartes&a=imprimirReporte";
+            }
+            else{
+              //mensaje de error
+              bootbox.alert({ 
+                title: "Error",
+                message: "No se pudo Imprimir el Reporte",
+                type: "danger"
+              })
+            }
+          })
+          .fail(function( jqXHR, textStatus ) {
+              alert( "Request failed: " + textStatus );
+        });
+      });
+
       //formato del datepicker
     $(".datepicker").datepicker({
         dateFormat: 'yy-mm-dd'
@@ -147,10 +179,9 @@ $(document).ready(function(){
           $('#lista_oficios_externos').DataTable().ajax.reload();
           });
           $( "#btn_imprimir_rep_ext" ).click(function() {
-            var params = $('#lista_oficios_externos').DataTable().ajax.params();
-            params.reporte = 1;
-            params.tipo_reporte = "externo";
-            console.log(params);
+            var params = {
+              externo : $('#lista_oficios_externos').DataTable().ajax.params()
+            };
             $.ajax({
               method: "POST",
               url: "?c=OfcPartes&a=createReportParam",
@@ -286,10 +317,9 @@ $(document).ready(function(){
             $('#lista_oficios_internos').DataTable().ajax.reload();
           });
           $( "#btn_imprimir_rep_int" ).click(function() {
-            var params = $('#lista_oficios_internos').DataTable().ajax.params();
-            params.reporte = 1;
-            params.tipo_reporte = "interno";
-            console.log(params);
+            var params = {
+              interno : $('#lista_oficios_internos').DataTable().ajax.params()
+            };
             $.ajax({
               method: "POST",
               url: "?c=OfcPartes&a=createReportParam",
@@ -421,10 +451,9 @@ $(document).ready(function(){
             $('#lista_oficios_destino_externo').DataTable().ajax.reload();
           });
           $( "#btn_imprimir_rep_des_ext" ).click(function() {
-            var params = $('#lista_oficios_destino_externo').DataTable().ajax.params();
-            params.reporte = 1;
-            params.tipo_reporte = "des_externo";
-            console.log(params);
+            var params = {
+              des_externo : $('#lista_oficios_destino_externo').DataTable().ajax.params()
+            };
             $.ajax({
               method: "POST",
               url: "?c=OfcPartes&a=createReportParam",

@@ -46,10 +46,10 @@ class OfcPartesController
 
   public function createReportParamAction(){
     // print_r($_POST);exit;
-    if(isset($_REQUEST['draw'])){
+    // if(isset($_REQUEST['draw'])){
       try {
-        if (!$this->validate->numero($_REQUEST['draw']))
-          throw new Exception("Accion no encontrada");
+        // if (!$this->validate->numero($_REQUEST['draw']))
+        //   throw new Exception("Accion no encontrada");
           $_SESSION['reporte_params'] = $_POST;
           echo json_encode(array('success' => true));
         exit;
@@ -62,11 +62,11 @@ class OfcPartesController
         
       }
 
-    }
-    else{
-      echo json_encode(array('success' => false));
-      exit;
-    }
+    //}
+    // else{
+    //   echo json_encode(array('success' => false));
+    //   exit;
+    // }
 
   }
 
@@ -77,13 +77,30 @@ class OfcPartesController
         throw new Exception("Error al Generar Reporte");
 
       $_POST = $_SESSION['reporte_params'];
+      $tempPost = $_POST;
       // print_r($_POST);exit;
-      if($_POST['tipo_reporte'] == 'externo')
+      if(isset($_POST['externo'])){
+        $_POST = $_POST['externo'];
         $data['externo'] = $this->listarOficiosExternosAction(true);
-      if($_POST['tipo_reporte'] == 'interno')
+        //$data['externo']['filtro_area'] = ($tempPost['externo']['area'] != '') ? $data['externo']['data'][0]['area'] : '';
+        //$data['externo']['filtro_fecha'] = ($tempPost['externo']['fecha_inicio'] != '' && $tempPost['externo']['fecha_fin'] != '') ? 'Del ' $tempPost['externo']['fecha_inicio']. ' al '. $tempPost['externo']['fecha_fin'] : '';
+
+        $_POST = $tempPost;
+      }
+      if(isset($_POST['interno'])){
+        $_POST = $_POST['interno'];
         $data['interno'] = $this->listarOficiosInternosAction(true);
-      if($_POST['tipo_reporte'] == 'des_externo')
-        $data['des_externo'] = $this->listarOficiosDestinoExternoAction(true);
+        // print_r($data['interno']);exit;
+        // $data['interno']['filtro_area'] = ($tempPost['interno']['area'] != '') ? $data['interno']['data'][0]['area'] : '';
+        $_POST = $tempPost;
+      }
+      if(isset($_POST['des_externo'])){
+        $_POST = $_POST['des_externo'];
+        $data['des_externo'] = $this->listarOficiosDestinoExternoAction(true);        
+        // print_r($data['des_externo']);exit;
+        // $data['des_externo']['filtro_area'] = ($tempPost['des_externo']['area'] != '') ? $data['des_externo']['data'][0]['area'] : '';
+        $_POST = $tempPost;
+      }
       
        $ofc_doc = new OficioDocumento();
 

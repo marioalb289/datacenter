@@ -7,6 +7,8 @@ class PDF extends PDF_Rotate
 	var $titulo = '';
 	var $titulo2 = '';
 	var $filtros = '';
+	var $array_width = array();
+	var $header_table = array();
 
 	var $widths;
 	var $aligns;
@@ -40,6 +42,11 @@ class PDF extends PDF_Rotate
 			//Save the current position
 			$x=$this->GetX();
 			$y=$this->GetY();
+
+			// print_r($x);
+			// print_r("<br>");			
+			// print_r($y);
+			// exit;
 			//Draw the border
 			$this->Rect($x,$y,$w,$h,($fill) ? 'DF': 'D');
 			//Print the text
@@ -129,13 +136,34 @@ class PDF extends PDF_Rotate
 		$this->Cell(0,10,$this->titulo2,0,0,'C');
 		// Salto de línea
 		$this->Ln();
-		$this->SetFont('Arial','',11);
+		$this->SetFont('Arial','',8);
 		$this->Cell(0,10,$this->filtros,0,0,'R');
+
 		// Salto de línea
-		$this->Ln(20);
+		$this->Ln();
+
+		// Colores, ancho de línea y fuente en negrita
+		$this->SetFillColor(245,245,245);
+		$this->SetTextColor(0);
+		$this->SetDrawColor(0,0,0);
+		$this->SetLineWidth(.1);
+		$this->SetFont('Arial','B',10);
+		
+
+		$this->SetWidths($this->array_width);
+
+
+		//Encabezados Tabla
+		//param 1, fila de datos
+		//param 2, color relleno de fila
+		//param 3, alto de la fila
+		$this->Row(array($this->header_table[0],$this->header_table[1],$this->header_table[2],$this->header_table[3],$this->header_table[4],$this->header_table[5],$this->header_table[6]),true,2);
+		//$this->SetY(20);
+		// Salto de línea
+		//$this->Ln(20);
 
 		//Marca de Agua
-		$this->RotatedText(-30,190,__DIR__.'/logo.png',0);
+		$this->RotatedText(-30,100,__DIR__.'/logo.png',0);
 	}
 
 	function RotatedText($x, $y, $img, $angle)
@@ -150,23 +178,6 @@ class PDF extends PDF_Rotate
 	// Tabla coloreada
 	function FancyTable($header, $data,$tipo_reporte,$array_width)
 	{
-	    // Colores, ancho de línea y fuente en negrita
-	    $this->SetFillColor(245,245,245);
-	    $this->SetTextColor(0);
-	    $this->SetDrawColor(0,0,0);
-	    $this->SetLineWidth(.1);
-	    $this->SetFont('Arial','B',10);
-	    
-
-	    $this->SetWidths($array_width);
-
-
-	    //Encabezados Tabla
-	    //param 1, fila de datos
-	    //param 2, color relleno de fila
-	    //param 3, alto de la fila
-	    $this->Row(array($header[0],$header[1],$header[2],$header[3],$header[4],$header[5],$header[6]),true,2);
-
 	    //Fila Datos
 	    // Restauración de colores y fuentes
 	    $this->SetFillColor(245);
@@ -197,7 +208,7 @@ class PDF extends PDF_Rotate
 	    		$fill
 	    	);
 
-	    	$fill = !$fill;
+	    	// $fill = !$fill;
 	    }
 	}
 }
@@ -207,8 +218,12 @@ class PDF extends PDF_Rotate
 $pdf=new PDF();
 
 $header = array('No. Oficio', 'Folio','Fecha de Registro', 'Fecha de Respuesta', 'Origen','Responde','Tiempo de Respuesta');
+$array_width = array(25, 30, 40, 40, 50, 50,45);
+$pdf->array_width = $array_width;
+$pdf->header_table = $header;
 foreach ($data['data'] as $key => $data_oficio) {
-	$array_width = array(25, 30, 40, 40, 50, 50,45);
+	// print_r($data_oficio);exit;
+
 	$pdf->titulo = 'Lista de Solicitudes Registradas';
 	if($key == 'externo')
 	  $pdf->titulo2 = 'Oficios Externos';
@@ -217,9 +232,12 @@ foreach ($data['data'] as $key => $data_oficio) {
 	if($key == 'des_externo')
 	  $pdf->titulo2 = 'Oficios con Destino Externo';
 	$pdf->filtros = 'Filtros';
-	$pdf->AddPage('L');
-	$pdf->FancyTable($header,$data_oficio,$key,$array_width);
+	if(!empty($data_oficio['data'])){
+		$pdf->AddPage('L');
+		$pdf->FancyTable($header,$data_oficio,$key,$array_width);		
+	}
 }
+$rep_name =  date('Y-m-d H:i:s')."_reporte";
 $pdf->Output();
 
 ?>

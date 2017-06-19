@@ -32,6 +32,7 @@
             <div class="col-md-4"><h4>Filtros</h4></div>
             <div class="col-md-8 text-right">
                 <button style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_remove_filtros">Quitar Filtros</button>
+                <button style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_rep_todo"><span class='glyphicon glyphicon-print' style='letter-spacing: 3px;color: #fff;font-weight: 900;'></span>Imprimir</button>
             </div>
           </div>    
         </div>
