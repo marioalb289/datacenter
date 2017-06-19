@@ -237,7 +237,7 @@ foreach ($data['data'] as $key => $data_oficio) {
 		$pdf->FancyTable($header,$data_oficio,$key,$array_width);		
 	}
 }
-$rep_name =  date('Y-m-d H:i:s')."_reporte";
+$rep_name =  date('Y-m-d H:i:s')."_reporte.pdf";
 $pdf->Output('D',$rep_name);
 
 ?>
