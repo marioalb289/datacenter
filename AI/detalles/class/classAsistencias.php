@@ -7,8 +7,8 @@ class sistema{
 			global $host, $usuario, $password, $dataBase;
 
 			$host      = 'localhost';
-			$usuario   = 'root';
-			$password  = '';
+			$usuario   = 'mario.canales';
+			$password  = 'alberto289';
 			$dataBase  = 'artic600_datacenter';
 
 			$conexion = mysql_connect($host, $usuario, $password);

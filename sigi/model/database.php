@@ -4,10 +4,12 @@ class Database
     public static function StartUp()
     {
 
-    	$host      = "localhost";
-        $usuario   = "root";
-        $password   = "";
-        $dataBase   = "artic600_datacenter";
+    	$host      = 'localhost';
+        $usuario   = 'mario.canales';
+        $password  = 'alberto289';
+        $dataBase  = 'artic600_datacenter';
+
+        
 
         
 
