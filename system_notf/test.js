@@ -1,31 +1,25 @@
-var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-var jwt = require('jsonwebtoken');
+var fs = require('fs');
+var https = require('https');
+
+var express = require('express');
+var app = express();
 require('dotenv').config();
 
-server.listen(8181, function () {
-  console.log('listening on http://<localhost:8181></localhost:8181>');
+var options = {
+   key  : fs.readFileSync(process.env.SERVER_KEY),
+   cert : fs.readFileSync(process.env.SERVER_CRT)
+};
+var serverPort = 8181;
+
+var server = https.createServer(options, app);
+var io = require('socket.io')(server);
+var jwt = require('jsonwebtoken');
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
-
-// io.on( 'connection', function( client ) {
-// 	// console.log( "New client !" );
-	
-	// client.on( 'message', function( data ) {
-	// 	io.sockets.emit( 'message', { name: data.name, message: data.message, usuario: data.usuario } );
-	// });
-	// client.on( 'notification', function( data ) {
-	// 	console.log(data);
-	// 	io.sockets.emit( 'notification', data );
-	// });
-	
-// });
-
-io.on('connect', function(socket){
+io.on('connection', function(socket){
 
 
 	// console.log(socket);
@@ -79,4 +73,6 @@ io.on('connect', function(socket){
     socket.on('authenticate', authenticate );
   });
 
-
+server.listen(serverPort,"0.0.0.0", function() {
+  console.log('server up and running at %s port', serverPort);
+});
