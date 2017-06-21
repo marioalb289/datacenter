@@ -5,6 +5,7 @@
         
         <meta charset="utf-8" />
         
+        <link rel="icon" type="image/png" href="AI/image/logo.png" />
         <link rel="stylesheet" href="sigi/assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="sigi/assets/css/dataTables.bootstrap.min.css" />
         <link rel="stylesheet" href="sigi/assets/css/jasny-bootstrap.css" />
