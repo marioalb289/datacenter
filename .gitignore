@@ -6,6 +6,7 @@
 \.metadata/
 Servers/
 target/
+/AI/resumen/mpdf
 /vendor
 /documentos
 /system_notf/node_modules
