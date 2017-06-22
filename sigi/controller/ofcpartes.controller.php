@@ -154,11 +154,11 @@ class OfcPartesController
 
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
-      $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario AND sigi_vw_oficios_externos.estatus_final <> 'Cancelado' ";
+      $cond = " (sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario AND sigi_vw_oficios_externos.estatus_final <> 'Cancelado') ";
     }
     //si eres un alto directivo
     elseif ($_SESSION['data_user']['privilegios'] == 2) {
-       $cond = " sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_externos.origen = 'Externo' ";
+       $cond = " (sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_externos.origen = 'Externo') ";
        $group_by = ' GROUP BY id_oficio ';
        //Filtro por area para usuarios ejecutivos
        if(isset($_POST['area']) && $_POST['area'] != ''  && intval($_POST['area']) > 0){
@@ -248,23 +248,23 @@ class OfcPartesController
     //si eres un usuario receptor, buscar solo los mensajes que te corresponden
     if($_SESSION['data_user']['privilegios'] == 3){
       // $cond = " sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_internos.id_usuario_emisor = $id_usuario GROUP BY id_oficio  ";
-      $cond = " (
+      $cond = " ((
       sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario
       AND sigi_vw_oficios_internos.estatus_final <> 'Cancelado'
       )
-      OR (id_usuario_emisor = $id_usuario)
+      OR (id_usuario_emisor = $id_usuario))
       ";
 
       $group_by = ' GROUP BY id_oficio ';
     }
     //si eres un alto directivo
     elseif ($_SESSION['data_user']['privilegios'] == 2) {
-       $cond = " (
+       $cond = " ((
       sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario
       AND sigi_vw_oficios_internos.estatus_final <> 'Cancelado'
       )
       OR (id_usuario_emisor = $id_usuario) 
-      OR origen = 'Interno'";
+      OR origen = 'Interno' )";
        $group_by = ' GROUP BY id_oficio ';
 
     }
@@ -357,7 +357,7 @@ class OfcPartesController
     $id_usuario = $_SESSION['data_user']['id'];
 
     //Traer tosos los oficios con destino externo
-      $cond = " ((
+      $cond = " (((
       sigi_vw_oficios_des_externo.id_usuario_receptor = $id_usuario
       AND sigi_vw_oficios_des_externo.estatus_final <> 'Cancelado'
       )
@@ -365,7 +365,9 @@ class OfcPartesController
       ";
       //Si eres directivo ademas de tus oficios, mostrar todos los demas oficios
       if($_SESSION['data_user']['privilegios'] == 2){
-        $cond = $cond." OR origen = 'Interno'";
+        $cond = $cond." OR origen = 'Interno')";
+      }else{
+        $cond = $cond.")";
       }
 
       $group_by = ' GROUP BY id_oficio ';

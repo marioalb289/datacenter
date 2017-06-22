@@ -94,6 +94,7 @@ $(document).ready(function(){
             { "data": "nombre_emisor","searchable": true,"orderable": true },
             { "data": "institucion_emisor","searchable": true,"orderable": true },
             { "data": "asunto_emisor" ,"searchable": true,"orderable": false},
+            { "data": "area" ,"searchable": true,"orderable": false},
             { "data": "estatus_inicial", "searchable": false,"orderable": false },
             { 
               "data": "estatus_final" ,
@@ -169,7 +170,7 @@ $(document).ready(function(){
             }
         ] ,       
       language: language,
-      "order": [[ 7, 'desc' ]],
+      "order": [[ 8, 'desc' ]],
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();

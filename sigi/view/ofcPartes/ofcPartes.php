@@ -139,7 +139,7 @@
                     <tr>
                       <th>Folio</th>
                       <th>N° Oficio</th>
-                      <th>Area</th>
+                      <th>Area Origen</th>
                       <th>Usuario</th>
                       <th>Asunto</th>
                       <th>Estatus Inicial</th>
@@ -162,7 +162,7 @@
                     <tr>
                       <th>Folio</th>
                       <th>N° Oficio</th>
-                      <th>Area</th>
+                      <th>Area Origen</th>
                       <th>Usuario</th>
                       <th>Dependencia</th>
                       <th>Asunto</th>
