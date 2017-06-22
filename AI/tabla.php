@@ -6,29 +6,32 @@ session_start();
         if ($_SESSION['prv'] == 1) {
             $tipUSU = 1;
         }
-        if ($_SESSION['prv'] != 1) {
+        if ($_SESSION['prv'] == 2) {
             $tipUSU = 0;
+        }
+        if ($_SESSION['prv'] == 3) {
+            header('Location: agenda.php');
         }
         include('head.php');
 
 ?>
 
-        <section>
+
 
 
 
             <p>
-            <h1>Eventos de los proximos 15 días</h1>
-            <canvas id="canvas" style="border:2px solid black;" width="920" height="auto"></canvas>
+            <h1>Eventos de los proximos 7 días</h1>
+            <canvas id="canvas" style="border:2px solid black; background: #d8d8d8; width: 50% !important;" width="920" height="auto"></canvas>
             <script>
                 var canvas = document.getElementById("canvas");
-                canvas.height=window.innerHeight;
+                canvas.height=1156;
                 var ctx = canvas.getContext("2d");
                 var data = 
                     "<svg xmlns='http://www.w3.org/2000/svg' width='920' height='auto'>" +
                         "<foreignObject width='100%' height='100%'>" +
                             "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:20px'>" +
-                                "<table border='1' style='text-align: center; center;width: 100%;'>" +
+                                "<table border='1' style='text-align: center; center;width: 100%; background: #d8d8d8;'>" +
                                     "<tr style='background: #8c1b67; color: white; font-size: x-large; font-weight: 900;'>" +
                                         "<td style='padding: 1%; width: 33%; font-family: sans-serif;'>Fecha</td>" +
                                         "<td style='padding: 1%; width: 33%; font-family: sans-serif;'>Actividad</td>" +
@@ -36,10 +39,11 @@ session_start();
                                     "</tr>" +
                                     <?php
                                     $hoy = date("Y-m-d");
-                                    $semana = date( "Y-m-d", strtotime( "+15 day", strtotime( $hoy ) ) );
+                                    $semana = date( "Y-m-d", strtotime( "+7 day", strtotime( $hoy ) ) );
                                     $clase = new sistema;
                                     $clase->conexion();
-                                    $sql = mysql_query("SELECT * FROM solicitudes WHERE estado = '9' AND fecha_evento_fin BETWEEN '".$hoy."'  AND '".$semana."' ORDER BY fecha_evento ASC LIMIT 15");
+                                    $sql = mysql_query("SELECT * FROM solicitudes WHERE (estado = '9' AND tipo_agenda != '3' AND (fecha_evento_fin BETWEEN '".$hoy."' AND '".$semana."')) OR (estado = '9' AND tipo_agenda != '3' AND fecha_evento < '".$hoy."' AND fecha_evento_fin > '".$semana."') ORDER BY fecha_evento ASC");
+                                    $cont = 0;
                                     if(mysql_num_rows($sql)>0){
                                         while($mostrarx = mysql_fetch_array($sql)){
                                             $aNOx = substr($mostrarx['fecha_evento'],0,4);
@@ -48,7 +52,7 @@ session_start();
                                             $aNOT = substr($mostrarx['fecha_evento_fin'],0,4);
                                             $mNOT = substr($mostrarx['fecha_evento_fin'],5,2);
                                             $dNOT = substr($mostrarx['fecha_evento_fin'],8,2);
-
+                                            $cont = $cont + 1;
                                             if ($mNOx == 1) {
                                                 $mNOx = 'Enero';
                                             }
@@ -96,7 +100,7 @@ session_start();
                                             elseif ($mNOx == 12) {
                                                 $mNOx = 'Diciembre';
                                             }
-
+                                            
                                             if ($mNOT == 1) {
                                                 $mNOT = 'Enero';
                                             }
@@ -152,6 +156,16 @@ session_start();
                                             "</tr>" +
                                     <?php
                                         }
+                                        while($cont < 15){
+                                            $cont = $cont + 1;
+                                            ?>
+                                            "<tr>" +
+                                                "<td style='padding: 1%; width: 33%; font-family: sans-serif;'></td>" +
+                                                "<td style='padding: 1%; width: 33%; font-family: sans-serif;'>Sin más actividades</td>" +
+                                                "<td style='padding: 1%; width: 33%; font-family: sans-serif;'></td>" +
+                                            "</tr>" +
+                                            <?php
+                                        }
                                     }
                                     ?>
 
@@ -170,8 +184,6 @@ session_start();
                 img.src = url;
                 </script>
 
-
-        </section>
     </body>
 </html>
     <?php

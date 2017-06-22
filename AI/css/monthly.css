@@ -239,7 +239,7 @@
 	left: 0.05em;
 	font-size: 0.9em;
 	padding: 0;
-	width: 1.25em;
+	width: 2.25em;
 	height: 1.25em;
 	line-height: 1.25em;
 	text-align: center;
@@ -369,9 +369,9 @@
 .monthly-event-list::-webkit-scrollbar-thumb:hover {background: #555;}
 
 /* Language-specific. Default is English. */
-.monthly-reset:after		{ content: 'Today'; }
-.monthly-cal:after			{ content: 'Month'; }
-.monthly-list-item:after	{ content: 'No Events'; }
+.monthly-reset:after		{ content: 'Hoy'; }
+.monthly-cal:after			{ content: 'Mes'; }
+.monthly-list-item:after	{ content: 'Sin eventos'; }
 
 .monthly-locale-fr .monthly-reset:after		{ content: "aujourd'hui"; }
 .monthly-locale-fr .monthly-cal:after		{ content: "mois"; }

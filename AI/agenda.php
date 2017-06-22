@@ -13,8 +13,11 @@ session_start();
         if ($_SESSION['prv'] == 1) {
             $tipUSU = 1;
         }
-        if ($_SESSION['prv'] != 1) {
+        if ($_SESSION['prv'] == 2) {
             $tipUSU = 0;
+        }
+        if ($_SESSION['prv'] == 3) {
+            $tipUSU = 3;
         }
 include('head.php');
 ?>
@@ -34,7 +37,21 @@ include('head.php');
 
 <section>
 <section style="margin-top: 0; width: 100%;">
-  <h2>Agenda</h2>
+
+	<a href="agenda.php?te=1">
+    	<button style="float: left;width: 165px;height: 35px;background: #8c1b67;border-color: #8c1b67; margin-right: 6px;" type="submit" class="btn btn-block btn-primary">Ver agenda institucional</button>
+    </a>
+    <a href="agenda.php?te=2">
+    	<button style="float: left;width: 165px;height: 35px;background: #7b6975;border-color: #7b6975; margin-right: 6px;" type="submit" class="btn btn-block btn-primary">Ver calendario electoral</button>
+    </a>
+    <a href="agenda.php">
+    	<button style="float: left;width: 165px;height: 35px;background: #8a8a8a;border-color: #8a8a8a; margin-right: 6px;" type="submit" class="btn btn-block btn-primary">Ver todos los eventos</button>
+    </a>
+    <a target="_blank" href="resumen/">
+        <button style="float: left;width: 165px;height: 35px;background: #ffffff;border-color: black; margin-right: 6px; color: black;" type="submit" class="btn btn-block btn-primary">Programación semanal</button>
+    </a>
+
+	<br>
     <center>
         <div class="monthly" id="mycalendar"></div>
 <script type="text/javascript" src="js/jquery.js"></script>

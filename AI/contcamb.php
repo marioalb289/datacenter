@@ -1,33 +1,43 @@
 <?php
 session_start();
     if (isset($_SESSION['nom']) && isset($_SESSION['cor']) && isset($_SESSION['prv']) && isset($_SESSION['con'])){
+
         include('detalles/class/classAsistencias.php');
         $clase = new sistema;
+        /*
+        $_SESSION['nom'];
+        $_SESSION['cor'];
+        $_SESSION['prv'];
+        $_SESSION['con'];
+        */
         if ($_SESSION['prv'] == 1) {
             $tipUSU = 1;
         }
-        if ($_SESSION['prv'] == 2) {
+        if ($_SESSION['prv'] != 1) {
             $tipUSU = 0;
         }
-        if ($_SESSION['prv'] == 3) {
-            $tipUSU = 3;
-        }
-        include('head.php');
+include('head.php');
 
-        if(@$_POST['llllll']){
-            $clase->valact();
-        }
-        elseif (@$_POST['kkkkkk']) {
-            $clase->valact();
-        }
+    if(@$_POST['llllll']){
+        $clase->valactcont();
+    }
+
 ?>
 
-        <section>
-                <?php
-                    $clase->conexion();
-                    $clase->even();
-                ?>
-        </section>
+<section>
+<section style="margin-top: 0; width: 100%;">
+  <h2>Editar contraseña</h2>
+  <?php
+    $clase->conexion();
+    
+        $clase->ediSUco();
+  ?>              
+                  
+</section>
+</section>
+
+</body>
+</html>
     </body>
 </html>
     <?php

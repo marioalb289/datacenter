@@ -24,6 +24,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <title>Elige un sistema</title>
+    <link rel="icon" type="image/png" href="http://www.iepcdurango.mx/x/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="AI/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="AI/css/main.css" rel="stylesheet" media="screen">
@@ -80,27 +81,72 @@ session_start();
                     </li>
                     <li style="float: left;" class="men">
                         <a style="display: block; font-weight: 600; color: white; padding: 16px; text-decoration: none;" href="index.php">
-                           Cerrar Sessión
+                           Cerrar sesión
                         </a>
                     </li>
                 </ul>
     <div class="container" style="text-align: center;background: rgba(255, 255, 255, 0.67); margin: 0 auto; padding: 1%;border-radius: 35px;">
         <h2 class="form-signin-heading"><b>Elige un sistema</b></h2>
-        <!-- <a style="text-decoration: none; color: white;" href="AI/solicitudes.php">
-            <img src="AI/image/iconoAI.png" class="if-image" title="Agenda Institucional" style="width: 25%; margin: 2% auto;">
-        </a> -->
-        <!-- <a style="text-decoration: none; color: white;" href="http://www.iepcdurango.mx/SIU/1003150041/iepc/2/inicio?0409199127032017=<?echo $_SESSION['cor'];?> ">
-            <img src="AI/image/iconoSIU.png" class="if-image" title="Soporte Informatico a Usuarios" style="width: 25%; margin: 2% auto;">
-        </a> -->
-        <!-- <a style="text-decoration: none; color: white;" href="#">
-            <img src="AI/image/iconoSIA.png" class="if-image" title="Sistema de Inventario y Administración" style="width: 25%; margin: 2% auto;">
-        </a> -->
-        <!-- <a style="text-decoration: none; color: white;" href="#">
-            <img src="AI/image/iconoAE.png" class="if-image" title="Agenda Electoral" style="width: 25%; margin: 2% auto;">
-        </a> -->
-        <a style="text-decoration: none; color: white;" href="sigi.php">
-            <img src="AI/image/iconoSIGI.png" class="if-image" title="Sistema de Gestión de Información" style="width: 25%; margin: 2% auto;">
-        </a>
+        
+        <?php
+
+
+
+        if ($_SESSION['prv'] >= '1') {
+            echo '
+            <a style="text-decoration: none; color: white;" href="AI/solicitudes.php">
+                <img src="AI/image/iconoAI.png" class="if-image" title="Agenda Institucional" style="width: 25%; margin: 2% auto;">
+            </a>
+            ';
+        }
+
+
+        if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"),"unknown"))
+           $ip = getenv("HTTP_CLIENT_IP");
+        else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+           $ip = getenv("HTTP_X_FORWARDED_FOR");
+        else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+           $ip = getenv("REMOTE_ADDR");
+        else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+           $ip = $_SERVER['REMOTE_ADDR'];
+        else
+           $ip = "IP desconocida";
+        
+        if ( intval($_SESSION['prvsigi'])  >= 1) {
+            // if ($ip == '201.146.138.83') {
+                echo '
+                <a style="text-decoration: none; color: white;" href="sigi.php">
+                    <img src="AI/image/iconoSIGI.png" class="if-image" title="Sistema de Gestión de Información" style="width: 25%; margin: 2% auto;">
+                </a>
+                ';
+            // }
+            // elseif ($ip == '187.242.80.10') {
+                // echo '
+                // <a style="text-decoration: none; color: white;" href="http://192.168.1.146/sigi.php?usuario='.$_SESSION['cor'].'&contrasena='.$_SESSION['con'].'">
+                //     <img src="AI/image/iconoSIGI.png" class="if-image" title="Sistema de Gestión de Información" style="width: 25%; margin: 2% auto;">
+                // </a>
+                // ';
+            // }
+        }
+
+        /*if ($_SESSION['prvsiu'] >= '1') {
+            echo '
+            <a style="text-decoration: none; color: white;" href="http://www.iepcdurango.mx/SIU/1003150041/iepc/2/inicio?0409199127032017=<?echo $_SESSION["cor"];?> ">
+                <img src="AI/image/iconoSIU.png" class="if-image" title="Soporte Informatico a Usuarios" style="width: 25%; margin: 2% auto;">
+            </a>
+            ';
+        }
+        
+        if ($_SESSION['prvsia'] >= '1') {
+            echo '
+            <a style="text-decoration: none; color: white;" href="#">
+                <img src="AI/image/iconoSIA.png" class="if-image" title="Sistema de Inventario y Administración" style="width: 25%; margin: 2% auto;">
+            </a>
+            ';
+        }*/
+        
+
+        ?>
 
     </div>
     <script src="AI/js/jquery-2.2.4.min.js"></script>

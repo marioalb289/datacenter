@@ -17,6 +17,13 @@ $(function() {
 			backdrop:'static',
 		});
 	});
+
+	$('#Resumen').on('click', function(){
+		$('#modalresumen').modal({
+			show:true,
+			backdrop:'static',
+		});
+	});
 	
 	
 	$('#generarAsistencia').on('click', function(){

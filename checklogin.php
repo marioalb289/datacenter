@@ -12,20 +12,31 @@ session_start();
   if(mysql_num_rows($sql)>0){
     while($mostrarx = mysql_fetch_array($sql)){
 
-      
       $user = $mostrarx['correo'];
+      
       $tusu = $mostrarx['privilegios'];
+      $tususigi = $mostrarx['priv_sigi'];
+      $tususiu = $mostrarx['priv_sui'];
+      $tususia = $mostrarx['priv_sia'];
+
+
       $nombre = $mostrarx['nombre'];
       $apelli = $mostrarx['apellido'];
       $idx = $mostrarx['id'];
       $are = $mostrarx['area'];
+
       $_SESSION['loggedin'] = true;
       $_SESSION['nom'] = $nombre;
       $_SESSION['ape'] = $apelli;
       $_SESSION['cor'] = $user;
       $_SESSION['prv'] = $tusu;
+
+      $_SESSION['prvsigi'] = $tususigi;
+      $_SESSION['prvsiu'] = $tususiu;
+      $_SESSION['prvsia'] = $tususia;
+
       $_SESSION['idx'] = $idx;
-      $_SESSION['are'] = $idx;
+      $_SESSION['are'] = $are;
       $_SESSION['con'] = md5($_POST['password']);
 
       $_SESSION['start'] = time();
@@ -51,7 +62,6 @@ session_start();
       );
 
       $_SESSION['token'] = JWT::encode($token, $secret_key);
-
 
       /*
       Setcookie(nombre , valor, duracion, ruta, dominio, seguridad)

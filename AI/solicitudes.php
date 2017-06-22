@@ -17,13 +17,13 @@ session_start();
             $tipUSU = 0;
         }
         if ($_SESSION['prv'] == 3) {
-            $tipUSU = 0;
+            header('Location: agenda.php');
         }
-include('head.php');
 
-$clase->conexion();
+
+
 $sino = '0';
-
+include('head.php');
 
 
     if(@$_POST['llllll']){
@@ -34,6 +34,13 @@ $sino = '0';
     }
     elseif (@$_POST['pppppp']) {
         $clase->valregCE();
+    }
+    elseif (@$_POST['ACTRESU']) {
+        $clase->regmortalsqledita();
+    }
+
+    if (@$_GET['actidesaid']) {
+        $clase->actidesaplp();
     }
 
 
@@ -70,15 +77,18 @@ $sino = '0';
         <?php
         }
     ?>
-    <input type="button" value="Nueva Publicación" id="nuevaAsistencia" class="btn btn-primary" style="background: #8c1b67;border-color: #8c1b67;float: right;"/>
+
             <?php 
             if ( $tipUSU == '1') {
         ?>
-    <input type="button" value="Nueva Actividad" id="nuevaAsistenciax" class="btn btn-primary" style="background: #8c1b67;border-color: #8c1b67;float: right;margin-right: 1%;"/>
-    <input type="button" value="Resumen quincenal" id="nuevaAsistenciax" class="btn btn-primary" style="background: #8c1b67;border-color: #8c1b67;float: right;margin-right: 1%;"/>
+    <input type="button" value="Nueva actividad" id="nuevaAsistenciax" class="btn btn-primary" style="background: #808080;border-color: #808080;float: right;"/>
+    <!--<input type="button" value="Resumen semanal" id="Resumen" class="btn btn-primary" style="background: #8c1b67;border-color: #8c1b67;float: right;margin-right: 1%;"/>-->
             <?php 
           }
-        ?>
+        ?>  
+
+    <input type="button" value="Nueva publicación" id="nuevaAsistencia" class="btn btn-primary" style="background: #8c1b67;border-color: #8c1b67;float: right; margin-right: 1%;"/>
+
     <br />
     <br />
     <table class="table table-bordered table-condensed table-hover" style="text-align: center;">
@@ -130,6 +140,7 @@ $sino = '0';
       </div>
         <?php 
             if ( $tipUSU == '1') {
+                $clase->conexion();
         ?>
     <div class="modal fade" id="modalAsistenciax" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -140,13 +151,29 @@ $sino = '0';
             </div>
             <div class="modal-body">
             <?php
-                $clase->conexion();
                 $clase->regSUCE();
             ?>
             </div>
           </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalresumen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel"><b>Actualizar resumen</b></h4>
+            </div>
+            <div class="modal-body">
+            <?php
+                $clase->ediSURES();
+            ?>
+            </div>
+          </div>
+        </div>
+    </div>
+
     <?php
         }
     ?>
