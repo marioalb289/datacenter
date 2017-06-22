@@ -43,6 +43,7 @@ session_start();
       $_SESSION['expire'] = $_SESSION['start'];
 
       $_SESSION['data_user'] = array(
+          'nombre_formal' =>$mostrarx['nombre_formal'],
           'nombre' =>  $nombre,
           'apellido' =>  $apelli,
           'correo' =>  $user,

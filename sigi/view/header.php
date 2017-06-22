@@ -58,7 +58,7 @@
             <li style="float: left;" class="men">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    <span class="glyphicon glyphicon-user"></span> 
-                   <strong><?php echo $_SESSION['data_user']['nombre'].' '.$_SESSION['data_user']['apellido']?></strong>
+                   <strong><?php echo ucwords(strtolower($_SESSION['data_user']['nombre_formal']))?></strong>
                    <span class="glyphicon glyphicon-chevron-down"></span>
                </a>
                 

@@ -123,7 +123,7 @@ class Usuario
 				$plist = ':id_'.implode(',:id_', array_keys($cond));
 				$parms = array_combine(explode(",", $plist), $cond);	
 				$stm = $this->pdo->prepare("
-				SELECT us.id as id_usuario, us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
+				SELECT us.id as id_usuario, us.nombre_formal as nombre_formal, us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
 				JOIN areas ar ON ar.id = us.area WHERE us.id NOT IN($plist)
 				$cond2
 				");
@@ -131,7 +131,7 @@ class Usuario
 			}
 			else{
 				$stm = $this->pdo->prepare("
-				SELECT us.id as id_usuario, us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
+				SELECT us.id as id_usuario, us.nombre_formal as nombre_formal,us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
 				JOIN areas ar ON ar.id = us.area
 				$cond2 
 				");

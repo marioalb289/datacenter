@@ -61,7 +61,7 @@ $(document).ready(function(){
       //formato del datepicker
     $(".datepicker").datepicker({
         dateFormat: 'yy-mm-dd'
-    });	
+    }); 
 
     /*Evento que ejecuta el modal de cancelar solicitd*/
     $('#cancelar_solicitud').on('show.bs.modal', function (event) {
@@ -94,6 +94,7 @@ $(document).ready(function(){
             { "data": "nombre_emisor","searchable": true,"orderable": true },
             { "data": "institucion_emisor","searchable": true,"orderable": true },
             { "data": "asunto_emisor" ,"searchable": true,"orderable": false},
+            { "data": "area" ,"searchable": true,"orderable": false},
             { "data": "estatus_inicial", "searchable": false,"orderable": false },
             { 
               "data": "estatus_final" ,
@@ -169,7 +170,7 @@ $(document).ready(function(){
             }
         ] ,       
       language: language,
-      "order": [[ 7, 'desc' ]],
+      "order": [[ 8, 'desc' ]],
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
@@ -733,14 +734,14 @@ $(document).ready(function(){
     /*Configuracion inicial de la tabla de usuarios*/
     var temp = [];
     var t =  $('#example').DataTable({
-    	language: language,
+      language: language,
 
-    	"columnDefs": [ 
+      "columnDefs": [ 
         {
-    	    "searchable": false,
-    	    "orderable": false,
-    	    "targets": 0
-    	  },
+          "searchable": false,
+          "orderable": false,
+          "targets": 0
+        },
         {
             "targets": [ 1 ],
             "className": "dt-center",
@@ -756,7 +757,7 @@ $(document).ready(function(){
         },
 
        ],
-    	"order": [[ 1, 'asc' ]]
+      "order": [[ 1, 'asc' ]]
 
     });
 
@@ -815,8 +816,8 @@ $(document).ready(function(){
             $('#lista_usuarios').show();
         }
         else{
-        	//No mostrar
-        	$('#lista_usuarios').hide();
+          //No mostrar
+          $('#lista_usuarios').hide();
         }
      });
 
@@ -853,21 +854,22 @@ $(document).ready(function(){
       })
       .change();
 
+
     //Agrega campos extras dependiendo del tipo de origen
     function form_tipo_origen(origen){
-    	console.log(origen);
-    	if(origen == "Externo"){
-    		/*Cargar form de oficio externo*/
-    		$('#formExterno').show();
-    		$('#formInterno').hide();
+      console.log(origen);
+      if(origen == "Externo"){
+        /*Cargar form de oficio externo*/
+        $('#formExterno').show();
+        $('#formInterno').hide();
 
-    	}
-    	else if(origen == "Interno"){
-    		/*Cargar form de oficio interno*/
-    		//console.log('entro aqui');
-    		$('#formExterno').hide();
-    		$('#formInterno').show();
-    	}
+      }
+      else if(origen == "Interno"){
+        /*Cargar form de oficio interno*/
+        //console.log('entro aqui');
+        $('#formExterno').hide();
+        $('#formInterno').show();
+      }
 
     }
     //Carga el usuario correspondiente

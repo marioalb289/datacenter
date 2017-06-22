@@ -62,7 +62,7 @@ session_start();
   }
 
   .login {
-    position: absolute;
+    /*position: absolute;*/
     display: inline-block;
     width: 300px;
     height: 210px;
