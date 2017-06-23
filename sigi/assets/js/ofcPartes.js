@@ -42,7 +42,8 @@ $(document).ready(function(){
             
             var respuesta = JSON.parse(res);
             if(respuesta.success){
-              window.location.href = "?c=OfcPartes&a=imprimirReporte";
+              url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+              window.open(url, '_blank');
             }
             else{
               //mensaje de error
@@ -192,7 +193,8 @@ $(document).ready(function(){
                 
                 var respuesta = JSON.parse(res);
                 if(respuesta.success){
-                  window.location.href = "?c=OfcPartes&a=imprimirReporte";
+                  url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+                  window.open(url, '_blank');                 
                 }
                 else{
                   //mensaje de error
@@ -233,7 +235,7 @@ $(document).ready(function(){
             { "data": "folio", "searchable": true,"orderable": true},
             { "data": "folio_institucion", "searchable": true,"orderable": false},
             { "data": "area", "searchable": true,"orderable": true },
-            { "data": "usuario", "searchable": true,"orderable": true },
+            { "data": "usuario", "searchable": true,"orderable": true ,"className": "capitalize"},
             { "data": "asunto_emisor", "searchable": true,"orderable": false },
             { "data": "estatus_inicial", "searchable": false,"orderable": false },
             { 
@@ -330,7 +332,8 @@ $(document).ready(function(){
                 
                 var respuesta = JSON.parse(res);
                 if(respuesta.success){
-                  window.location.href = "?c=OfcPartes&a=imprimirReporte";
+                  url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+                  window.open(url, '_blank');
                 }
                 else{
                   //mensaje de error
@@ -370,7 +373,7 @@ $(document).ready(function(){
             { "data": "folio", "searchable": true,"orderable": true},
             { "data": "folio_institucion", "searchable": true,"orderable": false},
             { "data": "area", "searchable": false,"orderable": false },
-            { "data": "usuario", "searchable": false,"orderable": false },
+            { "data": "usuario", "searchable": false,"orderable": false,"className": "capitalize" },
             { 
               "data": "institucion_destino", 
               "searchable": false,
@@ -464,7 +467,8 @@ $(document).ready(function(){
                 
                 var respuesta = JSON.parse(res);
                 if(respuesta.success){
-                  window.location.href = "?c=OfcPartes&a=imprimirReporte";
+                  url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+                  window.open(url, '_blank');
                 }
                 else{
                   //mensaje de error
@@ -888,7 +892,7 @@ $(document).ready(function(){
             // console.log(respuesta);
             if(respuesta.success){
                 console.log(respuesta);
-                $("#"+selector).val(respuesta.data[0].nombre + " " + respuesta.data[0].apellido);
+                $("#"+selector).val(respuesta.data[0].nombre_formal);
                 $("#"+selector2).val(respuesta.data[0].id_usuario);
                 ocultarUsuarios(respuesta.data);
             }

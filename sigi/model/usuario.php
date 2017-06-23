@@ -37,6 +37,7 @@ class Usuario
 			$stm = $this->pdo->prepare("
 				SELECT
 					us.id AS id_usuario,
+					us.nombre_formal AS nombre_formal,
 					us.nombre AS nombre_usuario,
 					us.apellido AS apellido_usuario,
 					us.correo AS email,
@@ -216,7 +217,7 @@ class Usuario
 		try
 		{
 			$stm = $this->pdo
-			          ->prepare("SELECT id as id_usuario, nombre, apellido FROM usuarios us WHERE area = ? AND us.titular = 1 AND us.priv_sigi <> 1  ");
+			          ->prepare("SELECT id as id_usuario, nombre, apellido,nombre_formal FROM usuarios us WHERE area = ? AND us.titular = 1 AND us.priv_sigi <> 1  ");
 			          
 
 			$stm->execute(array($id_area));

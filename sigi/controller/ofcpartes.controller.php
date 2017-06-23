@@ -1198,6 +1198,7 @@ class OfcPartesController
 
           if(!empty($usr)){
 
+            $usr[0]->nombre_formal = ucwords(mb_strtolower($usr[0]->nombre_formal,'UTF-8')) ;
             echo json_encode(array('success' => true,'data' => $usr));
             // print_r($usr->correo);exit;
           }
@@ -1603,7 +1604,7 @@ class OfcPartesController
               $origen = ($_POST['select_origen'] == 1) ? 'INTERNO': 'EXTERNO';
               $destino = isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO' ? 'EXTERNO': 'INTERNO';
 
-              $data = array('id_oficio' => $id_ofc,'nombre_usuario' => $objUsr->nombre_usuario.' '.$objUsr->apellido_usuario.' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino,'ids_usuario_receptor' => $usr_notificar);
+              $data = array('id_oficio' => $id_ofc,'nombre_usuario' => ucwords(mb_strtolower($objUsr->nombre_formal,'UTF-8')).' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino,'ids_usuario_receptor' => $usr_notificar);
 
               // header("Content-type:application/json");
               echo json_encode(array("success"=>$success,"notificacion" => $data));
@@ -1908,7 +1909,7 @@ class OfcPartesController
                   array_push($usr_notificar,$value->id_usuario);
               }
 
-              $data = array('id_oficio' => $id_ofc,'nombre_usuario' => $objUsr->nombre_usuario.' '.$objUsr->apellido_usuario.' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino_notf,'ids_usuario_receptor' => $usr_notificar);
+              $data = array('id_oficio' => $id_ofc,'nombre_usuario' => ucwords(mb_strtolower($objUsr->nombre_formal,'UTF-8')).' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino_notf,'ids_usuario_receptor' => $usr_notificar);
 
               // header("Content-type:application/json");
               echo json_encode(array("success"=>$success,"notificacion" => $data));

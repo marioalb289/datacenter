@@ -41,15 +41,18 @@ session_start();
 
       $_SESSION['start'] = time();
       $_SESSION['expire'] = $_SESSION['start'];
+      $nombre_formal = ucwords(mb_strtolower(utf8_encode($mostrarx['nombre_formal']),'UTF-8'));
+
+      // print_r($nombre_formal);exit;
 
       $_SESSION['data_user'] = array(
-          'nombre_formal' => utf8_decode( $mostrarx['nombre_formal']),
-          'nombre' =>  utf8_decode($nombre),
-          'apellido' =>  utf8_decode($apelli),
+          'nombre_formal' => $nombre_formal ,
+          'nombre' =>  $nombre,
+          'apellido' =>  $apelli,
           'correo' =>  $user,
           'privilegios' => $mostrarx['priv_sigi'],
           'id' =>  $idx,
-          'area' =>  utf8_decode($are),
+          'area' =>  $are,
           'titular' => $mostrarx['titular']
       );
 

@@ -45,11 +45,11 @@
                     <div class="row">
                           <div class="col-md-6">
                             <label for="">Desde:</label>
-                            <input type="date" autofocus id="fecha_inicio" name="fecha_inicio"  class="form-control input-sm" style="display: inline; width: 70%; margin-left: 10px;" />                                  
+                            <input type="text" id="fecha_inicio" name="fecha_inicio"  class="form-control input-sm" placeholder="Fecha Inicio" tabindex="-1" style="cursor: auto;display: inline; width: 70%; margin-left: 10px;" />                                  
                           </div>
                           <div class="col-md-6">
                             <label for="">Hasta:</label>
-                            <input type="date" id="fecha_fin" name="fecha_fin"  class="form-control input-sm" style="display: inline; width: 70%; margin-left: 10px;" />
+                            <input type="text" id="fecha_fin" name="fecha_fin"  class="form-control input-sm" placeholder="Fecha Fin" tabindex="-1" style="cursor:auto;display: inline; width: 70%; margin-left: 10px;" />
                           </div>
                     </div>
                     
@@ -204,6 +204,25 @@
 </div>
 <script>
   $(document).ready(function(){
+
+    var currentDate = new Date();
+
+    $("#fecha_inicio").datepicker({
+        dateFormat: 'yy-mm-dd',
+        maxDate: 0,
+        changeYear: false,
+        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ]
+    }).attr('readonly', 'readonly');
+
+    $("#fecha_fin").datepicker({
+        dateFormat: 'yy-mm-dd',
+        maxDate: 0,
+        changeYear: false,
+        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ]
+    }).attr('readonly', 'readonly');
+    //$("#fecha_inicio").datepicker("setDate", "yy-mm-dd");
 
     var fehca_inicio = document.getElementById('fecha_inicio');
     var fecha_fin = document.getElementById('fecha_fin');

@@ -10,9 +10,10 @@
         <link rel="stylesheet" href="sigi/assets/css/dataTables.bootstrap.min.css" />
         <link rel="stylesheet" href="sigi/assets/css/jasny-bootstrap.css" />
         <!-- <link rel="stylesheet" href="sigi/assets/css/bootstrap-theme.min.css" />         -->
-        <link rel="stylesheet" href="sigi/assets/js/jquery-ui/jquery-ui.min.css" />
+        <link rel="stylesheet" href="sigi/assets/js/jquery-ui/jquery-ui.css" />
         <link rel="stylesheet" href="sigi/assets/css/style.css" />
         <link rel="stylesheet" href="sigi/assets/css/jquery.gritter.css" />
+        <link rel="stylesheet" href="sigi/assets/css/wickedpicker.min.css" />
 
         <script src="sigi/assets/js/moment.min.js"></script>
         
@@ -20,6 +21,7 @@
         <script src="sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>
         <!-- <script src="sigi/assets/js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script> -->
         <script src="sigi/assets/js/socket.io.js"></script>
+        <script src="sigi/assets/js/wickedpicker.js"></script>
 
 	</head>
     <body style="min-width: 960px !important;">

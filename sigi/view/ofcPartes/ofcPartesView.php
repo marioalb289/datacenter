@@ -80,7 +80,7 @@
 					
 					<div class="form-group">
 					   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
-					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
+					    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo ucwords(mb_strtolower($data['usuario_emisor']->nombre_formal,'UTF-8')) ; ?>" />
 					    <span class="text-danger"></span>
 					</div>
 
@@ -135,7 +135,7 @@
 
 				<div class="form-group">
 				   <label for="recepciones_nombreEmisor" class="required">Usuario Destino:</label>
-				    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
+				    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo ucwords(mb_strtolower($data['usuario_receptor']->nombre_formal,'UTF-8'));} ?>" />
 				    <span class="text-danger"></span>
 				</div>
 				<?php } ?>
@@ -269,7 +269,7 @@
 										<td></td>
 										<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
 										<td><?php echo $u->id_usuario; ?></td>
-									    <td><?php echo ucwords(strtolower($u->nombre_formal)); ?></td>
+									    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
 									    <td><?php echo $u->area; ?></td>
 									</tr>
 								<?php endforeach; ?>

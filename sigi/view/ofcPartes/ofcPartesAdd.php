@@ -84,10 +84,10 @@
 						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
 						        <div class="row">
 				        	        <div class="col-md-6">
-				        	        	<input type="date" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+				        	        	<input type="text" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
 				        	        </div>
 				        	        <div class="col-md-6">
-				        		        <input type="time" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+				        		        <input type="text" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm " placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
 				        	        </div>
 						        </div>
 						        
@@ -106,7 +106,7 @@
 
 						    <div class="form-group">
 						        <label for="recepciones_institucionEmisor" class="required">Usuario Origen:</label>
-						        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo $data['area_usuario']->nombre_usuario. ' '. $data['area_usuario']->apellido_usuario ?>" />
+						        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo ucwords(mb_strtolower($data['area_usuario']->nombre_formal,'UTF-8'));?>" />
 						        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
 						        <span class="text-danger"></span>
 						    </div>
@@ -216,7 +216,7 @@
 				    	        	    	<td></td>
 				    	        	    	<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
 				    	        	    	<td><?php echo $u->id_usuario; ?></td>
-				    	        	        <td><?php echo ucwords(strtolower($u->nombre_formal)); ?></td>
+				    	        	        <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
 				    	        	        <td><?php echo $u->area; ?></td>
 				    	        	    </tr>
 				    	        	<?php endforeach; ?>
@@ -231,339 +231,341 @@
 	</form>	
 </div>
 <script>
-	// var prueba = {  
-	//    "success":true,
-	//    "notificacion":{  
-	//       "id_oficio":"117",
-	//       "nombre_usuario":"Larry Vargas de Unidad T\u00e9cnica de Computo",
-	//       "asunto":"MENSAJE DE PRRUEBA",
-	//       "origen":"INTERNO",
-	//       "destino":"INTERNO",
-	//       "ids_usuario_receptor":[  
-	//          "8"
-	//       ]
-	//    }
-	// };
-	// console.log(prueba.notificacion);
-	// socket.emit( 'notification', prueba.notificacion );
 
-	//fecha y hora del calendario
-	moment.locale('es');
+	$(document).ready(function(){      //Add this line (and it's closing line)
+	    var currentDate = new Date();
 
-	$("#fecha_recepcion").val(moment().format("YYYY-MM-DD"));
-	$("#hora_recepcion").val(moment().format("hh:mm"));
+	    $("#fecha_recepcion").datepicker({
+	        dateFormat: 'yy-mm-dd',
+	        maxDate: 0,
+	        changeYear: false,
+	        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+	        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ]
+	    }).attr('readonly', 'readonly');
+	    $("#fecha_recepcion").datepicker("setDate", currentDate);
 
-	//Evento para validar campos y enviar notificaciones por sokect io
-	$("form").submit(function( event ) {
-		var res = $(this).validate();
-		if(res){
 
-			var formData = new FormData($(this)[0]);
+	    	//fecha y hora del calendario
+	    	moment.locale('es');
 
-		    $.ajax({
-		        url: '?c=OfcPartes&a=Guardar',
-		        type: 'POST',
-		        data: formData,
-		        async: false,
-		        success: function (data) {
-		        	event.preventDefault();
-		        	respuesta = JSON.parse(data); 
-		        	console.log('aqui respuesta',respuesta);
-		        	if(respuesta.success){
-		        		socket.emit( 'notification', respuesta.notificacion );
-		        		window.location.href = "sigi.php";
-		        	}
-		        	else{
-		        		window.location.href = "sigi.php?c=OfcPartes&a=add";
-		        	}
-		        },
-		        cache: false,
-		        contentType: false,
-		        processData: false
-		    });
+	    	//$("#fecha_recepcion").val(moment().format("YYYY-MM-DD"));
+	    	//$("#hora_recepcion").val(moment().format("hh:mm"));
+	    	var twelveHour = $('#hora_recepcion').wickedpicker({title: 'Selecciona Hora'});
 
-		}
+	    	//Evento para validar campos y enviar notificaciones por sokect io
+	    	$("form").submit(function( event ) {
+	    		var res = $(this).validate();
+	    		if(res){
 
-		
+	    			var formData = new FormData($(this)[0]);
 
-	    event.preventDefault();
-    });
-	$('.form-control').bind('blur', function () {
-	    return $(this).validateBlur();
+	    		    $.ajax({
+	    		        url: '?c=OfcPartes&a=Guardar',
+	    		        type: 'POST',
+	    		        data: formData,
+	    		        async: false,
+	    		        success: function (data) {
+	    		        	event.preventDefault();
+	    		        	respuesta = JSON.parse(data); 
+	    		        	console.log('aqui respuesta',respuesta);
+	    		        	if(respuesta.success){
+	    		        		socket.emit( 'notification', respuesta.notificacion );
+	    		        		window.location.href = "sigi.php";
+	    		        	}
+	    		        	else{
+	    		        		window.location.href = "sigi.php?c=OfcPartes&a=add";
+	    		        	}
+	    		        },
+	    		        cache: false,
+	    		        contentType: false,
+	    		        processData: false
+	    		    });
+
+	    		}
+
+	    		
+
+	    	    event.preventDefault();
+	        });
+	    	$('.form-control').bind('blur', function () {
+	    	    return $(this).validateBlur();
+	    	});
+
+	    	$('#folio_iepc').bind('blur', function () {
+	    	    return $(this).validateNumOficio();
+	    	});
+	    		//Evento para visualizar pdf al crear registro
+	        $(function(){
+	            $("#verPdf").click(loadPreviews_click);
+	        })
+
+	        function loadPreviews_click(e) {
+	            $("#documento_iepc").each(function() {
+	                var $input = $(this);
+	                var files = this.files;
+	                console.log(files);
+	                if(files == undefined || files.length == 0) return;
+	                //var files = files[0];            
+	                
+	                // FileReader support
+	                //if (FileReader && files && files.length) {
+	                      //console.log('aquiiiiiiiiiiiiiii');
+	                      var fr = new FileReader();
+	                      var extension = files[0].name.split('.').pop().toLowerCase();
+	                      fr.onload = function(e) {
+	                        success = fileTypes.indexOf(extension) > -1;
+	                        if (success) {
+
+	                          PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
+	                            pdfDoc = pdfDoc_;
+	                            document.getElementById('page_count').textContent = pdfDoc.numPages;
+
+	                            // Initial/first page rendering
+	                            renderPage(pageNum);
+	                          });
+	                        }
+
+	                      }
+	                      fr.onloadend = function(e) {
+	                        console.debug("Load End");
+	                      }
+	                      fr.readAsArrayBuffer(files[0]);
+	                 //}
+
+	                
+	            });
+	        }
+
+
+	        var fileTypes = ['pdf'];  //acceptable file types
+	        
+	        $("input:file").change(function (evt) {
+	          /*var parentEl = $("#modal-pdf-body");
+	          console.log(parentEl);*/     
+	          var tgt = evt.target || window.event.srcElement,
+	                          files = tgt.files;
+	          console.log(files[0].name); 
+
+	          $(".fileinput-new").text(files[0].name)
+	                
+	        });
+
+
+	        var pdfDoc = null,
+	            pageNum = 1,
+	            pageRendering = false,
+	            pageNumPending = null,
+	            scale = 2,
+	            canvas = document.getElementById('the-canvas');
+	            ctx = canvas.getContext('2d');
+
+	        /**
+	         * Get page info from document, resize canvas accordingly, and render page.
+	         * @param num Page number.
+	         */
+	        function renderPage(num) {
+	          pageRendering = true;
+	          // Using promise to fetch the page
+	          pdfDoc.getPage(num).then(function(page) {
+	            var viewport = page.getViewport(scale);
+	            canvas.height = viewport.height;
+	            canvas.width = viewport.width;
+
+	            // Render PDF page into canvas context
+	            var renderContext = {
+	              canvasContext: ctx,
+	              viewport: viewport
+	            };
+	            var renderTask = page.render(renderContext);
+
+	            // Wait for rendering to finish
+	            renderTask.promise.then(function() {
+	              console.log("termino de cargar");
+
+	              $('#myModal').modal({
+	                      show:true,
+	                      backdrop:'static',
+	                  });
+	              pageRendering = false;
+	              if (pageNumPending !== null) {
+	                // New page rendering is pending
+	                renderPage(pageNumPending);
+	                pageNumPending = null;
+	              }
+	            });
+	          });
+
+	          // Update page counters
+	          document.getElementById('page_num').textContent = pageNum;
+	        }
+
+	        /**
+	         * If another page rendering in progress, waits until the rendering is
+	         * finised. Otherwise, executes rendering immediately.
+	         */
+	        function queueRenderPage(num) {
+	          if (pageRendering) {
+	            pageNumPending = num;
+	          } else {
+	            renderPage(num);
+	          }
+	        }
+
+	        /**
+	         * Displays previous page.
+	         */
+	        function onPrevPage() {
+	          if (pageNum <= 1) {
+	            return;
+	          }
+	          pageNum--;
+	          queueRenderPage(pageNum);
+	        }
+	        document.getElementById('prev').addEventListener('click', onPrevPage);
+
+	        /**
+	         * Displays next page.
+	         */
+	        function onNextPage() {
+	          if (pageNum >= pdfDoc.numPages) {
+	            return;
+	          }
+	          pageNum++;
+	          queueRenderPage(pageNum);
+	        }
+	        document.getElementById('next').addEventListener('click', onNextPage);
+
+	        /**
+	         * Asynchronously downloads PDF.
+	         */
+
+	         //Eventos de los buscadores
+	    		$( function() {
+
+	    		    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+	    		          _create: function() {
+	    		            this._super();
+	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+	    		          },
+	    		          _renderItem: function( ul, item ) {
+	    		            return $( "<li>" )
+	    		              .attr( "data-value", item.value )
+	    		              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
+	    		              .appendTo( ul );
+	    		          },
+	    		          _renderMenu: function( ul, items ) {
+	    		            var that = this,
+	    		              currentCategory = "";
+	    		            $.each( items, function( index, item ) {
+	    		              var li;
+	    		              if ( item.nombre_emisor != currentCategory ) {
+	    		                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
+	    		                currentCategory = item.nombre_emisor;
+	    		              }
+	    		              li = that._renderItemData( ul, item );
+	    		              if ( item.nombre_emisor ) {
+	    		                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
+	    		              }
+	    		            });
+	    		          }
+	    		        });
+	    		 
+	    		    $( "#institucion_emisor" ).catcomplete({
+	    		      source: "?c=OfcPartes&a=buscadorInstitucion",
+	    		      minLength: 3,
+	    		      select: function( event, ui ) {
+	    		      	console.log(ui);
+	    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+	    		      	$("#cargo_emisor").val(ui.item.cargo);
+	    		      	$("#institucion_emisor").val(ui.item.value);
+	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	    		      }
+	    		    });
+
+	    		    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
+	    		          _create: function() {
+	    		            this._super();
+	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+	    		          },
+	    		          _renderItem: function( ul, item ) {
+	    		            return $( "<li class='autocomplete-child'>" )
+	    		              .attr( "data-value", item.value )
+	    		              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
+	    		              .appendTo( ul );
+	    		          },
+	    		          _renderMenu: function( ul, items ) {
+	                      var that = this,
+	                        currentCategory = "";
+	                      $.each( items, function( index, item ) {
+	                        var li;
+	                        if ( item.institucion_emisor != currentCategory ) {
+	                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+	                          currentCategory = item.institucion_emisor;
+	                        }
+	                        li = that._renderItemData( ul, item );
+	                        if ( item.institucion_emisor ) {
+	                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+	                        }
+	                      });
+	                    }
+	    		        });
+	    		 
+	    		    $( "#nombre_emisor" ).catcompleteNombre({
+	    		      source: "?c=OfcPartes&a=buscadorEmisor",
+	    		      minLength: 3,
+	    		      select: function( event, ui ) {
+	    		      	console.log(ui);
+	    		      	$("#nombre_emisor").val(ui.item.value);
+	    		      	$("#cargo_emisor").val(ui.item.cargo);
+	    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	    		      }
+	    		    });
+
+	    		    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
+	    		          _create: function() {
+	    		            this._super();
+	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+	    		          },
+	    		          _renderItem: function( ul, item ) {
+	    		            return $( "<li class='autocomplete-child'>" )
+	    		              .attr( "data-value", item.value )
+	    		              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
+	    		              .appendTo( ul );
+	    		          },
+	    		          _renderMenu: function( ul, items ) {
+	                      var that = this,
+	                        currentCategory = "";
+	                      $.each( items, function( index, item ) {
+	                        var li;
+	                        if ( item.institucion_emisor != currentCategory ) {
+	                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+	                          currentCategory = item.institucion_emisor;
+	                        }
+	                        li = that._renderItemData( ul, item );
+	                        if ( item.institucion_emisor ) {
+	                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+	                        }
+	                      });
+	                    }
+	    		        });
+	    		 
+	    		    $( "#cargo_emisor" ).catcompleteCargo({
+	    		      source: "?c=OfcPartes&a=buscadorCargo",
+	    		      minLength: 3,
+	    		      select: function( event, ui ) {
+	    		      	console.log(ui);
+	    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+	    		      	$("#cargo_emisor").val(ui.item.value);
+	    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	    		      }
+	    		    });
+
+
+
+	    		  } );
 	});
 
-	$('#folio_iepc').bind('blur', function () {
-	    return $(this).validateNumOficio();
-	});
-		//Evento para visualizar pdf al crear registro
-    $(function(){
-        $("#verPdf").click(loadPreviews_click);
-    })
-
-    function loadPreviews_click(e) {
-        $("#documento_iepc").each(function() {
-            var $input = $(this);
-            var files = this.files;
-            console.log(files);
-            if(files == undefined || files.length == 0) return;
-            //var files = files[0];            
-            
-            // FileReader support
-            //if (FileReader && files && files.length) {
-                  //console.log('aquiiiiiiiiiiiiiii');
-                  var fr = new FileReader();
-                  var extension = files[0].name.split('.').pop().toLowerCase();
-                  fr.onload = function(e) {
-                    success = fileTypes.indexOf(extension) > -1;
-                    if (success) {
-
-                      PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
-                        pdfDoc = pdfDoc_;
-                        document.getElementById('page_count').textContent = pdfDoc.numPages;
-
-                        // Initial/first page rendering
-                        renderPage(pageNum);
-                      });
-                    }
-
-                  }
-                  fr.onloadend = function(e) {
-                    console.debug("Load End");
-                  }
-                  fr.readAsArrayBuffer(files[0]);
-             //}
-
-            
-        });
-    }
-
-
-    var fileTypes = ['pdf'];  //acceptable file types
-    
-    $("input:file").change(function (evt) {
-      /*var parentEl = $("#modal-pdf-body");
-      console.log(parentEl);*/     
-      var tgt = evt.target || window.event.srcElement,
-                      files = tgt.files;
-      console.log(files[0].name); 
-
-      $(".fileinput-new").text(files[0].name)
-            
-    });
-
-
-    var pdfDoc = null,
-        pageNum = 1,
-        pageRendering = false,
-        pageNumPending = null,
-        scale = 2,
-        canvas = document.getElementById('the-canvas');
-        ctx = canvas.getContext('2d');
-
-    /**
-     * Get page info from document, resize canvas accordingly, and render page.
-     * @param num Page number.
-     */
-    function renderPage(num) {
-      pageRendering = true;
-      // Using promise to fetch the page
-      pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport(scale);
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        // Render PDF page into canvas context
-        var renderContext = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-        var renderTask = page.render(renderContext);
-
-        // Wait for rendering to finish
-        renderTask.promise.then(function() {
-          console.log("termino de cargar");
-
-          $('#myModal').modal({
-                  show:true,
-                  backdrop:'static',
-              });
-          pageRendering = false;
-          if (pageNumPending !== null) {
-            // New page rendering is pending
-            renderPage(pageNumPending);
-            pageNumPending = null;
-          }
-        });
-      });
-
-      // Update page counters
-      document.getElementById('page_num').textContent = pageNum;
-    }
-
-    /**
-     * If another page rendering in progress, waits until the rendering is
-     * finised. Otherwise, executes rendering immediately.
-     */
-    function queueRenderPage(num) {
-      if (pageRendering) {
-        pageNumPending = num;
-      } else {
-        renderPage(num);
-      }
-    }
-
-    /**
-     * Displays previous page.
-     */
-    function onPrevPage() {
-      if (pageNum <= 1) {
-        return;
-      }
-      pageNum--;
-      queueRenderPage(pageNum);
-    }
-    document.getElementById('prev').addEventListener('click', onPrevPage);
-
-    /**
-     * Displays next page.
-     */
-    function onNextPage() {
-      if (pageNum >= pdfDoc.numPages) {
-        return;
-      }
-      pageNum++;
-      queueRenderPage(pageNum);
-    }
-    document.getElementById('next').addEventListener('click', onNextPage);
-
-    /**
-     * Asynchronously downloads PDF.
-     */
-
-     //Eventos de los buscadores
-		$( function() {
-
-		    $.widget( "custom.catcomplete", $.ui.autocomplete, {
-		          _create: function() {
-		            this._super();
-		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-		          },
-		          _renderItem: function( ul, item ) {
-		            return $( "<li>" )
-		              .attr( "data-value", item.value )
-		              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
-		              .appendTo( ul );
-		          },
-		          _renderMenu: function( ul, items ) {
-		            var that = this,
-		              currentCategory = "";
-		            $.each( items, function( index, item ) {
-		              var li;
-		              if ( item.nombre_emisor != currentCategory ) {
-		                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
-		                currentCategory = item.nombre_emisor;
-		              }
-		              li = that._renderItemData( ul, item );
-		              if ( item.nombre_emisor ) {
-		                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
-		              }
-		            });
-		          }
-		        });
-		 
-		    $( "#institucion_emisor" ).catcomplete({
-		      source: "?c=OfcPartes&a=buscadorInstitucion",
-		      minLength: 3,
-		      select: function( event, ui ) {
-		      	console.log(ui);
-		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-		      	$("#cargo_emisor").val(ui.item.cargo);
-		      	$("#institucion_emisor").val(ui.item.value);
-		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-		      }
-		    });
-
-		    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
-		          _create: function() {
-		            this._super();
-		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-		          },
-		          _renderItem: function( ul, item ) {
-		            return $( "<li class='autocomplete-child'>" )
-		              .attr( "data-value", item.value )
-		              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
-		              .appendTo( ul );
-		          },
-		          _renderMenu: function( ul, items ) {
-                  var that = this,
-                    currentCategory = "";
-                  $.each( items, function( index, item ) {
-                    var li;
-                    if ( item.institucion_emisor != currentCategory ) {
-                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-                      currentCategory = item.institucion_emisor;
-                    }
-                    li = that._renderItemData( ul, item );
-                    if ( item.institucion_emisor ) {
-                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-                    }
-                  });
-                }
-		        });
-		 
-		    $( "#nombre_emisor" ).catcompleteNombre({
-		      source: "?c=OfcPartes&a=buscadorEmisor",
-		      minLength: 3,
-		      select: function( event, ui ) {
-		      	console.log(ui);
-		      	$("#nombre_emisor").val(ui.item.value);
-		      	$("#cargo_emisor").val(ui.item.cargo);
-		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-		      }
-		    });
-
-		    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
-		          _create: function() {
-		            this._super();
-		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-		          },
-		          _renderItem: function( ul, item ) {
-		            return $( "<li class='autocomplete-child'>" )
-		              .attr( "data-value", item.value )
-		              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
-		              .appendTo( ul );
-		          },
-		          _renderMenu: function( ul, items ) {
-                  var that = this,
-                    currentCategory = "";
-                  $.each( items, function( index, item ) {
-                    var li;
-                    if ( item.institucion_emisor != currentCategory ) {
-                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-                      currentCategory = item.institucion_emisor;
-                    }
-                    li = that._renderItemData( ul, item );
-                    if ( item.institucion_emisor ) {
-                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-                    }
-                  });
-                }
-		        });
-		 
-		    $( "#cargo_emisor" ).catcompleteCargo({
-		      source: "?c=OfcPartes&a=buscadorCargo",
-		      minLength: 3,
-		      select: function( event, ui ) {
-		      	console.log(ui);
-		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-		      	$("#cargo_emisor").val(ui.item.value);
-		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-		      }
-		    });
-
-
-
-		  } );
+	
 </script>
