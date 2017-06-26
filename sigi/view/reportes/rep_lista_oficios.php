@@ -189,9 +189,9 @@ class PDF extends PDF_Rotate
 	    	if($tipo_reporte == 'externo')
 	    	  $nombre_origen = $row['nombre_emisor'].' de '.$row['institucion_emisor'];
 	    	if($tipo_reporte == 'interno')
-	    	  $nombre_origen = $row['usuario'].' de '.$row['area'];
+	    	  $nombre_origen = ucwords($row['usuario']).' de '.$row['area'];
 	    	if($tipo_reporte == 'des_externo')
-	    	  $nombre_origen = $row['usuario'].' de '.$row['area'];
+	    	  $nombre_origen = ucwords($row['usuario']).' de '.$row['area'];
 
 	    	//param 1, fila de datos
 	    	//param 2, color relleno de fila
@@ -203,7 +203,7 @@ class PDF extends PDF_Rotate
 	    		$row['fecha_recibido'],
 	    		$row['fecha_respuesta'],
 	    		$nombre_origen,
-	    		$row['respondio'],
+	    		ucwords($row['respondio']),
 	    		$row['tiempo_respuesta']),
 	    		$fill
 	    	);
