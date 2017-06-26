@@ -33,8 +33,8 @@
 					<div class="col-md-4"><h4><strong>Folio: <?php echo $data['oficio']->folio ?></strong></h4></div>
 					<div class="col-md-8 text-right">
 						<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_enviar">Enviar</button>
-						<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-cancelar">Cancelar</button>
-						</div>
+						<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
+					</div>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -219,203 +219,209 @@
 </div>
 
 <script>
-	/*Evento para deshabilitar la carga de archivos*/
-    $('#ofc_vinculado').change(function () {
-        if ($(this).is(':checked')) {
-            //Mostrar lista de usuarios
-            $('#cargar_archivo').hide();
-            $("#documento_iepc").prop('required', false);
-            $("#documento_iepc").val('');
-            $(".fileinput-new").text('')
-        }
-        else{
-        	//No mostrar
-        	$('#cargar_archivo').show();
-        	$("#documento_iepc").prop('required', true);
-        	$(".fileinput-new").text('No se eligió archivo')
-        }
-     });
+	$(document).ready(function (){
+		$( "#btn_regresar" ).click(function() {
+	    	window.history.go(-1);
+	    });
+			/*Evento para deshabilitar la carga de archivos*/
+		    $('#ofc_vinculado').change(function () {
+		        if ($(this).is(':checked')) {
+		            //Mostrar lista de usuarios
+		            $('#cargar_archivo').hide();
+		            $("#documento_iepc").prop('required', false);
+		            $("#documento_iepc").val('');
+		            $(".fileinput-new").text('')
+		        }
+		        else{
+		        	//No mostrar
+		        	$('#cargar_archivo').show();
+		        	$("#documento_iepc").prop('required', true);
+		        	$(".fileinput-new").text('No se eligió archivo')
+		        }
+		     });
 
-	//Evento para validar campos
-	$("form").submit(function( event ) {
-		var res = $(this).validate();
-		console.log(res);
-		if(res){
+			//Evento para validar campos
+			$("form").submit(function( event ) {
+				var res = $(this).validate();
+				console.log(res);
+				if(res){
 
-			var formData = new FormData($(this)[0]);
+					var formData = new FormData($(this)[0]);
 
-		    $.ajax({
-		        url: '?c=OfcPartes&a=guardarRespuesta',
-		        type: 'POST',
-		        data: formData,
-		        async: false,
-		        success: function (data) {
-		        	event.preventDefault();
-		        	respuesta = JSON.parse(data); 
-		        	console.log('aqui respuesta',respuesta);
-		        	if(respuesta.success){
-		        		socket.emit( 'notification', respuesta.notificacion );
-		        		window.location.href = "sigi.php";
-		        	}
-		        	else{
-		        		window.location.href = "sigi.php?c=OfcPartes&a=response";
-		        	}
-		        },
-		        cache: false,
-		        contentType: false,
-		        processData: false
+				    $.ajax({
+				        url: '?c=OfcPartes&a=guardarRespuesta',
+				        type: 'POST',
+				        data: formData,
+				        async: false,
+				        success: function (data) {
+				        	event.preventDefault();
+				        	respuesta = JSON.parse(data); 
+				        	console.log('aqui respuesta',respuesta);
+				        	if(respuesta.success){
+				        		socket.emit( 'notification', respuesta.notificacion );
+				        		window.location.href = "sigi.php";
+				        	}
+				        	else{
+				        		window.location.href = "sigi.php?c=OfcPartes&a=response";
+				        	}
+				        },
+				        cache: false,
+				        contentType: false,
+				        processData: false
+				    });
+
+				}
+
+				
+
+			    event.preventDefault();
+		    });
+			$('.form-control').bind('blur', function () {
+			    return $(this).validateBlur();
+			});
+			$('#folio_iepc').bind('blur', function () {
+			    return $(this).validateNumOficio();
+			});
+			//Evento para visualizar pdf al crear registro
+			$(function(){
+				$("#verPdf").click(loadPreviews_click);
+			})
+
+			function loadPreviews_click(e) {
+				$("#documento_iepc").each(function() {
+					var $input = $(this);
+					var files = this.files;
+					console.log(files);
+					if(files == undefined || files.length == 0) return;
+		            //var files = files[0];            
+		            
+		            // FileReader support
+		            //if (FileReader && files && files.length) {
+		                  //console.log('aquiiiiiiiiiiiiiii');
+		                  var fr = new FileReader();
+		                  var extension = files[0].name.split('.').pop().toLowerCase();
+		                  fr.onload = function(e) {
+		                  	success = fileTypes.indexOf(extension) > -1;
+		                  	if (success) {
+
+		                  		PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
+		                  			pdfDoc = pdfDoc_;
+		                  			document.getElementById('page_count').textContent = pdfDoc.numPages;
+
+		                        // Initial/first page rendering
+		                        renderPage(pageNum);
+		                    });
+		                  	}
+
+		                  }
+		                  fr.onloadend = function(e) {
+		                  	console.debug("Load End");
+		                  }
+		                  fr.readAsArrayBuffer(files[0]);
+		             //}
+
+		             
+		         });
+			}
+
+
+		    var fileTypes = ['pdf'];  //acceptable file types
+		    
+		    $("input:file").change(function (evt) {
+		      /*var parentEl = $("#modal-pdf-body");
+		      console.log(parentEl);*/     
+		      var tgt = evt.target || window.event.srcElement,
+		      files = tgt.files;
+		      console.log(files[0].name); 
+
+		      $(".fileinput-new").text(files[0].name)
+		      
+		  });
+
+
+		    var pdfDoc = null,
+		    pageNum = 1,
+		    pageRendering = false,
+		    pageNumPending = null,
+		    scale = 2,
+		    canvas = document.getElementById('the-canvas');
+		    ctx = canvas.getContext('2d');
+
+		    /**
+		     * Get page info from document, resize canvas accordingly, and render page.
+		     * @param num Page number.
+		     */
+		     function renderPage(num) {
+		     	pageRendering = true;
+		      // Using promise to fetch the page
+		      pdfDoc.getPage(num).then(function(page) {
+		      	var viewport = page.getViewport(scale);
+		      	canvas.height = viewport.height;
+		      	canvas.width = viewport.width;
+
+		        // Render PDF page into canvas context
+		        var renderContext = {
+		        	canvasContext: ctx,
+		        	viewport: viewport
+		        };
+		        var renderTask = page.render(renderContext);
+
+		        // Wait for rendering to finish
+		        renderTask.promise.then(function() {
+		        	console.log("termino de cargar");
+
+		        	$('#myModal').modal({
+		        		show:true,
+		        		backdrop:'static',
+		        	});
+		        	pageRendering = false;
+		        	if (pageNumPending !== null) {
+		            // New page rendering is pending
+		            renderPage(pageNumPending);
+		            pageNumPending = null;
+		        }
+		    });
 		    });
 
-		}
+		      // Update page counters
+		      document.getElementById('page_num').textContent = pageNum;
+		  }
 
-		
+		    /**
+		     * If another page rendering in progress, waits until the rendering is
+		     * finised. Otherwise, executes rendering immediately.
+		     */
+		     function queueRenderPage(num) {
+		     	if (pageRendering) {
+		     		pageNumPending = num;
+		     	} else {
+		     		renderPage(num);
+		     	}
+		     }
 
-	    event.preventDefault();
-    });
-	$('.form-control').bind('blur', function () {
-	    return $(this).validateBlur();
-	});
-	$('#folio_iepc').bind('blur', function () {
-	    return $(this).validateNumOficio();
-	});
-	//Evento para visualizar pdf al crear registro
-	$(function(){
-		$("#verPdf").click(loadPreviews_click);
+		    /**
+		     * Displays previous page.
+		     */
+		     function onPrevPage() {
+		     	if (pageNum <= 1) {
+		     		return;
+		     	}
+		     	pageNum--;
+		     	queueRenderPage(pageNum);
+		     }
+		     document.getElementById('prev').addEventListener('click', onPrevPage);
+
+		    /**
+		     * Displays next page.
+		     */
+		     function onNextPage() {
+		     	if (pageNum >= pdfDoc.numPages) {
+		     		return;
+		     	}
+		     	pageNum++;
+		     	queueRenderPage(pageNum);
+		     }
+		     document.getElementById('next').addEventListener('click', onNextPage);
 	})
-
-	function loadPreviews_click(e) {
-		$("#documento_iepc").each(function() {
-			var $input = $(this);
-			var files = this.files;
-			console.log(files);
-			if(files == undefined || files.length == 0) return;
-            //var files = files[0];            
-            
-            // FileReader support
-            //if (FileReader && files && files.length) {
-                  //console.log('aquiiiiiiiiiiiiiii');
-                  var fr = new FileReader();
-                  var extension = files[0].name.split('.').pop().toLowerCase();
-                  fr.onload = function(e) {
-                  	success = fileTypes.indexOf(extension) > -1;
-                  	if (success) {
-
-                  		PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
-                  			pdfDoc = pdfDoc_;
-                  			document.getElementById('page_count').textContent = pdfDoc.numPages;
-
-                        // Initial/first page rendering
-                        renderPage(pageNum);
-                    });
-                  	}
-
-                  }
-                  fr.onloadend = function(e) {
-                  	console.debug("Load End");
-                  }
-                  fr.readAsArrayBuffer(files[0]);
-             //}
-
-             
-         });
-	}
-
-
-    var fileTypes = ['pdf'];  //acceptable file types
-    
-    $("input:file").change(function (evt) {
-      /*var parentEl = $("#modal-pdf-body");
-      console.log(parentEl);*/     
-      var tgt = evt.target || window.event.srcElement,
-      files = tgt.files;
-      console.log(files[0].name); 
-
-      $(".fileinput-new").text(files[0].name)
-      
-  });
-
-
-    var pdfDoc = null,
-    pageNum = 1,
-    pageRendering = false,
-    pageNumPending = null,
-    scale = 2,
-    canvas = document.getElementById('the-canvas');
-    ctx = canvas.getContext('2d');
-
-    /**
-     * Get page info from document, resize canvas accordingly, and render page.
-     * @param num Page number.
-     */
-     function renderPage(num) {
-     	pageRendering = true;
-      // Using promise to fetch the page
-      pdfDoc.getPage(num).then(function(page) {
-      	var viewport = page.getViewport(scale);
-      	canvas.height = viewport.height;
-      	canvas.width = viewport.width;
-
-        // Render PDF page into canvas context
-        var renderContext = {
-        	canvasContext: ctx,
-        	viewport: viewport
-        };
-        var renderTask = page.render(renderContext);
-
-        // Wait for rendering to finish
-        renderTask.promise.then(function() {
-        	console.log("termino de cargar");
-
-        	$('#myModal').modal({
-        		show:true,
-        		backdrop:'static',
-        	});
-        	pageRendering = false;
-        	if (pageNumPending !== null) {
-            // New page rendering is pending
-            renderPage(pageNumPending);
-            pageNumPending = null;
-        }
-    });
-    });
-
-      // Update page counters
-      document.getElementById('page_num').textContent = pageNum;
-  }
-
-    /**
-     * If another page rendering in progress, waits until the rendering is
-     * finised. Otherwise, executes rendering immediately.
-     */
-     function queueRenderPage(num) {
-     	if (pageRendering) {
-     		pageNumPending = num;
-     	} else {
-     		renderPage(num);
-     	}
-     }
-
-    /**
-     * Displays previous page.
-     */
-     function onPrevPage() {
-     	if (pageNum <= 1) {
-     		return;
-     	}
-     	pageNum--;
-     	queueRenderPage(pageNum);
-     }
-     document.getElementById('prev').addEventListener('click', onPrevPage);
-
-    /**
-     * Displays next page.
-     */
-     function onNextPage() {
-     	if (pageNum >= pdfDoc.numPages) {
-     		return;
-     	}
-     	pageNum++;
-     	queueRenderPage(pageNum);
-     }
-     document.getElementById('next').addEventListener('click', onNextPage);
+	
  </script>

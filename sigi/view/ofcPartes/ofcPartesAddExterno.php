@@ -34,8 +34,7 @@
 			<div class="col-md-4"><h4>Registro de Documentos para Dependencia Externa</h4></div>
 			<div class="col-md-8 text-right">
 			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca">Guardar</button>
-			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_limpiar">Limpiar</button>
-			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_cancelar">Cancelar</button>
+			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 			</div>
 		</div>
 		
@@ -198,311 +197,321 @@
 </div>
 </form>
 <script>
-	//Evento para validar campos
-	$("form").submit(function( event ) {
-		var res = $(this).validate();
-		if(res){
-			var formData = new FormData($(this)[0]);
+	$(document).ready(function(){ 
+			$( "#btn_regresar" ).click(function() {
+				window.history.go(-1);
+			});
+			//Evento para validar campos
+			$("form").submit(function( event ) {
+				var res = $(this).validate();
+				if(res){
+					var formData = new FormData($(this)[0]);
 
-		    $.ajax({
-		        url: '?c=OfcPartes&a=Guardar',
-		        type: 'POST',
-		        data: formData,
-		        async: false,
-		        success: function (data) {
-		        	event.preventDefault();
-		        	respuesta = JSON.parse(data); 
-		        	if(respuesta.success){
-		        		socket.emit( 'notification', respuesta.notificacion );
-		        		window.location.href = "sigi.php";
-		        	}
-		        	else{
-		        		window.location.href = "sigi.php?c=OfcPartes&a=add";
-		        	}
-		        },
-		        cache: false,
-		        contentType: false,
-		        processData: false
-		    });			
-		}
+				    $.ajax({
+				        url: '?c=OfcPartes&a=Guardar',
+				        type: 'POST',
+				        data: formData,
+				        async: false,
+				        success: function (data) {
+				        	event.preventDefault();
+				        	respuesta = JSON.parse(data); 
+				        	if(respuesta.success){
+				        		socket.emit( 'notification', respuesta.notificacion );
+				        		window.location.href = "sigi.php";
+				        	}
+				        	else{
+				        		window.location.href = "sigi.php?c=OfcPartes&a=add";
+				        	}
+				        },
+				        cache: false,
+				        contentType: false,
+				        processData: false
+				    });			
+				}
 
-	    event.preventDefault();
-    });
-	$('.form-control').bind('blur', function () {
-	    return $(this).validateBlur();
-	});
-	$('#folio_iepc').bind('blur', function () {
-	    return $(this).validateNumOficio();
-	});
-	//Evento para visualizar pdf al crear registro
-    $(function(){
-        $("#verPdf").click(loadPreviews_click);
-    })
+			    event.preventDefault();
+		    });
+			$('.form-control').bind('blur', function () {
+			    return $(this).validateBlur();
+			});
+			$('#folio_iepc').bind('blur', function () {
+			    return $(this).validateNumOficio();
+			});
+			//Evento para visualizar pdf al crear registro
+		    $(function(){
+		        $("#verPdf").click(loadPreviews_click);
+		    })
 
-    function loadPreviews_click(e) {
-        $("#documento_iepc").each(function() {
-            var $input = $(this);
-            var files = this.files;
-            console.log(files);
-            if(files == undefined || files.length == 0) return;
-            //var files = files[0];            
-            
-            // FileReader support
-            //if (FileReader && files && files.length) {
-                  //console.log('aquiiiiiiiiiiiiiii');
-                  var fr = new FileReader();
-                  var extension = files[0].name.split('.').pop().toLowerCase();
-                  fr.onload = function(e) {
-                    success = fileTypes.indexOf(extension) > -1;
-                    if (success) {
+		    function loadPreviews_click(e) {
+		        $("#documento_iepc").each(function() {
+		            var $input = $(this);
+		            var files = this.files;
+		            console.log(files);
+		            if(files == undefined || files.length == 0) return;
+		            //var files = files[0];            
+		            
+		            // FileReader support
+		            //if (FileReader && files && files.length) {
+		                  //console.log('aquiiiiiiiiiiiiiii');
+		                  var fr = new FileReader();
+		                  var extension = files[0].name.split('.').pop().toLowerCase();
+		                  fr.onload = function(e) {
+		                    success = fileTypes.indexOf(extension) > -1;
+		                    if (success) {
 
-                      PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
-                        pdfDoc = pdfDoc_;
-                        document.getElementById('page_count').textContent = pdfDoc.numPages;
+		                      PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
+		                        pdfDoc = pdfDoc_;
+		                        document.getElementById('page_count').textContent = pdfDoc.numPages;
 
-                        // Initial/first page rendering
-                        renderPage(pageNum);
-                      });
-                    }
+		                        // Initial/first page rendering
+		                        renderPage(pageNum);
+		                      });
+		                    }
 
-                  }
-                  fr.onloadend = function(e) {
-                    console.debug("Load End");
-                  }
-                  fr.readAsArrayBuffer(files[0]);
-             //}
+		                  }
+		                  fr.onloadend = function(e) {
+		                    console.debug("Load End");
+		                  }
+		                  fr.readAsArrayBuffer(files[0]);
+		             //}
 
-            
-        });
-    }
-
-
-    var fileTypes = ['pdf'];  //acceptable file types
-    
-    $("input:file").change(function (evt) {
-      /*var parentEl = $("#modal-pdf-body");
-      console.log(parentEl);*/     
-      var tgt = evt.target || window.event.srcElement,
-                      files = tgt.files;
-      console.log(files[0].name); 
-
-      $(".fileinput-new").text(files[0].name)
-            
-    });
+		            
+		        });
+		    }
 
 
-    var pdfDoc = null,
-        pageNum = 1,
-        pageRendering = false,
-        pageNumPending = null,
-        scale = 2,
-        canvas = document.getElementById('the-canvas');
-        ctx = canvas.getContext('2d');
+		    var fileTypes = ['pdf'];  //acceptable file types
+		    
+		    $("input:file").change(function (evt) {
+		      /*var parentEl = $("#modal-pdf-body");
+		      console.log(parentEl);*/     
+		      var tgt = evt.target || window.event.srcElement,
+		                      files = tgt.files;
+		      console.log(files[0].name); 
 
-    /**
-     * Get page info from document, resize canvas accordingly, and render page.
-     * @param num Page number.
-     */
-    function renderPage(num) {
-      pageRendering = true;
-      // Using promise to fetch the page
-      pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport(scale);
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+		      $(".fileinput-new").text(files[0].name)
+		            
+		    });
 
-        // Render PDF page into canvas context
-        var renderContext = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-        var renderTask = page.render(renderContext);
 
-        // Wait for rendering to finish
-        renderTask.promise.then(function() {
-          console.log("termino de cargar");
+		    var pdfDoc = null,
+		        pageNum = 1,
+		        pageRendering = false,
+		        pageNumPending = null,
+		        scale = 2,
+		        canvas = document.getElementById('the-canvas');
+		        ctx = canvas.getContext('2d');
 
-          $('#myModal').modal({
-                  show:true,
-                  backdrop:'static',
-              });
-          pageRendering = false;
-          if (pageNumPending !== null) {
-            // New page rendering is pending
-            renderPage(pageNumPending);
-            pageNumPending = null;
-          }
-        });
-      });
+		    /**
+		     * Get page info from document, resize canvas accordingly, and render page.
+		     * @param num Page number.
+		     */
+		    function renderPage(num) {
+		      pageRendering = true;
+		      // Using promise to fetch the page
+		      pdfDoc.getPage(num).then(function(page) {
+		        var viewport = page.getViewport(scale);
+		        canvas.height = viewport.height;
+		        canvas.width = viewport.width;
 
-      // Update page counters
-      document.getElementById('page_num').textContent = pageNum;
-    }
+		        // Render PDF page into canvas context
+		        var renderContext = {
+		          canvasContext: ctx,
+		          viewport: viewport
+		        };
+		        var renderTask = page.render(renderContext);
 
-    /**
-     * If another page rendering in progress, waits until the rendering is
-     * finised. Otherwise, executes rendering immediately.
-     */
-    function queueRenderPage(num) {
-      if (pageRendering) {
-        pageNumPending = num;
-      } else {
-        renderPage(num);
-      }
-    }
+		        // Wait for rendering to finish
+		        renderTask.promise.then(function() {
+		          console.log("termino de cargar");
 
-    /**
-     * Displays previous page.
-     */
-    function onPrevPage() {
-      if (pageNum <= 1) {
-        return;
-      }
-      pageNum--;
-      queueRenderPage(pageNum);
-    }
-    document.getElementById('prev').addEventListener('click', onPrevPage);
-
-    /**
-     * Displays next page.
-     */
-    function onNextPage() {
-      if (pageNum >= pdfDoc.numPages) {
-        return;
-      }
-      pageNum++;
-      queueRenderPage(pageNum);
-    }
-    document.getElementById('next').addEventListener('click', onNextPage);
-
-    /**
-     * Asynchronously downloads PDF.
-     */
-
-     //Eventos de los buscadores
-		$( function() {
-
-		    $.widget( "custom.catcomplete", $.ui.autocomplete, {
-		          _create: function() {
-		            this._super();
-		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-		          },
-		          _renderItem: function( ul, item ) {
-		            return $( "<li>" )
-		              .attr( "data-value", item.value )
-		              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
-		              .appendTo( ul );
-		          },
-		          _renderMenu: function( ul, items ) {
-		            var that = this,
-		              currentCategory = "";
-		            $.each( items, function( index, item ) {
-		              var li;
-		              if ( item.nombre_emisor != currentCategory ) {
-		                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
-		                currentCategory = item.nombre_emisor;
-		              }
-		              li = that._renderItemData( ul, item );
-		              if ( item.nombre_emisor ) {
-		                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
-		              }
-		            });
+		          $('#myModal').modal({
+		                  show:true,
+		                  backdrop:'static',
+		              });
+		          pageRendering = false;
+		          if (pageNumPending !== null) {
+		            // New page rendering is pending
+		            renderPage(pageNumPending);
+		            pageNumPending = null;
 		          }
 		        });
-		 
-		    $( "#institucion_emisor" ).catcomplete({
-		      source: "?c=OfcPartes&a=buscadorInstitucion",
-		      minLength: 3,
-		      select: function( event, ui ) {
-		      	console.log(ui);
-		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-		      	$("#cargo_emisor").val(ui.item.cargo);
-		      	$("#institucion_emisor").val(ui.item.value);
-		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+		      });
+
+		      // Update page counters
+		      document.getElementById('page_num').textContent = pageNum;
+		    }
+
+		    /**
+		     * If another page rendering in progress, waits until the rendering is
+		     * finised. Otherwise, executes rendering immediately.
+		     */
+		    function queueRenderPage(num) {
+		      if (pageRendering) {
+		        pageNumPending = num;
+		      } else {
+		        renderPage(num);
 		      }
-		    });
+		    }
 
-		    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
-		          _create: function() {
-		            this._super();
-		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-		          },
-		          _renderItem: function( ul, item ) {
-		            return $( "<li class='autocomplete-child'>" )
-		              .attr( "data-value", item.value )
-		              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
-		              .appendTo( ul );
-		          },
-		          _renderMenu: function( ul, items ) {
-                  var that = this,
-                    currentCategory = "";
-                  $.each( items, function( index, item ) {
-                    var li;
-                    if ( item.institucion_emisor != currentCategory ) {
-                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-                      currentCategory = item.institucion_emisor;
-                    }
-                    li = that._renderItemData( ul, item );
-                    if ( item.institucion_emisor ) {
-                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-                    }
-                  });
-                }
-		        });
-		 
-		    $( "#nombre_emisor" ).catcompleteNombre({
-		      source: "?c=OfcPartes&a=buscadorEmisor",
-		      minLength: 3,
-		      select: function( event, ui ) {
-		      	console.log(ui);
-		      	$("#nombre_emisor").val(ui.item.value);
-		      	$("#cargo_emisor").val(ui.item.cargo);
-		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+		    /**
+		     * Displays previous page.
+		     */
+		    function onPrevPage() {
+		      if (pageNum <= 1) {
+		        return;
 		      }
-		    });
+		      pageNum--;
+		      queueRenderPage(pageNum);
+		    }
+		    document.getElementById('prev').addEventListener('click', onPrevPage);
 
-		    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
-		          _create: function() {
-		            this._super();
-		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-		          },
-		          _renderItem: function( ul, item ) {
-		            return $( "<li class='autocomplete-child'>" )
-		              .attr( "data-value", item.value )
-		              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
-		              .appendTo( ul );
-		          },
-		          _renderMenu: function( ul, items ) {
-                  var that = this,
-                    currentCategory = "";
-                  $.each( items, function( index, item ) {
-                    var li;
-                    if ( item.institucion_emisor != currentCategory ) {
-                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-                      currentCategory = item.institucion_emisor;
-                    }
-                    li = that._renderItemData( ul, item );
-                    if ( item.institucion_emisor ) {
-                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-                    }
-                  });
-                }
-		        });
-		 
-		    $( "#cargo_emisor" ).catcompleteCargo({
-		      source: "?c=OfcPartes&a=buscadorCargo",
-		      minLength: 3,
-		      select: function( event, ui ) {
-		      	console.log(ui);
-		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-		      	$("#cargo_emisor").val(ui.item.value);
-		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+		    /**
+		     * Displays next page.
+		     */
+		    function onNextPage() {
+		      if (pageNum >= pdfDoc.numPages) {
+		        return;
 		      }
-		    });
+		      pageNum++;
+		      queueRenderPage(pageNum);
+		    }
+		    document.getElementById('next').addEventListener('click', onNextPage);
+
+		    /**
+		     * Asynchronously downloads PDF.
+		     */
+
+		     //Eventos de los buscadores
+				$( function() {
+
+				    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+				          _create: function() {
+				            this._super();
+				            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+				          },
+				          _renderItem: function( ul, item ) {
+				            return $( "<li>" )
+				              .attr( "data-value", item.value )
+				              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
+				              .appendTo( ul );
+				          },
+				          _renderMenu: function( ul, items ) {
+				            var that = this,
+				              currentCategory = "";
+				            $.each( items, function( index, item ) {
+				              var li;
+				              if ( item.nombre_emisor != currentCategory ) {
+				                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
+				                currentCategory = item.nombre_emisor;
+				              }
+				              li = that._renderItemData( ul, item );
+				              if ( item.nombre_emisor ) {
+				                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
+				              }
+				            });
+				          }
+				        });
+				 
+				    $( "#institucion_emisor" ).catcomplete({
+				      source: "?c=OfcPartes&a=buscadorInstitucion",
+				      minLength: 3,
+				      select: function( event, ui ) {
+				      	console.log(ui);
+				      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+				      	$("#cargo_emisor").val(ui.item.cargo);
+				      	$("#institucion_emisor").val(ui.item.value);
+				        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+				      }
+				    });
+
+				    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
+				          _create: function() {
+				            this._super();
+				            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+				          },
+				          _renderItem: function( ul, item ) {
+				            return $( "<li class='autocomplete-child'>" )
+				              .attr( "data-value", item.value )
+				              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
+				              .appendTo( ul );
+				          },
+				          _renderMenu: function( ul, items ) {
+		                  var that = this,
+		                    currentCategory = "";
+		                  $.each( items, function( index, item ) {
+		                    var li;
+		                    if ( item.institucion_emisor != currentCategory ) {
+		                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+		                      currentCategory = item.institucion_emisor;
+		                    }
+		                    li = that._renderItemData( ul, item );
+		                    if ( item.institucion_emisor ) {
+		                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+		                    }
+		                  });
+		                }
+				        });
+				 
+				    $( "#nombre_emisor" ).catcompleteNombre({
+				      source: "?c=OfcPartes&a=buscadorEmisor",
+				      minLength: 3,
+				      select: function( event, ui ) {
+				      	console.log(ui);
+				      	$("#nombre_emisor").val(ui.item.value);
+				      	$("#cargo_emisor").val(ui.item.cargo);
+				      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+				        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+				      }
+				    });
+
+				    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
+				          _create: function() {
+				            this._super();
+				            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+				          },
+				          _renderItem: function( ul, item ) {
+				            return $( "<li class='autocomplete-child'>" )
+				              .attr( "data-value", item.value )
+				              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
+				              .appendTo( ul );
+				          },
+				          _renderMenu: function( ul, items ) {
+		                  var that = this,
+		                    currentCategory = "";
+		                  $.each( items, function( index, item ) {
+		                    var li;
+		                    if ( item.institucion_emisor != currentCategory ) {
+		                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+		                      currentCategory = item.institucion_emisor;
+		                    }
+		                    li = that._renderItemData( ul, item );
+		                    if ( item.institucion_emisor ) {
+		                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+		                    }
+		                  });
+		                }
+				        });
+				 
+				    $( "#cargo_emisor" ).catcompleteCargo({
+				      source: "?c=OfcPartes&a=buscadorCargo",
+				      minLength: 3,
+				      select: function( event, ui ) {
+				      	console.log(ui);
+				      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+				      	$("#cargo_emisor").val(ui.item.value);
+				      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+				        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+				      }
+				    });
 
 
 
-		  } );
+				  } );
+
+
+
+
+	});
+	
 </script>

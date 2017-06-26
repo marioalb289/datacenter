@@ -27,6 +27,9 @@
 		<div class="panel-heading">
 			<div class="row">
 				<div class="col-md-4"><h4><strong>Folio : <?php echo $data['oficio']->folio ?></strong></h4></div>
+				<div class="col-md-8 text-right">
+					<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
+				</div>
 			</div>
 		</div>
 		<div class="panel-body">
@@ -159,3 +162,10 @@
             
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$( "#btn_regresar" ).click(function() {
+	    	window.history.go(-1);
+	    });
+	})
+</script>

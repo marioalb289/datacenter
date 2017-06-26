@@ -31,8 +31,7 @@
 				<div class="col-md-4"><h4>Registro de Documentos</h4></div>
 				<div class="col-md-8 text-right">
 				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca">Guardar</button>
-				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_limpiar">Limpiar</button>
-				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" name="btn_cancelar">Cancelar</button>
+				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 				</div>
 			</div>
 			
@@ -234,6 +233,10 @@
 
 	$(document).ready(function(){      //Add this line (and it's closing line)
 	    var currentDate = new Date();
+
+	    $( "#btn_regresar" ).click(function() {
+	    	window.history.go(-1);
+	    });
 
 	    $("#fecha_recepcion").datepicker({
 	        dateFormat: 'yy-mm-dd',

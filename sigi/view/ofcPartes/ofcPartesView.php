@@ -48,14 +48,16 @@
 			<div class="col-md-8 text-right">
 				<?php if( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->tipo_oficio == "SOLICITUD" && $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 && $data['oficio']->estatus_final == 'Cerrado'){ ?>
 				<a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href="#warning" data-toggle="modal" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
-				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Cancelar</a>
+				
 				<?php } elseif ( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->respuesta && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){ ?>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php if($data['oficio']->fecha_visto != '0000-00-00 00:00:00') {echo "href='?c=OfcPartes&a=response&id=".$data['oficio']->id_oficio."'";} else {echo "href='#warning2' data-toggle='modal'";} ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Responder</a>
-				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Cancelar</a>
+				
 				<?php } ?>	
 				<?php if ( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->tipo_oficio == 'SOLICITUD' && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){  ?>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='?c=OfcPartes&a=vincular&id=".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Vincular</a>
 				<?php } ?>	
+
+				<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 
 			</div>
 		</div>
@@ -337,3 +339,11 @@
 	</div>
 </div>
 <?php } ?>
+<script>
+	$(document).ready(function(){      //Add this line (and it's closing line)
+
+	    $( "#btn_regresar" ).click(function() {
+	    	window.history.go(-1);
+	    });
+	})
+</script>
