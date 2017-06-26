@@ -308,8 +308,8 @@
 						      	<th></th>
 						        <th>Folio</th>
 						        <th>N° Oficio</th>
-						        <th>Area</th>
-						        <th>Persona que Responde</th>
+						        <th><?php if($data['oficio']->destino == "EXTERNO")echo "Área Receptora"; else echo "Área";?></th>
+						        <th><?php if($data['oficio']->destino == "EXTERNO")echo "Persona que Gestiona"; else echo "Persona que Responde";?></th>
 						        <th>Asunto</th>
 						        <th>Fecha Enviado</th>
 						        <th>Visto</th>
