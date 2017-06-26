@@ -323,7 +323,7 @@
 										<td><?php echo $r->folio; ?></td>
 										<td><?php echo $r->folio_institucion; ?></td>
 										<td><?php echo $r->area; ?></td>
-										<td><?php echo $r->persona_responde; ?></td>
+										<td><?php echo ucwords( $r->persona_responde); ?></td>
 										<td><?php echo $r->asunto_emisor; ?></td>
 										<td><?php echo $r->fecha_recibido; ?></td>
 										<td><?php echo $r->fecha_visto; ?></td>
