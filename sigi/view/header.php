@@ -83,7 +83,7 @@
 
     var audio = new Audio('AI/image/presence_changed.mp3');
 
-    var socket = io('<?php echo $_ENV['HOST_NOTF'] ?>',{secure: true});
+    var socket = io('<?php echo $_ENV['HOST_NOTF'] ?>',{secure: false});
 
     socket.on('connect', function () {
       //send the jwt

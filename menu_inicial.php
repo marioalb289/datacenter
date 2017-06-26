@@ -92,13 +92,13 @@ session_start();
 
 
 
-        if ($_SESSION['prv'] >= '1') {
-            echo '
-            <a style="text-decoration: none; color: white;" href="AI/solicitudes.php">
-                <img src="AI/image/iconoAI.png" class="if-image" title="Agenda Institucional" style="width: 25%; margin: 2% auto;">
-            </a>
-            ';
-        }
+        // if ($_SESSION['prv'] >= '1') {
+        //     echo '
+        //     <a style="text-decoration: none; color: white;" href="AI/solicitudes.php">
+        //         <img src="AI/image/iconoAI.png" class="if-image" title="Agenda Institucional" style="width: 25%; margin: 2% auto;">
+        //     </a>
+        //     ';
+        // }
 
 
         if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"),"unknown"))
