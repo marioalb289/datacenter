@@ -1,0 +1,14 @@
+RewriteEngine On
+
+RewriteBase /datancenter/
+
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^index_sigi[/\w+]/?$ index_sigi.php [L]
+
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^index_sigi/(\w+)/(\w+)/?$ index_sigi.php?c=$1&a=$2 [L]

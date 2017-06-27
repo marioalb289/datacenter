@@ -126,9 +126,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },
@@ -267,9 +267,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },
@@ -414,9 +414,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },
@@ -515,9 +515,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                   },
               },
@@ -577,9 +577,9 @@ $(document).ready(function(){
           "render": function ( data, type, row ) {
             moment.locale('es');
             if(row[7] == "0000-00-00 00:00:00")
-              return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+              return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
             else 
-              return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row[7]).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+              return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row[7]).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
             },
         },
@@ -660,9 +660,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },

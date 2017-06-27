@@ -601,7 +601,6 @@ class OfcPartesController
     $area_usuario = $usuario->getUsuarioArea($_SESSION['data_user']['id']);
     $ar = $area->ListarAreas();
     $privilegios = $_SESSION['data_user']['privilegios'];
-
         //require_once ("/../view/header.php");
         //require_once '/../view/ofcPartes/ofcPartesAdd.php';
     $this->layout->renderVista("ofcPartes","ofcPartesAdd",array('usuarios' => $usr, 'areas' => $ar,'privilegios' => $privilegios,'area_usuario'=>$area_usuario));
