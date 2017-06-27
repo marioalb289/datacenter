@@ -74,8 +74,13 @@ session_start();
       setcookie('corre', $user, false, '/account', 'www.example.com);
       setcookie('privi', $tusu, false, '/account', 'www.example.com);
       setcookie('contr', md5($_POST['password']), false, '/account', 'www.example.com);*/
-        
-      header('Location: menu_inicial.php');
+      
+      $host  = $_SERVER['HTTP_HOST'];
+      $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+      $extra = 'menu_inicial';
+
+      // print_r($uri);exit; 
+      header("Location: http://$host$uri/$extra");
     }
   }
   else{

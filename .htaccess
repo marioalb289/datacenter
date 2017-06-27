@@ -6,9 +6,16 @@ RewriteBase /datancenter/
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 
-RewriteRule ^index_sigi[/\w+]/?$ index_sigi.php [L]
+RewriteRule ^[/\w+]/?$ index_sigi.php [L]
 
 
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteRule ^index_sigi/(\w+)/(\w+)/?$ index_sigi.php?c=$1&a=$2 [L]
+RewriteRule ^(\w+)/(\w+)?$ index_sigi.php?c=$1&a=$2 [L]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(\w+)/(\w+)/(\w+)?$ index_sigi.php?c=$1&a=$2&term=$3 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

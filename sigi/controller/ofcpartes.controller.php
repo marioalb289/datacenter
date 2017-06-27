@@ -1158,7 +1158,7 @@ class OfcPartesController
     }
 
     public function buscadorCargoAction(){
-
+      print_r($_REQUEST);
 
       if(isset($_REQUEST['term']) && $_REQUEST['term'] != ""){
         try {

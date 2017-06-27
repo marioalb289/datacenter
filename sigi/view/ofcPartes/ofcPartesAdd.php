@@ -263,7 +263,8 @@
 	    			var formData = new FormData($(this)[0]);
 
 	    		    $.ajax({
-	    		        url: '?c=OfcPartes&a=Guardar',
+	    		        // url: '?c=OfcPartes&a=Guardar',
+	    		        url: GLOBAL_PATH+"ofcpartes/Guardar",
 	    		        type: 'POST',
 	    		        data: formData,
 	    		        async: false,
@@ -474,7 +475,8 @@
 	    		        });
 	    		 
 	    		    $( "#institucion_emisor" ).catcomplete({
-	    		      source: "?c=OfcPartes&a=buscadorInstitucion",
+	    		      // source: "?c=OfcPartes&a=buscadorInstitucion",
+	    		      source: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
 	    		      minLength: 3,
 	    		      select: function( event, ui ) {
 	    		      	console.log(ui);
@@ -514,7 +516,8 @@
 	    		        });
 	    		 
 	    		    $( "#nombre_emisor" ).catcompleteNombre({
-	    		      source: "?c=OfcPartes&a=buscadorEmisor",
+	    		      // source: "?c=OfcPartes&a=buscadorEmisor",
+	    		      source: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
 	    		      minLength: 3,
 	    		      select: function( event, ui ) {
 	    		      	console.log(ui);

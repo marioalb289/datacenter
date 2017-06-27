@@ -80,7 +80,7 @@ $(document).ready(function(){
         "deferRender": true,
         searchDelay: 1000,
         ajax: {
-            "url": "?c=OfcPartes&a=listarOficiosExternos",
+            "url": GLOBAL_PATH+"ofcpartes/listarOficiosExternos",
             "type": "POST",
             "data": function ( d ) {
                 d.fecha_inicio = fecha_inicio.value,
@@ -186,7 +186,8 @@ $(document).ready(function(){
             };
             $.ajax({
               method: "POST",
-              url: "?c=OfcPartes&a=createReportParam",
+              // url: "?c=OfcPartes&a=createReportParam",
+              url: GLOBAL_PATH+"ofcpartes/createReportParam",
               data: params
             })
               .done(function( res ) {                
@@ -222,7 +223,8 @@ $(document).ready(function(){
         "deferRender": true,
         searchDelay: 1000,
         ajax: {
-            "url": "?c=OfcPartes&a=listarOficiosInternos",
+            // "url": "?c=OfcPartes&a=listarOficiosInternos",
+            "url": GLOBAL_PATH+"ofcpartes/listarOficiosInternos",
             "type": "POST",
             "data": function ( d ) {
                 d.fecha_inicio = fecha_inicio.value,
@@ -325,7 +327,8 @@ $(document).ready(function(){
             };
             $.ajax({
               method: "POST",
-              url: "?c=OfcPartes&a=createReportParam",
+              // url: "?c=OfcPartes&a=createReportParam",
+              url: GLOBAL_PATH+"ofcpartes/createReportParam",
               data: params
             })
               .done(function( res ) {                
@@ -360,7 +363,8 @@ $(document).ready(function(){
         "deferRender": true,
         searchDelay: 1000,
         ajax: {
-            "url": "?c=OfcPartes&a=listarOficiosDestinoExterno",
+            // "url": "?c=OfcPartes&a=listarOficiosDestinoExterno",
+            "url": GLOBAL_PATH+"ofcpartes/listarOficiosDestinoExterno",
             "type": "POST",
             "data": function ( d ) {
                 d.fecha_inicio = fecha_inicio.value,
@@ -460,7 +464,8 @@ $(document).ready(function(){
             };
             $.ajax({
               method: "POST",
-              url: "?c=OfcPartes&a=createReportParam",
+              // url: "?c=OfcPartes&a=createReportParam",
+              url: GLOBAL_PATH+"ofcpartes/createReportParam",
               data: params
             })
               .done(function( res ) {                
@@ -496,7 +501,8 @@ $(document).ready(function(){
           "deferRender": true,
         searchDelay: 1000,
           ajax: {
-              "url": "?c=OfcPartes&a=listarRespuestasEnviadas",
+              // "url": "?c=OfcPartes&a=listarRespuestasEnviadas",
+              "url": GLOBAL_PATH+"ofcpartes/listarRespuestasEnviadas",
               "type": "POST"
           },
           "columns": [
@@ -612,7 +618,8 @@ $(document).ready(function(){
         "deferRender": true,
         searchDelay: 1000,
         ajax: {
-            "url": "?c=OfcPartes&a=listarOficiosExternosVincular",
+            // "url": "?c=OfcPartes&a=listarOficiosExternosVincular",
+            "url": GLOBAL_PATH+"ofcpartes/listarOficiosExternosVincular",
             "type": "POST"
         },
         "columns": [
@@ -881,7 +888,8 @@ $(document).ready(function(){
     function cargarUsuario(id_area,selector,selector2){
         $.ajax({
           method: "POST",
-          url: "?c=OfcPartes&a=buscarUsuario",
+          // url: "?c=OfcPartes&a=buscarUsuario",
+          url: GLOBAL_PATH+"ofcpartes/buscarUsuario",
           data: { id_area : id_area }
         })
           .done(function( res ) {
