@@ -1,21 +1,18 @@
 RewriteEngine On
 
-RewriteBase /datancenter/
+#RewriteBase /datancenter/
+
+Options +FollowSymLinks
 
 
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{SCRIPT_FILENAME} !-d
-
-RewriteRule ^[/\w+]/?$ index_sigi.php [L]
-
-
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteRule ^(\w+)/(\w+)?$ index_sigi.php?c=$1&a=$2 [L]
-
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteRule ^(\w+)/(\w+)/(\w+)?$ index_sigi.php?c=$1&a=$2&term=$3 [L]
+RewriteCond %{REQUEST_URI} !\.(?:css|js|jpe?g|gif|png)$ [NC]
+RewriteRule ofcpartes/([^/]+)/([^/]+)$ index_sigi.php?c=ofcpartes&a=$1&id=$2 [L]
+RewriteRule ^ofcpartes/([^/]+)^/([^/]+)+/(.+)$ /siaasdsadagi/$1  [L]
+RewriteRule ofcpartes/([^/]+)$ index_sigi.php?c=ofcpartes&a=$1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+#RewriteRule ^ofcpartes/(.+/?)/(.+/?)?(/|\.htm|\.php|\.html|/[^.]*)$ index_sigi.php?c=ofcpartes&a=$1&id=$2  [NC,QSA,L]
+

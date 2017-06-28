@@ -157,7 +157,7 @@
 
 					    <div class="form-group">
 					    
-					      <img src="../AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
+					      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
 					    </div>
 					    <div class="form-group" style="text-align: center; ">
 					      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
@@ -452,7 +452,7 @@
 	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
 	    		          },
 	    		          _renderItem: function( ul, item ) {
-	    		            return $( "<li>" )
+	    		            return $( "<li class='autocomplete-child'>" )
 	    		              .attr( "data-value", item.value )
 	    		              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
 	    		              .appendTo( ul );
@@ -476,7 +476,18 @@
 	    		 
 	    		    $( "#institucion_emisor" ).catcomplete({
 	    		      // source: "?c=OfcPartes&a=buscadorInstitucion",
-	    		      source: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
+	    		      //source: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
+	    		      source: function( request, response ) {
+	    		          $.ajax({
+	    		              url: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
+	    		              type: 'POST',
+	    		              data: {term: request.term},
+	    		              dataType: "json",
+	    		              success: function( data ) {
+	    		                  response(data);
+	    		              }
+	    		          });
+	    		      },
 	    		      minLength: 3,
 	    		      select: function( event, ui ) {
 	    		      	console.log(ui);
@@ -517,7 +528,18 @@
 	    		 
 	    		    $( "#nombre_emisor" ).catcompleteNombre({
 	    		      // source: "?c=OfcPartes&a=buscadorEmisor",
-	    		      source: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
+	    		      // source: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
+	    		      source: function( request, response ) {
+	    		          $.ajax({
+	    		              url: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
+	    		              type: 'POST',
+	    		              data: {term: request.term},
+	    		              dataType: "json",
+	    		              success: function( data ) {
+	    		                  response(data);
+	    		              }
+	    		          });
+	    		      },
 	    		      minLength: 3,
 	    		      select: function( event, ui ) {
 	    		      	console.log(ui);
@@ -557,7 +579,18 @@
 	    		        });
 	    		 
 	    		    $( "#cargo_emisor" ).catcompleteCargo({
-	    		      source: "?c=OfcPartes&a=buscadorCargo",
+	    		      // source: "?c=OfcPartes&a=buscadorCargo",
+	    		      source: function( request, response ) {
+	    		          $.ajax({
+	    		              url: GLOBAL_PATH+"ofcpartes/buscadorCargo",
+	    		              type: 'POST',
+	    		              data: {term: request.term},
+	    		              dataType: "json",
+	    		              success: function( data ) {
+	    		                  response(data);
+	    		              }
+	    		          });
+	    		      },
 	    		      minLength: 3,
 	    		      select: function( event, ui ) {
 	    		      	console.log(ui);

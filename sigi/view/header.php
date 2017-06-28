@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
+    <base href="/datancenter/" >
 		<title>Sistema de Gestion de Información</title>
         
         <meta charset="utf-8" />
         
-        <link rel="icon" type="image/png" href="../AI/image/logo.png" />
-        <link rel="stylesheet" href="../sigi/assets/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="../sigi/assets/css/dataTables.bootstrap.min.css" />
-        <link rel="stylesheet" href="../sigi/assets/css/jasny-bootstrap.css" />
+        <link rel="icon" type="image/png" href="AI/image/logo.png" />
+        <link rel="stylesheet" href="sigi/assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="sigi/assets/css/dataTables.bootstrap.min.css" />
+        <link rel="stylesheet" href="sigi/assets/css/jasny-bootstrap.css" />
         <!-- <link rel="stylesheet" href="sigi/assets/css/bootstrap-theme.min.css" />         -->
-        <link rel="stylesheet" href="../sigi/assets/js/jquery-ui/jquery-ui.css" />
-        <link rel="stylesheet" href="../sigi/assets/css/style.css" />
-        <link rel="stylesheet" href="../sigi/assets/css/jquery.gritter.css" />
-        <link rel="stylesheet" href="../sigi/assets/css/wickedpicker.min.css" />
+        <link rel="stylesheet" href="sigi/assets/js/jquery-ui/jquery-ui.css" />
+        <link rel="stylesheet" href="sigi/assets/css/style.css" />
+        <link rel="stylesheet" href="sigi/assets/css/jquery.gritter.css" />
+        <link rel="stylesheet" href="sigi/assets/css/wickedpicker.min.css" />
 
-        <script src="../sigi/assets/js/moment.min.js"></script>
+        <script src="sigi/assets/js/moment.min.js"></script>
         
-        <script src="../sigi/assets/js/jquery.js"></script>
-        <script src="../sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>
+        <script src="sigi/assets/js/jquery.js"></script>
+        <script src="sigi/assets/js/jquery-ui/jquery-ui.min.js"></script>
         <!-- <script src="sigi/assets/js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script> -->
-        <script src="../sigi/assets/js/socket.io.js"></script>
-        <script src="../sigi/assets/js/wickedpicker.js"></script>
+        <script src="sigi/assets/js/socket.io.js"></script>
+        <script src="sigi/assets/js/wickedpicker.js"></script>
 
 	</head>
     <body style="min-width: 960px !important;">
@@ -37,7 +38,7 @@
             <span class="icon-bar"></span>
           </button>
           <a style="display: block; font-weight: 600; color: white; margin-top: 10px; text-decoration: none;" href="sigi.php">
-            <img src="../AI/image/sigi_blanco.png" style="width: 100px;padding-top: 7px;">
+            <img src="AI/image/sigi_blanco.png" style="width: 100px;padding-top: 7px;">
           </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -66,7 +67,7 @@
                 
             </li>           
             <li style="float: left;" class="men">
-                <a href="index.php"><strong>Cerrar Sessión</strong></a>
+                <a href="index"><strong>Cerrar Sessión</strong></a>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -82,7 +83,7 @@
     var ID_USER = <?php echo $_SESSION['data_user']['id']; ?>;
     var GLOBAL_PATH = <?php echo "'http://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').'/'."'"; ?>;
 
-    var audio = new Audio('../AI/image/presence_changed.mp3');
+    var audio = new Audio('AI/image/presence_changed.mp3');
 
     var socket = io('<?php echo $_ENV['HOST_NOTF'] ?>',{secure: false});
 
@@ -102,7 +103,7 @@
       for (var i = data.ids_usuario_receptor.length - 1; i >= 0; i--) {
         if(actualuser==data.ids_usuario_receptor[i])
         {
-           notifyMe(data.asunto,'../AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
+           notifyMe(data.asunto,'AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
 
            if(data.origen == "EXTERNO" && data.destino == "INTERNO"){
             $('#lista_oficios_externos').DataTable().ajax.reload();
@@ -136,7 +137,7 @@
     //   for (var i = data.ids_usuario_receptor.length - 1; i >= 0; i--) {
     //     if(actualuser==data.ids_usuario_receptor[i])
     //     {
-    //        notifyMe(data.asunto,'../AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
+    //        notifyMe(data.asunto,'AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
 
     //        if(data.origen == "EXTERNO" && data.destino == "INTERNO"){
     //         $('#lista_oficios_externos').DataTable().ajax.reload();
@@ -187,7 +188,7 @@
       var options = {
           body: theBody,
           icon: theIcon,
-          sound: '../AI/image/presence_changed.wav'
+          sound: 'AI/image/presence_changed.wav'
       }
       var n = new Notification(theTitle,options);
 

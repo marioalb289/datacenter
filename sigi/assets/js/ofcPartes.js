@@ -35,14 +35,14 @@ $(document).ready(function(){
         console.log(params);
         $.ajax({
           method: "POST",
-          url: "?c=OfcPartes&a=createReportParam",
+          url: GLOBAL_PATH+"ofcpartes/createReportParam",
           data: params
         })
           .done(function( res ) {                
             
             var respuesta = JSON.parse(res);
             if(respuesta.success){
-              url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+              url = GLOBAL_PATH+"ofcpartes/imprimirReporte";
               window.open(url, '_blank');
             }
             else{
@@ -126,9 +126,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },
@@ -139,7 +139,7 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
             },
             // {
@@ -166,7 +166,7 @@ $(document).ready(function(){
                     if(row.tipo_oficio=="RESPUESTA")
                       return "";
                     else
-                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
             }
         ] ,       
@@ -194,7 +194,7 @@ $(document).ready(function(){
                 
                 var respuesta = JSON.parse(res);
                 if(respuesta.success){
-                  url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+                  url = GLOBAL_PATH+"ofcpartes/imprimirReporte",
                   window.open(url, '_blank');                 
                 }
                 else{
@@ -269,9 +269,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },
@@ -282,7 +282,7 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
             },
             // {
@@ -335,7 +335,7 @@ $(document).ready(function(){
                 
                 var respuesta = JSON.parse(res);
                 if(respuesta.success){
-                  url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+                  url = GLOBAL_PATH+"ofcpartes/imprimirReporte",
                   window.open(url, '_blank');
                 }
                 else{
@@ -418,9 +418,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },
@@ -431,7 +431,7 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
             },
             {
@@ -444,7 +444,7 @@ $(document).ready(function(){
                     if(parseInt(row.id_usuario_emisor)!=ID_USER)
                       return "";
                     else
-                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
             }
         ],
@@ -472,7 +472,7 @@ $(document).ready(function(){
                 
                 var respuesta = JSON.parse(res);
                 if(respuesta.success){
-                  url = window.location.href+"?c=OfcPartes&a=imprimirReporte";
+                  url = GLOBAL_PATH+"ofcpartes/imprimirReporte",
                   window.open(url, '_blank');
                 }
                 else{
@@ -521,9 +521,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                   },
               },
@@ -535,7 +535,7 @@ $(document).ready(function(){
                   "orderable" : false,
                   "className": "dt-center",
                   "render": function ( data, type, row ) {
-                      return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                      return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                   },
               }
           ],
@@ -583,9 +583,9 @@ $(document).ready(function(){
           "render": function ( data, type, row ) {
             moment.locale('es');
             if(row[7] == "0000-00-00 00:00:00")
-              return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+              return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
             else 
-              return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row[7]).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+              return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row[7]).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
             },
         },
@@ -596,7 +596,7 @@ $(document).ready(function(){
             "orderable" : false,
             "className": "dt-center",
             "render": function ( data, type, row ) {
-                return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row[0])+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                return  "<a href="+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row[0])+" class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
             },
         }, 
         ],
@@ -667,9 +667,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='../AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='../AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
                 },
             },
@@ -680,7 +680,7 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    return  "<a href='?c=OfcPartes&a=view&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
             },
             {
@@ -915,9 +915,9 @@ $(document).ready(function(){
         });
     }
 
-    $( "#btn-cancelar" ).click(function() {
-      location.href = "sigi.php";
-    });
+    // $( "#btn-cancelar" ).click(function() {
+    //   location.href = "sigi.php";
+    // });
 
     
     

@@ -9,6 +9,8 @@ $controller = 'ofcpartes';
 session_start();
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
+$host  = $_SERVER['HTTP_HOST'];
+$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
 //Validar primero que exista una sesion
 if( !empty($_SESSION['data_user'])){
@@ -138,11 +140,14 @@ else{
             );
 
             $_SESSION['token'] = JWT::encode($token, $secret_key);
-            header('Location: sigi.php'); 
+            
+            $extra = 'ofcpartes/index';
+            header("Location: http://$host$uri/$extra");
 
         }
         else{
-            header('Location: index.php'); 
+           $extra = 'ofcpartes/index';
+            header("Location: http://$host$uri/$extra");
 
         }
 
@@ -150,7 +155,8 @@ else{
 
     }
     else{
-        header('Location: index.php');        
+        $extra = 'ofcpartes/index';
+         header("Location: http://$host$uri/$extra");      
     }
 }
 

@@ -115,7 +115,7 @@ session_start();
         if ( intval($_SESSION['prvsigi'])  >= 1) {
             // if ($ip == '201.146.138.83') {
                 echo '
-                <a style="text-decoration: none; color: white;" href="sigi.php">
+                <a style="text-decoration: none; color: white;" href="ofcpartes/index">
                     <img src="AI/image/iconoSIGI.png" class="if-image" title="Sistema de Gestión de Información" style="width: 25%; margin: 2% auto;">
                 </a>
                 ';

@@ -125,7 +125,7 @@
 
 				    <div class="form-group">
 				    
-				      <img src="../AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
+				      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
 				    </div>
 				    <div class="form-group" style="text-align: center; ">
 				      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" required="required" /></span>
@@ -386,125 +386,159 @@
 				$( function() {
 
 				    $.widget( "custom.catcomplete", $.ui.autocomplete, {
-				          _create: function() {
-				            this._super();
-				            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-				          },
-				          _renderItem: function( ul, item ) {
-				            return $( "<li>" )
-				              .attr( "data-value", item.value )
-				              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
-				              .appendTo( ul );
-				          },
-				          _renderMenu: function( ul, items ) {
-				            var that = this,
-				              currentCategory = "";
-				            $.each( items, function( index, item ) {
-				              var li;
-				              if ( item.nombre_emisor != currentCategory ) {
-				                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
-				                currentCategory = item.nombre_emisor;
-				              }
-				              li = that._renderItemData( ul, item );
-				              if ( item.nombre_emisor ) {
-				                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
-				              }
-				            });
-				          }
-				        });
-				 
-				    $( "#institucion_emisor" ).catcomplete({
-				      source: "?c=OfcPartes&a=buscadorInstitucion",
-				      minLength: 3,
-				      select: function( event, ui ) {
-				      	console.log(ui);
-				      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-				      	$("#cargo_emisor").val(ui.item.cargo);
-				      	$("#institucion_emisor").val(ui.item.value);
-				        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-				      }
-				    });
+	    		          _create: function() {
+	    		            this._super();
+	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+	    		          },
+	    		          _renderItem: function( ul, item ) {
+	    		            return $( "<li class='autocomplete-child'>" )
+	    		              .attr( "data-value", item.value )
+	    		              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
+	    		              .appendTo( ul );
+	    		          },
+	    		          _renderMenu: function( ul, items ) {
+	    		            var that = this,
+	    		              currentCategory = "";
+	    		            $.each( items, function( index, item ) {
+	    		              var li;
+	    		              if ( item.nombre_emisor != currentCategory ) {
+	    		                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
+	    		                currentCategory = item.nombre_emisor;
+	    		              }
+	    		              li = that._renderItemData( ul, item );
+	    		              if ( item.nombre_emisor ) {
+	    		                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
+	    		              }
+	    		            });
+	    		          }
+	    		        });
+	    		 
+	    		    $( "#institucion_emisor" ).catcomplete({
+	    		      // source: "?c=OfcPartes&a=buscadorInstitucion",
+	    		      //source: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
+	    		      source: function( request, response ) {
+	    		          $.ajax({
+	    		              url: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
+	    		              type: 'POST',
+	    		              data: {term: request.term},
+	    		              dataType: "json",
+	    		              success: function( data ) {
+	    		                  response(data);
+	    		              }
+	    		          });
+	    		      },
+	    		      minLength: 3,
+	    		      select: function( event, ui ) {
+	    		      	console.log(ui);
+	    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+	    		      	$("#cargo_emisor").val(ui.item.cargo);
+	    		      	$("#institucion_emisor").val(ui.item.value);
+	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	    		      }
+	    		    });
 
-				    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
-				          _create: function() {
-				            this._super();
-				            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-				          },
-				          _renderItem: function( ul, item ) {
-				            return $( "<li class='autocomplete-child'>" )
-				              .attr( "data-value", item.value )
-				              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
-				              .appendTo( ul );
-				          },
-				          _renderMenu: function( ul, items ) {
-		                  var that = this,
-		                    currentCategory = "";
-		                  $.each( items, function( index, item ) {
-		                    var li;
-		                    if ( item.institucion_emisor != currentCategory ) {
-		                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-		                      currentCategory = item.institucion_emisor;
-		                    }
-		                    li = that._renderItemData( ul, item );
-		                    if ( item.institucion_emisor ) {
-		                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-		                    }
-		                  });
-		                }
-				        });
-				 
-				    $( "#nombre_emisor" ).catcompleteNombre({
-				      source: "?c=OfcPartes&a=buscadorEmisor",
-				      minLength: 3,
-				      select: function( event, ui ) {
-				      	console.log(ui);
-				      	$("#nombre_emisor").val(ui.item.value);
-				      	$("#cargo_emisor").val(ui.item.cargo);
-				      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-				        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-				      }
-				    });
+	    		    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
+	    		          _create: function() {
+	    		            this._super();
+	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+	    		          },
+	    		          _renderItem: function( ul, item ) {
+	    		            return $( "<li class='autocomplete-child'>" )
+	    		              .attr( "data-value", item.value )
+	    		              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
+	    		              .appendTo( ul );
+	    		          },
+	    		          _renderMenu: function( ul, items ) {
+	                      var that = this,
+	                        currentCategory = "";
+	                      $.each( items, function( index, item ) {
+	                        var li;
+	                        if ( item.institucion_emisor != currentCategory ) {
+	                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+	                          currentCategory = item.institucion_emisor;
+	                        }
+	                        li = that._renderItemData( ul, item );
+	                        if ( item.institucion_emisor ) {
+	                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+	                        }
+	                      });
+	                    }
+	    		        });
+	    		 
+	    		    $( "#nombre_emisor" ).catcompleteNombre({
+	    		      // source: "?c=OfcPartes&a=buscadorEmisor",
+	    		      // source: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
+	    		      source: function( request, response ) {
+	    		          $.ajax({
+	    		              url: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
+	    		              type: 'POST',
+	    		              data: {term: request.term},
+	    		              dataType: "json",
+	    		              success: function( data ) {
+	    		                  response(data);
+	    		              }
+	    		          });
+	    		      },
+	    		      minLength: 3,
+	    		      select: function( event, ui ) {
+	    		      	console.log(ui);
+	    		      	$("#nombre_emisor").val(ui.item.value);
+	    		      	$("#cargo_emisor").val(ui.item.cargo);
+	    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	    		      }
+	    		    });
 
-				    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
-				          _create: function() {
-				            this._super();
-				            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-				          },
-				          _renderItem: function( ul, item ) {
-				            return $( "<li class='autocomplete-child'>" )
-				              .attr( "data-value", item.value )
-				              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
-				              .appendTo( ul );
-				          },
-				          _renderMenu: function( ul, items ) {
-		                  var that = this,
-		                    currentCategory = "";
-		                  $.each( items, function( index, item ) {
-		                    var li;
-		                    if ( item.institucion_emisor != currentCategory ) {
-		                      ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-		                      currentCategory = item.institucion_emisor;
-		                    }
-		                    li = that._renderItemData( ul, item );
-		                    if ( item.institucion_emisor ) {
-		                      li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-		                    }
-		                  });
-		                }
-				        });
-				 
-				    $( "#cargo_emisor" ).catcompleteCargo({
-				      source: "?c=OfcPartes&a=buscadorCargo",
-				      minLength: 3,
-				      select: function( event, ui ) {
-				      	console.log(ui);
-				      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-				      	$("#cargo_emisor").val(ui.item.value);
-				      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-				        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-				      }
-				    });
-
+	    		    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
+	    		          _create: function() {
+	    		            this._super();
+	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+	    		          },
+	    		          _renderItem: function( ul, item ) {
+	    		            return $( "<li class='autocomplete-child'>" )
+	    		              .attr( "data-value", item.value )
+	    		              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
+	    		              .appendTo( ul );
+	    		          },
+	    		          _renderMenu: function( ul, items ) {
+	                      var that = this,
+	                        currentCategory = "";
+	                      $.each( items, function( index, item ) {
+	                        var li;
+	                        if ( item.institucion_emisor != currentCategory ) {
+	                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+	                          currentCategory = item.institucion_emisor;
+	                        }
+	                        li = that._renderItemData( ul, item );
+	                        if ( item.institucion_emisor ) {
+	                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+	                        }
+	                      });
+	                    }
+	    		        });
+	    		 
+	    		    $( "#cargo_emisor" ).catcompleteCargo({
+	    		      // source: "?c=OfcPartes&a=buscadorCargo",
+	    		      source: function( request, response ) {
+	    		          $.ajax({
+	    		              url: GLOBAL_PATH+"ofcpartes/buscadorCargo",
+	    		              type: 'POST',
+	    		              data: {term: request.term},
+	    		              dataType: "json",
+	    		              success: function( data ) {
+	    		                  response(data);
+	    		              }
+	    		          });
+	    		      },
+	    		      minLength: 3,
+	    		      select: function( event, ui ) {
+	    		      	console.log(ui);
+	    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+	    		      	$("#cargo_emisor").val(ui.item.value);
+	    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	    		      }
+	    		    });
 
 
 				  } );

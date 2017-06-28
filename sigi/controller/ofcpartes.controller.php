@@ -21,12 +21,16 @@ class OfcPartesController
   private $layout;
   private $validate;
 
+  private $GLOBAL_PATH;
+
   public function __CONSTRUCT()
   {
     try
     {
       $this->layout = new Layout();    
       $this->validate = new Validate();
+
+      $this->GLOBAL_PATH  = "http://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').'/';
     }
     catch(Exception $e)
     {
@@ -36,8 +40,6 @@ class OfcPartesController
 
 
   public function IndexAction(){
-    // print_r($_SESSION);
-
     $area =  new Area();
     $ar = $area->ListarAreas();
 
@@ -631,7 +633,7 @@ class OfcPartesController
       $id_usuario = $_SESSION['data_user']['id'];
     }
     else{
-      header('Location: sigi.php');
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
       exit;
     }
 
@@ -639,7 +641,7 @@ class OfcPartesController
     $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
     if(empty($objOficio)){
       $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-      header('Location: sigi.php');
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
       exit;
     }
 
@@ -748,14 +750,14 @@ class OfcPartesController
               $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
               if(empty($objOficio)){
                 $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-                header('Location: sigi.php');
+                header("Location: $this->GLOBAL_PATH/ofcpartes/index");
                 exit;       
               }
 
             }
             else{
               $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-              header('Location: sigi.php');
+              header("Location: $this->GLOBAL_PATH/ofcpartes/index");
               exit;              
             }
           }
@@ -841,7 +843,7 @@ class OfcPartesController
           $objSolicitud = $oficio->buscaUsuarioEnSolicitud($objOficioTemp->parent_id,$id_usuario);
           if(empty($objSolicitud)){
             $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-            header('Location: sigi.php');
+            header("Location: $this->GLOBAL_PATH/ofcpartes/index");
             exit;
           }
           else{
@@ -882,12 +884,12 @@ class OfcPartesController
           $objOficioDoc->ActualizarEstatusFinal();
 
           $_SESSION['flash-message-success'] = 'Solicitud Cancelada';
-          header('Location: sigi.php');
+          header("Location: $this->GLOBAL_PATH/ofcpartes/index");
           
         } catch (Exception $e) {
 
           $_SESSION['flash-message-error'] = 'Error al cambiar el estatus';
-          header('Location: sigi.php');
+          header("Location: $this->GLOBAL_PATH/ofcpartes/index");
           exit;
           
         }
@@ -895,7 +897,7 @@ class OfcPartesController
       }
       else{
         $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-        header('Location: sigi.php');
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
         exit;
       }
 
@@ -919,7 +921,7 @@ class OfcPartesController
               $id_usuario = $_SESSION['data_user']['id'];
             //}
             // else{
-            //   header('Location: sigi.php');
+            //   header("Location: $this->GLOBAL_PATH/ofcpartes/index");
             //   exit;
             // }
 
@@ -927,7 +929,7 @@ class OfcPartesController
             $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
             if(empty($objOficio)){
               $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-              header('Location: sigi.php');
+              header("Location: $this->GLOBAL_PATH/ofcpartes/index");
               exit;
             }
 
@@ -967,7 +969,7 @@ class OfcPartesController
           } catch (Exception $e) {
 
             $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-            header('Location: sigi.php');
+            header("Location: $this->GLOBAL_PATH/ofcpartes/index");
             exit;
             
           }
@@ -975,7 +977,7 @@ class OfcPartesController
         
       }else{
         $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-        header('Location: sigi.php');
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
         exit;
 
       }
@@ -1034,7 +1036,7 @@ class OfcPartesController
           
         } catch (Exception $e) {
           $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-          header('Location: sigi.php');
+          header("Location: $this->GLOBAL_PATH/ofcpartes/index");
           exit;
           
         }
@@ -1043,7 +1045,7 @@ class OfcPartesController
       
       else{
         $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-        header('Location: sigi.php');
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
         exit;
       }
 
@@ -1079,7 +1081,7 @@ class OfcPartesController
           
         } catch (Exception $e) {
           $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-          header('Location: sigi.php');
+          header("Location: $this->GLOBAL_PATH/ofcpartes/index");
           exit;
           
         }
@@ -1087,7 +1089,7 @@ class OfcPartesController
       
       else{
         $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-        header('Location: sigi.php');
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
         exit;
       }
 
@@ -1158,7 +1160,7 @@ class OfcPartesController
     }
 
     public function buscadorCargoAction(){
-      print_r($_REQUEST);
+      // print_r($_REQUEST);
 
       if(isset($_REQUEST['term']) && $_REQUEST['term'] != ""){
         try {
@@ -1365,7 +1367,7 @@ class OfcPartesController
         $ofc_doc->ActualizarEstatusFinal();
 
         $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
-        header('Location: sigi.php');
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
 
         
         
@@ -1379,7 +1381,7 @@ class OfcPartesController
     } catch (Exception $e) {
 
       $_SESSION['flash-message-error'] = 'Error al guardar la información';
-      header('Location: sigi.php');
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
       
     }
   }
@@ -1608,7 +1610,7 @@ class OfcPartesController
               // header("Content-type:application/json");
               echo json_encode(array("success"=>$success,"notificacion" => $data));
               exit;
-              //header('Location: sigi.php');
+              //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
           }
           
       } catch (Exception $e) {
@@ -1883,7 +1885,7 @@ class OfcPartesController
 
               
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
-              //header('Location: sigi.php');
+              //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
 
               //Armar arreglo de datos para los usuarios que se les notificara el oficio
               $usr = new Usuario();
