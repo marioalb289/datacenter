@@ -92,11 +92,12 @@ else{
     if( (isset($_REQUEST['usuario']) && $_REQUEST['usuario'] != '') && (isset($_REQUEST['contrasena']) && $_REQUEST['contrasena'] != '')){
         // print_r($_REQUEST);
         $validate = new Validate();
+        $extra = '/index';
         // print_r($validate);exit;
         if (!$validate->alfanumerico($_REQUEST['usuario']))
-          header('Location: index.php'); 
+           header("Location: http://$host$uri/$extra");     
         if (!$validate->alfanumerico($_REQUEST['contrasena']))
-            header('Location: index.php'); 
+             header("Location: http://$host$uri/$extra");     
 
         $usuario = new Usuario();
         $objUser = $usuario->reLoginUser($_REQUEST['usuario'],$_REQUEST['contrasena']);
@@ -141,12 +142,12 @@ else{
 
             $_SESSION['token'] = JWT::encode($token, $secret_key);
             
-            $extra = 'ofcpartes/index';
+            $extra = '/index';
             header("Location: http://$host$uri/$extra");
 
         }
         else{
-           $extra = 'ofcpartes/index';
+           $extra = '/index';
             header("Location: http://$host$uri/$extra");
 
         }
@@ -155,7 +156,7 @@ else{
 
     }
     else{
-        $extra = 'ofcpartes/index';
+        $extra = '/index';
          header("Location: http://$host$uri/$extra");      
     }
 }
