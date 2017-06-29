@@ -985,9 +985,10 @@ class OfcPartesController
     }
 
     public function viewFileAction(){
+      // print_r($_REQUEST);exit;
       if(isset($_REQUEST['id']) && $_REQUEST['id'] != ""){
         try {
-          if (!$this->validate->numero($_REQUEST['id']) || !$this->validate->numero($_REQUEST['idofc']))
+          if (!$this->validate->numero($_REQUEST['id']) || !$this->validate->numero($_REQUEST['idVincular']))
               throw new Exception("Accion no encontrada");
           $documento = new Documento();
           $objDoc = $documento->getDocumento($_REQUEST['id']);
@@ -1000,7 +1001,7 @@ class OfcPartesController
 
           //Buscar el oficio al que pertenece el docmuento y si es un externo y no requiere responder cambiar estatus global a cerrado
           $oficio = new oficio();
-          $objOficio = $oficio->getOficio($_REQUEST['idofc'],$_SESSION['data_user']['id']);
+          $objOficio = $oficio->getOficio($_REQUEST['idVincular'],$_SESSION['data_user']['id']);
           // print_r($objOficio);exit;
           if(!empty($objOficio)){
             if(!$objOficio->respuesta ){
@@ -1293,7 +1294,8 @@ class OfcPartesController
         $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
         $id= $_POST['id_oficio'];
 
-        $location = "Location: sigi.php?c=OfcPartes&a=view&id=$id";
+        // $location = "Location: sigi.php?c=OfcPartes&a=view&id=$id";
+        $location = "Location: $this->GLOBAL_PATH/ofcpartes/view/$id";
         header($location);
         
 
@@ -1303,7 +1305,7 @@ class OfcPartesController
       $_SESSION['flash-message-error'] =  $e->getMessage();
       $id= $_POST['id_oficio'];
 
-      $location = "Location: sigi.php?c=OfcPartes&a=view&id=$id";
+      $location = "Location: $this->GLOBAL_PATH/ofcpartes/view/$id";
       header($location);
     }
 

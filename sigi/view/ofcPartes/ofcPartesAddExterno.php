@@ -27,7 +27,7 @@
 
 
 <h1 class="page-header">Oficialia de Partes</h1>
-<form name="recepciones" method="post" action="?c=OfcPartes&a=Guardar" role="form" enctype="multipart/form-data">
+<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="row">
@@ -208,7 +208,7 @@
 					var formData = new FormData($(this)[0]);
 
 				    $.ajax({
-				        url: '?c=OfcPartes&a=Guardar',
+				        url: GLOBAL_PATH+"ofcpartes/guardar",
 				        type: 'POST',
 				        data: formData,
 				        async: false,
@@ -217,10 +217,10 @@
 				        	respuesta = JSON.parse(data); 
 				        	if(respuesta.success){
 				        		socket.emit( 'notification', respuesta.notificacion );
-				        		window.location.href = "sigi.php";
+				        		window.location.href = GLOBAL_PATH+"ofcpartes/index"
 				        	}
 				        	else{
-				        		window.location.href = "sigi.php?c=OfcPartes&a=add";
+				        		window.location.href = GLOBAL_PATH+"ofcpartes/addExterno";
 				        	}
 				        },
 				        cache: false,

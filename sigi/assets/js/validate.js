@@ -387,7 +387,8 @@ jQuery.fn.validateNumOficio = function ()
 
         $.ajax({
           method: "POST",
-          url: "?c=OfcPartes&a=buscarNumOficio",
+          // url: "?c=OfcPartes&a=buscarNumOficio",
+          url: GLOBAL_PATH+"ofcpartes/buscarNumOficio",
           data: { folio_iepc : obj.val() },
           beforeSend: function( xhr ) {
               $("#btn_guardar_oficio").prop('disabled', true);

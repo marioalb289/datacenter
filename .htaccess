@@ -1,13 +1,15 @@
 RewriteEngine On
 
-#RewriteBase /datancenter/
+#RewriteBase /datacenter/
 
 Options +FollowSymLinks
 
 
 RewriteCond %{REQUEST_URI} !\.(?:css|js|jpe?g|gif|png)$ [NC]
+RewriteRule ofcpartes/([^/]+)/([^/]+)/([^/]+)$ index_sigi.php?c=ofcpartes&a=$1&idVincular=$2&id=$3 [L]
+#RewriteRule ofcpartes/([^/]+)/([^/]+)/([^/]+)$ index_sigi.php?c=ofcpartes&a=$1&id=$2&idofc=$3 [L]
 RewriteRule ofcpartes/([^/]+)/([^/]+)$ index_sigi.php?c=ofcpartes&a=$1&id=$2 [L]
-RewriteRule ^ofcpartes/([^/]+)^/([^/]+)+/(.+)$ /siaasdsadagi/$1  [L]
+#RewriteRule ^ofcpartes/([^/]+)^/([^/]+)+/(.+)$ /siaasdsadagi/$1  [L]
 RewriteRule ofcpartes/([^/]+)$ index_sigi.php?c=ofcpartes&a=$1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f

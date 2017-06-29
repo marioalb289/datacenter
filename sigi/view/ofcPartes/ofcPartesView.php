@@ -14,7 +14,7 @@
             </div>
             <div class="modal-footer">
             <a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary pull-left" name="btn-cancelar" id="btn-responder" data-dismiss="modal" role="button">Cancelar</a>
-                <a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='?c=OfcPartes&a=response&id=<?php echo $data['oficio']->id_oficio ?>' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
+                <a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='ofcpartes/response/<?php echo $data['oficio']->id_oficio ?>' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -50,11 +50,11 @@
 				<a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href="#warning" data-toggle="modal" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
 				
 				<?php } elseif ( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->respuesta && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){ ?>
-				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php if($data['oficio']->fecha_visto != '0000-00-00 00:00:00') {echo "href='?c=OfcPartes&a=response&id=".$data['oficio']->id_oficio."'";} else {echo "href='#warning2' data-toggle='modal'";} ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Responder</a>
+				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php if($data['oficio']->fecha_visto != '0000-00-00 00:00:00') {echo "href='ofcpartes/response/".$data['oficio']->id_oficio."'";} else {echo "href='#warning2' data-toggle='modal'";} ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Responder</a>
 				
 				<?php } ?>	
 				<?php if ( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->tipo_oficio == 'SOLICITUD' && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){  ?>
-				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='?c=OfcPartes&a=vincular&id=".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Vincular</a>
+				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='ofcpartes/vincular/".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Vincular</a>
 				<?php } ?>	
 
 				<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
@@ -174,8 +174,8 @@
 			      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">
 			    </div>
 			    <div class="form-group" style="text-align: center; ">
-			      <a href='?c=OfcPartes&a=viewFile&id=<?php echo $data['oficio']->id_documento ?>&idofc=<?php  echo $data['oficio']->id_oficio?>' class='btn btn-default'  style="width: 100px;">Ver</a>
-				  <a href='?c=OfcPartes&a=downloadFile&id=<?php echo $data['oficio']->id_documento ?>' class='btn btn-default' style="width: 100px;">Descargar</a>
+			      <a href='ofcpartes/viewFile/<?php echo $data['oficio']->id_documento ?>/<?php  echo $data['oficio']->id_oficio?>' class='btn btn-default'  style="width: 100px;">Ver</a>
+				  <a href='ofcpartes/downloadFile/<?php echo $data['oficio']->id_documento ?>' class='btn btn-default' style="width: 100px;">Descargar</a>
 			    </div>
 			    <div class="form-group" style="text-align: center;">
 			    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;"><?php echo $data['oficio']->doc_nombre ?></span>
@@ -236,7 +236,7 @@
 	</div>
 </div>
 <?php if(!empty($data['usuarios_turnar']) && $data['oficio']->estatus_final!= 'Cerrado' &&  $data['oficio']->tipo_oficio == 'SOLICITUD' && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id']) { ?>
-<form name="recepciones" method="post" action="?c=OfcPartes&a=Turnar" role="form" enctype="multipart/form-data">
+<form name="recepciones" method="post" action="ofcpartes/turnar" role="form" enctype="multipart/form-data">
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="row">

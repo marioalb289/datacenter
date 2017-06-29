@@ -307,7 +307,7 @@ $(document).ready(function(){
                     if(parseInt(row.id_usuario_emisor)!=ID_USER)
                       return "";
                     else
-                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=cancel&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
             }
         ],
@@ -693,7 +693,7 @@ $(document).ready(function(){
                     if(parseInt(row.id_usuario_emisor)!=ID_USER)
                       return "";
                     else
-                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='?c=OfcPartes&a=guardarVinculacion&idVincular="+parseInt( $("#id_oficio").val())+"&id="+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Vincular</a>";
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/guardarVinculacion/"+parseInt( $("#id_oficio").val())+"/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Vincular</a>";
                 },
             }
         ],

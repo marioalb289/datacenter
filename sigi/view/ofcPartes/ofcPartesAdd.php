@@ -264,7 +264,7 @@
 
 	    		    $.ajax({
 	    		        // url: '?c=OfcPartes&a=Guardar',
-	    		        url: GLOBAL_PATH+"ofcpartes/Guardar",
+	    		        url: GLOBAL_PATH+"ofcpartes/guardar",
 	    		        type: 'POST',
 	    		        data: formData,
 	    		        async: false,
@@ -274,10 +274,10 @@
 	    		        	console.log('aqui respuesta',respuesta);
 	    		        	if(respuesta.success){
 	    		        		socket.emit( 'notification', respuesta.notificacion );
-	    		        		window.location.href = "sigi.php";
+	    		        		window.location.href = GLOBAL_PATH+"ofcpartes/index"
 	    		        	}
 	    		        	else{
-	    		        		window.location.href = "sigi.php?c=OfcPartes&a=add";
+	    		        		window.location.href = GLOBAL_PATH+"ofcpartes/add";
 	    		        	}
 	    		        },
 	    		        cache: false,

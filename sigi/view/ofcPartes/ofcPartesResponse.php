@@ -249,7 +249,7 @@
 					var formData = new FormData($(this)[0]);
 
 				    $.ajax({
-				        url: '?c=OfcPartes&a=guardarRespuesta',
+				        url: GLOBAL_PATH+"ofcpartes/guardarRespuesta",
 				        type: 'POST',
 				        data: formData,
 				        async: false,
@@ -259,10 +259,10 @@
 				        	console.log('aqui respuesta',respuesta);
 				        	if(respuesta.success){
 				        		socket.emit( 'notification', respuesta.notificacion );
-				        		window.location.href = "sigi.php";
+				        		window.location.href = GLOBAL_PATH+"ofcpartes/index";
 				        	}
 				        	else{
-				        		window.location.href = "sigi.php?c=OfcPartes&a=response";
+				        		window.location.href = GLOBAL_PATH+"ofcpartes/response";
 				        	}
 				        },
 				        cache: false,

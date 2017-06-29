@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-    <base href="/datancenter/" >
+    <base href="/datacenter/" >
 		<title>Sistema de Gestion de Información</title>
         
         <meta charset="utf-8" />
@@ -37,24 +37,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a style="display: block; font-weight: 600; color: white; margin-top: 10px; text-decoration: none;" href="sigi.php">
+          <a style="display: block; font-weight: 600; color: white; margin-top: 10px; text-decoration: none;" href="ofcpartes/index">
             <img src="AI/image/sigi_blanco.png" style="width: 100px;padding-top: 7px;">
           </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="sigi.php">Listar Oficios</a></li>
+            <li class="active"><a href="ofcpartes/index">Listar Oficios</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registrar Oficio <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="?c=OfcPartes&a=add">Crear Oficio</a></li>
+                <li><a href="ofcpartes/add">Crear Oficio</a></li>
                 <?php if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){ ?>
-                  <li><a href="?c=OfcPartes&a=addExterno">Crear Oficio con destino Externo</a></li>
+                  <li><a href="ofcpartes/addExterno">Crear Oficio con destino Externo</a></li>
                 <?php } ?>
               </ul>
             </li>
             <li style="float: left;" class="men">
-                <a  href="menu_inicial.php">Menú Principal</a>
+                <a  href="menu_inicial">Menú Principal</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right"> 
@@ -198,7 +198,8 @@
       n.onclick = function(event) {
         //event.preventDefault(); // prevent the browser from focusing the Notification's tab
         window.focus();
-        window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;   
+        //console.log(GLOBAL_PATH+"ofcpartes/view/"+id_oficio);
+        window.location.href = GLOBAL_PATH+"ofcpartes/view/"+id_oficio;   
 
         n.close();
       }
@@ -231,7 +232,7 @@
               audio.play();
               console.log($(e));
               $(e).click(function() {
-                window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;  
+                window.location.href = GLOBAL_PATH+"ofcpartes/view/"+id_oficio;  
               });
               // $.gritter.onclick = function () {
               //      window.location.href = "sigi.php?c=OfcPartes&a=view&id="+id_oficio;      
