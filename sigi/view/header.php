@@ -47,9 +47,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registrar Oficio <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="ofcpartes/add">Crear Oficio</a></li>
+                <li><a href="ofcpartes/add">Registrar Oficio</a></li>
                 <?php if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){ ?>
-                  <li><a href="ofcpartes/addExterno">Crear Oficio con destino Externo</a></li>
+                  <li><a href="ofcpartes/addExterno">Registrar Oficio con destino Externo</a></li>
                 <?php } ?>
               </ul>
             </li>
