@@ -79,9 +79,8 @@ if( !empty($_SESSION['data_user'])){
             /*Nota: deberia redireccionar a un status 404*/
             //header('Location: sigi.php');
             //die($e->getMessage());
-
             http_response_code(404);
-            die();
+            //die();
         }
         
     }

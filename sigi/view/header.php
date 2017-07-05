@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-    <base href="/datacenter/" >
+    <base href="/datancenter/" >
 		<title>Sistema de Gestion de Información</title>
         
         <meta charset="utf-8" />
@@ -79,9 +79,9 @@
     <?php //print_r($_SESSION); ?>
 
     <script type="text/javascript">
-    var USER_PRIV = <?php echo $_SESSION['data_user']['privilegios']; ?>;
-    var ID_USER = <?php echo $_SESSION['data_user']['id']; ?>;
-    var GLOBAL_PATH = <?php echo "'http://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').'/'."'"; ?>;
+    const USER_PRIV = <?php echo $_SESSION['data_user']['privilegios']; ?>;
+    const ID_USER = <?php echo $_SESSION['data_user']['id']; ?>;
+    const GLOBAL_PATH = <?php echo "'http://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').'/'."'"; ?>;
 
     var audio = new Audio('AI/image/presence_changed.mp3');
 
