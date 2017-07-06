@@ -207,6 +207,17 @@
 				if(res){
 					var formData = new FormData($(this)[0]);
 
+					var arrCheck = [];
+
+	    			$('#example').DataTable().$('input, checkbox').each(function (){
+	    				if($(this).prop('checked') == true){
+	    					arrCheck.push(parseInt(this.value));	    					
+	    				}
+	    			});
+
+
+					formData.append('check', arrCheck);
+
 				    $.ajax({
 				        url: GLOBAL_PATH+"ofcpartes/guardar",
 				        type: 'POST',
