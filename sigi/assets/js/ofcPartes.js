@@ -768,7 +768,19 @@ $(document).ready(function(){
         },
 
        ],
-      "order": [[ 1, 'asc' ]]
+      "order": [[ 1, 'asc' ]],
+      "initComplete": function(settings, json) {
+          console.log( 'DataTables has finished its initialisation.' );
+          $( "#example_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' id='btn_enviar_todos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-ok' style='color: #5cb85c;font-weight: 900;'></span>Seleccionar Todo</button>" );
+          $( "#btn_enviar_todos" ).click(function() {
+            if($('#example').DataTable().$('input, checkbox').prop('checked') == true){
+                $('#example').DataTable().$('input, checkbox').prop('checked', false);
+            }
+            else{
+              $('#example').DataTable().$('input, checkbox').prop('checked', true);
+            }
+          });
+        }
 
     });
 

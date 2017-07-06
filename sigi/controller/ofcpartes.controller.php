@@ -1414,6 +1414,7 @@ class OfcPartesController
     }
   }
   public function guardarAction(){
+      // print_r($_POST);exit;
       try {
           $success = true;
           if( !isset($_FILES['archivo']) ){
@@ -1595,8 +1596,8 @@ class OfcPartesController
 
 
                //Enviar copia solo si se selecciono de la lista de usuarios
-               if(isset($_POST['check_list_user'])){
-                 $arr_ccp = $_POST['check_list_user'];
+               if(isset($_POST['check'])){
+                 $arr_ccp = explode(",",$_POST['check']);
                  if(!empty($arr_ccp)){
                    foreach ($arr_ccp as $ids) {
                      //Hacer el guardado por id;
@@ -1885,8 +1886,8 @@ class OfcPartesController
               }
 
               //Enviar copia solo si se selecciono de la lista de usuarios
-              if(isset($_POST['check_list_user'])){
-                $arr_ccp = $_POST['check_list_user'];
+              if(isset($_POST['check'])){
+                $arr_ccp = explode(",", $_POST['check']);
                 if(!empty($arr_ccp)){
                     foreach ($arr_ccp as $ids) {
                         //Hacer el guardado por id;

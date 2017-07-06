@@ -128,7 +128,7 @@ body {
 
   }
 
-  .ui-state-focus{
+  .autocomplete-child:hover{
   	border: 1px solid #eee!important;
     background: #9a9a9a url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x!important;
     font-weight: bold!important;
