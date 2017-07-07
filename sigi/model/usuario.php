@@ -69,6 +69,7 @@ class Usuario
 					us.id AS id_usuario,
 					us.nombre AS nombre_usuario,
 					us.apellido AS apellido_usuario,
+					us.nombre_formal as nombre_formal,
 					us.correo AS email,
 					ar.nombre AS area
 				FROM

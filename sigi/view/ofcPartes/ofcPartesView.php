@@ -220,7 +220,7 @@
 						<tbody>
 							<?php foreach($data['usuarios'] as $u): ?>
 								<tr>
-									<td><?php echo $u->nombre_usuario." ".$u->apellido_usuario; ?></td>
+									<td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
 									<td><?php echo $u->area; ?></td>
 								</tr>
 							<?php endforeach; ?>
