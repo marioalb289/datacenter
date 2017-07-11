@@ -99,6 +99,8 @@
           <?php if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){ ?>
           <li><a href="#respuestas_enviadas" data-toggle="tab">Respuestas Enviadas</a></li>
           <?php } ?>
+          <li><a href="#tab_sol_entrantes" data-toggle="tab">Solicitudes Entrantes</a></li>
+          <li><a href="#tab_sol_salietes" data-toggle="tab">Solicitudes Salientes</a></li>
         </ul>
       </div>
       <div class="panel-body">
@@ -197,6 +199,48 @@
               </table>
             </div>
           </div>
+
+          <div class="tab-pane fade" id="tab_sol_entrantes">
+            <!-- contenido tab respuestas enviadas -->
+            <div class="col-md-12">
+              <table id="lista_solicitudes_entrantes" class="table  table-bordered table-hover display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>N° Oficio</th>
+                        <th>Emisor</th>
+                        <th>Asunto Emisor</th>
+                        <th>Estatus Inicial</th>
+                        <th>Estatus Final</th>
+                        <th>Fecha Recibido</th>
+                        <th>Visto</th>
+                        <th></th>
+                    </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="tab_sol_salietes">
+            <!-- contenido tab respuestas enviadas -->
+            <div class="col-md-12">
+              <table id="lista_solicitudes_salientes" class="table  table-bordered table-hover display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>N° Oficio</th>
+                        <th>Receptor</th>
+                        <th>Asunto Receptor</th>
+                        <th>Estatus Inicial</th>
+                        <th>Estatus Final</th>
+                        <th>Fecha Recibido</th>
+                        <th>Visto</th>
+                        <th></th>
+                    </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>

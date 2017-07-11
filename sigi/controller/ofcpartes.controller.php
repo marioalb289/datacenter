@@ -143,6 +143,145 @@ class OfcPartesController
 
   }
 
+  public function listarSolicitudesEntrantesAction($rep = false){
+
+
+
+    $initPag = new InitPaginador();
+    $cond = '';
+    $group_by = '';
+    $id_usuario = $_SESSION['data_user']['id'];
+
+    $cond = " id_usuario_receptor = $id_usuario";
+    $group_by = ' GROUP BY id_oficio ';
+
+    //Filtros
+    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
+      //Filtrar por fecha
+      $fecha_inicio = $_POST['fecha_inicio'];
+      $fecha_fin = $_POST['fecha_fin'];
+      if($cond != ''){
+        $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+      else{
+        $cond= $cond." CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+    }
+    //Filtrar por estatus
+    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
+      $estatus_final = $_POST['estatus_final'];
+      if($cond != ''){
+        $cond= $cond."  AND estatus_final = $estatus_final"; 
+      }
+      else{
+        $cond= $cond." estatus_final = $estatus_final"; 
+      }
+    }
+    //Filtrar por Area
+    if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
+       $id_area = intval($_POST['area']);
+       $cond = $cond . " AND id_area = $id_area";
+    }
+
+    // print_r($cond);exit;
+
+    $table = 'sigi_vw_solicitudes_entrantes';
+    $columns = array(
+      array(
+        'db' => 'id_oficio',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+          return 'row_'.$d;
+        }
+        ),
+      array( 'db' => 'origen',  'dt' => 'origen' ),
+      array( 'db' => 'destino',  'dt' => 'destino' ),
+      array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
+      array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
+      array( 'db' => 'emisor',   'dt' => 'emisor' ),
+      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
+      array( 'db' => 'id_area',   'dt' => 'id_area' ),
+      array( 'db' => 'area',   'dt' => 'area' ),
+      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
+      array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
+      array( 'db' => 'fecha_recibido',  'dt' => 'fecha_recibido'),
+      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
+      );
+    $primaryKey = 'id_oficio';
+
+    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
+
+  }
+
+  public function listarSolicitudesSalientesAction($rep = false){
+
+
+
+    $initPag = new InitPaginador();
+    $cond = '';
+    $group_by = '';
+    $id_usuario = $_SESSION['data_user']['id'];
+
+    $cond = " id_usuario_emisor = $id_usuario";
+    $group_by = ' GROUP BY id_oficio ';
+
+    //Filtros
+    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
+      //Filtrar por fecha
+      $fecha_inicio = $_POST['fecha_inicio'];
+      $fecha_fin = $_POST['fecha_fin'];
+      if($cond != ''){
+        $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+      else{
+        $cond= $cond." CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+    }
+    //Filtrar por estatus
+    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
+      $estatus_final = $_POST['estatus_final'];
+      if($cond != ''){
+        $cond= $cond."  AND estatus_final = $estatus_final"; 
+      }
+      else{
+        $cond= $cond." estatus_final = $estatus_final"; 
+      }
+    }
+    //Filtrar por Area
+    if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
+       $id_area = intval($_POST['area']);
+       $cond = $cond . " AND id_area = $id_area";
+    }
+
+    // print_r($cond);exit;
+
+    $table = 'sigi_vw_solicitudes_salientes';
+    $columns = array(
+      array(
+        'db' => 'id_oficio',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+          return 'row_'.$d;
+        }
+        ),
+      array( 'db' => 'origen',  'dt' => 'origen' ),
+      array( 'db' => 'destino',  'dt' => 'destino' ),
+      array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
+      array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
+      array( 'db' => 'receptor',   'dt' => 'receptor' ),
+      array( 'db' => 'asunto_receptor',   'dt' => 'asunto_receptor' ),
+      array( 'db' => 'id_area',   'dt' => 'id_area' ),
+      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
+      array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
+      array( 'db' => 'fecha_recibido',  'dt' => 'fecha_recibido'),
+      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
+      );
+    $primaryKey = 'id_oficio';
+
+    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
+
+  }
+
   public function listarOficiosExternosAction($rep = false){
 
 

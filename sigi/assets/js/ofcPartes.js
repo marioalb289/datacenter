@@ -71,6 +71,237 @@ $(document).ready(function(){
       // console.log('aqui datos button', recipient);
       $('#btn-confirmar').attr("href", recipient);
     })
+
+    //Evento del paginador de solicitudes entrantes
+    var sol_entrantes =  $('#lista_solicitudes_entrantes').DataTable({
+        "ordering": true,
+        "autoWidth": false,
+        processing: true,
+        serverSide: true,
+        "deferRender": true,
+        searchDelay: 1000,
+        ajax: {
+            "url": GLOBAL_PATH+"ofcpartes/listarSolicitudesEntrantes",
+            "type": "POST",
+            "data": function ( d ) {
+                d.fecha_inicio = fecha_inicio.value,
+                d.fecha_fin = fecha_fin.value,
+                d.area = filtro_area.value,
+                d.estatus_final = filtro_estatus_final.value
+            }            
+        },
+        "columns": [
+            { "data": "folio_institucion","searchable": true,"orderable": false },
+            { "data": "emisor","searchable": true,"orderable": true },
+            { "data": "asunto_emisor" ,"searchable": true,"orderable": false},
+            { "data": "estatus_inicial", "searchable": false,"orderable": false },
+            { 
+              "data": "estatus_final" ,
+              "searchable": false,
+              "orderable": true,
+              "className": "dt-center",
+              "render": function ( data, type, row ) {
+                    if(row.estatus_final == 'Cerrado')
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else if(row.estatus_final == 'Cancelado')
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
+                },
+            },
+            { "data": "fecha_recibido",
+              "className": "capitalize",
+              "render": function ( data, type, row ) {
+                    moment.locale('es');
+                    return  moment(row.fecha_recibido).format('MMMM Do YYYY, h:mm:ss a');
+                },
+            },
+            {
+                "targets": -1,
+                "data": null, 
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                  if(row.fecha_visto == "0000-00-00 00:00:00")
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                  else 
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+
+                },
+            },
+            {
+                "targets": -1,
+                "data": null,
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                },
+            }
+        ] ,       
+      language: language,
+      "order": [[ 5, 'desc' ]],
+      "initComplete": function(settings, json) {
+          //console.log( 'DataTables has finished its initialisation.' );
+          //$("#div_recargar_externos").show();
+          $( "#lista_solicitudes_entrantes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_recargar_entrantes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#lista_solicitudes_entrantes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_imprimir_rep_entrantes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-print' style='color: #818481;font-weight: 900;'></span>Imprimir</button>" );
+          $( "#btn_recargar_entrantes" ).click(function() {
+            $('#lista_solicitudes_entrantes').DataTable().ajax.reload();
+          });
+          $( "#btn_imprimir_rep_entrantes" ).click(function() {
+            var params = {
+              externo : $('#lista_solicitudes_entrantes').DataTable().ajax.params()
+            };
+            $.ajax({
+              method: "POST",
+              // url: "?c=OfcPartes&a=createReportParam",
+              url: GLOBAL_PATH+"ofcpartes/createReportParam",
+              data: params
+            })
+              .done(function( res ) {                
+                
+                var respuesta = JSON.parse(res);
+                if(respuesta.success){
+                  url = GLOBAL_PATH+"ofcpartes/imprimirReporte",
+                  window.open(url, '_blank');                 
+                }
+                else{
+                  //mensaje de error
+                  bootbox.alert({ 
+                    title: "Error",
+                    message: "No se pudo Imprimir el Reporte",
+                    type: "danger"
+                  })
+                }
+              })
+              .fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+            });
+          });
+        }
+
+
+    });
+
+    //Evento del paginador de solicitudes salientes
+    var sol_salientes =  $('#lista_solicitudes_salientes').DataTable({
+        "ordering": true,
+        "autoWidth": false,
+        processing: true,
+        serverSide: true,
+        "deferRender": true,
+        searchDelay: 1000,
+        ajax: {
+            "url": GLOBAL_PATH+"ofcpartes/listarSolicitudesSalientes",
+            "type": "POST",
+            "data": function ( d ) {
+                d.fecha_inicio = fecha_inicio.value,
+                d.fecha_fin = fecha_fin.value,
+                d.area = filtro_area.value,
+                d.estatus_final = filtro_estatus_final.value
+            }            
+        },
+        "columns": [
+            { "data": "folio_institucion","searchable": true,"orderable": false },
+            { "data": "receptor","searchable": true,"orderable": true },
+            { "data": "asunto_receptor" ,"searchable": true,"orderable": false},
+            { "data": "estatus_inicial", "searchable": false,"orderable": false },
+            { 
+              "data": "estatus_final" ,
+              "searchable": false,
+              "orderable": true,
+              "className": "dt-center",
+              "render": function ( data, type, row ) {
+                    if(row.estatus_final == 'Cerrado')
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else if(row.estatus_final == 'Cancelado')
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
+                },
+            },
+            { "data": "fecha_recibido",
+              "className": "capitalize",
+              "render": function ( data, type, row ) {
+                    moment.locale('es');
+                    return  moment(row.fecha_recibido).format('MMMM Do YYYY, h:mm:ss a');
+                },
+            },
+            {
+                "targets": -1,
+                "data": null, 
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                  if(row.fecha_visto == "0000-00-00 00:00:00")
+                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                  else 
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+
+                },
+            },
+            {
+                "targets": -1,
+                "data": null,
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                },
+            }
+        ] ,       
+      language: language,
+      "order": [[ 5, 'desc' ]],
+      "initComplete": function(settings, json) {
+          //console.log( 'DataTables has finished its initialisation.' );
+          //$("#div_recargar_externos").show();
+          $( "#lista_solicitudes_salientes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_recargar_salientes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#lista_solicitudes_salientes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_imprimir_rep_salientes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-print' style='color: #818481;font-weight: 900;'></span>Imprimir</button>" );
+          $( "#btn_recargar_salientes" ).click(function() {
+            $('#lista_solicitudes_salientes').DataTable().ajax.reload();
+          });
+          $( "#btn_imprimir_rep_salientes" ).click(function() {
+            var params = {
+              externo : $('#lista_solicitudes_salientes').DataTable().ajax.params()
+            };
+            $.ajax({
+              method: "POST",
+              // url: "?c=OfcPartes&a=createReportParam",
+              url: GLOBAL_PATH+"ofcpartes/createReportParam",
+              data: params
+            })
+              .done(function( res ) {                
+                
+                var respuesta = JSON.parse(res);
+                if(respuesta.success){
+                  url = GLOBAL_PATH+"ofcpartes/imprimirReporte",
+                  window.open(url, '_blank');                 
+                }
+                else{
+                  //mensaje de error
+                  bootbox.alert({ 
+                    title: "Error",
+                    message: "No se pudo Imprimir el Reporte",
+                    type: "danger"
+                  })
+                }
+              })
+              .fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+            });
+          });
+        }
+
+
+    });
+
+
+
     //Evento del paginador de oficios externos
     var externos =  $('#lista_oficios_externos').DataTable({
         "ordering": true,
