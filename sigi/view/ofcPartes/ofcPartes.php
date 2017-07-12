@@ -91,7 +91,7 @@
       </div>
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs dashboard_tabs_cl">
           <li class="active"><a href="#tab1default" data-toggle="tab">Listar Oficios Externos</a></li>
           <li><a href="#tab2default" data-toggle="tab">Listar Oficios Internos</a></li>
           
@@ -206,6 +206,7 @@
               <table id="lista_solicitudes_entrantes" class="table  table-hover display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                        <th></th>
                         <th></th>
                         <th>N° Oficio</th>
                         <th>Emisor</th>
@@ -343,6 +344,8 @@
       $('#lista_oficios_internos').DataTable().ajax.reload();
       $('#lista_oficios_externos').DataTable().ajax.reload();
       $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+      $('#lista_solicitudes_entrantes').DataTable().ajax.reload();
+      $('#lista_solicitudes_salientes').DataTable().ajax.reload();
     }
 
     $("#btn_remove_filtros").click(function(){

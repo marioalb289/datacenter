@@ -152,8 +152,13 @@ class OfcPartesController
     $group_by = '';
     $id_usuario = $_SESSION['data_user']['id'];
 
-    $cond = " id_usuario_receptor = $id_usuario";
     $group_by = ' GROUP BY id_oficio ';
+
+    if($_SESSION['data_user']['privilegios'] == 1){
+      //$cond = " id_usuario_receptor = $id_usuario"; 
+    }else{
+      $cond = " id_usuario_receptor = $id_usuario";      
+    }
 
     //Filtros
     if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
@@ -180,7 +185,12 @@ class OfcPartesController
     //Filtrar por Area
     if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
        $id_area = intval($_POST['area']);
-       $cond = $cond . " AND id_area = $id_area";
+      if($cond != ''){
+       $cond = $cond . " AND id_area = $id_area";        
+      }else{
+       $cond = $cond . " id_area = $id_area";        
+        
+      }
     }
 
     // print_r($cond);exit;

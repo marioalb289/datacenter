@@ -25,6 +25,43 @@ $(document).ready(function(){
           }
 
       };
+      //Funcion para almacenar tab active
+      if (typeof(Storage) !== "undefined") {
+          var dash_localVar = localStorage.getItem("dash_activ_tab"+getUrlPath());
+          console.log(dash_localVar);
+          if(dash_localVar){
+   
+              $(".dashboard_tabs_cl > li").removeClass("active");
+              $(".tab-content > div").removeClass("active");
+   
+              var hrefAttr = "a[href=\'"+dash_localVar+"\']";
+              console.log($(""+dash_localVar+""));
+              if( $(hrefAttr).parent() ){
+                  $(hrefAttr).parent().addClass("in active");
+                  $(""+dash_localVar+"").addClass("in active");
+              }
+   
+          }
+   
+          $(".dashboard_tabs_cl a").click(function (e) {
+              e.preventDefault();
+              localStorage.setItem("dash_activ_tab"+getUrlPath(), $( this ).attr( "href" ));
+          });
+          function getUrlPath(){
+              var returnVar = "_indexpg";
+              var splitStr = window.location.href;
+              var asdf = splitStr.split("?r=");
+              if(asdf[1]){
+                  var furthrSplt = asdf[1].split("&");
+                  if(furthrSplt[0]){
+                      returnVar = furthrSplt[0];
+                  }else{
+                      returnVar = asdf[1];
+                  }
+              }
+              return returnVar;
+          }
+      }
 
       $( "#btn_rep_todo" ).click(function() {
         var params = {
@@ -100,6 +137,7 @@ $(document).ready(function(){
                     return  "<span class='glyphicon glyphicon-envelope' aria-hidden='true' style='color:#00bcd4;font-size: 15px;'></span>";
                 },
             },
+            { "data": "tipo_oficio","searchable": false,"orderable": false },
             { "data": "folio_institucion","searchable": true,"orderable": false },
             { "data": "emisor","searchable": true,"orderable": true },
             { "data": "asunto_emisor" ,"searchable": true,"orderable": false},
@@ -141,7 +179,7 @@ $(document).ready(function(){
             }            
         ] ,       
       language: language,
-      "order": [[ 6, 'desc' ]],
+      "order": [[ 7, 'desc' ]],
       "createdRow": function( row, data, dataIndex ) {
         $(row).click(function() {
           window.location.href = GLOBAL_PATH+"ofcpartes/view/"+parseInt( data.DT_RowId.substring(4));
@@ -220,7 +258,7 @@ $(document).ready(function(){
                     return  "<span class='glyphicon glyphicon-file' aria-hidden='true' style='color:#5cb85c;font-size: 15px;'></span>";
                 },
             },
-            { "data": "tipo_oficio","searchable": true,"orderable": false },
+            { "data": "tipo_oficio","searchable": false,"orderable": false },
             { "data": "folio_institucion","searchable": true,"orderable": false },
             { "data": "receptor","searchable": true,"orderable": true },
             { "data": "asunto_receptor" ,"searchable": true,"orderable": false},
@@ -1189,6 +1227,8 @@ $(document).ready(function(){
     // $( "#btn-cancelar" ).click(function() {
     //   location.href = "sigi.php";
     // });
+
+    
 
     
     
