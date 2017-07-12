@@ -91,6 +91,15 @@ $(document).ready(function(){
             }            
         },
         "columns": [
+            {
+                "data": null,
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                    return  "<span class='glyphicon glyphicon-envelope' aria-hidden='true' style='color:#00bcd4;font-size: 15px;'></span>";
+                },
+            },
             { "data": "folio_institucion","searchable": true,"orderable": false },
             { "data": "emisor","searchable": true,"orderable": true },
             { "data": "asunto_emisor" ,"searchable": true,"orderable": false},
@@ -139,10 +148,17 @@ $(document).ready(function(){
                 "render": function ( data, type, row ) {
                     return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
                 },
-            }
+            },            
         ] ,       
       language: language,
-      "order": [[ 5, 'desc' ]],
+      "order": [[ 6, 'desc' ]],
+      "createdRow": function( row, data, dataIndex ) {
+        $(row).click(function() {
+          window.location.href = GLOBAL_PATH+"ofcpartes/view/"+parseInt( data.DT_RowId.substring(4));
+        });
+        if(data.fecha_visto == "0000-00-00 00:00:00")
+          $(row).addClass( 'solicitud_no_vista' );
+      },
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
@@ -205,6 +221,15 @@ $(document).ready(function(){
             }            
         },
         "columns": [
+            {
+                "data": null,
+                "visible": true,
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                    return  "<span class='glyphicon glyphicon-file' aria-hidden='true' style='color:#5cb85c;font-size: 15px;'></span>";
+                },
+            },
             { "data": "folio_institucion","searchable": true,"orderable": false },
             { "data": "receptor","searchable": true,"orderable": true },
             { "data": "asunto_receptor" ,"searchable": true,"orderable": false},
@@ -246,17 +271,29 @@ $(document).ready(function(){
             },
             {
                 "targets": -1,
-                "data": null,
-                "visible": true,
+                "data": null, 
+                //"visible": ocultarColumnas(USER_PRIV),
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
+                    if(row.tipo_oficio=="RESPUESTA")
+                      return "";
+                    else
+                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
             }
         ] ,       
       language: language,
       "order": [[ 5, 'desc' ]],
+      "createdRow": function( row, data, dataIndex ) {
+        $(row).click(function(e) {
+          if($(e.target).is('a')){
+            e.preventDefault();
+            return;
+          }
+          window.location.href = GLOBAL_PATH+"ofcpartes/view/"+parseInt( data.DT_RowId.substring(4));
+        });
+      },
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();

@@ -116,6 +116,20 @@ body {
 	font-size: 12px;
 }
 
+.table-hover>tbody>tr:hover {
+  background-color: rgba(0,0,0,0.075);
+  cursor: pointer;
+}
+tbody td{
+  color: #758697!important;
+}
+
+.solicitud_no_vista{
+  background-color: rgba(0,0,0,0.04);
+  font-weight: 600;
+  color: #758697!important;
+}
+
 .ui-autocomplete-loading {
     background: white url("../img/ui-anim_basic_16x16.gif") right center no-repeat;
   }
@@ -157,9 +171,7 @@ body {
     font-size:14px;
 }
 
-tbody td{
-  color: #758697!important;
-}
+
 
 th.dt-center, td.dt-center { text-align: center; }
 

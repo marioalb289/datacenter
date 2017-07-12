@@ -203,9 +203,10 @@
           <div class="tab-pane fade" id="tab_sol_entrantes">
             <!-- contenido tab respuestas enviadas -->
             <div class="col-md-12">
-              <table id="lista_solicitudes_entrantes" class="table  table-bordered table-hover display" cellspacing="0" width="100%">
+              <table id="lista_solicitudes_entrantes" class="table  table-hover display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>N° Oficio</th>
                         <th>Emisor</th>
                         <th>Asunto Emisor</th>
@@ -223,9 +224,10 @@
           <div class="tab-pane fade" id="tab_sol_salietes">
             <!-- contenido tab respuestas enviadas -->
             <div class="col-md-12">
-              <table id="lista_solicitudes_salientes" class="table  table-bordered table-hover display" cellspacing="0" width="100%">
+              <table id="lista_solicitudes_salientes" class="table table-hover display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>N° Oficio</th>
                         <th>Receptor</th>
                         <th>Asunto Receptor</th>
