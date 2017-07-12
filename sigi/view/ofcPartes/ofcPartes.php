@@ -228,6 +228,7 @@
                 <thead>
                     <tr>
                         <th></th>
+                        <th></th>
                         <th>N° Oficio</th>
                         <th>Receptor</th>
                         <th>Asunto Receptor</th>

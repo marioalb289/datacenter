@@ -122,7 +122,7 @@ $(document).ready(function(){
               "className": "capitalize",
               "render": function ( data, type, row ) {
                     moment.locale('es');
-                    return  moment(row.fecha_recibido).format('MMMM Do YYYY, h:mm:ss a');
+                    return  moment(row.fecha_recibido).format('DD/MM/YYYY, HH:mm');
                 },
             },
             {
@@ -135,20 +135,10 @@ $(document).ready(function(){
                   if(row.fecha_visto == "0000-00-00 00:00:00")
                     return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'>";
 
                 },
-            },
-            {
-                "targets": -1,
-                "data": null,
-                "visible": true,
-                "orderable" : false,
-                "className": "dt-center",
-                "render": function ( data, type, row ) {
-                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
-                },
-            },            
+            }            
         ] ,       
       language: language,
       "order": [[ 6, 'desc' ]],
@@ -205,7 +195,7 @@ $(document).ready(function(){
     //Evento del paginador de solicitudes salientes
     var sol_salientes =  $('#lista_solicitudes_salientes').DataTable({
         "ordering": true,
-        "autoWidth": false,
+        "autoWidth": true,
         processing: true,
         serverSide: true,
         "deferRender": true,
@@ -230,6 +220,7 @@ $(document).ready(function(){
                     return  "<span class='glyphicon glyphicon-file' aria-hidden='true' style='color:#5cb85c;font-size: 15px;'></span>";
                 },
             },
+            { "data": "tipo_oficio","searchable": true,"orderable": false },
             { "data": "folio_institucion","searchable": true,"orderable": false },
             { "data": "receptor","searchable": true,"orderable": true },
             { "data": "asunto_receptor" ,"searchable": true,"orderable": false},
@@ -252,7 +243,7 @@ $(document).ready(function(){
               "className": "capitalize",
               "render": function ( data, type, row ) {
                     moment.locale('es');
-                    return  moment(row.fecha_recibido).format('MMMM Do YYYY, h:mm:ss a');
+                    return  moment(row.fecha_recibido).format('DD/MM/YYYY, HH:mm');
                 },
             },
             {
@@ -265,7 +256,7 @@ $(document).ready(function(){
                   if(row.fecha_visto == "0000-00-00 00:00:00")
                     return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('MMMM Do YYYY, h:mm:ss a')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'>";
 
                 },
             },
@@ -284,7 +275,7 @@ $(document).ready(function(){
             }
         ] ,       
       language: language,
-      "order": [[ 5, 'desc' ]],
+      "order": [[ 6, 'desc' ]],
       "createdRow": function( row, data, dataIndex ) {
         $(row).click(function(e) {
           if($(e.target).is('a')){

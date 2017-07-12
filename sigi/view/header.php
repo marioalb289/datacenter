@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-    <base href="/datacenter/" >
+    <base href="/datancenter/" >
 		<title>Sistema de Gestion de Información</title>
         
         <meta charset="utf-8" />
