@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : iepc
+Source Server         : prueba
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : datacenter
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-11 15:55:36
+Date: 2017-07-11 21:43:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `sigi_contador_folios`;
 CREATE TABLE `sigi_contador_folios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_contador_folios
@@ -152,6 +152,8 @@ INSERT INTO `sigi_contador_folios` VALUES ('13');
 INSERT INTO `sigi_contador_folios` VALUES ('14');
 INSERT INTO `sigi_contador_folios` VALUES ('15');
 INSERT INTO `sigi_contador_folios` VALUES ('16');
+INSERT INTO `sigi_contador_folios` VALUES ('17');
+INSERT INTO `sigi_contador_folios` VALUES ('18');
 
 -- ----------------------------
 -- Table structure for sigi_documentos
@@ -167,7 +169,7 @@ CREATE TABLE `sigi_documentos` (
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_documentos
@@ -193,6 +195,10 @@ INSERT INTO `sigi_documentos` VALUES ('18', 'S000000132017-07-06-15-39-26CEMMRR'
 INSERT INTO `sigi_documentos` VALUES ('19', 'S000000142017-07-06-15-41-08CEMMC', '0', 'documentos/2017/CEMMC/', '2017-07-06 15:41:08', '25', '2017-07-06 15:41:08', '25');
 INSERT INTO `sigi_documentos` VALUES ('20', 'S000000152017-07-06-15-51-33UOE', '0', 'documentos/2017/UOE/', '2017-07-06 15:51:33', '22', '2017-07-06 15:51:33', '22');
 INSERT INTO `sigi_documentos` VALUES ('21', 'S000000162017-07-11-14-53-37UVINE', '0', 'documentos/2017/UVINE/', '2017-07-11 14:53:37', '32', '2017-07-11 14:53:37', '32');
+INSERT INTO `sigi_documentos` VALUES ('22', 'S000000172017-07-11-18-28-07ST', '0', 'documentos/2017/ST/', '2017-07-11 18:28:07', '25', '2017-07-11 18:28:07', '25');
+INSERT INTO `sigi_documentos` VALUES ('23', 'R000000172017-07-11-18-29-48ST', '0', 'documentos/2017/ST/', '2017-07-11 18:29:48', '32', '2017-07-11 18:29:48', '32');
+INSERT INTO `sigi_documentos` VALUES ('24', 'S000000182017-07-11-18-48-01ST', '0', 'documentos/2017/ST/', '2017-07-11 18:48:01', '91', '2017-07-11 18:48:01', '91');
+INSERT INTO `sigi_documentos` VALUES ('25', 'R000000182017-07-11-18-49-36ST', '0', 'documentos/2017/ST/', '2017-07-11 18:49:36', '32', '2017-07-11 18:49:36', '32');
 
 -- ----------------------------
 -- Table structure for sigi_oficios
@@ -222,7 +228,7 @@ CREATE TABLE `sigi_oficios` (
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios
@@ -248,6 +254,10 @@ INSERT INTO `sigi_oficios` VALUES ('18', 'SOLICITUD', '00000013', 'S/N', 'EXTERN
 INSERT INTO `sigi_oficios` VALUES ('19', 'SOLICITUD', '00000014', 'S/N', 'EXTERNO', '25', 'Gerardo Sanchez Nájera', 'Secretaria de Finanzas', 'Director', 'Invitacion para todos', '', '0', null, 'INTERNO', '0', '2017-07-06', '00:00:03', '', '2017-07-06 15:41:08', '25', '2017-07-06 15:41:08', '25');
 INSERT INTO `sigi_oficios` VALUES ('20', 'SOLICITUD', '00000015', 'S/N', 'INTERNO', '22', '', '', '', 'Mensaje para todo el personal', '', '0', null, 'INTERNO', '0', '0000-00-00', '00:00:00', '', '2017-07-06 15:51:33', '22', '2017-07-06 15:51:33', '22');
 INSERT INTO `sigi_oficios` VALUES ('21', 'SOLICITUD', '00000016', 'IEPC/00006', 'INTERNO', '32', '', '', '', 'MENSAJE PARA VINCULACION PRUEBA', '', '1', null, 'INTERNO', '0', '0000-00-00', '00:00:00', '', '2017-07-11 14:53:38', '32', '2017-07-11 14:53:38', '32');
+INSERT INTO `sigi_oficios` VALUES ('22', 'SOLICITUD', '00000017', 'S/N', 'EXTERNO', '25', 'Andrel Manuel Lopez Obrador', 'MORENA', 'Presidente', 'Se solicita informe de requisitos para registro', '', '1', '1', 'INTERNO', '0', '2017-07-11', '00:00:06', '', '2017-07-11 18:28:07', '25', '2017-07-11 18:28:07', '25');
+INSERT INTO `sigi_oficios` VALUES ('23', 'RESPUESTA', '00000017', 'IEPC/ST/0001', 'EXTERNO', '32', 'Andrel Manuel Lopez Obrador', 'MORENA', 'Presidente', 'Se envia documento con requisitos para registro', '', '1', '1', 'INTERNO', '0', null, null, '', '2017-07-11 18:29:48', '32', '2017-07-11 18:29:48', '32');
+INSERT INTO `sigi_oficios` VALUES ('24', 'SOLICITUD', '00000018', 'IEPC/UTDVINE/0001', 'INTERNO', '91', '', '', '', 'Se solicita informe de Avance Tecnico', '', '1', '1', 'INTERNO', '0', '0000-00-00', '00:00:00', '', '2017-07-11 18:48:01', '91', '2017-07-11 18:48:01', '91');
+INSERT INTO `sigi_oficios` VALUES ('25', 'RESPUESTA', '00000018', 'IEPC/ST/0002', 'INTERNO', '32', '', '', '', 'En respuesta a la solicitud de avance tecnico', '', '1', '1', 'INTERNO', '0', null, null, '', '2017-07-11 18:49:36', '32', '2017-07-11 18:49:36', '32');
 
 -- ----------------------------
 -- Table structure for sigi_oficios_documentos_recepcion
@@ -268,7 +278,7 @@ CREATE TABLE `sigi_oficios_documentos_recepcion` (
   `update_at` datetime DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sigi_oficios_documentos_recepcion
@@ -287,7 +297,7 @@ INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('11', null, '10', '10', 
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('12', null, '11', '11', '25', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-23 14:16:39', '32', '2017-06-23 14:16:39', '32');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('13', null, '12', '12', '32', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-06-23 14:17:36', '25', '2017-06-23 14:17:36', '25');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('14', null, '13', '13', '32', '0', '2017-06-23 15:10:54', 'Para el trámite que corresponda', 'Cerrado', '2017-06-23 14:29:06', '91', '2017-06-23 15:11:17', '32');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('15', '13', '14', '14', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-06-23 15:11:17', '32', '2017-06-23 15:11:17', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('15', '13', '14', '14', '91', '0', '2017-07-11 21:32:19', 'Para el trámite que corresponda', 'Cerrado', '2017-06-23 15:11:17', '32', '2017-06-23 15:11:17', '32');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('16', null, '15', '15', '22', '0', '2017-06-26 12:29:12', 'Para el trámite que corresponda', 'Abierto', '2017-06-26 12:25:00', '91', '2017-06-26 12:25:00', '91');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('17', null, '16', '16', '32', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-07-03 10:27:16', '25', '2017-07-03 10:27:16', '25');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('18', null, '17', '17', '32', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-07-03 10:29:47', '25', '2017-07-03 10:29:47', '25');
@@ -325,7 +335,7 @@ INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('49', null, '19', '19', 
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('50', null, '19', '19', '29', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:41:09', '25', '2017-07-06 15:41:09', '25');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('51', null, '19', '19', '30', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:41:09', '25', '2017-07-06 15:41:09', '25');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('52', null, '19', '19', '31', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:41:09', '25', '2017-07-06 15:41:09', '25');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('53', null, '19', '19', '32', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:41:09', '25', '2017-07-06 15:41:09', '25');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('53', null, '19', '19', '32', '1', '2017-07-11 18:18:12', 'Para conocimiento y archivo', 'Cerrado', '2017-07-06 15:41:09', '25', '2017-07-11 18:18:12', '32');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('54', null, '19', '19', '33', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:41:09', '25', '2017-07-06 15:41:09', '25');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('55', null, '19', '19', '34', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:41:09', '25', '2017-07-06 15:41:09', '25');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('56', null, '19', '19', '35', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:41:09', '25', '2017-07-06 15:41:09', '25');
@@ -482,15 +492,21 @@ INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('206', null, '20', '20',
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('207', null, '20', '20', '88', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('208', null, '20', '20', '89', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('209', null, '20', '20', '90', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('210', null, '20', '20', '91', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('210', null, '20', '20', '91', '1', '2017-07-11 20:52:23', 'Para conocimiento y archivo', 'Cerrado', '2017-07-06 15:51:35', '22', '2017-07-11 20:52:23', '91');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('211', null, '20', '20', '92', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('212', null, '20', '20', '93', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('213', null, '20', '20', '95', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('214', null, '20', '20', '96', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('215', null, '20', '20', '97', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('216', null, '20', '20', '98', '1', '0000-00-00 00:00:00', 'Para conocimiento y archivo', 'Abierto', '2017-07-06 15:51:35', '22', '2017-07-06 15:51:35', '22');
-INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('217', null, '21', '21', '91', '0', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-07-11 14:53:38', '32', '2017-07-11 14:53:38', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('217', null, '21', '21', '91', '0', '2017-07-11 20:49:57', 'Para el trámite que corresponda', 'Abierto', '2017-07-11 14:53:38', '32', '2017-07-11 14:53:38', '32');
 INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('218', null, '21', '21', '0', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Abierto', '2017-07-11 14:53:38', '32', '2017-07-11 14:53:38', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('219', null, '22', '22', '32', '0', '2017-07-11 18:28:49', 'Para el trámite que corresponda', 'Cerrado', '2017-07-11 18:28:07', '25', '2017-07-11 18:29:48', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('220', null, '22', '22', '0', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-07-11 18:28:07', '25', '2017-07-11 18:29:48', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('221', '22', '23', '23', '25', '0', '2017-07-11 18:30:47', 'Para el trámite que corresponda', 'Cerrado', '2017-07-11 18:29:48', '32', '2017-07-11 18:29:48', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('222', null, '24', '24', '32', '0', '2017-07-11 18:48:46', 'Para el trámite que corresponda', 'Cerrado', '2017-07-11 18:48:01', '91', '2017-07-11 18:49:36', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('223', null, '24', '24', '0', '1', '0000-00-00 00:00:00', 'Para el trámite que corresponda', 'Cerrado', '2017-07-11 18:48:01', '91', '2017-07-11 18:49:36', '32');
+INSERT INTO `sigi_oficios_documentos_recepcion` VALUES ('224', '24', '25', '25', '91', '0', '2017-07-11 18:50:24', 'Para el trámite que corresponda', 'Cerrado', '2017-07-11 18:49:36', '32', '2017-07-11 18:49:36', '32');
 
 -- ----------------------------
 -- Table structure for sigi_reportes_param
@@ -697,7 +713,7 @@ JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 JOIN usuarios us ON us.id = ofc.id_usuario_emisor
 JOIN areas ar ON ar.id = us.area
 WHERE
-	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'EXTERNO' ;
+	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'EXTERNO' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_oficios_externos
@@ -728,7 +744,7 @@ JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
 JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 JOIN usuarios us ON us.id = odr.id_usuario
 JOIN areas ar ON ar.id = us.area
-WHERE origen = 'EXTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ;
+WHERE origen = 'EXTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_oficios_internos
@@ -759,7 +775,7 @@ JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 JOIN usuarios us ON us.id = ofc.id_usuario_emisor
 JOIN areas ar ON ar.id = us.area
 WHERE
-	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ;
+	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' AND ofc.destino = 'INTERNO' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_oficios_vincular
@@ -791,7 +807,7 @@ JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 JOIN usuarios us ON us.id = ofc.id_usuario_emisor
 JOIN areas ar ON ar.id = us.area
 WHERE
-	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' ;
+	origen = 'INTERNO' AND ofc.tipo_oficio = 'SOLICITUD' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_respuestas_enviadas
@@ -821,7 +837,7 @@ JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 LEFT JOIN usuarios us ON us.id = odr.id_usuario
 LEFT JOIN areas ar ON ar.id = us.area
 WHERE
-	ofc.tipo_oficio = 'RESPUESTA' ;
+	ofc.tipo_oficio = 'RESPUESTA' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_respuestas_recibidas
@@ -848,7 +864,7 @@ LEFT JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 JOIN usuarios us ON us.id = ofc.id_usuario_emisor
 JOIN areas ar ON ar.id = us.area
 WHERE
-	ofc.tipo_oficio = 'RESPUESTA' ;
+	ofc.tipo_oficio = 'RESPUESTA' ; ;
 
 -- ----------------------------
 -- View structure for sigi_vw_solicitudes_entrantes
@@ -885,10 +901,7 @@ FROM
 LEFT JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
 LEFT JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 LEFT JOIN usuarios us ON us.id = ofc.id_usuario_emisor
-LEFT JOIN areas ar ON ar.id = us.area
-
-WHERE
-	ofc.tipo_oficio = 'SOLICITUD' ;
+LEFT JOIN areas ar ON ar.id = us.area ;
 
 -- ----------------------------
 -- View structure for sigi_vw_solicitudes_salientes
@@ -916,7 +929,4 @@ FROM
 LEFT JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
 LEFT JOIN sigi_documentos doc ON doc.id = odr.id_documentos
 LEFT JOIN usuarios us ON us.id = odr.id_usuario
-LEFT JOIN areas ar ON ar.id = us.area
-
-WHERE
-	ofc.tipo_oficio = 'SOLICITUD' ;
+LEFT JOIN areas ar ON ar.id = us.area ;
