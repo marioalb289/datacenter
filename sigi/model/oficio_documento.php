@@ -349,7 +349,7 @@ class OficioDocumento
 		{
 			$sql = "INSERT INTO sigi_oficios_documentos_recepcion (id_oficio,parent_id,id_documentos,id_usuario,ccp,fecha_visto,estatus_inicial,estatus_final,create_at,created_by,update_at,updated_by) 
 			        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+            // print_r($this->getIdUsuario());exit;
 			$this->pdo->prepare($sql)
 			     ->execute(
 					array(
@@ -367,7 +367,6 @@ class OficioDocumento
 	                    $this->getUpdatedBy(),
 	                )
 				);
-
 			return $this->pdo->lastInsertId();
 
 		} catch (Exception $e) 

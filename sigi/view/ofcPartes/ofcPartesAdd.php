@@ -23,7 +23,7 @@
 	    </div>
 	  </div>
 	</div>
-	<h1 class="page-header">Oficialia de Partes</h1>
+	<h1 class="page-header">Oficialía de Partes</h1>
 	<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -71,7 +71,7 @@
 
 						    <div class="form-group">
 						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Institución:</label>
-						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institucion del Titular" data-validacion-tipo="alfa|requerido|min:5"/>
+						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institución del Titular" data-validacion-tipo="alfa|requerido|min:5"/>
 						        <span class="text-danger"></span>
 						        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
 						          Result:
@@ -118,7 +118,7 @@
 					    <div class="form-group">
 					        <label for="" class="required">Área Destino:</label>
 					        <select class="form-control input-sm" id="area_destino" name="area_destino" data-validacion-tipo="requerido">
-			    			    <option value="">Selecccionar Area de Destino</option>
+			    			    <option value="">Selecccionar Área de Destino</option>
 					        	<?php foreach($data['areas'] as $area): ?>
 			    			        <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
 					        	<?php endforeach; ?>		          
@@ -143,9 +143,9 @@
 					        <span class="text-danger"></span>
 					    </div>
 					    <div class="form-group">
-					      <label for="exampleInputFile">Asunto:</label>	<span style="font-size: 9px;"> Máximo 50 carácteres</span>			      
+					      <label for="exampleInputFile">Asunto:</label>	<span style="font-size: 9px;"> Máximo 150 carácteres</span>			      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="asunto_oficio" maxlength="50"  id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+					      <textarea class="form-control input-sm"  name="asunto_oficio" maxlength="150"  id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 					    </div>
 
 
@@ -175,14 +175,14 @@
 					    	<div class="radio"  >
 					    	  <label>
 					    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
-					    	    Para su Conocimiento y Archivo
+					    	    Para su conocimiento y archivo
 					    	  </label>
 					    	</div>
 
 					    	<div class="radio"  >
 					    	  <label>
 					    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
-					    	    	Para el tramite que corresponda	
+					    	    	Para el trámite que corresponda	
 					    	  </label>
 					    	</div>
 

@@ -235,7 +235,7 @@
                         <th>Asunto Receptor</th>
                         <th>Estatus Inicial</th>
                         <th>Estatus Final</th>
-                        <th>Fecha Recibido</th>
+                        <th>Fecha Enviado</th>
                         <th>Visto</th>
                         <th></th>
                     </tr>

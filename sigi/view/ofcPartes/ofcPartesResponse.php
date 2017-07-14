@@ -156,9 +156,9 @@
 					        <span class="text-danger"></span>
 					    </div> -->
 					    <div class="form-group">
-					      <label for="exampleInputFile">Asunto:</label><span style="font-size: 9px;"> Máximo 50 carácteres</span>				      
+					      <label for="exampleInputFile">Asunto:</label><span style="font-size: 9px;"> Máximo 150 carácteres</span>				      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="50" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+					      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="150" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 					    </div>
 
 					    <div class="form-group">

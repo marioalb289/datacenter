@@ -313,7 +313,7 @@ $(document).ready(function(){
             }
         ] ,       
       language: language,
-      "order": [[ 6, 'desc' ]],
+      "order": [[ 7, 'desc' ]],
       "createdRow": function( row, data, dataIndex ) {
         $(row).click(function(e) {
           if($(e.target).is('a')){
@@ -856,12 +856,18 @@ $(document).ready(function(){
       var respuestas_recibidas =  $('#lista_respuestas_recibidas').DataTable({
         language: language,
 
-        "columnDefs": [ 
+        "columnDefs": [
+        {
+            "visible" : true,
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        },
         {
             "visible" : false,
             "searchable": false,
             "orderable": false,
-            "targets": 0
+            "targets": 1
         },
         { 
           "targets": 6,
@@ -885,27 +891,23 @@ $(document).ready(function(){
               return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row[7]).format('MMMM Do YYYY, h:mm:ss a')+"'>";
 
             },
-        },
-        {
-            "targets": -1,
-            "data": null, 
-            "visible": true,
-            "orderable" : false,
-            "className": "dt-center",
-            "render": function ( data, type, row ) {
-                return  "<a href="+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row[0])+" class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
-            },
         }, 
         ],
-        "order": [[ 1, 'desc' ]]
+        "order": [[ 1, 'desc' ]],
+        "createdRow": function( row, data, dataIndex ) {
+          console.log(data);
+          $(row).click(function(e) {
+            if($(e.target).is('a')){
+              e.preventDefault();
+              return;
+            }
+            window.location.href = GLOBAL_PATH+"ofcpartes/view/"+parseInt( data[1]);
+          });
+        },
 
       });
 
-      respuestas_recibidas.on( 'order.dt search.dt', function () {
-          respuestas_recibidas.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-              cell.innerHTML = i+1;
-          } );
-      } ).draw(); 
+     
 
     //Evento del paginador de oficios con destino externo a los que se les puede vincular un ofocio
     var destino_externo_vincular =  $('#lista_oficios_destino_externo_vincular').DataTable({

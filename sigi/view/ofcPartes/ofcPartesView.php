@@ -40,12 +40,17 @@
 </div><!-- /.modal -->
 
 
-<h1 class="page-header">Oficialia de Partes ver Detalle Oficio</h1>
+<h1 class="page-header">Oficialía de Partes ver Detalle Oficio</h1>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="row">
-			<div class="col-md-4"><h4><strong>Folio : <?php echo $data['oficio']->folio ?></strong></h4></div>
-			<div class="col-md-8 text-right">
+			<div class="col-md-6">
+					<h4 style="display: inline-block;"><strong>N° Oficio : </strong><?php echo $data['oficio']->folio_iepc ?> <strong>Estatus Final:</strong> </h4> 
+					<?php if ($data['oficio']->estatus_final == "Cerrado") echo "<button type='button' class='btn btn-success btn-xs' style='width:70px;margin-top: -5px;'>Cerrado</button>";?>
+					<?php if ($data['oficio']->estatus_final == "Abierto") echo "<button type='button' class='btn bbtn-danger btn-xs' style='width:70px;margin-top: -5px;'>Abierto</button>";?>
+					<?php if ($data['oficio']->estatus_final == "Cancelado") echo "<button type='button' class='btn btn-warning btn-xs' style='width:70px;margin-top: -5px;'>Cancelado</button>";?>
+			</div>
+			<div class="col-md-6 text-right">
 				<?php if( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->tipo_oficio == "SOLICITUD" && $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 && $data['oficio']->estatus_final == 'Cerrado'){ ?>
 				<a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href="#warning" data-toggle="modal" type="button" class="btn btn-primary" name="btn-cancelar" id="btn-responder" role="button">Reabrir Oficio</a>
 				
@@ -57,6 +62,14 @@
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='ofcpartes/vincular/".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Vincular</a>
 				<?php } ?>	
 
+				<?php if( $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->tipo_oficio <> 'ANEXO' ){ ?>
+				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" type="button" <?php  {echo "href='ofcpartes/anexar/".$data['oficio']->id_oficio."'";}	 ?> class="btn btn-primary" id="btn-anexar" role="button">Anexar Información</a>
+				<?php } ?>	
+
+				<?php if( $data['oficio']->tipo_oficio <> 'SOLICITUD' ){ ?>
+				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" type="button" <?php  {echo "href='ofcpartes/view/".$data['oficio']->id_oficio."'";}	 ?> class="btn btn-primary" id="btn-anexar" role="button">Oficio Original</a>
+				<?php } ?>	
+
 				<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 
 			</div>
@@ -64,8 +77,14 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
+			<!-- <div class="col-md-12">
+				<h4 style="display: inline-block;"><strong>Estatus Final :</strong></h4>
+				<?php if ($data['oficio']->estatus_final == "Cerrado") echo "<button type='button' class='btn btn-success btn-xs' style='width:70px'>Cerrado</button>";?>
+				<?php if ($data['oficio']->estatus_final == "Abierto") echo "<button type='button' class='btn bbtn-danger btn-xs' style='width:70px'>Abierto</button>";?>
+				<?php if ($data['oficio']->estatus_final == "Cancelado") echo "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>Cancelado</button>";?>
+			</div> -->
 			<div class="col-md-6 ">
-
+				
 
 				<div class="form-group">
 				    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
@@ -290,7 +309,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="row">
-			<div class="col-md-4"><h4><strong>Lista de Respuestas a este Oficio</strong></h4></div>
+			<div class="col-md-4"><h4><strong>Seguimiento de Solicitud</strong></h4></div>
 		</div>
 	</div>
 	<div class="panel-body">
@@ -302,32 +321,30 @@
 					<div class="form-group" id="lista_usuarios" >
 						<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio ?>">
 						<input type="hidden" name="id_documento" value = "<?php echo $data['oficio']->id_documento ?>">
-						<table id="lista_respuestas_recibidas" class="table table-bordered table-hover display compact" cellspacing="0" width="100%">
+						<table id="lista_respuestas_recibidas" class="table table-hover display" cellspacing="0" width="100%">
 						  <thead>
 						      <tr>
 						      	<th></th>
-						        <th>Folio</th>
+						      	<th></th>
 						        <th>N° Oficio</th>
 						        <th><?php if($data['oficio']->destino == "EXTERNO")echo "Área Receptora"; else echo "Área";?></th>
 						        <th><?php if($data['oficio']->destino == "EXTERNO")echo "Persona que Gestiona"; else echo "Persona que Responde";?></th>
 						        <th>Asunto</th>
 						        <th>Fecha Enviado</th>
 						        <th>Visto</th>
-						        <th></th>
 						      </tr>
 						  </thead>
 						  <tbody>
 								<?php foreach($data['respuestas_recibidas'] as $r): ?>
 									<tr>
+										<td class="dt-center"><span class='glyphicon glyphicon-envelope' aria-hidden='true' style='color:#00bcd4;font-size: 15px;'></span></td>
 										<td><?php echo $r->id_oficio; ?></td>
-										<td><?php echo $r->folio; ?></td>
 										<td><?php echo $r->folio_institucion; ?></td>
 										<td><?php echo $r->area; ?></td>
 										<td><?php echo ucwords( $r->persona_responde); ?></td>
 										<td><?php echo $r->asunto_emisor; ?></td>
 										<td><?php echo $r->fecha_recibido; ?></td>
 										<td><?php echo $r->fecha_visto; ?></td>
-										<td></td>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>

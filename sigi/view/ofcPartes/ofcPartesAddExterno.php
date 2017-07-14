@@ -26,7 +26,7 @@
 
 
 
-<h1 class="page-header">Oficialia de Partes</h1>
+<h1 class="page-header">Oficialía de Partes</h1>
 <form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -111,9 +111,9 @@
 				        <span class="text-danger"></span>
 				    </div>
 				    <div class="form-group">
-				      <label for="exampleInputFile">Asunto:</label> <span style="font-size: 9px;"> Máximo 50 carácteres</span>			      
+				      <label for="exampleInputFile">Asunto:</label> <span style="font-size: 9px;"> Máximo 150 carácteres</span>			      
 				      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" maxlength="50" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+				      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" maxlength="150" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 				    </div>
 
 
@@ -150,7 +150,7 @@
 				    	<div class="radio"  >
 				    	  <label>
 				    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
-				    	    	Para el tramite que corresponda	
+				    	    	Para el trámite que corresponda	
 				    	  </label>
 				    	</div>
 

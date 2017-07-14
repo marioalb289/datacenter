@@ -154,7 +154,7 @@ class OfcPartesController
 
     $group_by = ' GROUP BY id_oficio ';
 
-    if($_SESSION['data_user']['privilegios'] == 1){
+    if($_SESSION['data_user']['privilegios'] == 2){
       //$cond = " id_usuario_receptor = $id_usuario"; 
     }else{
       $cond = " id_usuario_receptor = $id_usuario";      
@@ -1159,6 +1159,85 @@ class OfcPartesController
 
     }
 
+    public function anexarAction(){
+
+      
+      if(isset($_REQUEST['id'])){
+          try {
+            if (!$this->validate->numero($_REQUEST['id']))
+                throw new Exception("Accion no encontrada");
+
+            $id_oficio = $_REQUEST['id'];
+            $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
+
+            //si eres un usuario receptor, buscar solo el oficio que te correponse
+            //if($_SESSION['data_user']['privilegios'] == 3){
+              $id_usuario = $_SESSION['data_user']['id'];
+            //}
+            // else{
+            //   header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+            //   exit;
+            // }
+
+            $oficio = new Oficio();
+            $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+            if(empty($objOficio)){
+              $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+              header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+              exit;
+            }
+
+            $privilegios = $_SESSION['data_user']['privilegios'];
+
+            // print_r($objOficio);exit;
+
+            $usuario = new Usuario();
+            $usr = array(); 
+            $area =  new Area();
+            $ar = $area->ListarAreas();
+            $usuarios_ccp = array();
+
+            $objUserReceptor = $usuario->getUsuarioArea($objOficio->id_usuario_receptor);
+            $objUserEmisor = $usuario->getUsuarioArea($objOficio->id_usuario_emisor);
+
+            $arrUsrccp = array();
+            //Si eres un usuario receptor cargar los usuarios que tambien recibieron el mensaje solo si eres el titular del mensaje, y solo el titular puede turnar a otros usuarios
+            //if($_SESSION['data_user']['privilegios'] == 3){
+              if($objOficio->ccp == 0){
+
+                //en caso de ser un oficio interno quitar el usuario que lo emitio
+                if($objOficio->origen == "INTERNO")
+                  $usuarios_ccp[] = $objOficio->id_usuario_emisor;
+                //quitar de la lista de usuarios el usuario logeado
+                $usuarios_ccp[] = $id_usuario;
+
+
+                $usr = $usuario->ListarUsuarios($usuarios_ccp);
+
+              }
+              
+            //}
+            $this->layout->renderVista("ofcPartes","ofcPartesAnexar",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr, 'privilegios' => $privilegios));
+
+            
+          } catch (Exception $e) {
+
+            $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+            header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+            exit;
+            
+          }
+
+        
+      }else{
+        $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+
+      }
+
+    }
+
     public function viewFileAction(){
       // print_r($_REQUEST);exit;
       if(isset($_REQUEST['id']) && $_REQUEST['id'] != ""){
@@ -1166,17 +1245,19 @@ class OfcPartesController
           if (!$this->validate->numero($_REQUEST['id']) || !$this->validate->numero($_REQUEST['idVincular']))
               throw new Exception("Accion no encontrada");
           $documento = new Documento();
-          $objDoc = $documento->getDocumento($_REQUEST['id']);
+          $objDoc = $documento->getDocumento($_REQUEST['idVincular']);
+
+          // print_r($_REQUEST);exit;
 
           $objOficioDoc = new OficioDocumento();
           $objOficioDoc->setFechaVisto(date("Y-m-d H:i:s"));
-          $objOficioDoc->setIdDocumentos($_REQUEST['id']);
+          $objOficioDoc->setIdDocumentos($_REQUEST['idVincular']);
           $objOficioDoc->setIdUsuario($_SESSION['data_user']['id']);
           $objOficioDoc->FechaVistoActualizar();
 
           //Buscar el oficio al que pertenece el docmuento y si es un externo y no requiere responder cambiar estatus global a cerrado
           $oficio = new oficio();
-          $objOficio = $oficio->getOficio($_REQUEST['idVincular'],$_SESSION['data_user']['id']);
+          $objOficio = $oficio->getOficio($_REQUEST['id'],$_SESSION['data_user']['id']);
           // print_r($objOficio);exit;
           if(!empty($objOficio)){
             if(!$objOficio->respuesta ){
@@ -1571,7 +1652,7 @@ class OfcPartesController
           }
           else{
                // print_r($_FILES);
-               //   print_r($_POST);exit;
+                 // print_r($_POST);exit;
 
 
                $usr_notificar = array();
@@ -1746,7 +1827,7 @@ class OfcPartesController
 
                //Enviar copia solo si se selecciono de la lista de usuarios
                if(isset($_POST['check'])){
-                 $arr_ccp = explode(",",$_POST['check']);
+                 $arr_ccp = empty($_POST['check']) ? array() : explode(",",$_POST['check']);
                  if(!empty($arr_ccp)){
                    foreach ($arr_ccp as $ids) {
                      //Hacer el guardado por id;
@@ -1758,7 +1839,6 @@ class OfcPartesController
                   }            
                 }
                }
-
               $usr = new Usuario();
                /*Se añadio que si hay mas de un titular se le enviara mensaje, quitar de la lista el usuario que se selecciono anteriormente*/
                if(isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO'){
@@ -2067,6 +2147,229 @@ class OfcPartesController
 
               }
 
+              
+              $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+              //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+
+              //Armar arreglo de datos para los usuarios que se les notificara el oficio
+              $usr = new Usuario();
+              $objUsr = $usr->getUsuarioArea($_SESSION['data_user']['id']);
+              
+
+              if ($_POST['origen'] == "INTERNO"){
+                $origen = 'INTERNO';
+              }
+              else{
+                $origen = 'EXTERNO';
+                $objUsrPartes = $usr->userOfcPartes();
+                if(!in_array($objUsrPartes->id_usuario,$usr_notificar))
+                  array_push($usr_notificar,$objUsrPartes->id_usuario);
+              }
+
+              //$origen = ($_POST['origen'] == "INTERNO") ? 'INTERNO': 'EXTERNO';
+              
+
+              foreach ($obj_usr_not as $value) {
+                if(!in_array($value->id_usuario,$usr_notificar))
+                  array_push($usr_notificar,$value->id_usuario);
+              }
+
+              $data = array('id_oficio' => $id_ofc,'nombre_usuario' => ucwords(mb_strtolower($objUsr->nombre_formal,'UTF-8')).' de '.$objUsr->area, 'asunto' => $_POST["asunto_oficio"], 'origen'=> $origen, 'destino' => $destino_notf,'ids_usuario_receptor' => $usr_notificar);
+
+              // header("Content-type:application/json");
+              echo json_encode(array("success"=>$success,"notificacion" => $data));
+              exit;
+
+
+          }
+          
+          
+      } catch (Exception $e) {
+          //Trabajar en un sistema de manejo de errores
+          $_SESSION['flash-message-error'] = 'Error al guardar la información';
+          echo json_encode(array("success"=>false));
+          exit;
+          //header('Location: sigi.php?c=OfcPartes&a=add');            
+      }
+  }
+
+  public function guardarAnexoAction()
+  {
+      try {
+         if( !isset($_FILES['archivo']) ){
+               throw new Exception('No se ha seleccionado ningun archivo.');
+          } else {
+            $success = true;
+            // print_r($_FILES);
+            // print_r($_REQUEST);
+            // exit;
+
+            //Buscar el oficio original y obtener sus datos
+            // $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
+            // print_r($id_usuario);
+            // $ofc = new Oficio();
+            // $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
+            // print_r($objOficio);exit;
+              // throw new Exception('No se ha seleccionado ningun archivo.');
+              // print_r($_POST['origen']);exit;
+
+            $ofc = new Oficio();
+            $objOficioDoc =  new OficioDocumento();
+
+            $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
+
+            //Buscar el oficio del mensaje recibido y obtener sus datos
+            $objOficio = $ofc->getOficio($_POST['id_oficio'],$id_usuario);
+
+            // print_r($objOficio);exit;
+
+              $origen = ($_POST['origen'] == 'INTERNO') ? 'I': 'E';
+              $area = new Area();
+              // print_r($_SESSION['data_user']);exit;
+              $objArea = $area->ListarAreasById($_SESSION['data_user']['area'])['0'];
+
+              
+
+              //Generar el folio de RESPUESTA
+              $folio = $objOficio->folio;
+              $folio_archivo = 'R'.$folio.date("Y-m-d-H-i-s").$objArea->abreviatura;
+
+              $temp = explode(".", $_FILES["archivo"]["name"]);
+              $newfilename = $folio_archivo . '.' . end($temp);
+              // exit;
+
+              //Si es un oficio sin vincular se gaurda el documento
+              if(!isset($_POST['ofc_vinculado'])){
+                //Proceder a guardar el arhivo
+                $nombre = $_FILES['archivo']['name'];
+                $nombre_tmp = $_FILES['archivo']['tmp_name'];
+                $tipo = $_FILES['archivo']['type'];
+                $tamano = $_FILES['archivo']['size'];
+
+                $ext_permitidas = array('pdf');
+                $partes_nombre = explode('.', $nombre);
+                $extension = end( $partes_nombre );
+                $ext_correcta = in_array($extension, $ext_permitidas);
+
+                $tipo_correcto = preg_match('/^application\/(pdf)$/', $tipo);
+
+                $limite = 500 * 1024;
+
+                  if( $ext_correcta && $tipo_correcto ){//&& $tamano <= $limite ){
+                    if( $_FILES['archivo']['error'] > 0 ){
+                          //Error al subir el archivo, tipo incorrecto o tamaño excesido
+                      throw new Exception('Error al subir el archivo');
+                    }
+                    else{
+                     $year = date("Y");
+                     $rutaAnio = "documentos/$year";
+                     $rutaArea = $rutaAnio."/".$objArea->abreviatura;
+                     if (!file_exists($rutaAnio)) {
+                         if(!mkdir($rutaAnio, 0777, true))
+                           throw new Exception('Error al crear carpeta');
+
+                     }
+                     if (!file_exists($rutaArea)) {
+                       if(!mkdir($rutaArea, 0777, true))
+                           throw new Exception('Error al crear carpeta');
+
+                     }             
+
+                      if( file_exists( $rutaArea.'/'.$newfilename) ){
+                            //Archivo ya existente
+                      }
+
+                      else{
+                            //crear archivo
+                        if(move_uploaded_file($nombre_tmp,$rutaArea.'/'.$newfilename)){
+
+                        }
+                        else{
+                          throw new Exception('Archivo no valido');
+                        }
+                      }
+                    }
+                  }
+                  else{
+                         //Archivo no valido
+                    throw new Exception('Archivo no valido');
+                  }
+
+
+                //Guardar referencia al archivo
+                $documento =  new Documento();
+                $documento->setNombre($folio_archivo);
+                $documento->setRespuesta(0);
+                $documento->setRuta($rutaArea."/");
+                $documento->setCreatedBy($id_usuario); //Asignar el user logeado
+                $documento->setUpdatedBy ($id_usuario); //Asingar el user logeado;
+                $id_documento = $documento->RegistrarDocumento();                
+              }
+              else{
+                $id_documento = 0;
+              }
+
+              
+
+              //Guardar oficio
+              $ofc->_setOrigen($_POST["origen"]);
+              $ofc->setTipoOficio("ANEXO");
+              $ofc->setFolio($folio);
+              $ofc->setFolioInstitucion( isset($_POST['folio_iepc']) && $_POST['folio_iepc'] != '' && strlen($_POST['folio_iepc']) >= 7  ? $_POST['folio_iepc']: 'S/N'); //Folio de institucion cambiar
+              $ofc->_setIdUsuarioEmisor($id_usuario);
+              $ofc->_setNombreEmisor($objOficio->nombre_emisor);
+              $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
+              $ofc->_setCargo($objOficio->cargo);
+              $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
+              $ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
+              $destino_notf = ($objOficio->destino == 'EXTERNO') ? 'EXTERNO': 'INTERNO';
+              $ofc->setComentarios(isset($_POST['comentarios']) && $_POST['comentarios'] != '' ? $_POST['comentarios'] : '');
+              $ofc->setVinculado(isset($_POST['ofc_vinculado']) && intval($_POST['ofc_vinculado']) == 1 ? 1 : 0);
+              $ofc->_setAsuntoReceptor("");
+              $ofc->_setRespuesta(1);
+              //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta
+              if($objOficio->tipo_oficio == "SOLICITUD" && !$objOficio->respondido)
+              $ofc->setRespondido(1);
+              //Si es una solicitud el objoficio y ya fue respondida marcar como no respondido para que el receptor pueda responder la respuesta de la respuesta
+              elseif($objOficio->tipo_oficio == "SOLICITUD" && $objOficio->respondido)
+              $ofc->setRespondido(0);
+              //si es una respuesta el objfocio marcar como respondido para terminar de cerrar el oficio y evitar que respondan sin reabirl el oficio
+              else
+              $ofc->setRespondido(1);
+              $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
+              $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
+              $id_ofc = $ofc->RegistrarOficio();
+
+              //Guardar Registro del oficio con documento
+              $ofc_doc = new OficioDocumento();
+
+              $ofc_doc->setIdOficio($id_ofc);    
+              $ofc_doc->setParentId( ($objOficio->tipo_oficio == "RESPUESTA") ? $objOficio->parent_id : $objOficio->id_oficio );    
+              $ofc_doc->setIdDocumentos($id_documento);
+
+              //Si es el oficio original y no esta respondido, utilizar el id usuario emisor del oficio objOficioOriginal 
+              if($objOficio->tipo_oficio == "SOLICITUD" && !$objOficio->respondido)
+                $ofc_doc->setIdUsuario($objOficio->id_usuario_receptor);   
+              //Si es el oficio original y esta responido lo cual indica que se intenta reabrir el oficio, utilizar el id del usuario recpetor
+              elseif($objOficio->tipo_oficio == "SOLICITUD" && $objOficio->respondido)
+                $ofc_doc->setIdUsuario($objOficio->id_usuario_receptor);
+              //Si es la respuesta de una respuesta utilizar el id usuario emisor
+              else
+                $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);
+              $ofc_doc->setCcp(0);         
+              $ofc_doc->setFechaVisto('');  
+              $ofc_doc->setEstatusInicial(1);
+              $ofc_doc->setEstatusFinal(1);
+              $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
+              $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+              
+              $ofc_doc->RegistrarOficioDocumento();
+
+
+              //REcuperar lista de usuarios a los que se notificara el anexo
+              $obj_usr_not = array();
+              $usr_notificar = array();
+              $obj_usr_not = $objOficioDoc->getUsuariosEnDocumentos($objOficio->tipo_oficio == "RESPUESTA" ? $objOficio->parent_id : $objOficio->id_oficio,$_SESSION['data_user']['id']);
               
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
               //header("Location: $this->GLOBAL_PATH/ofcpartes/index");

@@ -104,6 +104,8 @@
         if(actualuser==data.ids_usuario_receptor[i])
         {
            notifyMe(data.asunto,'AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
+           
+            $('#lista_solicitudes_entrantes').DataTable().ajax.reload();
 
            if(data.origen == "EXTERNO" && data.destino == "INTERNO"){
             $('#lista_oficios_externos').DataTable().ajax.reload();
