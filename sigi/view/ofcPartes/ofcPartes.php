@@ -39,9 +39,9 @@
         <div class="panel-body">
         
             <div class="row">
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div class="form-group">
-                    <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Filtrar por Fecha:</label>
+                    <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha:</label>
                     <div class="row">
                           <div class="col-md-6">
                             <label for="">Desde:</label>
@@ -55,26 +55,28 @@
                     
                     <span class="text-danger"></span>
                 </div>  
-              </div>
-              <div class="col-md-3">        
+              </div> -->
+              <div class="col-md-2">        
                   
                 <div class="form-group">
-                    <label for="" class="required">Filtrar por Área:</label>
-                    <select class="form-control input-sm" id="filtro_area"  >
-                      <option value="">Selecccionar Area</option>
-                      <option value="0">Todas</option>
-                      <?php foreach($data['areas'] as $area): ?>
-                          <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
-                      <?php endforeach; ?>              
-                         </select>
-                    <span class="text-danger"></span>
+                    <label for="" class="required">Desde:</label>
+                    <input type="text" id="fecha_inicio" name="fecha_inicio"  class="form-control input-sm" placeholder="Fecha Inicio" tabindex="-1" style="cursor: auto;" />          
                 </div> 
                 
               </div>
-              <div class="col-md-3">        
+              <div class="col-md-2">        
                   
                 <div class="form-group">
-                    <label for="" class="required">Filtrar por Estatus Final:</label>
+                    <label for="" class="required">Hasta:</label>
+                    <input type="text" id="fecha_fin" name="fecha_fin"  class="form-control input-sm" placeholder="Fecha Fin" tabindex="-1" style="cursor:auto;" />         
+                </div> 
+                
+              </div>
+              
+              <div class="col-md-2">        
+                  
+                <div class="form-group">
+                    <label for="" class="required">Estatus Final:</label>
                     <select class="form-control input-sm" id="filtro_estatus_final"  >
                         <option value="">Selecccionar</option>
                         <option value="1">Cerrado</option>
@@ -85,7 +87,37 @@
                     <span class="text-danger"></span>
                 </div> 
                 
-              </div>               
+              </div>
+              <div class="col-md-2">        
+                  
+                <div class="form-group">
+                    <label for="" class="required">Tipo Oficio:</label>
+                    <select class="form-control input-sm" id="filtro_estatus_final"  >
+                        <option value="">Selecccionar</option>
+                        <option value="1">Solicitud</option>
+                        <option value="2">Respuesta</option>
+                        <option value="3">Anexo</option>
+                        <span class="text-danger"></span>
+                      </select>
+                    <span class="text-danger"></span>
+                </div> 
+                
+              </div>
+              <div class="col-md-2">        
+                  
+                <div class="form-group">
+                    <label for="" class="required">Área:</label>
+                    <select class="form-control input-sm" id="filtro_area"  >
+                      <option value="">Selecccionar Area</option>
+                      <option value="0">Todas</option>
+                      <?php foreach($data['areas'] as $area): ?>
+                          <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
+                      <?php endforeach; ?>              
+                         </select>
+                    <span class="text-danger"></span>
+                </div> 
+                
+              </div>                  
             </div>
         </div>
       </div>

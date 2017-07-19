@@ -132,7 +132,7 @@ function validarObjetoForm (control){
 
                 /* Validamos si es solo letras y numeros */
                 if (v == 'alfa-numerico') {
-                    if (!obj.val().match(/^[a-zA-Z \u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00c1 \u00c9 \u00cd \u00d3 \u00da \u00f1 \u00d1 0-9- .,() - /]+$/i) && obj.val().length > 0) {
+                    if (!obj.val().match(/^[a-zA-Z \n \u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00c1 \u00c9 \u00cd \u00d3 \u00da \u00f1 \u00d1 0-9- .,() - /]+$/i) && obj.val().length > 0) {
 
                         errores++;
                         form_group.addClass('has-error');

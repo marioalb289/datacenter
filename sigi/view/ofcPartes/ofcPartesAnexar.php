@@ -39,12 +39,14 @@
 			</div>
 			<div class="panel-body">
 				<div class="row">
+				<?php print_r($data['oficio']); ?>
 					<div class="col-md-6 ">
 						<div class="form-group">
 						    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
 						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->origen; ?>" />
 						    <span class="text-danger"></span>
 						    <input type="hidden" name="origen" value = "<?php echo $data['oficio']->origen ?>">
+						    <input type="hidden" name="destino" value = "<?php echo $data['oficio']->destino ?>">
 							<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio;?>">
 						</div>
 

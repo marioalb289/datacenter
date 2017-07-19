@@ -218,14 +218,14 @@ class SSP {
 		else{
 			$consulta_esp = "COUNT(`{$primaryKey}`)";
 		}
-		/*$x = "SELECT `".implode("`, `", self::pluck($columns, 'db'))."`
-			 FROM `$table`
-			 $where
-			 $group_by
-			 $order
-			 $limit";
-		print_r($x);
-		exit;*/
+		// $x = "SELECT `".implode("`, `", self::pluck($columns, 'db'))."`
+		// 	 FROM `$table`
+		// 	 $where
+		// 	 $group_by
+		// 	 $order
+		// 	 $limit";
+		// print_r($x);
+		// exit;
 
 		// Main query to actually get the data		
 		$data = self::sql_exec( $db, $bindings,

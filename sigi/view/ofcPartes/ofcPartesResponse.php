@@ -29,6 +29,7 @@
 	<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<?php print_r($data['oficio']); ?>
 				<div class="row">
 					<div class="col-md-4"><h4><strong>Folio: <?php echo $data['oficio']->folio ?></strong></h4></div>
 					<div class="col-md-8 text-right">
@@ -113,6 +114,11 @@
 					    </div>
 					    <?php } ?>
 
+						<div class="form-group">
+							   <label for="recepciones_nombreEmisor" class="required">Asunto Emisor:</label>
+							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->asunto_emisor; ?></textarea>
+							    <span class="text-danger"></span>
+						</div>
 					    <div class="form-group">
 							   <label for="recepciones_nombreEmisor" class="required">Comentarios:</label>
 							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->comentarios; ?></textarea>
@@ -120,11 +126,6 @@
 						</div>
 
 
-						<div class="form-group">
-							   <label for="recepciones_nombreEmisor" class="required">Asunto Emisor:</label>
-							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->asunto_emisor; ?></textarea>
-							    <span class="text-danger"></span>
-						</div>
 						
 					</div>
 

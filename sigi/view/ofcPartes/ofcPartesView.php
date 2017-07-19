@@ -67,7 +67,7 @@
 				<?php } ?>	
 
 				<?php if( $data['oficio']->tipo_oficio <> 'SOLICITUD' ){ ?>
-				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" type="button" <?php  {echo "href='ofcpartes/view/".$data['oficio']->id_oficio."'";}	 ?> class="btn btn-primary" id="btn-anexar" role="button">Oficio Original</a>
+				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" type="button" <?php  {echo "href='ofcpartes/view/".$data['oficio']->parent_id."'";}	 ?> class="btn btn-primary" id="btn-anexar" role="button">Oficio Original</a>
 				<?php } ?>	
 
 				<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>

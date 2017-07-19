@@ -155,7 +155,7 @@ class OfcPartesController
     $group_by = ' GROUP BY id_oficio ';
 
     if($_SESSION['data_user']['privilegios'] == 2){
-      //$cond = " id_usuario_receptor = $id_usuario"; 
+      $cond = " id_usuario_receptor = $id_usuario"; 
     }else{
       $cond = " id_usuario_receptor = $id_usuario";      
     }
@@ -2005,7 +2005,7 @@ class OfcPartesController
               
 
               //Guardar oficio
-              $ofc->_setOrigen($_POST["origen"]);
+              $ofc->_setOrigen('INTERNO');
               $ofc->setTipoOficio("RESPUESTA");
               $ofc->setFolio($folio);
               $ofc->setFolioInstitucion( isset($_POST['folio_iepc']) && $_POST['folio_iepc'] != '' && strlen($_POST['folio_iepc']) >= 7  ? $_POST['folio_iepc']: 'S/N'); //Folio de institucion cambiar
@@ -2014,8 +2014,10 @@ class OfcPartesController
               $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
               $ofc->_setCargo($objOficio->cargo);
               $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
-              $ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
-              $destino_notf = ($objOficio->destino == 'EXTERNO') ? 'EXTERNO': 'INTERNO';
+
+              //$ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
+              $ofc->setDestino($_POST["origen"] == 'EXTERNO' ? 'EXTERNO': 'INTERNO');
+              $destino_notf = $_POST["origen"] == 'EXTERNO' ? 'EXTERNO': 'INTERNO';
               $ofc->setComentarios(isset($_POST['comentarios']) && $_POST['comentarios'] != '' ? $_POST['comentarios'] : '');
               $ofc->setVinculado(isset($_POST['ofc_vinculado']) && intval($_POST['ofc_vinculado']) == 1 ? 1 : 0);
               $ofc->_setAsuntoReceptor("");
@@ -2312,7 +2314,7 @@ class OfcPartesController
               
 
               //Guardar oficio
-              $ofc->_setOrigen($_POST["origen"]);
+              $ofc->_setOrigen($_POST['origen']);
               $ofc->setTipoOficio("ANEXO");
               $ofc->setFolio($folio);
               $ofc->setFolioInstitucion( isset($_POST['folio_iepc']) && $_POST['folio_iepc'] != '' && strlen($_POST['folio_iepc']) >= 7  ? $_POST['folio_iepc']: 'S/N'); //Folio de institucion cambiar
@@ -2321,8 +2323,8 @@ class OfcPartesController
               $ofc->_setInstitucionEmisor($objOficio->institucion_emisor);
               $ofc->_setCargo($objOficio->cargo);
               $ofc->_setAsuntoEmisor($_POST["asunto_oficio"]);
-              $ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
-              $destino_notf = ($objOficio->destino == 'EXTERNO') ? 'EXTERNO': 'INTERNO';
+              $ofc->setDestino( $_POST['destino']) ;
+              $destino_notf = $_POST['destino'];
               $ofc->setComentarios(isset($_POST['comentarios']) && $_POST['comentarios'] != '' ? $_POST['comentarios'] : '');
               $ofc->setVinculado(isset($_POST['ofc_vinculado']) && intval($_POST['ofc_vinculado']) == 1 ? 1 : 0);
               $ofc->_setAsuntoReceptor("");
@@ -2347,15 +2349,7 @@ class OfcPartesController
               $ofc_doc->setParentId( ($objOficio->tipo_oficio == "RESPUESTA") ? $objOficio->parent_id : $objOficio->id_oficio );    
               $ofc_doc->setIdDocumentos($id_documento);
 
-              //Si es el oficio original y no esta respondido, utilizar el id usuario emisor del oficio objOficioOriginal 
-              if($objOficio->tipo_oficio == "SOLICITUD" && !$objOficio->respondido)
-                $ofc_doc->setIdUsuario($objOficio->id_usuario_receptor);   
-              //Si es el oficio original y esta responido lo cual indica que se intenta reabrir el oficio, utilizar el id del usuario recpetor
-              elseif($objOficio->tipo_oficio == "SOLICITUD" && $objOficio->respondido)
-                $ofc_doc->setIdUsuario($objOficio->id_usuario_receptor);
-              //Si es la respuesta de una respuesta utilizar el id usuario emisor
-              else
-                $ofc_doc->setIdUsuario($objOficio->id_usuario_emisor);
+              $ofc_doc->setIdUsuario($objOficio->id_usuario_receptor);
               $ofc_doc->setCcp(0);         
               $ofc_doc->setFechaVisto('');  
               $ofc_doc->setEstatusInicial(1);
