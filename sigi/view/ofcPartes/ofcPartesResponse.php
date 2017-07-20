@@ -29,7 +29,6 @@
 	<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<?php print_r($data['oficio']); ?>
 				<div class="row">
 					<div class="col-md-4"><h4><strong>Folio: <?php echo $data['oficio']->folio ?></strong></h4></div>
 					<div class="col-md-8 text-right">

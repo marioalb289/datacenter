@@ -68,7 +68,7 @@
 
 					    <div class="form-group">
 					        <label for="recepciones_institucionEmisor" class="required">Usuario Origen:</label>
-					        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo $data['area_usuario']->nombre_usuario. ' '. $data['area_usuario']->apellido_usuario ?>" />
+					        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo ucwords(mb_strtolower($data['area_usuario']->nombre_formal,'UTF-8'));?>" />
 					        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
 					        <input type="hidden" id="destino" name="destino" value="EXTERNO">
 					        <span class="text-danger"></span>

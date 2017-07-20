@@ -39,7 +39,6 @@
 			</div>
 			<div class="panel-body">
 				<div class="row">
-				<?php print_r($data['oficio']); ?>
 					<div class="col-md-6 ">
 						<div class="form-group">
 						    <label for="recepciones_nombreEmisor" class="required">Origen:</label>

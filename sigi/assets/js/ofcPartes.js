@@ -233,7 +233,7 @@ $(document).ready(function(){
     //Evento del paginador de solicitudes salientes
     var sol_salientes =  $('#lista_solicitudes_salientes').DataTable({
         "ordering": true,
-        "autoWidth": true,
+        "autoWidth": false,
         processing: true,
         serverSide: true,
         "deferRender": true,

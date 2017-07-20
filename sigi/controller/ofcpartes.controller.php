@@ -1841,11 +1841,8 @@ class OfcPartesController
                }
               $usr = new Usuario();
                /*Se añadio que si hay mas de un titular se le enviara mensaje, quitar de la lista el usuario que se selecciono anteriormente*/
-               if(isset($_POST['destino']) && $_POST['destino'] == 'EXTERNO'){
 
-               }
-               else{
-                $obj_usr_titular = $usr->userTitulares($objArea->id,$_POST['id_usuario_receptor']);
+                $obj_usr_titular = $usr->userTitulares($objArea->id,$id_usuario);
 
                 if(!empty($obj_usr_titular)){
                   foreach ($obj_usr_titular as $ids) {
@@ -1857,7 +1854,6 @@ class OfcPartesController
                     
                   }
                 }                
-               }
                /*****************/
 
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
@@ -2364,6 +2360,22 @@ class OfcPartesController
               $obj_usr_not = array();
               $usr_notificar = array();
               $obj_usr_not = $objOficioDoc->getUsuariosEnDocumentos($objOficio->tipo_oficio == "RESPUESTA" ? $objOficio->parent_id : $objOficio->id_oficio,$_SESSION['data_user']['id']);
+
+              //Enviar copia del anexo a usuarios titulares
+              $usr = new Usuario();
+              $objArea = $area->ListarAreaByIdUser($objOficio->id_usuario_receptor);
+              $obj_usr_titular = $usr->userTitulares($objArea->area,$objOficio->id_usuario_receptor);
+              if(!empty($obj_usr_titular)){
+                foreach ($obj_usr_titular as $ids) {
+                  $ofc_doc->setIdUsuario($ids->id_usuario);   
+                  $ofc_doc->setCcp(0); //Se envia con ccp 0 para permitir que pueda responder 
+                  $ofc_doc->RegistrarOficioDocumento();
+                  array_push($usr_notificar, $ids->id_usuario); 
+                  
+                }
+              }                
+                 /*****************/
+
               
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
               //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
