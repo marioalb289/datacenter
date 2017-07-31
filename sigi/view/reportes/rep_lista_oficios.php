@@ -153,11 +153,14 @@ class PDF extends PDF_Rotate
 		$this->SetWidths($this->array_width);
 
 
+		//Array de aliniacion para columnas
+		$this->aligns= array('C','C','C','C','C','C');
 		//Encabezados Tabla
 		//param 1, fila de datos
 		//param 2, color relleno de fila
 		//param 3, alto de la fila
-		$this->Row(array($this->header_table[0],$this->header_table[1],$this->header_table[2],$this->header_table[3],$this->header_table[4],$this->header_table[5],$this->header_table[6]),true,2);
+		$this->Row(array($this->header_table[0],$this->header_table[1],$this->header_table[2],$this->header_table[3],$this->header_table[4],$this->header_table[5]),true,0);
+		$this->aligns = array();
 		//$this->SetY(20);
 		// Salto de línea
 		//$this->Ln(20);
@@ -176,7 +179,7 @@ class PDF extends PDF_Rotate
 	}
 
 	// Tabla coloreada
-	function FancyTable($header, $data,$tipo_reporte,$array_width)
+	function FancyTable($data,$tipo_reporte,$array_width)
 	{
 	    //Fila Datos
 	    // Restauración de colores y fuentes
@@ -192,16 +195,21 @@ class PDF extends PDF_Rotate
 	    	  $nombre_origen = ucwords($row['usuario']).' de '.$row['area'];
 	    	if($tipo_reporte == 'des_externo')
 	    	  $nombre_origen = ucwords($row['usuario']).' de '.$row['area'];
+	    	if($tipo_reporte == 'sol_entrantes')
+	    	  $nombre_origen = $row['emisor'];
+	    	if($tipo_reporte == 'sol_salientes')
+	    	  $nombre_origen = $row['receptor'];
 
 	    	//param 1, fila de datos
 	    	//param 2, color relleno de fila
 	    	//param 3, alto de la fila
 
+	    	//Array de aliniacion para columnas
+	    	$this->aligns= array('C','L','L','L','L','L');
 	    	$this->Row(array(
-	    		$row['folio'],
 	    		$row['folio_institucion'],
-	    		$row['fecha_recibido'],
-	    		$row['fecha_respuesta'],
+	    		$row['fecha_recibido'] != '' ? date("d/m/Y H:i",strtotime($row['fecha_recibido'])) : '',
+	    		$row['fecha_respuesta'] != '' ? date("d/m/Y H:i",strtotime($row['fecha_respuesta'])) : '',
 	    		$nombre_origen,
 	    		ucwords($row['respondio']),
 	    		$row['tiempo_respuesta']),
@@ -217,24 +225,24 @@ class PDF extends PDF_Rotate
 
 $pdf=new PDF();
 
-$header = array('No. Oficio', 'Folio','Fecha de Registro', 'Fecha de Respuesta', 'Origen','Responde','Tiempo de Respuesta');
-$array_width = array(25, 30, 40, 40, 50, 50,45);
+$array_width = array(40, 30, 30, 75, 50, 50);
 $pdf->array_width = $array_width;
-$pdf->header_table = $header;
 foreach ($data['data'] as $key => $data_oficio) {
 	// print_r($data_oficio);exit;
 
 	$pdf->titulo = 'Lista de Solicitudes Registradas';
-	if($key == 'externo')
-	  $pdf->titulo2 = 'Oficios Externos';
-	if($key == 'interno')
-	  $pdf->titulo2 = 'Oficios Internos';
-	if($key == 'des_externo')
-	  $pdf->titulo2 = 'Oficios con Destino Externo';
+	if($key == 'sol_entrantes'){
+	  $pdf->titulo2 = 'Solicitudes Entrantes';
+	  $pdf->header_table = array('No. Oficio','Fecha de Registro', 'Fecha de Respuesta', 'Emisor','Responde','Tiempo de Respuesta');
+	}
+	if($key == 'sol_salientes'){
+	  $pdf->titulo2 = 'Solicitudes Salientes';
+	  $pdf->header_table = array('No. Oficio','Fecha de Registro', 'Fecha de Respuesta', 'Receptor','Responde','Tiempo de Respuesta');
+	}
 	$pdf->filtros = 'Filtros';
 	if(!empty($data_oficio['data'])){
 		$pdf->AddPage('L');
-		$pdf->FancyTable($header,$data_oficio,$key,$array_width);		
+		$pdf->FancyTable($data_oficio,$key,$array_width);		
 	}
 }
 $rep_name =  date('Y-m-d H:i:s')."_reporte.pdf";

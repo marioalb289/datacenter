@@ -80,30 +80,23 @@ class OfcPartesController
 
       $_POST = $_SESSION['reporte_params'];
       $tempPost = $_POST;
-      // print_r($_POST);exit;
-      if(isset($_POST['externo'])){
-        $_POST = $_POST['externo'];
-        $data['externo'] = $this->listarOficiosExternosAction(true);
-        //$data['externo']['filtro_area'] = ($tempPost['externo']['area'] != '') ? $data['externo']['data'][0]['area'] : '';
-        //$data['externo']['filtro_fecha'] = ($tempPost['externo']['fecha_inicio'] != '' && $tempPost['externo']['fecha_fin'] != '') ? 'Del ' $tempPost['externo']['fecha_inicio']. ' al '. $tempPost['externo']['fecha_fin'] : '';
-
+      // print_r($_POST['sol_entrantes']);exit;
+      if(isset($_POST['sol_entrantes'])){
+        $_POST = $_POST['sol_entrantes'];
+        $data['sol_entrantes'] = $this->listarSolicitudesEntrantesAction(true);        
+        // print_r($data['des_externo']);exit;
+        // $data['des_externo']['filtro_area'] = ($tempPost['des_externo']['area'] != '') ? $data['des_externo']['data'][0]['area'] : '';
         $_POST = $tempPost;
       }
-      if(isset($_POST['interno'])){
-        $_POST = $_POST['interno'];
-        $data['interno'] = $this->listarOficiosInternosAction(true);
-        // print_r($data['interno']);exit;
-        // $data['interno']['filtro_area'] = ($tempPost['interno']['area'] != '') ? $data['interno']['data'][0]['area'] : '';
-        $_POST = $tempPost;
-      }
-      if(isset($_POST['des_externo'])){
-        $_POST = $_POST['des_externo'];
-        $data['des_externo'] = $this->listarOficiosDestinoExternoAction(true);        
+      if(isset($_POST['sol_salientes'])){
+        $_POST = $_POST['sol_salientes'];
+        $data['sol_salientes'] = $this->listarSolicitudesSalientesAction(true);        
         // print_r($data['des_externo']);exit;
         // $data['des_externo']['filtro_area'] = ($tempPost['des_externo']['area'] != '') ? $data['des_externo']['data'][0]['area'] : '';
         $_POST = $tempPost;
       }
       
+      // print_r($data);exit;
        $ofc_doc = new OficioDocumento();
 
        foreach ($data as $key1 => $all) {
@@ -116,14 +109,18 @@ class OfcPartesController
             if($oficio['estatus_final'] == 'Cerrado'){
              $idOfc= intval( substr($oficio['DT_RowId'], 4)); 
              $objOficioDoc = $ofc_doc->getRespuestas($idOfc,'LIMIT 1');
-             // print_r($objOficioDoc);exit;
-             $datetime1 = new DateTime($oficio['fecha_recibido']);
-             $datetime2 = new DateTime($objOficioDoc[0]->fecha_recibido);
-             $interval = $datetime1->diff($datetime2);
 
-             $data[$key1]['data'][$key2]['fecha_respuesta'] = $objOficioDoc[0]->fecha_recibido;
-             $data[$key1]['data'][$key2]['tiempo_respuesta'] = $interval->format('%a días %h horas %i minutos');
-             $data[$key1]['data'][$key2]['respondio'] = $objOficioDoc[0]->persona_responde.' de '.$objOficioDoc[0]->area;
+             if(!empty($objOficioDoc)){
+               // print_r($objOficioDoc);exit;
+               $datetime1 = new DateTime($oficio['fecha_recibido']);
+               $datetime2 = new DateTime($objOficioDoc[0]->fecha_recibido);
+               $interval = $datetime1->diff($datetime2);
+
+               $data[$key1]['data'][$key2]['fecha_respuesta'] = $objOficioDoc[0]->fecha_recibido;
+               $data[$key1]['data'][$key2]['tiempo_respuesta'] = $interval->format('%a días %h horas %i minutos');
+               $data[$key1]['data'][$key2]['respondio'] = $objOficioDoc[0]->persona_responde.' de '.$objOficioDoc[0]->area;
+              
+             }
 
             }
          }
@@ -158,6 +155,14 @@ class OfcPartesController
       $cond = " id_usuario_receptor = $id_usuario"; 
     }else{
       $cond = " id_usuario_receptor = $id_usuario";      
+    }
+
+    //Solo mostrar solicitudes cuando se solicite reporte
+    if($rep){
+      if($cond != '')
+        $cond= $cond." AND tipo_oficio = 'SOLICITUD'"; 
+      else
+        $cond= $cond." tipo_oficio = 'SOLICITUD'"; 
     }
 
     //Filtros
@@ -226,7 +231,6 @@ class OfcPartesController
   public function listarSolicitudesSalientesAction($rep = false){
 
 
-
     $initPag = new InitPaginador();
     $cond = '';
     $group_by = '';
@@ -234,6 +238,15 @@ class OfcPartesController
 
     $cond = " id_usuario_emisor = $id_usuario";
     $group_by = ' GROUP BY id_oficio ';
+
+    //Solo mostrar solicitudes cuando se realice reporte
+    if($rep){
+      if($cond != '')
+        $cond= $cond." AND tipo_oficio = 'SOLICITUD'"; 
+      else
+        $cond= $cond." tipo_oficio = 'SOLICITUD'"; 
+    }
+
 
     //Filtros
     if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
@@ -248,13 +261,24 @@ class OfcPartesController
       }
     }
     //Filtrar por estatus
-    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
+    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''  && intval($_POST['estatus_final']) > 0){
       $estatus_final = $_POST['estatus_final'];
       if($cond != ''){
         $cond= $cond."  AND estatus_final = $estatus_final"; 
       }
       else{
         $cond= $cond." estatus_final = $estatus_final"; 
+      }
+    }
+
+    //Filtrar por Tipo Oficio
+    if(isset($_POST['tipo_oficio']) && $_POST['tipo_oficio'] != '' && $_POST['tipo_oficio'] != 'ALL'){
+      $tipo_oficio = $_POST['tipo_oficio'];
+      if($cond != ''){
+        $cond= $cond."  AND tipo_oficio = '$tipo_oficio'"; 
+      }
+      else{
+        $cond= $cond." tipo_oficio = '$tipo_oficio'"; 
       }
     }
     //Filtrar por Area
@@ -292,295 +316,6 @@ class OfcPartesController
 
   }
 
-  public function listarOficiosExternosAction($rep = false){
-
-
-
-    $initPag = new InitPaginador();
-    $cond = '';
-    $group_by = '';
-    $id_usuario = $_SESSION['data_user']['id'];
-
-    // print_r($_POST);exit;
-
-    //si eres un usuario receptor, buscar solo los mensajes que te corresponden
-    if($_SESSION['data_user']['privilegios'] == 3){
-      $cond = " (sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario AND sigi_vw_oficios_externos.estatus_final <> 'Cancelado') ";
-    }
-    //si eres un alto directivo
-    elseif ($_SESSION['data_user']['privilegios'] == 2) {
-       $cond = " (sigi_vw_oficios_externos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_externos.origen = 'Externo') ";
-       $group_by = ' GROUP BY id_oficio ';
-       //Filtro por area para usuarios ejecutivos
-       if(isset($_POST['area']) && $_POST['area'] != ''  && intval($_POST['area']) > 0){
-        $id_area = intval($_POST['area']);
-        $cond = $cond . " AND id_area = $id_area";
-       }
-
-    }
-    //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
-    else{
-      $group_by = ' GROUP BY id_oficio ';
-      if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
-       $id_area = intval($_POST['area']);
-       $cond = $cond . " id_area = $id_area";
-      }
-    }
-
-    //Filtros
-    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
-      //Filtrar por fecha
-      $fecha_inicio = $_POST['fecha_inicio'];
-      $fecha_fin = $_POST['fecha_fin'];
-      if($cond != ''){
-        $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
-      }
-      else{
-        $cond= $cond." CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
-      }
-    }
-    //Filtrar por estatus
-    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
-      $estatus_final = $_POST['estatus_final'];
-      if($cond != ''){
-        $cond= $cond."  AND estatus_final = $estatus_final"; 
-      }
-      else{
-        $cond= $cond." estatus_final = $estatus_final"; 
-      }
-    }
-
-    // print_r($cond);exit;
-
-    $table = 'sigi_vw_oficios_externos';
-    $columns = array(
-      array(
-        'db' => 'id_oficio',
-        'dt' => 'DT_RowId',
-        'formatter' => function( $d, $row ) {
-          return 'row_'.$d;
-        }
-        ),
-      array( 'db' => 'origen',  'dt' => 'origen' ),
-      array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
-      array( 'db' => 'folio',   'dt' => 'folio' ),
-      array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
-      array( 'db' => 'nombre_emisor',   'dt' => 'nombre_emisor' ),
-      array( 'db' => 'cargo',   'dt' => 'cargo' ),
-      array( 'db' => 'institucion_emisor',   'dt' => 'institucion_emisor' ),
-      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-      array( 'db' => 'id_area',   'dt' => 'id_area' ),
-      array( 'db' => 'area',   'dt' => 'area' ),
-      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-      array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
-      array( 'db' => 'fecha_recibido',  'dt' => 'fecha_recibido'),
-      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-      );
-    $primaryKey = 'id_oficio';
-
-    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
-
-  }
-
-
-  public function listarOficiosInternosAction($rep = false){
-
-    // $initPag = new InitPaginador();
-
-    $initPag = new InitPaginador();
-
-    $cond = '';
-    $group_by = '';
-    $id_usuario = $_SESSION['data_user']['id'];
-
-    $fecha_inicio = '';
-    $fecha_fin = '';
-
-    //si eres un usuario receptor, buscar solo los mensajes que te corresponden
-    if($_SESSION['data_user']['privilegios'] == 3){
-      // $cond = " sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario OR sigi_vw_oficios_internos.id_usuario_emisor = $id_usuario GROUP BY id_oficio  ";
-      $cond = " ((
-      sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario
-      AND sigi_vw_oficios_internos.estatus_final <> 'Cancelado'
-      )
-      OR (id_usuario_emisor = $id_usuario))
-      ";
-
-      $group_by = ' GROUP BY id_oficio ';
-    }
-    //si eres un alto directivo
-    elseif ($_SESSION['data_user']['privilegios'] == 2) {
-       $cond = " ((
-      sigi_vw_oficios_internos.id_usuario_receptor = $id_usuario
-      AND sigi_vw_oficios_internos.estatus_final <> 'Cancelado'
-      )
-      OR (id_usuario_emisor = $id_usuario) 
-      OR origen = 'Interno' )";
-       $group_by = ' GROUP BY id_oficio ';
-
-    }
-    //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
-    else{
-      $group_by = ' GROUP BY id_oficio ';
-    }
-
-    //Filtros
-    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
-      //Filtrar por fecha
-      $fecha_inicio = $_POST['fecha_inicio'];
-      $fecha_fin = $_POST['fecha_fin'];
-      if($cond != ''){
-        $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
-      }
-      else{
-        $cond= $cond." CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
-      }
-    }
-    //Filtrar por estatus
-    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
-      $estatus_final = $_POST['estatus_final'];
-      if($cond != ''){
-        $cond= $cond."  AND estatus_final = $estatus_final"; 
-      }
-      else{
-        $cond= $cond." estatus_final = $estatus_final"; 
-      }
-    }
-    //Filtrar por area
-    if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
-       $id_area = intval($_POST['area']);
-       //Si eres usuario capturista y solo se filtra por area
-       if($_SESSION['data_user']['privilegios'] == 1 && $fecha_inicio != '' & $fecha_fin != ''){
-          $cond = $cond . " AND id_area = $id_area";
-
-       }
-       //Si eres usuarios capturista y filtras por area y por fecha
-       elseif ($_SESSION['data_user']['privilegios'] == 1 && $fecha_inicio == '' & $fecha_fin == '') {
-          if($cond != ''){
-            $cond = $cond . " AND id_area = $id_area";            
-          }else{
-            $cond = " id_area = $id_area";
-          }
-       }
-        else{
-          $cond = $cond . " AND id_area = $id_area";
-        }
-
-      }
-
-    $table = 'sigi_vw_oficios_internos';
-    $columns = array(
-      array(
-        'db' => 'id_oficio',
-        'dt' => 'DT_RowId',
-        'formatter' => function( $d, $row ) {
-          return 'row_'.$d;
-        },
-        'order' => 'desc'
-        ),
-      array( 'db' => 'origen',  'dt' => 'origen' ),
-      array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
-      array( 'db' => 'folio',   'dt' => 'folio' ),
-      array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
-      array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
-      array( 'db' => 'area',   'dt' => 'area' ),
-      array( 'db' => 'usuario',   'dt' => 'usuario' ),
-      array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
-      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-      array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
-      array(
-        'db'        => 'fecha_recibido',
-        'dt'        => 'fecha_recibido',
-        ),
-      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-      );
-    $primaryKey = 'id_oficio';
-
-    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
-
-  }
-
-  public function listarOficiosDestinoExternoAction($rep = false){
-
-    // $initPag = new InitPaginador();
-
-    $initPag = new InitPaginador();
-
-    $cond = '';
-    $group_by = '';
-    $id_usuario = $_SESSION['data_user']['id'];
-
-    //Traer tosos los oficios con destino externo
-      $cond = " (((
-      sigi_vw_oficios_des_externo.id_usuario_receptor = $id_usuario
-      AND sigi_vw_oficios_des_externo.estatus_final <> 'Cancelado'
-      )
-      OR (sigi_vw_oficios_des_externo.id_usuario_emisor = $id_usuario))
-      ";
-      //Si eres directivo ademas de tus oficios, mostrar todos los demas oficios
-      if($_SESSION['data_user']['privilegios'] == 2){
-        $cond = $cond." OR origen = 'Interno')";
-      }else{
-        $cond = $cond.")";
-      }
-
-      $group_by = ' GROUP BY id_oficio ';
-
-      //Filtros
-    if(isset($_POST['fecha_inicio']) && $_POST['fecha_inicio'] != '' && isset($_POST['fecha_fin']) && $_POST['fecha_fin'] != ''){
-      //Filtrar por fecha
-      $fecha_inicio = $_POST['fecha_inicio'];
-      $fecha_fin = $_POST['fecha_fin'];
-      $cond= $cond."  AND CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
-    }
-    //Filtrar por area
-    if(isset($_POST['area']) && $_POST['area'] != '' && intval($_POST['area']) > 0 ){
-       $id_area = intval($_POST['area']);
-       $cond = $cond . " AND id_area = $id_area";
-    }
-    //Filtrar por estatus
-    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
-      $estatus_final = $_POST['estatus_final'];
-        $cond= $cond."  AND estatus_final = $estatus_final"; 
-    }
-
-
-    $table = 'sigi_vw_oficios_des_externo';
-    $columns = array(
-      array(
-        'db' => 'id_oficio',
-        'dt' => 'DT_RowId',
-        'formatter' => function( $d, $row ) {
-          return 'row_'.$d;
-        },
-        'order' => 'desc'
-        ),
-      array( 'db' => 'origen',  'dt' => 'origen' ),
-      array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
-      array( 'db' => 'folio',   'dt' => 'folio' ),
-      array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
-      array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
-      array( 'db' => 'area',   'dt' => 'area' ),
-      array( 'db' => 'usuario',   'dt' => 'usuario' ),
-      array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
-      array( 'db' => 'nombre_destino',   'dt' => 'nombre_destino' ),
-      array( 'db' => 'cargo_destino',   'dt' => 'cargo_destino' ),
-      array( 'db' => 'institucion_destino',   'dt' => 'institucion_destino' ),
-      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-      array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
-      array(
-        'db'        => 'fecha_recibido',
-        'dt'        => 'fecha_recibido',
-        ),
-      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-      );
-    $primaryKey = 'id_oficio';
-
-    return $initPag->construir($table,$columns,$primaryKey,$cond,$group_by,$rep);
-
-  }
   public function listarOficiosExternosVincularAction(){
 
     // $initPag = new InitPaginador();
@@ -639,56 +374,6 @@ class OfcPartesController
       array(
         'db'        => 'fecha_recibido',
         'dt'        => 'fecha_recibido',
-        ),
-      array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
-      );
-    $primaryKey = 'id_oficio';
-
-    $initPag->construir($table,$columns,$primaryKey,$cond,$group_by);
-
-  }
-
-  public function listarRespuestasEnviadasAction(){
-
-    // $initPag = new InitPaginador();
-
-    $initPag = new InitPaginador();
-
-    $cond = '';
-    $group_by = '';
-    $id_usuario = $_SESSION['data_user']['id'];
-
-    //si eres un usuario receptor o un alto directivo, buscar solo los mensajes que te corresponden
-    if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){
-      $cond = " sigi_vw_respuestas_enviadas.id_usuario_emisor = $id_usuario ";
-       $group_by = ' GROUP BY id_oficio ';
-    }
-    //Si eres el capturista de oficios, para la correcta visualizacion del paginador se agregar este group
-    else{
-      $group_by = ' GROUP BY id_oficio ';
-    }
-
-    $table = 'sigi_vw_respuestas_enviadas';
-    $columns = array(
-      array(
-        'db' => 'id_oficio',
-        'dt' => 'DT_RowId',
-        'formatter' => function( $d, $row ) {
-          return 'row_'.$d;
-        },
-        'order' => 'desc'
-        ),
-      array( 'db' => 'origen',  'dt' => 'origen' ),
-      array( 'db' => 'folio',   'dt' => 'folio' ),
-      array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
-      array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
-      array( 'db' => 'persona_recibe',   'dt' => 'persona_recibe' ),
-      array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
-      array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
-      array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
-      array(
-        'db'        => 'fecha_enviado',
-        'dt'        => 'fecha_enviado',
         ),
       array( 'db' => 'fecha_visto',  'dt' => 'fecha_visto')
       );

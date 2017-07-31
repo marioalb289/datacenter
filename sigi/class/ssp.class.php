@@ -46,15 +46,7 @@ class SSP {
 		return $out;
 	}
 	/**
-	 * Database connection
-	 *
-	 * Obtain an PHP PDO connection from a connection details array
-	 *
-	 *  @param  array $conn SQL connection details. The array should have
-	 *    the following properties
-	 *     * host - host name
-	 *     * db   - database name
-	 *     * user - user name
+	 * Database connectionl
 	 *     * pass - user password
 	 *  @return resource PDO connection
 	 */

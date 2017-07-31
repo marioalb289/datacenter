@@ -79,6 +79,7 @@
                     <label for="" class="required">Estatus Final:</label>
                     <select class="form-control input-sm" id="filtro_estatus_final"  >
                         <option value="">Selecccionar</option>
+                        <option value="0">Todos</option>
                         <option value="1">Cerrado</option>
                         <option value="2">Abierto</option>
                         <option value="3">Cancelado</option>
@@ -92,18 +93,19 @@
                   
                 <div class="form-group">
                     <label for="" class="required">Tipo Oficio:</label>
-                    <select class="form-control input-sm" id="filtro_estatus_final"  >
+                    <select class="form-control input-sm" id="filtro_tipo_oficio"  >
                         <option value="">Selecccionar</option>
-                        <option value="1">Solicitud</option>
-                        <option value="2">Respuesta</option>
-                        <option value="3">Anexo</option>
+                        <option value="ALL">Todos</option>
+                        <option value="SOLICITUD">Solicitud</option>
+                        <option value="RESPUESTA">Respuesta</option>
+                        <option value="ANEXO">Anexo</option>
                         <span class="text-danger"></span>
                       </select>
                     <span class="text-danger"></span>
                 </div> 
                 
               </div>
-              <div class="col-md-2">        
+              <div class="col-md-3">        
                   
                 <div class="form-group">
                     <label for="" class="required">Área:</label>
@@ -124,115 +126,14 @@
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
         <ul class="nav nav-tabs dashboard_tabs_cl">
-          <li class="active"><a href="#tab1default" data-toggle="tab">Listar Oficios Externos</a></li>
-          <li><a href="#tab2default" data-toggle="tab">Listar Oficios Internos</a></li>
-          
-          <li><a href="#oficios_destino_externo" data-toggle="tab">Listar Oficios con Destino Externo</a></li>
-          <?php if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){ ?>
-          <li><a href="#respuestas_enviadas" data-toggle="tab">Respuestas Enviadas</a></li>
-          <?php } ?>
           <li><a href="#tab_sol_entrantes" data-toggle="tab">Solicitudes Entrantes</a></li>
           <li><a href="#tab_sol_salietes" data-toggle="tab">Solicitudes Salientes</a></li>
         </ul>
       </div>
       <div class="panel-body">
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="tab1default">
-            <!-- contenido tab externo -->
-            <!-- <div class="col-md-12" style="text-align: center; top: 30px; display: none;" id="div_recargar_externos">
-              <button style="" type="button" class="btn btn-default btn-md" name="btn_recargar" id="btn_recargar_externos" style="float: right;height: 30px;font-size: 12px;"><span class="glyphicon glyphicon-refresh" style="color: #5cb85c;font-weight: 900;"></span>Recargar</button>
-            </div> -->
-
-            <div class="col-md-12">
-              <table id="lista_oficios_externos" class="table  table-bordered table-hover display" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Folio</th>
-                        <th>N° Oficio</th>
-                        <th>Nombre Suscribe</th>
-                        <th>Institucion</th>
-                        <th>Asunto</th>
-                        <th>Area Destino</th>
-                        <th>Estatus Inicial</th>
-                        <th>Estatus Final</th>
-                        <th>Fecha Recibido</th>
-                        <th>Visto</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-              </table>
-            </div>
-            
-          </div>
-          <div class="tab-pane fade" id="tab2default">
-            <!-- contenido tab interno -->
-            <div class="col-md-12">
-              <table id="lista_oficios_internos" class="table  table-bordered table-hover display dt-center " cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                      <th>Folio</th>
-                      <th>N° Oficio</th>
-                      <th>Area Origen</th>
-                      <th>Usuario</th>
-                      <th>Asunto</th>
-                      <th>Estatus Inicial</th>
-                      <th>Estatus Final</th>
-                      <th>Fecha Recibido</th>
-                      <th>Visto</th>
-                      <th ></th>
-                      <th ></th>
-                    </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
           
-          <div class="tab-pane fade" id="oficios_destino_externo">
-            <!-- contenido tab oficios externos -->
-            <div class="col-md-12">
-              <table id="lista_oficios_destino_externo" class="table  table-bordered table-hover display dt-center " cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                      <th>Folio</th>
-                      <th>N° Oficio</th>
-                      <th>Area Origen</th>
-                      <th>Usuario</th>
-                      <th>Dependencia</th>
-                      <th>Asunto</th>
-                      <th>Estatus Inicial</th>
-                      <th>Estatus Final</th>
-                      <th>Fecha Recibido</th>
-                      <th>Visto</th>
-                      <th ></th>
-                      <th ></th>
-                    </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="respuestas_enviadas">
-            <!-- contenido tab respuestas enviadas -->
-            <div class="col-md-12">
-              <table id="lista_respuestas" class="table table-bordered table-hover display compact" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                      <th>Folio</th>
-                      <th>N° Oficio</th>
-                      <th>Origen</th>
-                      <th>Persona que Recibe</th>
-                      <th>Asunto</th>
-                      <th>Estatus</th>
-                      <th>Fecha Enviado</th>
-                      <th>Visto</th>
-                      <th style="width: 60px;"></th>
-                    </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
-
-          <div class="tab-pane fade" id="tab_sol_entrantes">
+          <div class="tab-pane fade in active" id="tab_sol_entrantes">
             <!-- contenido tab respuestas enviadas -->
             <div class="col-md-12">
               <table id="lista_solicitudes_entrantes" class="table  table-hover display" cellspacing="0" width="100%">
@@ -372,10 +273,23 @@
         });
       })
       .change();
+      //Evento para filtrar por estatus
+    var filtro_tipo_oficio = document.getElementById('filtro_tipo_oficio');
+    $( "#filtro_tipo_oficio" )
+      .change(function () {
+        var str = "";
+        $( "#filtro_tipo_oficio option:selected" ).each(function() {
+           opc = $(this)[0].value;
+           if(opc != "") {
+            
+            filtrar();
+            // console.log('opc',opc);
+            //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
+           }
+        });
+      })
+      .change();
     function filtrar(){
-      $('#lista_oficios_internos').DataTable().ajax.reload();
-      $('#lista_oficios_externos').DataTable().ajax.reload();
-      $('#lista_oficios_destino_externo').DataTable().ajax.reload();
       $('#lista_solicitudes_entrantes').DataTable().ajax.reload();
       $('#lista_solicitudes_salientes').DataTable().ajax.reload();
     }
