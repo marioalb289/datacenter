@@ -255,8 +255,17 @@ class OfcPartesController
     $group_by = '';
     $id_usuario = $_SESSION['data_user']['id'];
 
-    $cond = " id_usuario_emisor = $id_usuario";
     $group_by = ' GROUP BY id_oficio ';
+    if($_SESSION['data_user']['privilegios'] == 2){
+      $cond = " id_usuario_receptor = $id_usuario"; 
+
+      if(isset($_POST['usuario']) && $_POST['usuario'] != ''){
+        $id_usuario = intval($_POST['usuario']);
+        $cond = " id_usuario_receptor = $id_usuario"; 
+      }
+    }else{
+      $cond = " id_usuario_receptor = $id_usuario";      
+    }
 
     //Solo mostrar solicitudes cuando se realice reporte
     if($rep){

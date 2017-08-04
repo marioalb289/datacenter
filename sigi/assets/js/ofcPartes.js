@@ -129,7 +129,7 @@ $(document).ready(function(){
                 d.area = filtro_area.value,
                 d.estatus_final = filtro_estatus_final.value,
                 d.tipo_oficio = filtro_tipo_oficio.value,
-                d.usuario = (typeof filtro_usuario.value != 'undefined') ? filtro_usuario.value : ''
+                d.usuario = (typeof filtro_usuario != 'undefined') ? filtro_usuario.value : ''
 
             }            
         },
@@ -253,7 +253,7 @@ $(document).ready(function(){
                 d.area = filtro_area.value,
                 d.estatus_final = filtro_estatus_final.value,
                 d.tipo_oficio = filtro_tipo_oficio.value,
-                d.usuario = (typeof filtro_usuario.value != 'undefined') ? filtro_usuario.value : ''
+                d.usuario = (typeof filtro_usuario != 'undefined') ? filtro_usuario.value : ''
             }            
         },
         "columns": [

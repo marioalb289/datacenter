@@ -120,6 +120,7 @@
                 </div> 
                 
               </div> 
+              <?php if($_SESSION['data_user']['privilegios'] == 2){ ?>
               <div class="col-md-3">        
                   
                 <div class="form-group">
@@ -133,7 +134,8 @@
                     <span class="text-danger"></span>
                 </div> 
                 
-              </div>                  
+              </div>
+              <?php } ?>                  
             </div>
         </div>
       </div>
