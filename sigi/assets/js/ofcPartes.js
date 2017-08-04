@@ -128,7 +128,9 @@ $(document).ready(function(){
                 d.fecha_fin = fecha_fin.value,
                 d.area = filtro_area.value,
                 d.estatus_final = filtro_estatus_final.value,
-                d.tipo_oficio = filtro_tipo_oficio.value
+                d.tipo_oficio = filtro_tipo_oficio.value,
+                d.usuario = (typeof filtro_usuario.value != 'undefined') ? filtro_usuario.value : ''
+
             }            
         },
         "columns": [
@@ -201,7 +203,7 @@ $(document).ready(function(){
           });
           $( "#btn_imprimir_rep_entrantes" ).click(function() {
             var params = {
-              externo : $('#lista_solicitudes_entrantes').DataTable().ajax.params()
+              sol_entrantes : $('#lista_solicitudes_entrantes').DataTable().ajax.params()
             };
             $.ajax({
               method: "POST",
@@ -250,7 +252,8 @@ $(document).ready(function(){
                 d.fecha_fin = fecha_fin.value,
                 d.area = filtro_area.value,
                 d.estatus_final = filtro_estatus_final.value,
-                d.tipo_oficio = filtro_tipo_oficio.value
+                d.tipo_oficio = filtro_tipo_oficio.value,
+                d.usuario = (typeof filtro_usuario.value != 'undefined') ? filtro_usuario.value : ''
             }            
         },
         "columns": [
@@ -338,7 +341,7 @@ $(document).ready(function(){
           });
           $( "#btn_imprimir_rep_salientes" ).click(function() {
             var params = {
-              externo : $('#lista_solicitudes_salientes').DataTable().ajax.params()
+              sol_salientes : $('#lista_solicitudes_salientes').DataTable().ajax.params()
             };
             $.ajax({
               method: "POST",

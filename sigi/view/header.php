@@ -24,6 +24,9 @@
         <script src="sigi/assets/js/socket.io.js"></script>
         <script src="sigi/assets/js/wickedpicker.js"></script>
 
+        <script src="sigi/assets/js/bootstrap.min.js"></script>
+        <script src="sigi/assets/js/bootstrap-select.min.js"></script>
+
 	</head>
     <body style="min-width: 960px !important;">
 

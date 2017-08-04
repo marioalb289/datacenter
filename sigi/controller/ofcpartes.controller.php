@@ -43,7 +43,10 @@ class OfcPartesController
     $area =  new Area();
     $ar = $area->ListarAreas();
 
-    $this->layout->renderVista("ofcPartes","ofcPartes",array('areas' => $ar));
+    $usuario = new Usuario();
+    $usr = $usuario->ListarUsuarios(array($_SESSION['data_user']['id']));
+
+    $this->layout->renderVista("ofcPartes","ofcPartes",array('areas' => $ar,'usuarios' => $usr));
   }
 
   public function createReportParamAction(){
@@ -133,7 +136,8 @@ class OfcPartesController
       $this->layout->renderVista("reportes","rep_lista_oficios",array('data' => $data));
       
     } catch (Exception $e) {
-      echo json_encode(array('success' => false));
+      //Aqui deberia mostrar error
+      //echo json_encode(array('success' => false));
       exit;
       
     }
@@ -153,6 +157,11 @@ class OfcPartesController
 
     if($_SESSION['data_user']['privilegios'] == 2){
       $cond = " id_usuario_receptor = $id_usuario"; 
+
+      if(isset($_POST['usuario']) && $_POST['usuario'] != ''){
+        $id_usuario = intval($_POST['usuario']);
+        $cond = " id_usuario_receptor = $id_usuario"; 
+      }
     }else{
       $cond = " id_usuario_receptor = $id_usuario";      
     }
@@ -175,6 +184,16 @@ class OfcPartesController
       }
       else{
         $cond= $cond." CAST(fecha_recibido AS DATE) BETWEEN '$fecha_inicio' AND '$fecha_fin'"; 
+      }
+    }
+    //Filtrar por Tipo Oficio
+    if(isset($_POST['tipo_oficio']) && $_POST['tipo_oficio'] != '' && $_POST['tipo_oficio'] != 'ALL'){
+      $tipo_oficio = $_POST['tipo_oficio'];
+      if($cond != ''){
+        $cond= $cond."  AND tipo_oficio = '$tipo_oficio'"; 
+      }
+      else{
+        $cond= $cond." tipo_oficio = '$tipo_oficio'"; 
       }
     }
     //Filtrar por estatus

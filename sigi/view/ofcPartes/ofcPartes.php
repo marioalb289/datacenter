@@ -119,6 +119,20 @@
                     <span class="text-danger"></span>
                 </div> 
                 
+              </div> 
+              <div class="col-md-3">        
+                  
+                <div class="form-group">
+                    <label for="" class="required">Ver como un usuario:</label>
+                    <select class="form-control input-sm"  id="filtro_usuario"  >
+                      <option value="">Selecccionar Usuario</option>
+                      <?php foreach($data['usuarios'] as $user): ?>
+                          <option value="<?php echo $user->id_usuario; ?>"><?php echo ucwords(mb_strtolower($user->nombre_formal,'UTF-8')); ?></option>
+                      <?php endforeach; ?>              
+                         </select>
+                    <span class="text-danger"></span>
+                </div> 
+                
               </div>                  
             </div>
         </div>
@@ -240,6 +254,22 @@
           }
        }
     }
+
+    //Evento para filtrar por usuario
+    var filtro_usuario = document.getElementById('filtro_usuario');
+    $( "#filtro_usuario" )
+      .change(function () {
+        var str = "";
+        $( "#filtro_usuario option:selected" ).each(function() {
+           opc = parseInt($(this)[0].value);
+           if(opc >= 0) {
+            
+            filtrar();
+            // console.log('opc',opc);
+            //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
+           }
+        });
+      });
     
     //Evento para filtrar por area
     var filtro_area = document.getElementById('filtro_area');
@@ -255,8 +285,7 @@
             //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
            }
         });
-      })
-      .change();
+      });
     //Evento para filtrar por estatus
     var filtro_estatus_final = document.getElementById('filtro_estatus_final');
     $( "#filtro_estatus_final" )
@@ -271,12 +300,10 @@
             //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
            }
         });
-      })
-      .change();
-      //Evento para filtrar por estatus
+      });
+    //Evento para filtrar por tipo oficio
     var filtro_tipo_oficio = document.getElementById('filtro_tipo_oficio');
-    $( "#filtro_tipo_oficio" )
-      .change(function () {
+     $(document).on('change', '#filtro_tipo_oficio', function() {
         var str = "";
         $( "#filtro_tipo_oficio option:selected" ).each(function() {
            opc = $(this)[0].value;
@@ -287,9 +314,9 @@
             //cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
            }
         });
-      })
-      .change();
+    });
     function filtrar(){
+      console.log('entro aqui');
       $('#lista_solicitudes_entrantes').DataTable().ajax.reload();
       $('#lista_solicitudes_salientes').DataTable().ajax.reload();
     }
@@ -299,6 +326,8 @@
       $("#fecha_inicio").val("");
       $("#filtro_area").val("");
       $("#filtro_estatus_final").val("");
+      $("#filtro_tipo_oficio").val("");
+      $("#filtro_usuario").val("");
       filtrar();
     })
 
