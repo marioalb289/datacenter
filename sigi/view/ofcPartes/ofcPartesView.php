@@ -47,7 +47,7 @@
 			<div class="col-md-6">
 					<h4 style="display: inline-block;"><strong>N° Oficio : </strong><?php echo $data['oficio']->folio_iepc ?> <strong>Estatus Final:</strong> </h4> 
 					<?php if ($data['oficio']->estatus_final == "Cerrado") echo "<button type='button' class='btn btn-success btn-xs' style='width:70px;margin-top: -5px;'>Cerrado</button>";?>
-					<?php if ($data['oficio']->estatus_final == "Abierto") echo "<button type='button' class='btn bbtn-danger btn-xs' style='width:70px;margin-top: -5px;'>Abierto</button>";?>
+					<?php if ($data['oficio']->estatus_final == "Abierto") echo "<button type='button' class='btn btn-warning btn-xs' style='width:70px;margin-top: -5px;'>Abierto</button>";?>
 					<?php if ($data['oficio']->estatus_final == "Cancelado") echo "<button type='button' class='btn btn-warning btn-xs' style='width:70px;margin-top: -5px;'>Cancelado</button>";?>
 			</div>
 			<div class="col-md-6 text-right">
@@ -77,12 +77,6 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<!-- <div class="col-md-12">
-				<h4 style="display: inline-block;"><strong>Estatus Final :</strong></h4>
-				<?php if ($data['oficio']->estatus_final == "Cerrado") echo "<button type='button' class='btn btn-success btn-xs' style='width:70px'>Cerrado</button>";?>
-				<?php if ($data['oficio']->estatus_final == "Abierto") echo "<button type='button' class='btn bbtn-danger btn-xs' style='width:70px'>Abierto</button>";?>
-				<?php if ($data['oficio']->estatus_final == "Cancelado") echo "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>Cancelado</button>";?>
-			</div> -->
 			<div class="col-md-6 ">
 				
 
