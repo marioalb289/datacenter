@@ -25,7 +25,7 @@
 
 
 
-	<h1 class="page-header">Anexar información adicional al oficio </h1>
+	<h1 class="page-header">Añadir alncance al oficio </h1>
 	<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 		<div class="panel panel-default">
 			<div class="panel-heading">

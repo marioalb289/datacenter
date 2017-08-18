@@ -98,7 +98,7 @@
                         <option value="ALL">Todos</option>
                         <option value="SOLICITUD">Solicitud</option>
                         <option value="RESPUESTA">Respuesta</option>
-                        <option value="ANEXO">Anexo</option>
+                        <option value="ALCANCE">Alcance</option>
                         <span class="text-danger"></span>
                       </select>
                     <span class="text-danger"></span>

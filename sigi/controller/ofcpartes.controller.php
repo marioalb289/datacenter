@@ -387,15 +387,11 @@ class OfcPartesController
         ),
       array( 'db' => 'origen',  'dt' => 'origen' ),
       array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
-      array( 'db' => 'folio',   'dt' => 'folio' ),
       array( 'db' => 'folio_institucion',   'dt' => 'folio_institucion' ),
       array( 'db' => 'id_usuario_emisor',   'dt' => 'id_usuario_emisor' ),
-      array( 'db' => 'area',   'dt' => 'area' ),
-      array( 'db' => 'usuario',   'dt' => 'usuario' ),
+      array( 'db' => 'emisor',   'dt' => 'emisor' ),
       array( 'db' => 'id_usuario_receptor',   'dt' => 'id_usuario_receptor' ),
-      array( 'db' => 'nombre_destino',   'dt' => 'nombre_destino' ),
-      array( 'db' => 'cargo_destino',   'dt' => 'cargo_destino' ),
-      array( 'db' => 'institucion_destino',   'dt' => 'institucion_destino' ),
+      array( 'db' => 'dependencia',   'dt' => 'dependencia' ),
       array( 'db' => 'asunto_emisor',   'dt' => 'asunto_emisor' ),
       array( 'db' => 'estatus_inicial',   'dt' => 'estatus_inicial' ),
       array( 'db' => 'estatus_final',   'dt' => 'estatus_final' ),
@@ -2024,7 +2020,7 @@ class OfcPartesController
 
               //Guardar oficio
               $ofc->_setOrigen($_POST['origen']);
-              $ofc->setTipoOficio("ANEXO");
+              $ofc->setTipoOficio("ALCANCE");
               $ofc->setFolio($folio);
               $ofc->setFolioInstitucion( isset($_POST['folio_iepc']) && $_POST['folio_iepc'] != '' && strlen($_POST['folio_iepc']) >= 7  ? $_POST['folio_iepc']: 'S/N'); //Folio de institucion cambiar
               $ofc->_setIdUsuarioEmisor($id_usuario);

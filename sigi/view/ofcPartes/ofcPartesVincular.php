@@ -142,11 +142,9 @@
               <table id="lista_oficios_destino_externo_vincular" class="table  table-bordered table-hover display dt-center " cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                      <th>Folio</th>
                       <th>N° Oficio</th>
-                      <th>Area</th>
-                      <th>Usuario</th>
-                      <th>Dependencia</th>
+                      <th>Emisor</th>
+                      <th>Receptor</th>
                       <th>Asunto</th>
                       <th>Estatus Inicial</th>
                       <th>Estatus Final</th>

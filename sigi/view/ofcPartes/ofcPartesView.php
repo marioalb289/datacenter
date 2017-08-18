@@ -62,8 +62,8 @@
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='ofcpartes/vincular/".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Vincular</a>
 				<?php } ?>	
 
-				<?php if( $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->tipo_oficio <> 'ANEXO' ){ ?>
-				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" type="button" <?php  {echo "href='ofcpartes/anexar/".$data['oficio']->id_oficio."'";}	 ?> class="btn btn-primary" id="btn-anexar" role="button">Anexar Información</a>
+				<?php if( $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->tipo_oficio <> 'ALNCANCE' ){ ?>
+				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" type="button" <?php  {echo "href='ofcpartes/anexar/".$data['oficio']->id_oficio."'";}	 ?> class="btn btn-primary" id="btn-anexar" role="button">Añadir Alcance</a>
 				<?php } ?>	
 
 				<?php if( $data['oficio']->tipo_oficio <> 'SOLICITUD' ){ ?>

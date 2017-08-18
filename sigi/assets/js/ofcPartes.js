@@ -445,19 +445,9 @@ $(document).ready(function(){
             "type": "POST"
         },
         "columns": [
-            { "data": "folio", "searchable": true,"orderable": true},
             { "data": "folio_institucion", "searchable": true,"orderable": false},
-            { "data": "area", "searchable": false,"orderable": false },
-            { "data": "usuario", "searchable": false,"orderable": false },
-            { 
-              "data": "institucion_destino", 
-              "searchable": false,
-              "orderable": false,
-              "render": function ( data, type, row ) {
-                return (row.nombre_destino != '') ? row.nombre_destino + " " + row.cargo_destino + " de " + row.institucion_destino : '';
-              },
-
-            },
+            { "data": "emisor", "searchable": false,"orderable": false },
+            { "data": "dependencia", "searchable": true,"orderable": false },
             { "data": "asunto_emisor", "searchable": true,"orderable": false },
             { "data": "estatus_inicial", "searchable": false,"orderable": false },
             { 
@@ -520,7 +510,7 @@ $(document).ready(function(){
             }
         ],
       language: language,
-      "order": [[ 8, 'desc' ]],
+      "order": [[ 5, 'desc' ]],
       "initComplete": function(settings, json) {
           //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
