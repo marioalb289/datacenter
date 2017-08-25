@@ -140,7 +140,19 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    return  "<span class='glyphicon glyphicon-envelope' aria-hidden='true' style='color:#00bcd4;font-size: 15px;'></span>";
+                    // console.log(row.tipo_oficio);
+                    if(row.tipo_oficio == 'SOLICITUD'){
+                      return  "<span class='glyphicon glyphicon-file' aria-hidden='true' style='color:#00bcd4;font-size: 15px;'></span>";
+
+                    }
+                    else if(row.tipo_oficio == 'RESPUESTA'){
+                      return  "<span class='glyphicon glyphicon-comment' aria-hidden='true' style='color:#00bcd4;font-size: 15px;'></span>";
+
+                    }
+                    else{
+                      return  "<span class='glyphicon glyphicon-briefcase' aria-hidden='true' style='color:#00bcd4;font-size: 15px;'></span>";
+                      
+                    }
                 },
             },
             { "data": "tipo_oficio","searchable": false,"orderable": false },
