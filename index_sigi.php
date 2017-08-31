@@ -88,6 +88,7 @@ if( !empty($_SESSION['data_user'])){
     //require_once 'sigi/view/footer.php';
 }
 else{
+    // print_r($_REQUEST);exit;
     if( (isset($_REQUEST['usuario']) && $_REQUEST['usuario'] != '') && (isset($_REQUEST['contrasena']) && $_REQUEST['contrasena'] != '')){
         // print_r($_REQUEST);
         $validate = new Validate();

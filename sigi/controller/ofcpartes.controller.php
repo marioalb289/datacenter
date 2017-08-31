@@ -38,6 +38,87 @@ class OfcPartesController
     }
   }
 
+  public function loginExternoAction(){
+    // print_r($_REQUEST);exit;
+    if( (isset($_REQUEST['idVincular']) && $_REQUEST['idVincular'] != '') && (isset($_REQUEST['id']) && $_REQUEST['id'] != '')){
+        // print_r($_REQUEST);
+        $correo = $_REQUEST['idVincular'];
+        $pass = $_REQUEST['id'];
+        $validate = new Validate();
+        $extra = '/index';
+        // print_r($validate);exit;
+        if (!$validate->alfanumerico($correo))
+           header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");     
+        if (!$validate->alfanumerico($pass))
+             header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");     
+
+        $usuario = new Usuario();
+        $objUser = $usuario->reLoginUser($correo,$pass);
+        if(!empty($objUser)){
+
+            $user = $objUser->correo;
+            $tusu = $objUser->privilegios;
+            $nombre = $objUser->nombre;
+            $apelli = $objUser->apellido;
+            $idx = $objUser->id;
+            $are = $objUser->area;
+            $_SESSION['loggedin'] = true;
+            $_SESSION['nom'] = $nombre;
+            $_SESSION['ape'] = $apelli;
+            $_SESSION['cor'] = $user;
+            $_SESSION['prv'] = $tusu;
+            $_SESSION['idx'] = $idx;
+            $_SESSION['are'] = $idx;
+            $_SESSION['con'] = $pass;
+
+            $_SESSION['start'] = time();
+            $_SESSION['expire'] = $_SESSION['start'];
+
+            $_SESSION['data_user'] = array(
+                'nombre_formal' => $nombre_formal ,
+                'nombre' =>  $nombre,
+                'apellido' =>  $apelli,
+                'correo' =>  $user,
+                'privilegios' => $mostrarx['priv_sigi'],
+                'id' =>  $idx,
+                'area' =>  $are,
+                'titular' => $mostrarx['titular']
+            );
+
+            $time = time();
+            $secret_key = 'Sdw1s9x8784455gtykifd335@';
+            
+            $token = array(
+                'iat' => $time,
+                'exp' => $time + (60*60),
+                'data' => $_SESSION['data_user']
+            );
+
+            $_SESSION['token'] = JWT::encode($token, $secret_key);
+            
+            $host  = $_SERVER['HTTP_HOST'];
+            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            $extra = 'ofcpartes/index';
+
+            // print_r($uri);exit; 
+            header("Location: http://$host$uri/$extra");
+
+        }
+        else{
+           $extra = '/index';
+            header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");
+
+        }
+
+        
+
+    }
+    else{
+        $extra = '/index';
+         header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");      
+    }
+  }
+
 
   public function IndexAction(){
     $area =  new Area();
