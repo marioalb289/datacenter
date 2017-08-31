@@ -13,6 +13,10 @@ require_once ("sigi/model/reportes_param.php");
 include ("sigi/class/init_paginador.php");
 require_once ("sigi/class/validate.class.php");
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+  use Firebase\JWT\JWT;
+
+
 //require_once ("/../view/header.php");
 
 
@@ -73,16 +77,17 @@ class OfcPartesController
 
             $_SESSION['start'] = time();
             $_SESSION['expire'] = $_SESSION['start'];
+            $nombre_formal = ucwords(mb_strtolower(utf8_encode($objUser->nombre_formal),'UTF-8'));
 
             $_SESSION['data_user'] = array(
                 'nombre_formal' => $nombre_formal ,
                 'nombre' =>  $nombre,
                 'apellido' =>  $apelli,
                 'correo' =>  $user,
-                'privilegios' => $mostrarx['priv_sigi'],
+                'privilegios' => $objUser->priv_sigi,
                 'id' =>  $idx,
                 'area' =>  $are,
-                'titular' => $mostrarx['titular']
+                'titular' => $objUser->nombre_formal->titular
             );
 
             $time = time();
