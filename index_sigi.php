@@ -89,19 +89,20 @@ if( !empty($_SESSION['data_user'])){
 }
 else{
     // print_r($_REQUEST);exit;
-    if( (isset($_REQUEST['usuario']) && $_REQUEST['usuario'] != '') && (isset($_REQUEST['contrasena']) && $_REQUEST['contrasena'] != '')){
+    if( (isset($_REQUEST['idVincular']) && $_REQUEST['idVincular'] != '') && (isset($_REQUEST['id']) && $_REQUEST['id'] != '')){
         // print_r($_REQUEST);
+        $correo = $_REQUEST['idVincular'];
+        $pass = $_REQUEST['id'];
         $validate = new Validate();
         $extra = '/index';
         // print_r($validate);exit;
-        if (!$validate->alfanumerico($_REQUEST['usuario']))
-           header("Location: http://$host$uri/$extra");     
-        if (!$validate->alfanumerico($_REQUEST['contrasena']))
-             header("Location: http://$host$uri/$extra");     
+        if (!$validate->alfanumerico($correo))
+           header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");     
+        if (!$validate->alfanumerico($pass))
+             header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");     
 
         $usuario = new Usuario();
-        $objUser = $usuario->reLoginUser($_REQUEST['usuario'],$_REQUEST['contrasena']);
-        // print_r($objUser);exit;
+        $objUser = $usuario->reLoginUser($correo,$pass);
         if(!empty($objUser)){
 
             $user = $objUser->correo;
@@ -117,18 +118,21 @@ else{
             $_SESSION['prv'] = $tusu;
             $_SESSION['idx'] = $idx;
             $_SESSION['are'] = $idx;
-            $_SESSION['con'] = md5($_REQUEST['contrasena']);
+            $_SESSION['con'] = $pass;
 
             $_SESSION['start'] = time();
             $_SESSION['expire'] = $_SESSION['start'];
+            $nombre_formal = ucwords(mb_strtolower(utf8_encode($objUser->nombre_formal),'UTF-8'));
 
             $_SESSION['data_user'] = array(
+                'nombre_formal' => $nombre_formal ,
                 'nombre' =>  $nombre,
                 'apellido' =>  $apelli,
                 'correo' =>  $user,
                 'privilegios' => $objUser->priv_sigi,
                 'id' =>  $idx,
                 'area' =>  $are,
+                'titular' => $objUser->nombre_formal->titular
             );
 
             $time = time();
@@ -142,13 +146,17 @@ else{
 
             $_SESSION['token'] = JWT::encode($token, $secret_key);
             
-            $extra = '/index';
+            $host  = $_SERVER['HTTP_HOST'];
+            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            $extra = 'ofcpartes/index';
+
+            // print_r($uri);exit; 
             header("Location: http://$host$uri/$extra");
 
         }
         else{
            $extra = '/index';
-            header("Location: http://$host$uri/$extra");
+            header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");
 
         }
 
@@ -157,7 +165,7 @@ else{
     }
     else{
         $extra = '/index';
-         header("Location: http://$host$uri/$extra");      
+         header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");      
     }
 }
 
