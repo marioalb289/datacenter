@@ -197,7 +197,7 @@ class OfcPartesController
       }
     }
     //Filtrar por estatus
-    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != ''){
+    if(isset($_POST['estatus_final']) && $_POST['estatus_final'] != '' && $_POST['estatus_final'] != '3'){
       $estatus_final = $_POST['estatus_final'];
       if($cond != ''){
         $cond= $cond."  AND estatus_final = $estatus_final"; 
