@@ -31,6 +31,7 @@ class OfcPartesController
   {
     try
     {
+      
       $this->layout = new Layout();    
       $this->validate = new Validate();
 
