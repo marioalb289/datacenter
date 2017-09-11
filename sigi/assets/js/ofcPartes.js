@@ -318,15 +318,35 @@ $(document).ready(function(){
                     else
                       return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                 },
+            },
+            {
+                "targets": -1,
+                "data": null, 
+                //"visible": ocultarColumnas(USER_PRIV),
+                "orderable" : false,
+                "className": "dt-center",
+                "render": function ( data, type, row ) {
+                    // if(row.estatus_final == "Revision")
+                    if(1==1)
+                      return  "<a href='"+GLOBAL_PATH+"ofcpartes/edit/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs edit' style='width:60px'>Editar</a>";
+                    else
+                      return "";
+                },
             }
         ] ,       
       language: language,
       "order": [[ 7, 'desc' ]],
       "createdRow": function( row, data, dataIndex ) {
         $(row).click(function(e) {
+          console.log(e.target);
           if($(e.target).is('a')){
-            e.preventDefault();
-            return;
+            if($(e.target).is('.edit')){
+              return;
+            }
+            else{
+              e.preventDefault();
+              return;              
+            }
           }
           window.location.href = GLOBAL_PATH+"ofcpartes/view/"+parseInt( data.DT_RowId.substring(4));
         });
@@ -556,6 +576,7 @@ $(document).ready(function(){
 
     /*Configuracion inicial de la tabla de usuarios*/
     var temp = [];
+    var flag = false;
     var t =  $('#example').DataTable({
       language: language,
 
@@ -565,36 +586,77 @@ $(document).ready(function(){
           "orderable": false,
           "targets": 0
         },
-        {
+         {
             "targets": [ 1 ],
-            "className": "dt-center",
+            "visible": false
         },
          {
             "targets": [ 2 ],
-            "visible": false,
+            "visible": false
+        },
+         {
+            "targets": [ 3 ],
+            "visible": true,
         },
         {
-            "targets": [ 2 ],
+            "targets": [ 4 ],
             "visible": true,
             "searchable": true
         },
 
        ],
-      "order": [[ 1, 'asc' ]],
       "initComplete": function(settings, json) {
           console.log( 'DataTables has finished its initialisation.' );
           $( "#example_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' id='btn_enviar_todos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-ok' style='color: #5cb85c;font-weight: 900;'></span>Seleccionar Todo</button>" );
           $( "#btn_enviar_todos" ).click(function() {
-            if($('#example').DataTable().$('input, checkbox').prop('checked') == true){
-                $('#example').DataTable().$('input, checkbox').prop('checked', false);
-            }
-            else{
-              $('#example').DataTable().$('input, checkbox').prop('checked', true);
-            }
+            var count = $('#example').DataTable().$('tr').length;
+            var i = 1;
+            $('#example').DataTable().$('tr').each(function (){
+              $(this).removeClass( "success" );
+              if(!flag){
+                $(this).addClass("success");
+                if(i++ == count){
+                  flag = true;
+                }
+              }
+              if(i++ == count){
+                flag = false;
+              }
+            });
           });
         }
 
     });
+
+    
+
+    $('#example tbody').on( 'click', 'tr', function () {
+          $(this).toggleClass('success');
+          _this = this;
+
+          // var count = $('#lista_usuarios_recibidos').DataTable().$('tr').length;
+          // var i = 1;
+          // $('#lista_usuarios_recibidos').DataTable().$('tr').each(function (){
+          //   intId1 = parseInt( $('#lista_usuarios_recibidos').dataTable().fnGetData( this )[1]);
+          //   intId2 = parseInt( $('#example').dataTable().fnGetData( _this )[1]);
+          //   if(intId1 == intId2){
+          //     t2.row($(this)).remove().draw();
+          //     return;
+          //   }
+          //   if(i == count){
+          //     t2.row.add($('#example').dataTable().fnGetData( _this )).draw( true );
+          //   }
+          //   i++;
+
+          // });
+
+         
+
+      } );
+
+    $('#lista_usuarios_recibidos tbody').click();
+
+
 
 
     t.on( 'order.dt search.dt', function () {
@@ -602,6 +664,63 @@ $(document).ready(function(){
             cell.innerHTML = i+1;
         } );
     } ).draw();
+
+
+    var t2 =  $('#lista_usuarios_recibidos').DataTable({
+      language: language,
+
+      "columnDefs": [ 
+        {
+          "searchable": false,
+          "orderable": false,
+          "targets": 0
+        },
+         {
+            "targets": [ 1 ],
+            "visible": false
+        },
+         {
+            "targets": [ 2 ],
+            "visible": false
+        },
+         {
+            "targets": [ 3 ],
+            "visible": true,
+        },
+        {
+            "targets": [ 4 ],
+            "visible": true,
+            "searchable": true
+        },
+
+       ],
+      "initComplete": function(settings, json) {
+          console.log( 'DataTables has finished its initialisation.' );
+        }
+
+    });
+
+    t2.on( 'order.dt search.dt', function () {
+        t2.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    $('#lista_usuarios_recibidos tbody').on( 'click', 'tr', function () {
+        areaM = $( "#area_destino option:selected" )[0].text; 
+        select = $('#lista_usuarios_recibidos').dataTable().fnGetData( this );
+        console.log(select);
+        if( areaM == select[4] && parseInt(select[2]) == 1){
+          //Mensaje de error
+          bootbox.alert({ 
+            title: "Error",
+            message: select[3]+" es un usuario titular del Área destino, seleccione otra area para cambiarlo.",
+            type: "danger"
+          })
+          return;
+        }
+        $(this).toggleClass('danger');
+      } );
 
     
 

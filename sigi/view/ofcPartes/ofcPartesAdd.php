@@ -211,13 +211,13 @@
 				    	        </thead>
 				    	        <tbody>
 				    	        	<?php foreach($data['usuarios'] as $u): ?>
-				    	        	    <tr>
-				    	        	    	<td></td>
-				    	        	    	<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" class="checkbox-users" value="<?php echo $u->id_usuario; ?>"></td>
-				    	        	    	<td><?php echo $u->id_usuario; ?></td>
-				    	        	        <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
-				    	        	        <td><?php echo $u->area; ?></td>
-				    	        	    </tr>
+				    	        	   <tr>
+											<td></td>
+											<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
+											<td ><?php echo $u->titular; ?></td>
+										    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
+										    <td><?php echo $u->area; ?></td>
+										</tr>
 				    	        	<?php endforeach; ?>
 				    	        </tbody>
 					    	</table>
@@ -263,9 +263,10 @@
 	    			var formData = new FormData($(this)[0]);
 	    			var arrCheck = [];
 
-	    			$('#example').DataTable().$('input, checkbox').each(function (){
-	    				if($(this).prop('checked') == true){
-	    					arrCheck.push(parseInt(this.value));	    					
+	    			$('#example').DataTable().$('tr, td').each(function (){
+	    				if($(this).hasClass('success') == true){
+	    					console.log($('#example').dataTable().fnGetData( this ));
+	    					arrCheck.push(parseInt($('#example').dataTable().fnGetData( this )[1]));	    					
 	    				}
 	    			});
 

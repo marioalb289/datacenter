@@ -187,6 +187,7 @@
                         <th>Fecha Enviado</th>
                         <th>Visto</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
               </table>

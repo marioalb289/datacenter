@@ -65,7 +65,7 @@ class InitPaginador
     	$host      = "localhost";
         $usuario   = "root";
         $password   = "";
-        $dataBase   = "datacenter";
+        $dataBase   = "datacenter2";
 
 
 		 

@@ -40,12 +40,15 @@ class Usuario
 					us.nombre_formal AS nombre_formal,
 					us.nombre AS nombre_usuario,
 					us.apellido AS apellido_usuario,
+					us.titular,
 					us.correo AS email,
-					ar.nombre AS area
+					ar.nombre AS area,
+					ar.id as id_area
 				FROM
 					usuarios us
 				JOIN areas ar ON ar.id = us.area
 				WHERE us.id = ?
+				ORDER BY us.titular
 			");
 			$stm->execute(array($id_usuario));
 
@@ -70,6 +73,7 @@ class Usuario
 					us.nombre AS nombre_usuario,
 					us.apellido AS apellido_usuario,
 					us.nombre_formal as nombre_formal,
+					us.titular,
 					us.correo AS email,
 					ar.nombre AS area
 				FROM
@@ -79,7 +83,7 @@ class Usuario
 				JOIN usuarios us ON us.id = odr.id_usuario
 				JOIN areas ar ON ar.id = us.area
 				WHERE
-					ofc.id = ? AND odr.ccp = 1
+					ofc.id = ? AND odr.ccp >= 0
 			");
 			$stm->execute(array($id_oficio));
 
@@ -125,17 +129,19 @@ class Usuario
 				$plist = ':id_'.implode(',:id_', array_keys($cond));
 				$parms = array_combine(explode(",", $plist), $cond);	
 				$stm = $this->pdo->prepare("
-				SELECT us.id as id_usuario, us.nombre_formal as nombre_formal, us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
+				SELECT us.id as id_usuario, us.nombre_formal as nombre_formal, us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, us.titular, ar.nombre as area FROM usuarios us
 				JOIN areas ar ON ar.id = us.area WHERE us.id NOT IN($plist)
 				$cond2
+				ORDER BY us.titular DESC
 				");
 				$stm->execute($parms);
 			}
 			else{
 				$stm = $this->pdo->prepare("
-				SELECT us.id as id_usuario, us.nombre_formal as nombre_formal,us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email, ar.nombre as area FROM usuarios us
+				SELECT us.id as id_usuario, us.nombre_formal as nombre_formal,us.nombre as nombre_usuario, us.apellido as apellido_usuario, us.correo as email,us.titular, ar.nombre as area FROM usuarios us
 				JOIN areas ar ON ar.id = us.area
 				$cond2 
+				ORDER BY us.titular DESC
 				");
 				$stm->execute();
 

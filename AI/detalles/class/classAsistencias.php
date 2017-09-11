@@ -9,7 +9,7 @@ class sistema{
 			$host      = 'localhost';
 			$usuario   = 'root';
 			$password  = '';
-			$dataBase  = 'datacenter';
+			$dataBase  = 'datacenter2';
 
 			$conexion = mysql_connect($host, $usuario, $password);
 			$seleccion = mysql_select_db($dataBase, $conexion);

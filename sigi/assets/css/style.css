@@ -125,6 +125,10 @@ tbody td{
   color: #758697!important;
 }
 
+.selected_user {
+    background-color: #B0BED9!important;
+}
+
 .solicitud_no_vista{
   background-color: rgba(0,0,0,0.04);
   font-weight: 600;

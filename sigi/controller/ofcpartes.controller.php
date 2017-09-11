@@ -31,7 +31,7 @@ class OfcPartesController
   {
     try
     {
-      
+
       $this->layout = new Layout();    
       $this->validate = new Validate();
 
@@ -572,63 +572,6 @@ class OfcPartesController
 
  }
 
- public function editAction(){
-  if(isset($_REQUEST['id'])){
-    $id_oficio = $_REQUEST['id'];
-    $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
-
-    //si eres un usuario receptor, buscar solo el oficio que te correponse
-    if($_SESSION['data_user']['privilegios'] == 3){
-      $id_usuario = $_SESSION['data_user']['id'];
-    }
-    else{
-      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
-      exit;
-    }
-
-    $oficio = new Oficio();
-    $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
-    if(empty($objOficio)){
-      $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
-      exit;
-    }
-
-    $privilegios = $_SESSION['data_user']['privilegios'];
-
-    // print_r($objOficio);exit;
-
-    $usuario = new Usuario();
-    $usr = array(); 
-    $area =  new Area();
-    $ar = $area->ListarAreas();
-    $usuarios_ccp = array();
-
-    $objUserReceptor = $usuario->getUsuarioArea($objOficio->id_usuario_receptor);
-    $objUserEmisor = $usuario->getUsuarioArea($objOficio->id_usuario_emisor);
-
-    $arrUsrccp = array();
-    //Si eres un usuario receptor cargar los usuarios que tambien recibieron el mensaje solo si eres el titular del mensaje, y solo el titular puede turnar a otros usuarios
-    if($_SESSION['data_user']['privilegios'] == 3){
-      if($objOficio->ccp == 0){
-
-        //en caso de ser un oficio interno quitar el usuario que lo emitio
-        if($objOficio->origen == "INTERNO")
-          $usuarios_ccp[] = $objOficio->id_usuario_emisor;
-        //quitar de la lista de usuarios el usuario logeado
-        $usuarios_ccp[] = $id_usuario;
-
-
-        $usr = $usuario->ListarUsuarios($usuarios_ccp);
-
-      }
-      
-    }
-    $this->layout->renderVista("ofcPartes","ofcPartesEdit",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr, 'privilegios' => $privilegios));
-
-    }
-  }
-
   //Obteenr datos del oficio para la notificacion
   public function getOficioNotificacionAction(){
 
@@ -666,6 +609,129 @@ class OfcPartesController
       exit;
     }
   }
+
+  public function editAction(){
+
+      if(isset($_REQUEST['id'])){
+        //Buscar oficio
+        try {
+          if (!$this->validate->numero($_REQUEST['id']))
+            throw new Exception("Accion no encontrada");
+
+          // print_r($_REQUEST);exit;
+
+          $id_oficio = $_REQUEST['id'];
+          $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
+          $privilegios = $_SESSION['data_user']['privilegios'];
+
+          //si eres un usuario receptor, buscar solo el oficio que te correponse
+          if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2){
+            $id_usuario = $_SESSION['data_user']['id'];
+          }
+          // print_r($id_oficio);
+          // print_r($id_usuario);exit;
+          $oficio = new Oficio();
+          $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+          // print_r($objOficio);exit;
+          //Si esta vacio verificar que el usuario este en la lista de usuarios a los que se les envio copia
+          if(empty($objOficio) && $id_usuario != ''){
+            $objOficioTemp = $oficio->getOficio($id_oficio);
+            $objSolicitud = $oficio->buscaUsuarioEnSolicitud($objOficioTemp->parent_id,$id_usuario);
+            if(empty($objSolicitud)){
+              //Verificar por ultimo, que si tienes privilegios de titular ejecutivo
+              // print_r($_SESSION);exit;
+              if($_SESSION['data_user']['privilegios'] == 2 && intval($_SESSION['data_user']['titular']) == 1){
+                $id_usuario = '';
+                $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+                if(empty($objOficio)){
+                  $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+                  header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+                  exit;       
+                }
+
+              }
+              else{
+                $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+                header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+                exit;              
+              }
+            }
+            else{
+              $objOficio = $objOficioTemp;
+            }
+          }
+
+          // print_r($objOficio);exit;
+
+          $usuario = new Usuario();
+          $usr = array(); 
+
+          $area =  new Area();
+          $ar = $area->ListarAreas();
+          $area_usuario = $usuario->getUsuarioArea($_SESSION['data_user']['id']);
+
+          //Traer la lista de respuestas recibidas a este folio
+          $ofc_doc =  new OficioDocumento();
+          $arrRespuestas = $ofc_doc->getRespuestas($objOficio->id_oficio);
+
+          // print_r($arrRespuestas);exit;
+          //$area =  new Area();
+          //$ar = $area->ListarAreas();
+          $usuarios_ccp = array();
+
+          $objUserReceptor = $usuario->getUsuarioArea($objOficio->id_usuario_receptor);
+          $objUserEmisor = $usuario->getUsuarioArea($objOficio->id_usuario_emisor);
+
+          $arrUsrccp = array();
+          //Si eres un usuario receptor cargar los usuarios que tambien recibieron el mensaje solo si eres el titular del mensaje, y solo el titular puede turnar a otros usuarios
+          if($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2 || $_SESSION['data_user']['privilegios'] == 1 ){
+            if($objOficio->ccp == 0 ){
+              //Obtener lista de usuarios a los que se les envio el mensaje
+              $arrUsrccp = $usuario->ListarUsuariosCcp($objOficio->id_oficio);
+              // print_r($arrUsrccp);exit;
+              //crear arreglo de ids de usurios a los que se le envio el mensaje
+              foreach ($arrUsrccp as $key => $value) {
+                $usuarios_ccp[] = $value->id_usuario;
+              }
+              //añadir al arreglo de omitidos el usuario logeado
+              $usuarios_ccp[] = $id_usuario;
+              //en caso de ser un oficio interno quitar el usuario que lo emitio
+              if($objOficio->origen == "INTERNO")
+                $usuarios_ccp[] = $objOficio->id_usuario_emisor;
+
+              //Quitar de la lista de usuarios los usuarios a los que se les haya enviado el mensaje incluido el usuario logeado y solo cargar si eres el usuario titular del mensaje
+              if($objOficio->id_usuario_emisor != $id_usuario)
+                $usr = $usuario->ListarUsuarios($usuarios_ccp);
+
+            }
+            
+          }
+          //Si eres super su, traer todos los usuarios a los que se les envio el mensaje
+          else{
+            $arrUsrccp = $usuario->ListarUsuariosCcp($objOficio->id_oficio);
+
+
+          }
+          $this->layout->renderVista("ofcPartes","ofcPartesEdit",array('oficio' => $objOficio,'areas' => $ar,'area_usuario'=>$area_usuario, 'privilegios' => $privilegios,'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $arrUsrccp,'usuarios_turnar' => $usr, 'respuestas_recibidas' => $arrRespuestas));
+          
+        } catch (Exception $e) {
+
+          $_SESSION['flash-message-error'] = $e->getMessage();
+          header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+          exit;
+          
+        }
+
+        
+
+      }
+      else{
+        $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+      }
+
+    }
 
     public function viewAction(){
 
@@ -1440,7 +1506,8 @@ class OfcPartesController
     }
   }
   public function guardarAction(){
-      // print_r($_POST);exit;
+    // print_r($_FILES);
+      // print_r($_REQUEST);exit;
       try {
           $success = true;
           if( !isset($_FILES['archivo']) ){
@@ -1448,7 +1515,8 @@ class OfcPartesController
           }
           else{
                // print_r($_FILES);
-                 // print_r($_POST);exit;
+                 // print_r($_POST);
+                 //  exit;
 
 
                $usr_notificar = array();
@@ -1580,8 +1648,12 @@ class OfcPartesController
                  $ofc->setHoraRecepcion('');
                }
                else{
+                  $hora_recepcion = str_replace(" ", "", $_POST['hora_recepcion']);
+                  $hora_recepcion = str_replace("AM", " am", $hora_recepcion);
+                  $hora_recepcion = str_replace("PM", " pm", $hora_recepcion);
+                  $hora_recepcion = date("H:i:s", strtotime($hora_recepcion));
                  $ofc->setFechaRecepcion($_POST['fecha_recepcion']);
-                 $ofc->setHoraRecepcion($_POST['hora_recepcion']);                               
+                 $ofc->setHoraRecepcion($hora_recepcion);                               
                }
 
                $ofc->setComentarios(isset($_POST['comentarios']) && $_POST['comentarios'] != '' ? $_POST['comentarios'] : '');
@@ -1638,16 +1710,16 @@ class OfcPartesController
               $usr = new Usuario();
                /*Se añadio que si hay mas de un titular se le enviara mensaje, quitar de la lista el usuario que se selecciono anteriormente*/
 
-                $obj_usr_titular = $usr->userTitulares($objArea->id,$id_usuario);
+                $obj_usr_titular = $usr->userTitulares($objArea->id,$_POST['id_usuario_receptor']);
 
                 if(!empty($obj_usr_titular)){
                   foreach ($obj_usr_titular as $ids) {
-                    $ofc_doc->setIdUsuario($ids->id_usuario);   
-                    $ofc_doc->setCcp(0); //Se envia con ccp 0 para permitir que pueda responder 
-                    $ofc_doc->RegistrarOficioDocumento();
-
-                    array_push($usr_notificar, $ids->id_usuario); 
-                    
+                    if(!in_array($ids->id_usuario, $usr_notificar)){
+                      $ofc_doc->setIdUsuario($ids->id_usuario);   
+                      $ofc_doc->setCcp(0); //Se envia con ccp 0 para permitir que pueda responder 
+                      $ofc_doc->RegistrarOficioDocumento();
+                      array_push($usr_notificar, $ids->id_usuario);
+                    }          
                   }
                 }                
                /*****************/
