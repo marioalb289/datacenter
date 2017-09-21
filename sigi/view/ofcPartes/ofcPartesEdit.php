@@ -28,9 +28,10 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="row">
-				<div class="col-md-4"><h4>Registro de Documentos</h4></div>
+				<div class="col-md-4"><h4>Editar Oficio</h4></div>
 				<div class="col-md-8 text-right">
-				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca">Guardar</button>
+				    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_enviar_oficio" name="btn_enviar_oficio" class="btn btn-primary" name="btn_busca" value="Enviar" />
+				    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca" value="Guardar" />
 				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 				</div>
 			</div>
@@ -55,45 +56,7 @@
 			                <input type="hidden" id="select_origen" name="select_origen" value="<?php if($data['privilegios'] == 1) echo "2"; else echo "1"  ?>">
 			                <span class="text-danger"></span>
 			            </div>
-			            <?php if($data['privilegios'] == 1) { ?>
-			            <div id="formExterno">
-				            <div class="form-group">
-				                <label for="recepciones_nombreEmisor" class="required" id="lbl_nombre_emisor">Nombre quien Suscribe:</label>
-				                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
-				                <span class="text-danger"></span>
-				            </div>
-				            
-						    <div class="form-group" id="box_cargo">
-						        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
-						        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->cargo; ?>" />
-						        <span class="text-danger"></span>
-						    </div>
-
-						    <div class="form-group">
-						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Institución:</label>
-						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institución del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->institucion_emisor; ?>"/>
-						        <span class="text-danger"></span>
-						        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
-						          Result:
-						          <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
-						        </div> -->
-						    </div>
-
-						    <div class="form-group">
-						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
-						        <div class="row">
-				        	        <div class="col-md-6">
-				        	        	<input type="text" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->fecha_recepcion ; ?>"/>
-				        	        </div>
-				        	        <div class="col-md-6">
-				        		        <input type="text" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm " placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->hora_recepcion; ?>"/>
-				        	        </div>
-						        </div>
-						        
-						        <span class="text-danger"></span>
-						    </div>
-			            </div>
-						<?php } else{ ?>
+			            <?php  if($data['oficio']->origen == "INTERNO"){ ?>
 			            <div id="formInterno" >
 			    		    <div class="form-group">
 			    		        <label for="" class="required">Área Origen:</label>
@@ -113,9 +76,51 @@
 
 			            </div>
 			            <?php } ?>
+			            <?php if($data['privilegios'] == 1 || ( $data['oficio']->origen == "INTERNO" && $data['oficio']->destino == "EXTERNO" )) { ?>
+			            <div id="formExterno">
+				            <div class="form-group">
+				                <label ><?php if($data['oficio']->destino == "EXTERNO") echo "Nombre Destino:"; else echo "Nombre de quien Suscribe:" ?></label>
+				                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" value="<?php  echo $data['oficio']->nombre_emisor; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+				                <span class="text-danger"></span>
+				            </div>
+				            
+						    <div class="form-group" id="box_cargo">
+						        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
+						        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->cargo; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+						        <span class="text-danger"></span>
+						    </div>
+
+						    <div class="form-group">
+						        <label for="recepciones_nombreEmisor" class="required"><?php if($data['oficio']->destino == "EXTERNO") echo "Institución	Destino:"; else echo "Institución:" ?></label>
+						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institución del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->institucion_emisor; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?>/>
+						        <span class="text-danger"></span>
+						        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
+						          Result:
+						          <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+						        </div> -->
+						    </div>
+							<?php if($data['oficio']->origen == "EXTERNO") { ?>
+						    <div class="form-group">
+						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
+						        <div class="row">
+				        	        <div class="col-md-6">
+				        	        	<input type="text" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->fecha_recepcion ; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+				        	        </div>
+				        	        <div class="col-md-6">
+				        		        <input type="text" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm " placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->hora_recepcion; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+				        	        </div>
+						        </div>
+						        
+						        <span class="text-danger"></span>
+						    </div>
+						    <?php } ?>
+			            </div>
+						<?php } ?>
+
+			            <?php if( $data['oficio']->destino == "INTERNO" ){ ?>
 					    <div class="form-group">
 					        <label for="" class="required">Área Destino:</label>
-					        <select class="form-control input-sm" id="area_destino" name="area_destino" data-validacion-tipo="requerido">
+					        <select class="form-control input-sm" id="area_destino" name="area_destino" data-validacion-tipo="requerido" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("disabled");} ?> >
 			    			    <option value="">Selecccionar Área de Destino</option>
 					        	<?php foreach($data['areas'] as $area): ?>
 			    			        <option value="<?php echo $area->id; ?>" <?php if($area->id == $data['usuario_receptor']->id_area) {echo "selected";} ?> ><?php echo $area->nombre; ?></option>
@@ -129,17 +134,18 @@
 					        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo ucwords(mb_strtolower($data['usuario_receptor']->id_usuario,'UTF-8'));} ?>">
 					        <span class="text-danger"></span>
 					    </div>
+					    <?php } ?>
 					    <div class="form-group">
 					    	<div class="radio"  >
 					    	  <label>
-					    	    <input type="radio" name="respuesta" id="respuesta" <?php if(!$data['oficio']->respuesta) echo "checked"?> value="0" >
+					    	    <input type="radio" name="respuesta" id="respuesta" <?php if(!$data['oficio']->respuesta) echo "checked"?> value="0" data-validacion-tipo="requerido" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("disabled");} ?>>
 					    	    Para su conocimiento y archivo
 					    	  </label>
 					    	</div>
 
 					    	<div class="radio"  >
 					    	  <label>
-					    	    <input type="radio" name="respuesta" id="respuesta" <?php if($data['oficio']->respuesta) echo "checked"?> value="1" >
+					    	    <input type="radio" name="respuesta" id="respuesta" <?php if($data['oficio']->respuesta) echo "checked"?> value="1" data-validacion-tipo="requerido" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("disabled");} ?>>
 					    	    	Para el trámite que corresponda	
 					    	  </label>
 					    	</div>
@@ -179,7 +185,7 @@
 					    <div class="form-group" style="text-align: center; ">
 					      <span class="btn btn-default btn-file"><span>Seleccionar Archivo</span><input type="file" accept="application/pdf" name="archivo" id="documento_iepc" /></span>
 					      <button id="verPdf" type="button" class="btn btn-default" data-dismiss="modal" style="width: 100px;">Visualizar</button>
-					      <a href='ofcpartes/viewFile/<?php echo $data['oficio']->id_documento ?>/<?php  echo $data['oficio']->id_oficio?>' class='btn btn-default'  style="width: 100px;">Ver Original</a>
+					      <a href='ofcpartes/viewFile/<?php echo $data['oficio']->id_documento ?>/<?php  echo $data['oficio']->id_oficio?>' class='btn btn-default'  style="width: 100px;" target="_blank">Ver Original</a>
 					    </div>
 					    <div class="form-group" style="text-align: center;">
 					    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
@@ -205,11 +211,14 @@
 				</div>
 		</div>
 	</div>
-
+	<input type="hidden" id="id_oficio" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio ?>">
+	<input type="hidden" name="id_documento" value = "<?php echo $data['oficio']->id_documento ?>">
+	<?php if($data['oficio']->tipo_oficio == "SOLICITUD" ) {?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="row">
-				<div class="col-md-12"><h4><strong>Usuarios que recibirán copia</strong></h4></div>
+				<div class="col-md-12"><h4><strong>Usuarios que recibirán copia </strong></h4></div>
+				<div class="col-md-12"><p>Seleccione para eliminar</p></div>
 			</div>
 		</div>
 		<div class="panel-body">
@@ -241,7 +250,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="row">
@@ -255,8 +264,7 @@
 					<div class="form-group">
 						
 						<div class="form-group" id="lista_usuarios" >
-							<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio ?>">
-							<input type="hidden" name="id_documento" value = "<?php echo $data['oficio']->id_documento ?>">
+							
 							<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 								<thead>
 									<tr>
@@ -286,12 +294,16 @@
 			</div>
 		</div>
 	</div>
+	<?php } ?>
 	</form>	
 </div>
 <script>
 
 	$(document).ready(function(){      //Add this line (and it's closing line)
 	    var currentDate = new Date();
+	    var enviar = false;
+
+	    $(this).setFolioOriginal($("#folio_iepc").val());
 
 	    $( "#btn_regresar" ).click(function() {
 	    	window.history.go(-1);
@@ -321,381 +333,402 @@
 	    	};
 	    }
 
-	    // $('#example tbody').on( 'click', 'tr', function () {
-	    //       $(this).toggleClass('success');
-	    //       var data =  $('#example').dataTable().fnGetData( this );
-	    //       console.log(data);
-	    //   } );
+	    var subm = "";
+	     $('input[type="submit"]').click(function(e) {
+	       subm = e.target.id;
+	     });
 
 
-	    	//fecha y hora del calendario
-	    	moment.locale('es');
+    	//fecha y hora del calendario
+    	moment.locale('es');
 
-	    	//$("#fecha_recepcion").val(moment().format("YYYY-MM-DD"));
-	    	//$("#hora_recepcion").val(moment().format("hh:mm"));
-	    	var twelveHour = $('#hora_recepcion').wickedpicker(conf);
+    	//$("#fecha_recepcion").val(moment().format("YYYY-MM-DD"));
+    	//$("#hora_recepcion").val(moment().format("hh:mm"));
+    	var twelveHour = $('#hora_recepcion').wickedpicker(conf);
 
-	    	//Evento para validar campos y enviar notificaciones por sokect io
-	    	$("form").submit(function( event ) {
-	    		var res = $(this).validate();
-	    		if(res){
+    	//Evento para validar campos y enviar notificaciones por sokect io
+    	$("form").submit(function( event ) {
+    		if(subm == "btn_enviar_oficio")
+    			enviar = 1;
+    		else
+    			enviar= 0;
 
-	    			var formData = new FormData($(this)[0]);
-	    			var arrCheck = [];
+    		var res = $(this).validate();
+    		if(res){
 
-	    			$('#example').DataTable().$('tr, td').each(function (){
-	    				if($(this).hasClass('success') == true){
-	    					arrCheck.push(parseInt($('#example').dataTable().fnGetData( this )[1]));	    					
-	    				}
-	    			});
+    			var formData = new FormData($(this)[0]);
+    			var arrCheck = [];
+    			var arrDelete = [];
 
+    			$('#example').DataTable().$('tr, td').each(function (){
+    				if($(this).hasClass('success-usuarios') == true){
+    					arrCheck.push(parseInt($('#example').dataTable().fnGetData( this )[1]));	    					
+    				}
+    			});
 
-					formData.append('check', arrCheck);
-					console.log(formData);
-
-
-	    		    $.ajax({
-	    		        // url: '?c=OfcPartes&a=Guardar',
-	    		        url: GLOBAL_PATH+"ofcpartes/guardar",
-	    		        type: 'POST',
-	    		        data: formData,
-	    		        async: false,
-	    		        success: function (data) {
-	    		        	event.preventDefault();
-	    		        	respuesta = JSON.parse(data); 
-	    		        	console.log('aqui respuesta',respuesta);
-	    		        	if(respuesta.success){
-	    		        		socket.emit( 'notification', respuesta.notificacion );
-	    		        		window.location.href = GLOBAL_PATH+"ofcpartes/index"
-	    		        	}
-	    		        	else{
-	    		        		window.location.href = GLOBAL_PATH+"ofcpartes/add";
-	    		        	}
-	    		        },
-	    		        cache: false,
-	    		        contentType: false,
-	    		        processData: false
-	    		    });
-
-	    		}
-
-	    		
-
-	    	    event.preventDefault();
-	        });
-	    	$('.form-control').bind('blur', function () {
-	    	    return $(this).validateBlur();
-	    	});
-
-	    	$('#folio_iepc').bind('blur', function () {
-	    	    return $(this).validateNumOficio();
-	    	});
-	    		//Evento para visualizar pdf al crear registro
-	        $(function(){
-	            $("#verPdf").click(loadPreviews_click);
-	        })
-
-	        function loadPreviews_click(e) {
-	            $("#documento_iepc").each(function() {
-	                var $input = $(this);
-	                var files = this.files;
-	                console.log(files);
-	                if(files == undefined || files.length == 0) return;
-	                //var files = files[0];            
-	                
-	                // FileReader support
-	                //if (FileReader && files && files.length) {
-	                      //console.log('aquiiiiiiiiiiiiiii');
-	                      var fr = new FileReader();
-	                      var extension = files[0].name.split('.').pop().toLowerCase();
-	                      fr.onload = function(e) {
-	                        success = fileTypes.indexOf(extension) > -1;
-	                        if (success) {
-
-	                          PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
-	                            pdfDoc = pdfDoc_;
-	                            document.getElementById('page_count').textContent = pdfDoc.numPages;
-
-	                            // Initial/first page rendering
-	                            renderPage(pageNum);
-	                          });
-	                        }
-
-	                      }
-	                      fr.onloadend = function(e) {
-	                        console.debug("Load End");
-	                      }
-	                      fr.readAsArrayBuffer(files[0]);
-	                 //}
-
-	                
-	            });
-	        }
+    			$('#lista_usuarios_recibidos').DataTable().$('tr, td').each(function (){
+    				if($(this).hasClass('danger-usuarios-delete') == true){
+    					console.log($('#lista_usuarios_recibidos').dataTable().fnGetData( this ));
+    					arrDelete.push(parseInt($('#lista_usuarios_recibidos').dataTable().fnGetData( this )[1]));	    					
+    				}
+    			});
 
 
-	        var fileTypes = ['pdf'];  //acceptable file types
-	        
-	        $("input:file").change(function (evt) {
-	          /*var parentEl = $("#modal-pdf-body");
-	          console.log(parentEl);*/     
-	          var tgt = evt.target || window.event.srcElement,
-	                          files = tgt.files;
-	          console.log(files[0].name); 
+				formData.append('check', arrCheck);
+				formData.append('delete', arrDelete);
+				formData.append('enviar', enviar);
+				// console.log(formData);
 
-	          $(".fileinput-new").text(files[0].name)
-	                
-	        });
+				var id_oficio = $("#id_oficio").val();
 
 
-	        var pdfDoc = null,
-	            pageNum = 1,
-	            pageRendering = false,
-	            pageNumPending = null,
-	            scale = 2,
-	            canvas = document.getElementById('the-canvas');
-	            ctx = canvas.getContext('2d');
+    		    $.ajax({
+    		        // url: '?c=OfcPartes&a=Guardar',
+    		        url: GLOBAL_PATH+"ofcpartes/guardarEdicion",
+    		        type: 'POST',
+    		        data: formData,
+    		        async: false,
+    		        success: function (data) {
+    		        	event.preventDefault();
+    		        	respuesta = JSON.parse(data); 
+    		        	console.log('aqui respuesta',respuesta);
+    		        	if(respuesta.success){
+    		        		if(enviar){
+    		        			socket.emit( 'notification', respuesta.notificacion );
+    		        			window.location.href = GLOBAL_PATH+"ofcpartes/index";
+    		        		}else{
+    		        			window.location.href = GLOBAL_PATH+"ofcpartes/edit/"+id_oficio
+    		        			
+    		        		}
+    		        	}
+    		        	else{
+    		        		window.location.href = GLOBAL_PATH+"ofcpartes/edit/"+id_oficio;
+    		        	}
+    		        },
+    		        cache: false,
+    		        contentType: false,
+    		        processData: false
+    		    });
 
-	        /**
-	         * Get page info from document, resize canvas accordingly, and render page.
-	         * @param num Page number.
-	         */
-	        function renderPage(num) {
-	          pageRendering = true;
-	          // Using promise to fetch the page
-	          pdfDoc.getPage(num).then(function(page) {
-	            var viewport = page.getViewport(scale);
-	            canvas.height = viewport.height;
-	            canvas.width = viewport.width;
+    		}
 
-	            // Render PDF page into canvas context
-	            var renderContext = {
-	              canvasContext: ctx,
-	              viewport: viewport
-	            };
-	            var renderTask = page.render(renderContext);
+    		
 
-	            // Wait for rendering to finish
-	            renderTask.promise.then(function() {
-	              console.log("termino de cargar");
+    	    event.preventDefault();
+        });
+    	$('.form-control').bind('blur', function () {
+    	    return $(this).validateBlur();
+    	});
 
-	              $('#myModal').modal({
-	                      show:true,
-	                      backdrop:'static',
-	                  });
-	              pageRendering = false;
-	              if (pageNumPending !== null) {
-	                // New page rendering is pending
-	                renderPage(pageNumPending);
-	                pageNumPending = null;
-	              }
-	            });
-	          });
+    	$('#folio_iepc').bind('blur', function () {
+    	    return $(this).validateNumOficio();
+    	});
+    		//Evento para visualizar pdf al crear registro
+        $(function(){
+            $("#verPdf").click(loadPreviews_click);
+        })
 
-	          // Update page counters
-	          document.getElementById('page_num').textContent = pageNum;
-	        }
+        function loadPreviews_click(e) {
+            $("#documento_iepc").each(function() {
+                var $input = $(this);
+                var files = this.files;
+                console.log(files);
+                if(files == undefined || files.length == 0) return;
+                //var files = files[0];            
+                
+                // FileReader support
+                //if (FileReader && files && files.length) {
+                      //console.log('aquiiiiiiiiiiiiiii');
+                      var fr = new FileReader();
+                      var extension = files[0].name.split('.').pop().toLowerCase();
+                      fr.onload = function(e) {
+                        success = fileTypes.indexOf(extension) > -1;
+                        if (success) {
 
-	        /**
-	         * If another page rendering in progress, waits until the rendering is
-	         * finised. Otherwise, executes rendering immediately.
-	         */
-	        function queueRenderPage(num) {
-	          if (pageRendering) {
-	            pageNumPending = num;
-	          } else {
-	            renderPage(num);
-	          }
-	        }
+                          PDFJS.getDocument(e.target.result).then(function(pdfDoc_) {
+                            pdfDoc = pdfDoc_;
+                            document.getElementById('page_count').textContent = pdfDoc.numPages;
 
-	        /**
-	         * Displays previous page.
-	         */
-	        function onPrevPage() {
-	          if (pageNum <= 1) {
-	            return;
-	          }
-	          pageNum--;
-	          queueRenderPage(pageNum);
-	        }
-	        document.getElementById('prev').addEventListener('click', onPrevPage);
+                            // Initial/first page rendering
+                            renderPage(pageNum);
+                          });
+                        }
 
-	        /**
-	         * Displays next page.
-	         */
-	        function onNextPage() {
-	          if (pageNum >= pdfDoc.numPages) {
-	            return;
-	          }
-	          pageNum++;
-	          queueRenderPage(pageNum);
-	        }
-	        document.getElementById('next').addEventListener('click', onNextPage);
+                      }
+                      fr.onloadend = function(e) {
+                        console.debug("Load End");
+                      }
+                      fr.readAsArrayBuffer(files[0]);
+                 //}
 
-	        /**
-	         * Asynchronously downloads PDF.
-	         */
-
-	         //Eventos de los buscadores
-	    		$( function() {
-
-	    		    $.widget( "custom.catcomplete", $.ui.autocomplete, {
-	    		          _create: function() {
-	    		            this._super();
-	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-	    		          },
-	    		          _renderItem: function( ul, item ) {
-	    		            return $( "<li class='autocomplete-child'>" )
-	    		              .attr( "data-value", item.value )
-	    		              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
-	    		              .appendTo( ul );
-	    		          },
-	    		          _renderMenu: function( ul, items ) {
-	    		            var that = this,
-	    		              currentCategory = "";
-	    		            $.each( items, function( index, item ) {
-	    		              var li;
-	    		              if ( item.nombre_emisor != currentCategory ) {
-	    		                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
-	    		                currentCategory = item.nombre_emisor;
-	    		              }
-	    		              li = that._renderItemData( ul, item );
-	    		              if ( item.nombre_emisor ) {
-	    		                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
-	    		              }
-	    		            });
-	    		          }
-	    		        });
-	    		 
-	    		    $( "#institucion_emisor" ).catcomplete({
-	    		      // source: "?c=OfcPartes&a=buscadorInstitucion",
-	    		      //source: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
-	    		      source: function( request, response ) {
-	    		          $.ajax({
-	    		              url: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
-	    		              type: 'POST',
-	    		              data: {term: request.term},
-	    		              dataType: "json",
-	    		              success: function( data ) {
-	    		                  response(data);
-	    		              }
-	    		          });
-	    		      },
-	    		      minLength: 3,
-	    		      select: function( event, ui ) {
-	    		      	console.log(ui);
-	    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-	    		      	$("#cargo_emisor").val(ui.item.cargo);
-	    		      	$("#institucion_emisor").val(ui.item.value);
-	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-	    		      }
-	    		    });
-
-	    		    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
-	    		          _create: function() {
-	    		            this._super();
-	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-	    		          },
-	    		          _renderItem: function( ul, item ) {
-	    		            return $( "<li class='autocomplete-child'>" )
-	    		              .attr( "data-value", item.value )
-	    		              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
-	    		              .appendTo( ul );
-	    		          },
-	    		          _renderMenu: function( ul, items ) {
-	                      var that = this,
-	                        currentCategory = "";
-	                      $.each( items, function( index, item ) {
-	                        var li;
-	                        if ( item.institucion_emisor != currentCategory ) {
-	                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-	                          currentCategory = item.institucion_emisor;
-	                        }
-	                        li = that._renderItemData( ul, item );
-	                        if ( item.institucion_emisor ) {
-	                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-	                        }
-	                      });
-	                    }
-	    		        });
-	    		 
-	    		    $( "#nombre_emisor" ).catcompleteNombre({
-	    		      // source: "?c=OfcPartes&a=buscadorEmisor",
-	    		      // source: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
-	    		      source: function( request, response ) {
-	    		          $.ajax({
-	    		              url: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
-	    		              type: 'POST',
-	    		              data: {term: request.term},
-	    		              dataType: "json",
-	    		              success: function( data ) {
-	    		                  response(data);
-	    		              }
-	    		          });
-	    		      },
-	    		      minLength: 3,
-	    		      select: function( event, ui ) {
-	    		      	console.log(ui);
-	    		      	$("#nombre_emisor").val(ui.item.value);
-	    		      	$("#cargo_emisor").val(ui.item.cargo);
-	    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-	    		      }
-	    		    });
-
-	    		    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
-	    		          _create: function() {
-	    		            this._super();
-	    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
-	    		          },
-	    		          _renderItem: function( ul, item ) {
-	    		            return $( "<li class='autocomplete-child'>" )
-	    		              .attr( "data-value", item.value )
-	    		              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
-	    		              .appendTo( ul );
-	    		          },
-	    		          _renderMenu: function( ul, items ) {
-	                      var that = this,
-	                        currentCategory = "";
-	                      $.each( items, function( index, item ) {
-	                        var li;
-	                        if ( item.institucion_emisor != currentCategory ) {
-	                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
-	                          currentCategory = item.institucion_emisor;
-	                        }
-	                        li = that._renderItemData( ul, item );
-	                        if ( item.institucion_emisor ) {
-	                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
-	                        }
-	                      });
-	                    }
-	    		        });
-	    		 
-	    		    $( "#cargo_emisor" ).catcompleteCargo({
-	    		      // source: "?c=OfcPartes&a=buscadorCargo",
-	    		      source: function( request, response ) {
-	    		          $.ajax({
-	    		              url: GLOBAL_PATH+"ofcpartes/buscadorCargo",
-	    		              type: 'POST',
-	    		              data: {term: request.term},
-	    		              dataType: "json",
-	    		              success: function( data ) {
-	    		                  response(data);
-	    		              }
-	    		          });
-	    		      },
-	    		      minLength: 3,
-	    		      select: function( event, ui ) {
-	    		      	console.log(ui);
-	    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
-	    		      	$("#cargo_emisor").val(ui.item.value);
-	    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
-	    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-	    		      }
-	    		    });
+                
+            });
+        }
 
 
+        var fileTypes = ['pdf'];  //acceptable file types
+        
+        $("input:file").change(function (evt) {
+          /*var parentEl = $("#modal-pdf-body");
+          console.log(parentEl);*/     
+          var tgt = evt.target || window.event.srcElement,
+                          files = tgt.files;
+          console.log(files[0].name); 
 
-	    		  } );
+          $(".fileinput-new").text(files[0].name)
+                
+        });
+
+
+        var pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 2,
+            canvas = document.getElementById('the-canvas');
+            ctx = canvas.getContext('2d');
+
+        /**
+         * Get page info from document, resize canvas accordingly, and render page.
+         * @param num Page number.
+         */
+        function renderPage(num) {
+          pageRendering = true;
+          // Using promise to fetch the page
+          pdfDoc.getPage(num).then(function(page) {
+            var viewport = page.getViewport(scale);
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Render PDF page into canvas context
+            var renderContext = {
+              canvasContext: ctx,
+              viewport: viewport
+            };
+            var renderTask = page.render(renderContext);
+
+            // Wait for rendering to finish
+            renderTask.promise.then(function() {
+              console.log("termino de cargar");
+
+              $('#myModal').modal({
+                      show:true,
+                      backdrop:'static',
+                  });
+              pageRendering = false;
+              if (pageNumPending !== null) {
+                // New page rendering is pending
+                renderPage(pageNumPending);
+                pageNumPending = null;
+              }
+            });
+          });
+
+          // Update page counters
+          document.getElementById('page_num').textContent = pageNum;
+        }
+
+        /**
+         * If another page rendering in progress, waits until the rendering is
+         * finised. Otherwise, executes rendering immediately.
+         */
+        function queueRenderPage(num) {
+          if (pageRendering) {
+            pageNumPending = num;
+          } else {
+            renderPage(num);
+          }
+        }
+
+        /**
+         * Displays previous page.
+         */
+        function onPrevPage() {
+          if (pageNum <= 1) {
+            return;
+          }
+          pageNum--;
+          queueRenderPage(pageNum);
+        }
+        document.getElementById('prev').addEventListener('click', onPrevPage);
+
+        /**
+         * Displays next page.
+         */
+        function onNextPage() {
+          if (pageNum >= pdfDoc.numPages) {
+            return;
+          }
+          pageNum++;
+          queueRenderPage(pageNum);
+        }
+        document.getElementById('next').addEventListener('click', onNextPage);
+
+        /**
+         * Asynchronously downloads PDF.
+         */
+
+         //Eventos de los buscadores
+    		$( function() {
+
+    		    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+    		          _create: function() {
+    		            this._super();
+    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+    		          },
+    		          _renderItem: function( ul, item ) {
+    		            return $( "<li class='autocomplete-child'>" )
+    		              .attr( "data-value", item.value )
+    		              .append( "Firma: " +item.nombre_emisor + " Cargo: " +item.cargo)
+    		              .appendTo( ul );
+    		          },
+    		          _renderMenu: function( ul, items ) {
+    		            var that = this,
+    		              currentCategory = "";
+    		            $.each( items, function( index, item ) {
+    		              var li;
+    		              if ( item.nombre_emisor != currentCategory ) {
+    		                ul.append( "<li class='ui-autocomplete-category'>" + item.label + "</li>" );
+    		                currentCategory = item.nombre_emisor;
+    		              }
+    		              li = that._renderItemData( ul, item );
+    		              if ( item.nombre_emisor ) {
+    		                li.attr( "aria-label", item.nombre_emisor + " : " + item.label );
+    		              }
+    		            });
+    		          }
+    		        });
+    		 
+    		    $( "#institucion_emisor" ).catcomplete({
+    		      // source: "?c=OfcPartes&a=buscadorInstitucion",
+    		      //source: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
+    		      source: function( request, response ) {
+    		          $.ajax({
+    		              url: GLOBAL_PATH+"ofcpartes/buscadorInstitucion",
+    		              type: 'POST',
+    		              data: {term: request.term},
+    		              dataType: "json",
+    		              success: function( data ) {
+    		                  response(data);
+    		              }
+    		          });
+    		      },
+    		      minLength: 3,
+    		      select: function( event, ui ) {
+    		      	console.log(ui);
+    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+    		      	$("#cargo_emisor").val(ui.item.cargo);
+    		      	$("#institucion_emisor").val(ui.item.value);
+    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    		      }
+    		    });
+
+    		    $.widget( "custom.catcompleteNombre", $.ui.autocomplete, {
+    		          _create: function() {
+    		            this._super();
+    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+    		          },
+    		          _renderItem: function( ul, item ) {
+    		            return $( "<li class='autocomplete-child'>" )
+    		              .attr( "data-value", item.value )
+    		              .append( "Institucion: " +item.institucion_emisor + " Cargo: "+item.cargo)
+    		              .appendTo( ul );
+    		          },
+    		          _renderMenu: function( ul, items ) {
+                      var that = this,
+                        currentCategory = "";
+                      $.each( items, function( index, item ) {
+                        var li;
+                        if ( item.institucion_emisor != currentCategory ) {
+                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+                          currentCategory = item.institucion_emisor;
+                        }
+                        li = that._renderItemData( ul, item );
+                        if ( item.institucion_emisor ) {
+                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+                        }
+                      });
+                    }
+    		        });
+    		 
+    		    $( "#nombre_emisor" ).catcompleteNombre({
+    		      // source: "?c=OfcPartes&a=buscadorEmisor",
+    		      // source: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
+    		      source: function( request, response ) {
+    		          $.ajax({
+    		              url: GLOBAL_PATH+"ofcpartes/buscadorEmisor",
+    		              type: 'POST',
+    		              data: {term: request.term},
+    		              dataType: "json",
+    		              success: function( data ) {
+    		                  response(data);
+    		              }
+    		          });
+    		      },
+    		      minLength: 3,
+    		      select: function( event, ui ) {
+    		      	console.log(ui);
+    		      	$("#nombre_emisor").val(ui.item.value);
+    		      	$("#cargo_emisor").val(ui.item.cargo);
+    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    		      }
+    		    });
+
+    		    $.widget( "custom.catcompleteCargo", $.ui.autocomplete, {
+    		          _create: function() {
+    		            this._super();
+    		            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+    		          },
+    		          _renderItem: function( ul, item ) {
+    		            return $( "<li class='autocomplete-child'>" )
+    		              .attr( "data-value", item.value )
+    		              .append( "Firma: " +item.nombre_emisor + " Institucion: " +item.institucion_emisor)
+    		              .appendTo( ul );
+    		          },
+    		          _renderMenu: function( ul, items ) {
+                      var that = this,
+                        currentCategory = "";
+                      $.each( items, function( index, item ) {
+                        var li;
+                        if ( item.institucion_emisor != currentCategory ) {
+                          ul.append( "<li class='ui-autocomplete-category '>" + item.label + "</li>" );
+                          currentCategory = item.institucion_emisor;
+                        }
+                        li = that._renderItemData( ul, item );
+                        if ( item.institucion_emisor ) {
+                          li.attr( "aria-label", item.institucion_emisor + " : " + item.label );
+                        }
+                      });
+                    }
+    		        });
+    		 
+    		    $( "#cargo_emisor" ).catcompleteCargo({
+    		      // source: "?c=OfcPartes&a=buscadorCargo",
+    		      source: function( request, response ) {
+    		          $.ajax({
+    		              url: GLOBAL_PATH+"ofcpartes/buscadorCargo",
+    		              type: 'POST',
+    		              data: {term: request.term},
+    		              dataType: "json",
+    		              success: function( data ) {
+    		                  response(data);
+    		              }
+    		          });
+    		      },
+    		      minLength: 3,
+    		      select: function( event, ui ) {
+    		      	console.log(ui);
+    		      	$("#nombre_emisor").val(ui.item.nombre_emisor);
+    		      	$("#cargo_emisor").val(ui.item.value);
+    		      	$("#institucion_emisor").val(ui.item.institucion_emisor);
+    		        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    		      }
+    		    });
+
+
+
+    		  } );
 	});
 
 	

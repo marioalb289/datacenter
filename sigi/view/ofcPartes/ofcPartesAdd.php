@@ -30,7 +30,8 @@
 			<div class="row">
 				<div class="col-md-4"><h4>Registro de Documentos</h4></div>
 				<div class="col-md-8 text-right">
-				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca">Guardar</button>
+				    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_enviar_oficio" name="btn_enviar_oficio" class="btn btn-primary" name="btn_busca" value="Enviar" />
+				    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca" value="Guardar" />
 				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 				</div>
 			</div>
@@ -132,6 +133,22 @@
 					        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor">
 					        <span class="text-danger"></span>
 					    </div>
+
+			    	    <div class="form-group">
+			    	    	<div class="radio"  >
+			    	    	  <label>
+			    	    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
+			    	    	    Para su conocimiento y archivo
+			    	    	  </label>
+			    	    	</div>
+
+			    	    	<div class="radio"  >
+			    	    	  <label>
+			    	    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
+			    	    	    	Para el trámite que corresponda	
+			    	    	  </label>
+			    	    	</div>
+			    	    </div>
 						
 						
 					</div>
@@ -170,63 +187,51 @@
 						
 					</div>
 
-					<div class="col-md-12">
-					    <div class="form-group">
-					    	<div class="radio"  >
-					    	  <label>
-					    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
-					    	    Para su conocimiento y archivo
-					    	  </label>
-					    	</div>
-
-					    	<div class="radio"  >
-					    	  <label>
-					    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
-					    	    	Para el trámite que corresponda	
-					    	  </label>
-					    	</div>
-
-					    	<div class="checkbox"  >
-					    	  <label>
-					    	    <input type="checkbox" id="ccp">
-					    	   	Para acuerdo con:
-					    	  </label>
-					    	</div>
-
-					        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
-				            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
-				            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
-					        <!-- <span class="text-danger"></span> -->
-					    </div>
-					    <div class="form-group" id="lista_usuarios" style="display: none">
-					    	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-				    	        <thead>
-				    	            <tr>
-				    	            	<th></th>
-				    	            	<th></th>
-				    	            	<th></th>
-				    	                <th>Nombre</th>
-				    	                <th>Area</th>
-				    	            </tr>
-				    	        </thead>
-				    	        <tbody>
-				    	        	<?php foreach($data['usuarios'] as $u): ?>
-				    	        	   <tr>
-											<td></td>
-											<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
-											<td ><?php echo $u->titular; ?></td>
-										    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
-										    <td><?php echo $u->area; ?></td>
-										</tr>
-				    	        	<?php endforeach; ?>
-				    	        </tbody>
-					    	</table>
-					    </div>
-					    
-					</div>
 				</div>
 		</div>
 	</div>
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="row">
+			<div class="col-md-12"><h4><strong>Seleccionar usuarios que recibirán copia</strong></h4></div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">		
+
+			<div class="col-md-12">
+				<div class="form-group">
+					
+					<div class="form-group" id="lista_usuarios" >
+						<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+			    	        <thead>
+			    	            <tr>
+			    	            	<th></th>
+			    	            	<th></th>
+			    	            	<th></th>
+			    	                <th>Nombre</th>
+			    	                <th>Area</th>
+			    	            </tr>
+			    	        </thead>
+			    	        <tbody>
+			    	        	<?php foreach($data['usuarios'] as $u): ?>
+			    	        	   <tr>
+										<td></td>
+										<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
+										<td ><?php echo $u->titular; ?></td>
+									    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
+									    <td><?php echo $u->area; ?></td>
+									</tr>
+			    	        	<?php endforeach; ?>
+			    	        </tbody>
+				    	</table>
+					</div>						
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	
 	</form>	
 </div>
 <script>
@@ -247,6 +252,11 @@
 	    }).attr('readonly', 'readonly');
 	    $("#fecha_recepcion").datepicker("setDate", currentDate);
 
+	    var subm = "";
+	     $('input[type="submit"]').click(function(e) {
+	       subm = e.target.id;
+	     });
+
 
 	    	//fecha y hora del calendario
 	    	moment.locale('es');
@@ -257,6 +267,10 @@
 
 	    	//Evento para validar campos y enviar notificaciones por sokect io
 	    	$("form").submit(function( event ) {
+	    		if(subm == "btn_enviar_oficio")
+	    			enviar = 1;
+	    		else
+	    			enviar= 0;
 	    		var res = $(this).validate();
 	    		if(res){
 
@@ -264,14 +278,15 @@
 	    			var arrCheck = [];
 
 	    			$('#example').DataTable().$('tr, td').each(function (){
-	    				if($(this).hasClass('success') == true){
-	    					console.log($('#example').dataTable().fnGetData( this ));
+	    				if($(this).hasClass('success-usuarios') == true){
+	    					// console.log($('#example').dataTable().fnGetData( this ));
 	    					arrCheck.push(parseInt($('#example').dataTable().fnGetData( this )[1]));	    					
 	    				}
 	    			});
 
 
 					formData.append('check', arrCheck);
+					formData.append('enviar', enviar);
 
 	    		    $.ajax({
 	    		        // url: '?c=OfcPartes&a=Guardar',
@@ -282,9 +297,10 @@
 	    		        success: function (data) {
 	    		        	event.preventDefault();
 	    		        	respuesta = JSON.parse(data); 
-	    		        	console.log('aqui respuesta',respuesta);
 	    		        	if(respuesta.success){
-	    		        		socket.emit( 'notification', respuesta.notificacion );
+	    		        		if(enviar){
+	    		        			socket.emit( 'notification', respuesta.notificacion );	    		        			
+	    		        		}
 	    		        		window.location.href = GLOBAL_PATH+"ofcpartes/index"
 	    		        	}
 	    		        	else{

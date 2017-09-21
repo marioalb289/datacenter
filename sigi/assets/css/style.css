@@ -125,6 +125,15 @@ tbody td{
   color: #758697!important;
 }
 
+.success-usuarios td{
+  color: green!important; 
+  background: #dff0d8!important;
+}
+.danger-usuarios-delete td{
+  color: red!important; 
+  background: #f2dede!important;
+}
+
 .selected_user {
     background-color: #B0BED9!important;
 }

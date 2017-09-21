@@ -343,6 +343,155 @@ class OficioDocumento
         return $this;
     }
 
+    public function ActualizarTitularOficioDocumento($id_usuario_actual,$id_oficio,$ccp){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios_documentos_recepcion SET
+                `id_usuario`= ?,
+                estatus_inicial = ?,
+                estatus_final = ?,
+                updated_by = ?,
+                update_at = ?
+                WHERE (id_oficio= ? AND id_usuario = ? AND ccp = ?);
+            ";
+
+            //print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getIdUsuario(),
+                        $this->getEstatusInicial(),
+                        $this->getEstatusFinal(),
+                        $this->getUpdatedBy(),
+                        date('Y-m-d H:i:s'),
+                        $id_oficio,
+                        $id_usuario_actual,
+                        $ccp
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+    public function ActualizarTitularAlcance($id_usuario_actual,$id_oficio){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios_documentos_recepcion SET
+                `id_usuario`= ?,
+                updated_by = ?,
+                update_at = ?
+                WHERE (parent_id= ? );
+            ";
+
+            //print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $id_usuario_actual,
+                        $this->getUpdatedBy(),
+                        date('Y-m-d H:i:s'),
+                        $id_oficio
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+    public function EliminarUsuarioCCpOficioDocumento($id_usuario_actual,$id_oficio){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios_documentos_recepcion SET
+                `eliminado`= 1
+                WHERE id_oficio=? AND id_usuario=?;
+            ";
+
+            // print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $id_oficio,
+                        $id_usuario_actual
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+    public function enviarUsuarios($id_usuario,$id_oficio){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios_documentos_recepcion SET
+                `estatus_final`= 2
+                WHERE id_oficio=? AND id_usuario=?;
+            ";
+
+            // print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $id_oficio,
+                        $id_usuario
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+    public function enviarAlcances($id_oficio){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios_documentos_recepcion SET
+                `estatus_final`= 1
+                WHERE parent_id=?;
+            ";
+
+            // print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $id_oficio,
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+
     public function RegistrarOficioDocumento()
 	{
 		try 

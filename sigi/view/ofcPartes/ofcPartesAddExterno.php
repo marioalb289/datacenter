@@ -33,7 +33,8 @@
 		<div class="row">
 			<div class="col-md-4"><h4>Registro de Documentos para Dependencia Externa</h4></div>
 			<div class="col-md-8 text-right">
-			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca">Guardar</button>
+			    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_enviar_oficio" name="btn_enviar_oficio" class="btn btn-primary" name="btn_busca" value="Enviar" />
+			    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca" value="Guardar" />
 			    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 			</div>
 		</div>
@@ -99,6 +100,21 @@
 					          <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
 					        </div> -->
 					    </div>
+			    	    <div class="form-group">
+			    	    	<div class="radio"  >
+			    	    	  <label>
+			    	    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
+			    	    	    Para su Conocimiento y Archivo
+			    	    	  </label>
+			    	    	</div>
+
+			    	    	<div class="radio"  >
+			    	    	  <label>
+			    	    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
+			    	    	    	Para el trámite que corresponda	
+			    	    	  </label>
+			    	    	</div>
+			    	    </div>
 		            </div>
 					
 					
@@ -137,37 +153,23 @@
 				    </div>
 					
 				</div>
+			</div>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="row">
+			<div class="col-md-12"><h4><strong>Seleccionar usuarios que recibirán copia</strong></h4></div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">		
 
-				<div class="col-md-12">
-				    <div class="form-group">
-				    	<div class="radio"  >
-				    	  <label>
-				    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
-				    	    Para su Conocimiento y Archivo
-				    	  </label>
-				    	</div>
-
-				    	<div class="radio"  >
-				    	  <label>
-				    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
-				    	    	Para el trámite que corresponda	
-				    	  </label>
-				    	</div>
-
-				    	<div class="checkbox"  >
-				    	  <label>
-				    	    <input type="checkbox" id="ccp">
-				    	   	Para acuerdo con:
-				    	  </label>
-				    	</div>
-
-				        <!-- <input type="radio" name="respuesta" value="1" checked> Para su Conocimiento y Archivo<br>
-			            <input type="radio" name="respuesta" value="1"> Para el tramite que corresponda<br>
-			            <input type="checkbox" name="ccp" value="1"> Para acuerdo con:	 -->
-				        <!-- <span class="text-danger"></span> -->
-				    </div>
-				    <div class="form-group" id="lista_usuarios" style="display: none">
-				    	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+			<div class="col-md-12">
+				<div class="form-group">
+					
+					<div class="form-group" id="lista_usuarios" >
+						<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 			    	        <thead>
 			    	            <tr>
 			    	            	<th></th>
@@ -179,20 +181,20 @@
 			    	        </thead>
 			    	        <tbody>
 			    	        	<?php foreach($data['usuarios'] as $u): ?>
-			    	        	    <tr>
-			    	        	    	<td></td>
-			    	        	    	<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
-			    	        	    	<td><?php echo $u->id_usuario; ?></td>
-			    	        	        <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
-			    	        	        <td><?php echo $u->area; ?></td>
-			    	        	    </tr>
+			    	        	   <tr>
+										<td></td>
+										<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
+										<td ><?php echo $u->titular; ?></td>
+									    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
+									    <td><?php echo $u->area; ?></td>
+									</tr>
 			    	        	<?php endforeach; ?>
 			    	        </tbody>
 				    	</table>
-				    </div>
-				    
+					</div>						
 				</div>
 			</div>
+		</div>
 	</div>
 </div>
 </form>
@@ -201,22 +203,32 @@
 			$( "#btn_regresar" ).click(function() {
 				window.history.go(-1);
 			});
+			var subm = "";
+			 $('input[type="submit"]').click(function(e) {
+			   subm = e.target.id;
+			 });
 			//Evento para validar campos
 			$("form").submit(function( event ) {
+				if(subm == "btn_enviar_oficio")
+					enviar = 1;
+				else
+					enviar= 0;
 				var res = $(this).validate();
 				if(res){
 					var formData = new FormData($(this)[0]);
 
 					var arrCheck = [];
 
-	    			$('#example').DataTable().$('input, checkbox').each(function (){
-	    				if($(this).prop('checked') == true){
-	    					arrCheck.push(parseInt(this.value));	    					
+	    			$('#example').DataTable().$('tr, td').each(function (){
+	    				if($(this).hasClass('success-usuarios') == true){
+	    					// console.log($('#example').dataTable().fnGetData( this ));
+	    					arrCheck.push(parseInt($('#example').dataTable().fnGetData( this )[1]));	    					
 	    				}
 	    			});
 
 
 					formData.append('check', arrCheck);
+					formData.append('enviar', enviar);
 
 				    $.ajax({
 				        url: GLOBAL_PATH+"ofcpartes/guardar",
@@ -227,7 +239,9 @@
 				        	event.preventDefault();
 				        	respuesta = JSON.parse(data); 
 				        	if(respuesta.success){
-				        		socket.emit( 'notification', respuesta.notificacion );
+				        		if(enviar){
+	    		        			socket.emit( 'notification', respuesta.notificacion );	    		        			
+	    		        		}
 				        		window.location.href = GLOBAL_PATH+"ofcpartes/index"
 				        	}
 				        	else{

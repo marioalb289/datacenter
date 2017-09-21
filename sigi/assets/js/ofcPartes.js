@@ -28,14 +28,12 @@ $(document).ready(function(){
       //Funcion para almacenar tab active
       if (typeof(Storage) !== "undefined") {
           var dash_localVar = localStorage.getItem("dash_activ_tab"+getUrlPath());
-          console.log(dash_localVar);
           if(dash_localVar){
    
               $(".dashboard_tabs_cl > li").removeClass("active");
               $(".tab-content > div").removeClass("active");
    
               var hrefAttr = "a[href=\'"+dash_localVar+"\']";
-              console.log($(""+dash_localVar+""));
               if( $(hrefAttr).parent() ){
                   $(hrefAttr).parent().addClass("in active");
                   $(""+dash_localVar+"").addClass("in active");
@@ -71,7 +69,6 @@ $(document).ready(function(){
           sol_entrantes : $('#lista_solicitudes_entrantes').DataTable().ajax.params(),
           sol_salientes : $('#lista_solicitudes_salientes').DataTable().ajax.params(),
         };
-        //console.log(params);
         $.ajax({
           method: "POST",
           url: GLOBAL_PATH+"ofcpartes/createReportParam",
@@ -107,7 +104,6 @@ $(document).ready(function(){
     $('#cancelar_solicitud').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
       var recipient = button.data('whatever') // Extract info from data-* attributes
-      // console.log('aqui datos button', recipient);
       $('#btn-confirmar').attr("href", recipient);
     })
 
@@ -123,7 +119,6 @@ $(document).ready(function(){
             "url": GLOBAL_PATH+"ofcpartes/listarSolicitudesEntrantes",
             "type": "POST",
             "data": function ( d ) {
-                console.log(d);
                 d.fecha_inicio = fecha_inicio.value,
                 d.fecha_fin = fecha_fin.value,
                 d.area = filtro_area.value,
@@ -194,7 +189,6 @@ $(document).ready(function(){
           $(row).addClass( 'solicitud_no_vista' );
       },
       "initComplete": function(settings, json) {
-          //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
           $( "#lista_solicitudes_entrantes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_recargar_entrantes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
           $( "#lista_solicitudes_entrantes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_imprimir_rep_entrantes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-print' style='color: #818481;font-weight: 900;'></span>Imprimir</button>" );
@@ -271,6 +265,7 @@ $(document).ready(function(){
             { "data": "receptor","searchable": true,"orderable": true },
             { "data": "asunto_receptor" ,"searchable": true,"orderable": false},
             { "data": "estatus_inicial", "searchable": false,"orderable": false },
+            { "data": "respondido", "searchable": false,"orderable": false,"visible": false },
             { 
               "data": "estatus_final" ,
               "searchable": false,
@@ -281,6 +276,8 @@ $(document).ready(function(){
                       return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
                     else if(row.estatus_final == 'Cancelado')
                       return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                    else if(row.estatus_final == 'Revision')
+                      return  "<button type='button' class='btn btn-info btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
                     else
                       return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
                 },
@@ -313,10 +310,10 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
-                    if(row.tipo_oficio=="RESPUESTA")
-                      return "";
-                    else
+                    if( (row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Abierto' && row.respondido != 1)||(row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Revision'))
                       return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                    else
+                      return "";
                 },
             },
             {
@@ -327,7 +324,7 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                     // if(row.estatus_final == "Revision")
-                    if(1==1)
+                    if(row.estatus_final == 'Revision')
                       return  "<a href='"+GLOBAL_PATH+"ofcpartes/edit/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs edit' style='width:60px'>Editar</a>";
                     else
                       return "";
@@ -335,10 +332,9 @@ $(document).ready(function(){
             }
         ] ,       
       language: language,
-      "order": [[ 7, 'desc' ]],
+      "order": [[ 8, 'desc' ]],
       "createdRow": function( row, data, dataIndex ) {
         $(row).click(function(e) {
-          console.log(e.target);
           if($(e.target).is('a')){
             if($(e.target).is('.edit')){
               return;
@@ -352,7 +348,6 @@ $(document).ready(function(){
         });
       },
       "initComplete": function(settings, json) {
-          //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
           $( "#lista_solicitudes_salientes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_recargar_salientes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
           $( "#lista_solicitudes_salientes_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_imprimir_rep_salientes' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-print' style='color: #818481;font-weight: 900;'></span>Imprimir</button>" );
@@ -438,7 +433,6 @@ $(document).ready(function(){
         ],
         "order": [[ 1, 'desc' ]],
         "createdRow": function( row, data, dataIndex ) {
-          console.log(data);
           $(row).click(function(e) {
             if($(e.target).is('a')){
               e.preventDefault();
@@ -532,7 +526,6 @@ $(document).ready(function(){
       language: language,
       "order": [[ 5, 'desc' ]],
       "initComplete": function(settings, json) {
-          //console.log( 'DataTables has finished its initialisation.' );
           //$("#div_recargar_externos").show();
           $( "#lista_oficios_destino_externo_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_destino_externo' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
           $( "#btn_recargar_destino_externo" ).click(function() {
@@ -545,7 +538,6 @@ $(document).ready(function(){
 
     //Funcion para habilitar columnas en paginadores dependiendo de los privilegios
     function ocultarColumnas(privilegios){
-      console.log(privilegios);
       var res= false
       if (privilegios == 1) {
           res = true;
@@ -558,7 +550,6 @@ $(document).ready(function(){
     }
 
     function ocultarColumnasInternos($id_usua){
-      console.log(privilegios);
       var res= false
       if (privilegios == 1) {
           res = true;
@@ -606,15 +597,14 @@ $(document).ready(function(){
 
        ],
       "initComplete": function(settings, json) {
-          console.log( 'DataTables has finished its initialisation.' );
           $( "#example_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' id='btn_enviar_todos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-ok' style='color: #5cb85c;font-weight: 900;'></span>Seleccionar Todo</button>" );
           $( "#btn_enviar_todos" ).click(function() {
             var count = $('#example').DataTable().$('tr').length;
             var i = 1;
             $('#example').DataTable().$('tr').each(function (){
-              $(this).removeClass( "success" );
+              $(this).removeClass( "success-usuarios" );
               if(!flag){
-                $(this).addClass("success");
+                $(this).addClass("success-usuarios");
                 if(i++ == count){
                   flag = true;
                 }
@@ -631,7 +621,7 @@ $(document).ready(function(){
     
 
     $('#example tbody').on( 'click', 'tr', function () {
-          $(this).toggleClass('success');
+          $(this).toggleClass('success-usuarios');
           _this = this;
 
           // var count = $('#lista_usuarios_recibidos').DataTable().$('tr').length;
@@ -695,7 +685,6 @@ $(document).ready(function(){
 
        ],
       "initComplete": function(settings, json) {
-          console.log( 'DataTables has finished its initialisation.' );
         }
 
     });
@@ -707,9 +696,12 @@ $(document).ready(function(){
     } ).draw();
 
     $('#lista_usuarios_recibidos tbody').on( 'click', 'tr', function () {
-        areaM = $( "#area_destino option:selected" )[0].text; 
+        if($("#lista_usuarios_recibidos").hasClass('no-select')){
+          return;
+        }
+
+        areaM = (typeof $( "#area_destino option:selected" )[0] != 'undefined') ? $( "#area_destino option:selected" )[0].text : ''; 
         select = $('#lista_usuarios_recibidos').dataTable().fnGetData( this );
-        console.log(select);
         if( areaM == select[4] && parseInt(select[2]) == 1){
           //Mensaje de error
           bootbox.alert({ 
@@ -719,12 +711,16 @@ $(document).ready(function(){
           })
           return;
         }
-        $(this).toggleClass('danger');
+        if(!$(this).hasClass('delete')){
+          $(this).toggleClass('danger-usuarios-delete');
+        }
+        
       } );
 
     
 
     function ocultarUsuarios(data){
+      console.log(data);
       var arr_remove = [];
       $('#example').DataTable().rows().flatten().each( function ( colIdx ) {
 
@@ -732,23 +728,14 @@ $(document).ready(function(){
         if (typeof row != 'undefined'){
 
           for (var i = data.length - 1; i >= 0; i--) {
-            if( parseInt(row[2]) == parseInt( data[i].id_usuario)){
+            if( parseInt(row[1]) == parseInt( data[i].id_usuario)){
               //Es igual
-              // $('#example').DataTable().row(colIdx).node().remove();
-              // if(prueba < 2){
                 temp.push( $('#example').DataTable().row(colIdx).data() );
                 arr_remove.push(colIdx);
-                // $('#example').DataTable().row(colIdx).remove().draw( true );
                 
-              // }
-              
             }
           }
-          
-          
         }
-
-
       });
 
       for (var i = arr_remove.length - 1; i >= 0; i--) {
@@ -758,11 +745,6 @@ $(document).ready(function(){
 
 
     }
-
-
-
-
-
     /*Evento que muestra los ususarios en caso de que sea con copia*/
     $('#ccp').change(function () {
         if ($(this).is(':checked')) {
@@ -789,6 +771,8 @@ $(document).ready(function(){
       .change();
 
     /*Evento de seleccion de area*/
+    var flagSelect = 1;
+    var opcOriginal = (typeof $( "#area_destino option:selected" )[0] != 'undefined') ? $( "#area_destino option:selected" )[0].text : ''; 
     $( "#area_destino" )
       .change(function () {
         var str = "";
@@ -802,7 +786,40 @@ $(document).ready(function(){
               }
               // temp = [];          
             }
-            cargarUsuario(opc,"usuario_receptor","id_usuario_receptor")
+            
+            //Marcar usuarios que seran removidos de la lista de usuarios que ya recibieron copia
+            count =$('#lista_usuarios_recibidos').DataTable().$('tr').length;
+            if(count > 0 && flagSelect > 1){
+              selected =  $(this)[0].text;
+              if(selected != opcOriginal){
+                $('#lista_usuarios_recibidos').DataTable().$('tr').each(function (){
+                  list = $('#lista_usuarios_recibidos').dataTable().fnGetData( this )[4];
+                  titular = parseInt($('#lista_usuarios_recibidos').dataTable().fnGetData( this )[2]);
+                  if(list == opcOriginal && titular == 1 && $(this).hasClass("danger delete") == false){
+                    $(this).toggleClass('danger delete');
+                    t.row.add($('#lista_usuarios_recibidos').dataTable().fnGetData( this )).draw( true );
+                  }
+                });
+              }
+              else{
+                $('#lista_usuarios_recibidos').DataTable().$('tr').each(function (){
+                  list = $('#lista_usuarios_recibidos').dataTable().fnGetData( this )[4];
+                  titular = parseInt($('#lista_usuarios_recibidos').dataTable().fnGetData( this )[2]);
+                  if(opcOriginal == selected && titular == 1){
+                    $(this).removeClass('danger delete');
+                    idRemove = parseInt($('#lista_usuarios_recibidos').dataTable().fnGetData( this )[1])
+                    $('#example').DataTable().$('tr').each(function (){
+                      idActual = parseInt($('#example').dataTable().fnGetData( this )[1]);
+                      if(idActual == idRemove){
+                        t.row($(this)).remove().draw();                        
+                      }
+                    });
+                  }
+                });
+              }              
+            }
+            cargarUsuario(opc,"usuario_receptor","id_usuario_receptor");
+            flagSelect++;
            }
         });
       })
@@ -811,7 +828,6 @@ $(document).ready(function(){
 
     //Agrega campos extras dependiendo del tipo de origen
     function form_tipo_origen(origen){
-      console.log(origen);
       if(origen == "Externo"){
         /*Cargar form de oficio externo*/
         $('#formExterno').show();
@@ -820,14 +836,12 @@ $(document).ready(function(){
       }
       else if(origen == "Interno"){
         /*Cargar form de oficio interno*/
-        //console.log('entro aqui');
         $('#formExterno').hide();
         $('#formInterno').show();
       }
 
     }
     //Carga el usuario correspondiente
-    // console.log(temp);
     function cargarUsuario(id_area,selector,selector2){
         $.ajax({
           method: "POST",
@@ -840,9 +854,7 @@ $(document).ready(function(){
             
             
             var respuesta = JSON.parse(res);
-            // console.log(respuesta);
             if(respuesta.success){
-                console.log(respuesta);
                 $("#"+selector).val(respuesta.data[0].nombre_formal);
                 $("#"+selector2).val(respuesta.data[0].id_usuario);
                 ocultarUsuarios(respuesta.data);
@@ -851,7 +863,6 @@ $(document).ready(function(){
                 //mensaje de error
                  $("#"+selector).val("");
             }
-            // console.log(respuesta.success);
           })
           .fail(function( jqXHR, textStatus ) {
               alert( "Request failed: " + textStatus );

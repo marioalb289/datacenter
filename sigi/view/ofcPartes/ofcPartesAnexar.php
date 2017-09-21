@@ -251,7 +251,8 @@
 				        	respuesta = JSON.parse(data); 
 				        	console.log('aqui respuesta',respuesta);
 				        	if(respuesta.success){
-				        		socket.emit( 'notification', respuesta.notificacion );
+				        		if(respuesta.notificacion.length > 0)
+				        			socket.emit( 'notification', respuesta.notificacion );
 				        		window.location.href = GLOBAL_PATH+"ofcpartes/index";
 				        	}
 				        	else{

@@ -31,6 +31,7 @@ class Oficio
 	private $created_by;
 	private $updated_by;
     private $folio;
+    private $flag_id;
 
 	public function __CONSTRUCT()
 	{
@@ -601,12 +602,64 @@ class Oficio
         return $this;
     }
 
+    public function UpdateOficio($id_oficio){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios SET
+                `folio_institucion`= ?, 
+                `nombre_emisor`=?, 
+                `institucion_emisor`=?, 
+                `cargo`=?, 
+                `asunto_emisor`=?, 
+                `respuesta`= ?, 
+                `fecha_recepcion`=?, 
+                `hora_recepcion`=?, 
+                `comentarios`=?, 
+                `respondido`=?, 
+                `updated_at`=?, 
+                `updated_by`=? 
+                WHERE (`id`= ?);
+            ";
+
+            //print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getFolioInstitucion(),
+                        $this->getNombreEmisor(),
+                        $this->getInstitucionEmisor(),
+                        $this->getCargo(),
+                        $this->getAsuntoEmisor(),
+                        $this->getRespuesta(),
+                        $this->getFechaRecepcion(),
+                        $this->getHoraRecepcion(),
+                        $this->getComentarios(),
+                        $this->getRespondido(),
+                        $this->getUpdatedBy(),
+                        date('Y-m-d H:i:s'),
+                        $id_oficio
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+
+
+    }
+
     public function RegistrarOficio()
     {
         try 
         {
-            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,fecha_recepcion,hora_recepcion,comentarios,vinculado,created_at,created_by,updated_at,updated_by)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO sigi_oficios (origen,tipo_oficio, folio,folio_institucion,id_usuario_emisor,nombre_emisor,institucion_emisor,cargo,asunto_emisor,asunto_receptor,respuesta,respondido,destino,fecha_recepcion,hora_recepcion,comentarios,vinculado,flag_id,created_at,created_by,updated_at,updated_by)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //print_r($sql);exit;
 
@@ -630,6 +683,7 @@ class Oficio
                         $this->getHoraRecepcion(),
                         $this->getComentarios(),
                         $this->getVinculado(),
+                        $this->getFlagId(),
                         date('Y-m-d H:i:s'), 
                         $this->getCreatedBy(),
                         date('Y-m-d H:i:s'), 
@@ -717,6 +771,7 @@ class Oficio
                 ofc.asunto_emisor AS asunto_emisor,
                 ofc.respuesta AS respuesta,
                 ofc.vinculado as vinculado,
+                ofc.flag_id as flag_id,
                 odr.id as id_oficio_documento,
                 odr.estatus_inicial AS estatus_inicial,
                 odr.ccp AS ccp,
@@ -941,6 +996,26 @@ class Oficio
     
 
     
+
+    /**
+     * @return mixed
+     */
+    public function getFlagId()
+    {
+        return $this->flag_id;
+    }
+
+    /**
+     * @param mixed $flag_id
+     *
+     * @return self
+     */
+    public function setFlagId($flag_id)
+    {
+        $this->flag_id = $flag_id;
+
+        return $this;
+    }
 }
 
 

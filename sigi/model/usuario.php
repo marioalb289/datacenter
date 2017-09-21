@@ -83,7 +83,7 @@ class Usuario
 				JOIN usuarios us ON us.id = odr.id_usuario
 				JOIN areas ar ON ar.id = us.area
 				WHERE
-					ofc.id = ? AND odr.ccp >= 0
+					ofc.id = ? AND odr.ccp >= 0 AND odr.eliminado <> 1 AND us.priv_sigi <> 1
 			");
 			$stm->execute(array($id_oficio));
 
@@ -185,10 +185,27 @@ class Usuario
 		}
 	}
 
-	public function userTitulares($area,$id_not_usuario)
+	public function userTitulares($area,$id_not_usuario,$ofc_partes = false)
 	{
 		try
-		{						
+		{		
+			$cond = "";
+			if($ofc_partes){
+				$cond = "
+				us.area = ?
+				AND us.titular = 1
+				AND us.priv_sigi = 1
+				AND us.id NOT IN (?)
+				";
+			}
+			else{
+				$cond = "
+				us.area = ?
+				AND us.titular = 1
+				AND us.priv_sigi <> 1
+				AND us.id NOT IN (?)
+				";
+			}				
 			$stm = $this->pdo->prepare("
 			SELECT
 				us.id AS id_usuario,
@@ -202,10 +219,7 @@ class Usuario
 				usuarios us
 			JOIN areas ar ON ar.id = us.area
 			WHERE
-				us.area = ?
-				AND us.titular = 1
-				AND us.priv_sigi <> 1
-				AND us.id NOT IN (?)
+				$cond
 			");
 			$stm->execute(array(
 				$area,

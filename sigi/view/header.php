@@ -70,7 +70,7 @@
                 
             </li>           
             <li style="float: left;" class="men">
-                <a href="index"><strong>Cerrar Sessión</strong></a>
+                <a href="index"><strong>Cerrar Sesión</strong></a>
             </li>
           </ul>
         </div><!--/.nav-collapse -->

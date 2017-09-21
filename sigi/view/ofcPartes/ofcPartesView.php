@@ -48,7 +48,8 @@
 					<h4 style="display: inline-block;"><strong>N° Oficio : </strong><?php echo $data['oficio']->folio_iepc ?> <strong>Estatus Final:</strong> </h4> 
 					<?php if ($data['oficio']->estatus_final == "Cerrado") echo "<button type='button' class='btn btn-success btn-xs' style='width:70px;margin-top: -5px;'>Cerrado</button>";?>
 					<?php if ($data['oficio']->estatus_final == "Abierto") echo "<button type='button' class='btn btn-warning btn-xs' style='width:70px;margin-top: -5px;'>Abierto</button>";?>
-					<?php if ($data['oficio']->estatus_final == "Cancelado") echo "<button type='button' class='btn btn-warning btn-xs' style='width:70px;margin-top: -5px;'>Cancelado</button>";?>
+					<?php if ($data['oficio']->estatus_final == "Cancelado") echo "<button type='button' class='btn btn-danger btn-xs' style='width:70px;margin-top: -5px;'>Cancelado</button>";?>
+					<?php if ($data['oficio']->estatus_final == "Revision") echo "<button type='button' class='btn btn-info btn-xs' style='width:70px;margin-top: -5px;'>Revisión</button>";?>
 			</div>
 			<div class="col-md-6 text-right">
 				<?php if( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->tipo_oficio == "SOLICITUD" && $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 && $data['oficio']->estatus_final == 'Cerrado'){ ?>
@@ -62,7 +63,7 @@
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='ofcpartes/vincular/".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Vincular</a>
 				<?php } ?>	
 
-				<?php if( $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->tipo_oficio <> 'ALNCANCE' ){ ?>
+				<?php if( $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->tipo_oficio <> 'ALCANCE' ){ ?>
 				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" type="button" <?php  {echo "href='ofcpartes/anexar/".$data['oficio']->id_oficio."'";}	 ?> class="btn btn-primary" id="btn-anexar" role="button">Añadir Alcance</a>
 				<?php } ?>	
 
@@ -154,6 +155,23 @@
 				    <span class="text-danger"></span>
 				</div>
 				<?php } ?>
+
+				
+				<div class="form-group">
+					<div class="radio"  >
+						<label>
+							<input type="radio" name="respuesta" id="respuesta" value="0" <?php if(!$data['oficio']->respuesta) echo "checked"?> disabled>
+							Para su Conocimiento y Archivo
+						</label>
+					</div>
+
+					<div class="radio"  >
+						<label>
+							<input type="radio" name="respuesta" id="respuesta" value="1" <?php if($data['oficio']->respuesta) echo "checked"?>  disabled>
+							Para el tramite que corresponda	
+						</label>
+					</div>
+				</div>
 				
 				
 			</div>
@@ -197,65 +215,54 @@
 			    <?php } ?>
 				
 			</div>
-
+		</div>
+	</div>
+</div>
+<?php if(!empty($data['usuarios'])) { ?>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="row">
+			<div class="col-md-12"><h4><strong>Usuarios que recibierón copia</strong></h4></div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
 			<div class="col-md-12">
-				<div class="form-group">
-					<div class="radio"  >
-						<label>
-							<input type="radio" name="respuesta" id="respuesta" value="0" <?php if(!$data['oficio']->respuesta) echo "checked"?> disabled>
-							Para su Conocimiento y Archivo
-						</label>
-					</div>
-
-					<div class="radio"  >
-						<label>
-							<input type="radio" name="respuesta" id="respuesta" value="1" <?php if($data['oficio']->respuesta) echo "checked"?>  disabled>
-							Para el tramite que corresponda	
-						</label>
-					</div>
-
-					<div class="checkbox"  >
-						<label>
-							<input type="checkbox" <?php if(!empty($data['usuarios'])) echo "checked" ?>  >
-							<strong>Para acuerdo con:</strong>
-						</label>
-					</div>
-				</div>
-				<?php if(!empty($data['usuarios'])) { ?>
-				<div class="form-group" id="lista_usuarios" >
-					<table id="table_ccp" class="table table-striped table-bordered" cellspacing="0" width="100%">
-						<thead>
+				<table id="lista_usuarios_recibidos" class="table table-striped table-bordered no-select" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>Nombre</th>
+							<th>Area</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($data['usuarios'] as $u): ?>
 							<tr>
-								<th>Nombre</th>
-								<th>Area</th>
+								<td></td>
+								<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
+								<td ><?php echo $u->titular; ?></td>
+								<td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
+								<td><?php echo $u->area; ?></td>
 							</tr>
-						</thead>
-						<tbody>
-							<?php foreach($data['usuarios'] as $u): ?>
-								<tr>
-									<td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
-									<td><?php echo $u->area; ?></td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-				<?php } ?>
-			</div>
-			<div class="col-md-12">
-				
+						<?php endforeach; ?>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
 </div>
-<?php if(!empty($data['usuarios_turnar']) && $data['oficio']->estatus_final!= 'Cerrado' &&  $data['oficio']->tipo_oficio == 'SOLICITUD' && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id']) { ?>
-<form name="recepciones" method="post" action="ofcpartes/turnar" role="form" enctype="multipart/form-data">
+<?php } ?>
+<?php if(!empty($data['usuarios_turnar']) && $data['oficio']->estatus_final!= 'Cerrado' &&  $data['oficio']->tipo_oficio == 'SOLICITUD' && ($data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] || $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'])) { ?>
+<form name="recepciones" method="post" action="" role="form" enctype="multipart/form-data">
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="row">
-			<div class="col-md-4"><h4><strong>Turnar a otros usuarios</strong></h4></div>
+			<div class="col-md-4"><h4><strong>Seleccionar a otros usuarios que recibiran copia</strong></h4></div>
 			<div class="col-md-8 text-right">
-				<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" class="btn btn-primary" name="btn_turnar">Enviar</button>
+				<input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_enviar_oficio" name="btn_enviar_oficio" class="btn btn-primary" name="btn_busca" value="Enviar" />
 			</div>
 		</div>
 	</div>
@@ -266,13 +273,13 @@
 				<div class="form-group">
 					
 					<div class="form-group" id="lista_usuarios" >
-						<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio ?>">
+						<input type="hidden" name="id_oficio" id="id_oficio" value = "<?php echo $data['oficio']->id_oficio ?>">
 						<input type="hidden" name="id_documento" value = "<?php echo $data['oficio']->id_documento ?>">
 						<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 							<thead>
 								<tr>
 									<th></th>
-			    	            	<th></th>
+									<th></th>
 			    	            	<th></th>
 			    	                <th>Nombre</th>
 			    	                <th>Area</th>
@@ -282,8 +289,8 @@
 								<?php foreach($data['usuarios_turnar'] as $u): ?>
 									<tr>
 										<td></td>
-										<td style="text-align: center;"><input type="checkbox" id="row-1-age" name="check_list_user[]" value="<?php echo $u->id_usuario; ?>"></td>
-										<td><?php echo $u->id_usuario; ?></td>
+										<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
+										<td ><?php echo $u->titular; ?></td>
 									    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
 									    <td><?php echo $u->area; ?></td>
 									</tr>
@@ -356,5 +363,50 @@
 	    $( "#btn_regresar" ).click(function() {
 	    	window.history.go(-1);
 	    });
+
+	    $("form").submit(function( event ) {
+
+			var formData = new FormData($(this)[0]);
+			var arrCheck = [];
+			var arrDelete = [];
+
+			$('#example').DataTable().$('tr, td').each(function (){
+				if($(this).hasClass('success-usuarios') == true){
+					console.log($('#example').dataTable().fnGetData( this ));
+					arrCheck.push(parseInt($('#example').dataTable().fnGetData( this )[1]));	    					
+				}
+			});
+
+			var id_oficio = $("#id_oficio").val();
+
+
+			formData.append('check', arrCheck);
+
+
+		    $.ajax({
+		        // url: '?c=OfcPartes&a=Guardar',
+		        url: GLOBAL_PATH+"ofcpartes/turnar",
+		        type: 'POST',
+		        data: formData,
+		        async: false,
+		        success: function (data) {
+		        	event.preventDefault();
+		        	respuesta = JSON.parse(data); 
+		        	console.log('aqui respuesta',respuesta);
+		        	if(respuesta.success){
+		        		socket.emit( 'notification', respuesta.notificacion );
+		        		window.location.href = GLOBAL_PATH+"ofcpartes/view/"+id_oficio
+		        	}
+		        	else{
+		        		window.location.href = GLOBAL_PATH+"ofcpartes/view/"+id_oficio;
+		        	}
+		        },
+		        cache: false,
+		        contentType: false,
+		        processData: false
+		    });   		
+
+    	    // event.preventDefault();
+        });
 	})
 </script>

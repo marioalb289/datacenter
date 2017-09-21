@@ -183,6 +183,7 @@
                         <th>Receptor</th>
                         <th>Asunto Receptor</th>
                         <th>Estatus Inicial</th>
+                        <th></th>
                         <th>Estatus Final</th>
                         <th>Fecha Enviado</th>
                         <th>Visto</th>

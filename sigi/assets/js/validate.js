@@ -52,7 +52,6 @@ function validarObjetoForm (control){
     /* El control actual del arreglo */
     var obj = control;
 
-    // console.log(obj);
 
     /* No nos interesa validar controles con el estado readonly/disabled */
     if (!obj.prop('readonly') || !obj.prop('disabled'))
@@ -342,12 +341,18 @@ jQuery.fn.validateBlur = function ()
     }
 }
 
+var folioOriginal = '';
+
+jQuery.fn.setFolioOriginal = function (valor)
+{
+    folioOriginal = valor;
+}
+
 jQuery.fn.validateNumOficio = function ()
 {
     try {
 
         var obj = $(this);
-        console.log('validateNumOficio',obj);
         /* El control donde vamos agregar el texto */
         var small = $('<small />');
 
@@ -384,6 +389,13 @@ jQuery.fn.validateNumOficio = function ()
 
             return false; /* Rompe el bucle */
         }
+        if(folioOriginal == obj.val()){
+            //Num de oficio valido
+            $("#btn_guardar_oficio").prop('disabled', false);
+            form_group.addClass('has-success');
+            obj.parent().append($("<span id='icon-valido' class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>") );
+            return;
+        }
 
         $.ajax({
           method: "POST",
@@ -396,7 +408,6 @@ jQuery.fn.validateNumOficio = function ()
         })
           .done(function( res ) {
             data = JSON.parse(res);
-            console.log(data);
             if(data.success){
                 if(data.opc == 1){
                     //Num de oficio valido
@@ -412,7 +423,6 @@ jQuery.fn.validateNumOficio = function ()
 
                     /* Mostramos el mensaje */
                     if (obj.data('validacion-mensaje') == undefined) {
-                        console.log(small);
                         small.text(_mensaje.folio_repetido);
                     } else {
                         small.text(obj.data('validacion-mensaje'));
