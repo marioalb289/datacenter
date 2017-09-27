@@ -9,6 +9,7 @@
         <link rel="icon" type="image/png" href="AI/image/logo.png" />
         <link rel="stylesheet" href="sigi/assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="sigi/assets/css/dataTables.bootstrap.min.css" />
+        <link rel="stylesheet" href="sigi/assets/css/bootstrap-select.min.css" />
         <link rel="stylesheet" href="sigi/assets/css/jasny-bootstrap.css" />
         <!-- <link rel="stylesheet" href="sigi/assets/css/bootstrap-theme.min.css" />         -->
         <link rel="stylesheet" href="sigi/assets/js/jquery-ui/jquery-ui.css" />
@@ -25,7 +26,7 @@
         <script src="sigi/assets/js/wickedpicker.js"></script>
 
         <script src="sigi/assets/js/bootstrap.min.js"></script>
-        <script src="sigi/assets/js/bootstrap-select.min.js"></script>
+        
 
 	</head>
     <body style="min-width: 960px !important;">

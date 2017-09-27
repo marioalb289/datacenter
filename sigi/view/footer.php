@@ -21,5 +21,6 @@
         <script src="sigi/assets/js/pdf/pdf.worker.js"></script>
         <script src="sigi/assets/js/validate.js"></script>
         <script src="sigi/assets/js/ofcPartes.js"></script>
+        <script src="sigi/assets/js/bootstrap-select.min.js"></script>
     </body>
 </html>

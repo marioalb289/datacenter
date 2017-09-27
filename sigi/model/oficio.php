@@ -741,6 +741,37 @@ class Oficio
         }
     }
 
+    public function getTotalOfcRevision($id_oficio){
+        try
+        {
+
+            $stm = $this->pdo->prepare("
+               SELECT
+                COUNT(odr.id) AS total_revision
+               FROM
+                sigi_oficios ofc
+               JOIN sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
+               WHERE
+                (
+                    odr.id_oficio = 127
+                    OR odr.parent_id = 127
+                )
+               AND ofc.tipo_oficio <> 'ALCANCE'
+               AND odr.estatus_final = 'REVISION'
+            ");
+            // print_r($stm);exit;
+            
+            $stm->execute(array($id_oficio,$id_oficio));
+
+            return $stm->fetch(PDO::FETCH_OBJ);
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
     public function getOficio($id_oficio,$id_usuario =''){
         try
         {

@@ -32,7 +32,8 @@
 				<div class="row">
 					<div class="col-md-4"><h4><strong>N° de Oficio: <?php echo $data['oficio']->folio_iepc ?></strong></h4></div>
 					<div class="col-md-8 text-right">
-						<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_enviar">Guardar</button>
+						<input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_enviar_oficio" name="btn_enviar_oficio" class="btn btn-primary" name="btn_busca" value="Enviar" />
+				    	<input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca" value="Guardar" />
 						<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 					</div>
 				</div>
@@ -216,6 +217,10 @@
 		$( "#btn_regresar" ).click(function() {
 	    	window.history.go(-1);
 	    });
+	    var subm = "";
+	     $('input[type="submit"]').click(function(e) {
+	       subm = e.target.id;
+	     });
 			/*Evento para deshabilitar la carga de archivos*/
 		    $('#ofc_vinculado').change(function () {
 		        if ($(this).is(':checked')) {
@@ -235,11 +240,16 @@
 
 			//Evento para validar campos
 			$("form").submit(function( event ) {
+				if(subm == "btn_enviar_oficio")
+					enviar = 1;
+				else
+					enviar= 0;
 				var res = $(this).validate();
 				console.log(res);
 				if(res){
 
 					var formData = new FormData($(this)[0]);
+					formData.append('enviar', enviar);
 
 				    $.ajax({
 				        url: GLOBAL_PATH+"ofcpartes/guardarAnexo",
@@ -251,12 +261,21 @@
 				        	respuesta = JSON.parse(data); 
 				        	console.log('aqui respuesta',respuesta);
 				        	if(respuesta.success){
+				        		if (respuesta.msgEstatus != ''){
+				        			// bootbox.alert({ 
+				        			//   title: "Error",
+				        			//   message: respuesta.msgEstatus,
+				        			//   type: "danger"
+				        			// })
+				        			localStorage.setItem("msgEstatus", respuesta.msgEstatus);
+
+				        		}
 				        		if(respuesta.notificacion.length > 0)
 				        			socket.emit( 'notification', respuesta.notificacion );
-				        		window.location.href = GLOBAL_PATH+"ofcpartes/index";
+				        		window.location.href = GLOBAL_PATH+"ofcpartes/index";				        			
 				        	}
 				        	else{
-				        		window.location.href = GLOBAL_PATH+"ofcpartes/response";
+				        		window.location.href = GLOBAL_PATH+"ofcpartes/anexar";
 				        	}
 				        },
 				        cache: false,

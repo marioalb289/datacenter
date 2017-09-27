@@ -103,14 +103,14 @@
 			    	    <div class="form-group">
 			    	    	<div class="radio"  >
 			    	    	  <label>
-			    	    	    <input type="radio" name="respuesta" id="respuesta" value="0" checked>
+			    	    	    <input type="radio" name="respuesta" id="respuesta" value="0" data-validacion-tipo="requerido">
 			    	    	    Para su Conocimiento y Archivo
 			    	    	  </label>
 			    	    	</div>
 
 			    	    	<div class="radio"  >
 			    	    	  <label>
-			    	    	    <input type="radio" name="respuesta" id="respuesta" value="1" checked>
+			    	    	    <input type="radio" name="respuesta" id="respuesta" value="1" data-validacion-tipo="requerido">
 			    	    	    	Para el trámite que corresponda	
 			    	    	  </label>
 			    	    	</div>
@@ -259,6 +259,21 @@
 			$('.form-control').bind('blur', function () {
 			    return $(this).validateBlur();
 			});
+
+			$('input[type=radio][name=respuesta]').change(function() {
+
+	    		/* El control donde vamos agregar el texto */
+                var small = $('<small />');
+    	        /* El contenedor del control */
+    	        var obj  = $(this);
+    	        var form_group = obj.closest('.form-group');
+    	        form_group.removeClass('has-error'); /* Limpiamos el estado de error */
+
+    	        /* Capturamos el label donde queremos mostrar el mensaje */
+    	        var label = form_group.find('label');
+    	        label.find('small').remove(); /* Eliminamos el mensaje anterior */
+    	        label.append(small);
+    	    });
 			$('#folio_iepc').bind('blur', function () {
 			    return $(this).validateNumOficio();
 			});

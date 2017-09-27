@@ -310,26 +310,35 @@ $(document).ready(function(){
                 "orderable" : false,
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
+                    var ren = "";
+
                     if( (row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Abierto' && row.respondido != 1)||(row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Revision'))
-                      return  "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      ren = "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
                     else
-                      return "";
-                },
-            },
-            {
-                "targets": -1,
-                "data": null, 
-                //"visible": ocultarColumnas(USER_PRIV),
-                "orderable" : false,
-                "className": "dt-center",
-                "render": function ( data, type, row ) {
-                    // if(row.estatus_final == "Revision")
+                      ren = "";
+
                     if(row.estatus_final == 'Revision')
-                      return  "<a href='"+GLOBAL_PATH+"ofcpartes/edit/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs edit' style='width:60px'>Editar</a>";
+                      ren = ren +"<a href='"+GLOBAL_PATH+"ofcpartes/edit/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs edit' style='width:60px'>Editar</a>";
                     else
-                      return "";
+                      ren = ren +"";
+
+                    return ren;
                 },
             }
+            // {
+            //     "targets": -1,
+            //     "data": null, 
+            //     //"visible": ocultarColumnas(USER_PRIV),
+            //     "orderable" : false,
+            //     "className": "dt-center",
+            //     "render": function ( data, type, row ) {
+            //         // if(row.estatus_final == "Revision")
+            //         if(row.estatus_final == 'Revision')
+            //           return  "<a href='"+GLOBAL_PATH+"ofcpartes/edit/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs edit' style='width:60px'>Editar</a>";
+            //         else
+            //           return "";
+            //     },
+            // }
         ] ,       
       language: language,
       "order": [[ 8, 'desc' ]],
@@ -444,9 +453,6 @@ $(document).ready(function(){
 
       });
 
-     
-
-    //Evento del paginador de oficios con destino externo a los que se les puede vincular un ofocio
     var destino_externo_vincular =  $('#lista_oficios_destino_externo_vincular').DataTable({
       processing: true,
         serverSide: true,
@@ -460,7 +466,6 @@ $(document).ready(function(){
         },
         "columns": [
             { "data": "folio_institucion", "searchable": true,"orderable": false},
-            { "data": "emisor", "searchable": false,"orderable": false },
             { "data": "dependencia", "searchable": true,"orderable": false },
             { "data": "asunto_emisor", "searchable": true,"orderable": false },
             { "data": "estatus_inicial", "searchable": false,"orderable": false },
@@ -482,7 +487,7 @@ $(document).ready(function(){
               "className": "capitalize",
               "render": function ( data, type, row ) {
                     moment.locale('es');
-                    return  moment(row.fecha_recibido).format('MMMM Do YYYY, h:mm:ss a');
+                    return  moment(row.fecha_recibido).format('DD/MM/YYYY, HH:mm');
                 },
             },
             {
@@ -501,16 +506,6 @@ $(document).ready(function(){
             },
             {
                 "targets": -1,
-                "data": null, 
-                "visible": true,
-                "orderable" : false,
-                "className": "dt-center",
-                "render": function ( data, type, row ) {
-                    return  "<a href='"+GLOBAL_PATH+"ofcpartes/view/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Ver</a>";
-                },
-            },
-            {
-                "targets": -1,
                 "data": null,
                 "visible": true,
                 "orderable" : false, 
@@ -525,11 +520,25 @@ $(document).ready(function(){
         ],
       language: language,
       "order": [[ 5, 'desc' ]],
+      "createdRow": function( row, data, dataIndex ) {
+        $(row).click(function(e) {
+          if($(e.target).is('a')){
+            if($(e.target).is('.edit')){
+              return;
+            }
+            else{
+              e.preventDefault();
+              return;              
+            }
+          }
+          window.location.href = GLOBAL_PATH+"ofcpartes/view/"+parseInt( data.DT_RowId.substring(4));
+        });
+      },
       "initComplete": function(settings, json) {
           //$("#div_recargar_externos").show();
-          $( "#lista_oficios_destino_externo_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' name='btn_recargar' id='btn_recargar_destino_externo' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
-          $( "#btn_recargar_destino_externo" ).click(function() {
-            $('#lista_oficios_destino_externo').DataTable().ajax.reload();
+          $( "#lista_oficios_destino_externo_vincular_filter" ).prepend( "<button type='button' class='btn btn-default btn-md'  id='btn_recargar_vincular' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-refresh' style='color: #5cb85c;font-weight: 900;'></span>Recargar</button>" );
+          $( "#btn_recargar_vincular" ).click(function() {
+            $('#lista_oficios_destino_externo_vincular').DataTable().ajax.reload();
           });
         }
 
@@ -568,6 +577,7 @@ $(document).ready(function(){
     /*Configuracion inicial de la tabla de usuarios*/
     var temp = [];
     var flag = false;
+    var flag2 = false;
     var t =  $('#example').DataTable({
       language: language,
 
@@ -597,7 +607,8 @@ $(document).ready(function(){
 
        ],
       "initComplete": function(settings, json) {
-          $( "#example_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' id='btn_enviar_todos' style='float: right;height: 30px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-ok' style='color: #5cb85c;font-weight: 900;'></span>Seleccionar Todo</button>" );
+          $( "#example_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' id='btn_enviar_todos' style='float: right;height: 30px;width: 80px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-ok' style='color: #5cb85c;font-weight: 900;'></span>Todo</button>" );
+          $( "#example_filter" ).prepend( "<button type='button' class='btn btn-default btn-md' id='btn_enviar_todos_titulares' style='float: right;height: 30px;width: 80px;font-size: 12px;margin-left: 5px;'><span class='glyphicon glyphicon-ok' style='color: #5cb85c;font-weight: 900;'></span>Titulares</button>" );
           $( "#btn_enviar_todos" ).click(function() {
             var count = $('#example').DataTable().$('tr').length;
             var i = 1;
@@ -605,12 +616,45 @@ $(document).ready(function(){
               $(this).removeClass( "success-usuarios" );
               if(!flag){
                 $(this).addClass("success-usuarios");
-                if(i++ == count){
+                if(i == count){
                   flag = true;
+                  return;
                 }
               }
-              if(i++ == count){
+              if(i == count){
                 flag = false;
+                return;
+              }
+              i++;
+            });
+          });
+          $( "#btn_enviar_todos_titulares" ).click(function() {
+            arrData= $('#example').dataTable().fnGetData();
+            totalTitulares = 0;
+            for (var i = arrData.length - 1; i >= 0; i--) {
+              if(parseInt(arrData[i][2])){
+                totalTitulares++;
+              }
+            }
+
+            var count = totalTitulares;
+            var i = 1;
+            $('#example').DataTable().$('tr').each(function (){
+              var titular = parseInt($('#example').dataTable().fnGetData( this )[2]);
+              if(titular){
+                $(this).removeClass( "success-usuarios" );
+                if(!flag2){
+                  $(this).addClass("success-usuarios");
+                  if(i == count){
+                    flag2 = true;
+                    return;
+                  }
+                }
+                if(i == count){
+                  flag2 = false;
+                  return;
+                }
+                i++;
               }
             });
           });
@@ -795,8 +839,8 @@ $(document).ready(function(){
                 $('#lista_usuarios_recibidos').DataTable().$('tr').each(function (){
                   list = $('#lista_usuarios_recibidos').dataTable().fnGetData( this )[4];
                   titular = parseInt($('#lista_usuarios_recibidos').dataTable().fnGetData( this )[2]);
-                  if(list == opcOriginal && titular == 1 && $(this).hasClass("danger delete") == false){
-                    $(this).toggleClass('danger delete');
+                  if(list == opcOriginal && titular == 1 && $(this).hasClass("danger-usuarios-delete delete") == false){
+                    $(this).toggleClass('danger-usuarios-delete delete');
                     t.row.add($('#lista_usuarios_recibidos').dataTable().fnGetData( this )).draw( true );
                   }
                 });
@@ -806,7 +850,7 @@ $(document).ready(function(){
                   list = $('#lista_usuarios_recibidos').dataTable().fnGetData( this )[4];
                   titular = parseInt($('#lista_usuarios_recibidos').dataTable().fnGetData( this )[2]);
                   if(opcOriginal == selected && titular == 1){
-                    $(this).removeClass('danger delete');
+                    $(this).removeClass('danger-usuarios-delete delete');
                     idRemove = parseInt($('#lista_usuarios_recibidos').dataTable().fnGetData( this )[1])
                     $('#example').DataTable().$('tr').each(function (){
                       idActual = parseInt($('#example').dataTable().fnGetData( this )[1]);

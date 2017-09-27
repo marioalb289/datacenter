@@ -77,12 +77,13 @@
                   
                 <div class="form-group">
                     <label for="" class="required">Estatus Final:</label>
-                    <select class="form-control input-sm" id="filtro_estatus_final"  >
+                    <select class="form-control input-sm selectpicker" id="filtro_estatus_final"  >
                         <option value="">Selecccionar</option>
                         <option value="0">Todos</option>
                         <option value="1">Cerrado</option>
                         <option value="2">Abierto</option>
                         <option value="3">Cancelado</option>
+                        <option value="4">Revisión</option>
                         <span class="text-danger"></span>
                       </select>
                     <span class="text-danger"></span>
@@ -93,7 +94,7 @@
                   
                 <div class="form-group">
                     <label for="" class="required">Tipo Oficio:</label>
-                    <select class="form-control input-sm" id="filtro_tipo_oficio"  >
+                    <select class="form-control input-sm selectpicker" id="filtro_tipo_oficio"  >
                         <option value="">Selecccionar</option>
                         <option value="ALL">Todos</option>
                         <option value="SOLICITUD">Solicitud</option>
@@ -109,7 +110,7 @@
                   
                 <div class="form-group">
                     <label for="" class="required">Área:</label>
-                    <select class="form-control input-sm" id="filtro_area"  >
+                    <select class="form-control input-sm selectpicker" data-live-search="true" id="filtro_area"  >
                       <option value="">Selecccionar Area</option>
                       <option value="0">Todas</option>
                       <?php foreach($data['areas'] as $area): ?>
@@ -121,14 +122,14 @@
                 
               </div> 
               <?php if($_SESSION['data_user']['privilegios'] == 2){ ?>
-              <div class="col-md-3">        
+              <div class="col-md-2">        
                   
                 <div class="form-group">
                     <label for="" class="required">Ver como un usuario:</label>
-                    <select class="form-control input-sm"  id="filtro_usuario"  >
+                    <select class="form-control input-sm selectpicker" data-live-search="true"  id="filtro_usuario"  >
                       <option value="">Selecccionar Usuario</option>
                       <?php foreach($data['usuarios'] as $user): ?>
-                          <option value="<?php echo $user->id_usuario; ?>"><?php echo ucwords(mb_strtolower($user->nombre_formal,'UTF-8')); ?></option>
+                          <option data-icon="glyphicon glyphicon-user" value="<?php echo $user->id_usuario; ?>"><?php echo ucwords(mb_strtolower($user->nombre_formal,'UTF-8')); ?></option>
                       <?php endforeach; ?>              
                          </select>
                     <span class="text-danger"></span>
@@ -188,14 +189,11 @@
                         <th>Fecha Enviado</th>
                         <th>Visto</th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
               </table>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -203,6 +201,24 @@
 </div>
 <script>
   $(document).ready(function(){
+
+    // $('#filtro_usuario').selectpicker({
+    //   size: 'auto'
+    // });
+
+
+    msgEstatus = localStorage.getItem("msgEstatus");
+    console.log(msgEstatus);
+    if(msgEstatus != null){
+      if(msgEstatus != ""){
+        bootbox.alert({ 
+          title: "Advertencia",
+          message: msgEstatus,
+          type: "warning"
+        })
+        localStorage.setItem("msgEstatus", "")        
+      }
+    }
 
     var currentDate = new Date();
 
@@ -328,10 +344,10 @@
     $("#btn_remove_filtros").click(function(){
       $("#fecha_fin").val("");
       $("#fecha_inicio").val("");
-      $("#filtro_area").val("");
-      $("#filtro_estatus_final").val("");
-      $("#filtro_tipo_oficio").val("");
-      $("#filtro_usuario").val("");
+      $("#filtro_area").selectpicker('val', '');
+      $("#filtro_estatus_final").selectpicker('val', '');
+      $("#filtro_tipo_oficio").selectpicker('val', '');
+      $('#filtro_usuario').selectpicker('val', '');
       filtrar();
     })
 

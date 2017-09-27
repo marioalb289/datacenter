@@ -26,7 +26,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="row">
-				<div class="col-md-4"><h4><strong>Folio : <?php echo $data['oficio']->folio ?></strong></h4></div>
+				<div class="col-md-4"><h4><strong>Información del oficio por vincular</strong></h4></div>
 				<div class="col-md-8 text-right">
 					<button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 				</div>
@@ -134,23 +134,21 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="row">
-				<div class="col-md-4"><h4><strong>Lista de Oficios</strong></h4></div>
+				<div class="col-md-4"><h4><strong>Lista de Oficios Disponibles para vincular</strong></h4></div>
 			</div>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-12">
-              <table id="lista_oficios_destino_externo_vincular" class="table  table-bordered table-hover display dt-center " cellspacing="0" width="100%">
+              <table id="lista_oficios_destino_externo_vincular" class="table table-hover display dt-center " cellspacing="0" width="100%">
                 <thead>
                     <tr>
                       <th>N° Oficio</th>
-                      <th>Emisor</th>
                       <th>Receptor</th>
                       <th>Asunto</th>
                       <th>Estatus Inicial</th>
                       <th>Estatus Final</th>
                       <th>Fecha Recibido</th>
                       <th>Visto</th>
-                      <th ></th>
                       <th ></th>
                     </tr>
                 </thead>

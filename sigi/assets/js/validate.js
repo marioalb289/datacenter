@@ -32,12 +32,23 @@ jQuery.fn.validate = function ()
 
         /* Los controles encontrados por nuestra Clase de CSS */
         var controles = $('[data-validacion-tipo]', form);
-
+        var flagRadio = false;
         /* Comenzamos a validar cada control */
         $.each(controles, function () {
-            validarObjetoForm($(this));
+             // temp = $(this).attr('id');
+             // if(temp == "respuesta" && !flagRadio){
+             //    flagRadio = true;
+             //     validarObjetoForm($(this));
+             // }
+             // else if(temp == "respuesta" && flagRadio){
+             //    flagRadio = false;
+             // }
+             // else{
+             //    validarObjetoForm($(this));
+             // }
+             validarObjetoForm($(this));
         })
-        
+
         /* Verificamos si ha sido validado */
         return (errores == 0);
     } catch (e) {
@@ -51,6 +62,7 @@ function validarObjetoForm (control){
 
     /* El control actual del arreglo */
     var obj = control;
+    
 
 
     /* No nos interesa validar controles con el estado readonly/disabled */
@@ -74,7 +86,32 @@ function validarObjetoForm (control){
 
                 /* Validamos si es requerido */
                 if (v == 'requerido') {
-                    if (obj.val().length == 0) {
+                    // console.log("aqui",obj.val());
+                    // console.log("aqui",$(obj).attr('type'));
+                    var radio = (typeof $(obj).attr('type') != 'undefined') ? $(obj).attr('type') : '';
+                    if(radio == 'radio'){
+                        var nameRadio = $(obj).attr("name");
+                        var selector = "input[name="+nameRadio+"]";
+                        if($(selector).is(':checked') == false){
+                            /* Contamos que hay un error */
+                            errores++;
+
+                            /* Agregamos la clase de bootstrap de errores */
+                            form_group.addClass('has-error');
+
+                            /* Mostramos el mensaje */
+                            if (obj.data('validacion-mensaje') == undefined) {
+                                small.text(_mensaje.campo_obligatorio);
+                            } else {
+                                small.text(obj.data('validacion-mensaje'));
+                            }
+
+                            return false; /* Rompe el bucle */
+                        }
+
+                        
+                    }  
+                    else if (obj.val().length == 0) {
 
                         /* Contamos que hay un error */
                         errores++;
@@ -326,6 +363,7 @@ jQuery.fn.validateBlur = function ()
 {
     try {
         /* Cuenta los posibles errores encontrados */
+        console.log("edit");
         errores = 0;
 
         /* Comenzamos a validar cada control */

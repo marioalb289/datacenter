@@ -469,9 +469,14 @@ class OficioDocumento
         try 
         {
             $sql = "
-                UPDATE sigi_oficios_documentos_recepcion SET
-                `estatus_final`= 1
-                WHERE parent_id=?;
+                UPDATE sigi_oficios_documentos_recepcion odr
+                JOIN
+                    sigi_oficios ofc ON ofc.id = odr.id_oficio
+                SET odr.estatus_final = 1
+                WHERE
+                    odr.parent_id = ?
+                    AND ofc.tipo_oficio = 'ALCANCE'
+                    AND odr.estatus_final = 'Revision';
             ";
 
             // print_r($sql);exit;
@@ -637,9 +642,12 @@ class OficioDocumento
     public function ActualizarEstatusFinal(){
         try 
         {
-            $sql = "UPDATE sigi_oficios_documentos_recepcion SET 
-                        estatus_final = ?, update_at = ? , updated_by = ?
-                    WHERE id_oficio = ? OR parent_id = ? ";
+            $sql = "UPDATE sigi_oficios_documentos_recepcion odr
+                    JOIN sigi_oficios ofc ON ofc.id = odr.id_oficio
+                     SET 
+                        odr.estatus_final = ?, odr.update_at = ? , odr.updated_by = ?
+                    WHERE (odr.id_oficio = ? OR odr.parent_id = ?)
+                        AND ofc.tipo_oficio <> 'ALCANCE' ";
 
                     // print_r($sql);exit;
 
@@ -651,6 +659,31 @@ class OficioDocumento
                         $this->getUpdatedBy(),
                         intval($this->getIdOficio()),
                         intval($this->getIdOficio())
+                    )
+                );
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+    public function ActualizarEstatusFinalSolicitud(){
+        try 
+        {
+            $sql = "UPDATE sigi_oficios_documentos_recepcion SET 
+                        estatus_final = ?, update_at = ? , updated_by = ?
+                    WHERE id_oficio = ?";
+
+                    // print_r($sql);exit;
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getEstatusFinal(),
+                        date('Y-m-d H:i:s'), 
+                        $this->getUpdatedBy(),
+                        intval($this->getIdOficio()),
                     )
                 );
 

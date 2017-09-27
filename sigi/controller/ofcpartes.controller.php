@@ -413,6 +413,7 @@ class OfcPartesController
           return 'row_'.$d;
         }
         ),
+      array( 'db' => 'id_usuario_emisor',  'dt' => 'id_usuario_emisor' ),
       array( 'db' => 'origen',  'dt' => 'origen' ),
       array( 'db' => 'destino',  'dt' => 'destino' ),
       array( 'db' => 'tipo_oficio',  'dt' => 'tipo_oficio' ),
@@ -789,6 +790,10 @@ class OfcPartesController
           $usuario = new Usuario();
           $usr = array(); 
 
+          //Obtener el total de oficios en revision que no sean alcances para evitar que respondan o reabran oficios
+          $total_revision = $oficio->getTotalOfcRevision($id_oficio);
+          // print_r($total_revision);exit;
+
           //Traer la lista de respuestas recibidas a este folio
           $ofc_doc =  new OficioDocumento();
           $arrRespuestas = $ofc_doc->getRespuestas($objOficio->id_oficio);
@@ -832,7 +837,7 @@ class OfcPartesController
 
           }
           // print_r($usr);exit;
-          $this->layout->renderVista("ofcPartes","ofcPartesView",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $arrUsrccp,'usuarios_turnar' => $usr, 'respuestas_recibidas' => $arrRespuestas));
+          $this->layout->renderVista("ofcPartes","ofcPartesView",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $arrUsrccp,'usuarios_turnar' => $usr, 'respuestas_recibidas' => $arrRespuestas,'total_revision' => $total_revision->total_revision));
           
         } catch (Exception $e) {
 
@@ -1536,6 +1541,7 @@ class OfcPartesController
       $oficio = new Oficio();
       $objOficio = $oficio->getOficio($_POST['id_oficio']);
       $respuesta = isset($_POST['respuesta']) && $_POST['respuesta'] != '' ? $_POST['respuesta'] : $objOficio->respuesta;
+      $msgEstatus = "";
       // print_r($objOficio);exit;
 
       $cambio_area = false;
@@ -1547,6 +1553,7 @@ class OfcPartesController
 
       $documento = new Documento();
       $objDoc = $documento->getDocumento($_POST['id_documento']);
+      $enviar_alcance = true;
 
       $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
       $id_oficio = $_POST['id_oficio'];
@@ -1620,6 +1627,8 @@ class OfcPartesController
         $ofc->setRespondido(1);
 
       }
+      if($objOficio->tipo_oficio == "ALCANCE")
+        $ofc->setRespondido(1);
       if(!$ofc->UpdateOficio($id_oficio))
         throw new Exception("Error al actualizar el oficio");
 
@@ -1639,7 +1648,22 @@ class OfcPartesController
         array_push($usr_notificar, $_POST['id_usuario_receptor']);
       }
       $ofc_doc->setEstatusInicial(($respuesta == 0) ? 2: 1);
-      $ofc_doc->setEstatusFinal($enviar ? 2 : 4); //<<<<<<<<<<<<<<<verificar que si es guardar o enviar
+
+      if($objOficio->tipo_oficio == "ALCANCE" && $enviar){
+        $ofcOriginalRes = $oficio->getOficio($objOficio->flag_id);
+        if($ofcOriginalRes->estatus_final == "Revision"){
+          $enviar_alcance = false;
+          $msgEstatus = "Cambios Guardados Correctamente pero NO se puede ENVIAR un Alcance de una Solicitud o Respuesta que este en estatus Revisión";
+          $ofc_doc->setEstatusFinal(4);
+        }
+        else{
+          $ofc_doc->setEstatusFinal(1);
+        }
+      }
+      else{
+        $ofc_doc->setEstatusFinal($enviar ? 2 : 4); //<<<<<<<<<<<<<<<verificar que si es guardar o enviar
+      }
+
       $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
        
       if(!$ofc_doc->ActualizarTitularOficioDocumento($objOficio->id_usuario_receptor,$id_oficio,0))
@@ -1718,6 +1742,15 @@ class OfcPartesController
           }
 
         }
+        elseif($objOficio->tipo_oficio == "ALCANCE"){
+          if(!$enviar_alcance){
+            $success = true;
+            echo json_encode(array("success"=>$success,"notificacion" => array(),"msgEstatus" => $msgEstatus));
+            exit;
+            
+          }
+
+        }
         else{
           //cAMBIAR el estatus de todas las solicitudes en revision
           $arrUsrccp = $usr->ListarUsuariosCcp($objOficio->id_oficio);
@@ -1728,13 +1761,10 @@ class OfcPartesController
             }
 
           }
-          //Cambiar el estatus de todas los alcances a abierto
-          $ofc_doc->enviarAlcances($objOficio->id_oficio);
+          //Cambiar el estatus de todas los alcances a abierto hechos durante la revision de la SOLICITUD
+          //$ofc_doc->enviarAlcances($objOficio->id_oficio);
 
         }
-
-        
-        
       }
 
       //Enviar copia a los nuevos usuarios seleccionados
@@ -1765,7 +1795,8 @@ class OfcPartesController
             
             $ofc_doc->RegistrarOficioDocumento();
 
-            array_push($usr_notificar, $ids);
+            if(!in_array($ids,$usr_notificar))
+              array_push($usr_notificar, $ids);
          }            
        }
       }
@@ -1813,7 +1844,7 @@ class OfcPartesController
       }
 
       // header("Content-type:application/json");
-      echo json_encode(array("success"=>$success,"notificacion" => $data));
+      echo json_encode(array("success"=>$success,"notificacion" => $data,"msgEstatus" => $msgEstatus));
       exit;
     } catch (Exception $e) {
         //Trabajar en un sistema de manejo de errores
@@ -2415,6 +2446,9 @@ class OfcPartesController
               // throw new Exception('No se ha seleccionado ningun archivo.');
               // print_r($_POST['origen']);exit;
 
+            $enviar = isset($_POST['enviar']) && $_POST['enviar'] != '' ? $_POST['enviar'] : true;
+            $msgEstatus = "";
+
             $ofc = new Oficio();
             $objOficioDoc =  new OficioDocumento();
 
@@ -2529,6 +2563,7 @@ class OfcPartesController
               $ofc->setVinculado(isset($_POST['ofc_vinculado']) && intval($_POST['ofc_vinculado']) == 1 ? 1 : 0);
               $ofc->_setAsuntoReceptor("");
               $ofc->_setRespuesta(1);
+              $ofc->setFlagId($objOficio->id_oficio);
               //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta
               if($objOficio->tipo_oficio == "SOLICITUD" && !$objOficio->respondido)
               $ofc->setRespondido(1);
@@ -2553,7 +2588,24 @@ class OfcPartesController
               $ofc_doc->setCcp(0);         
               $ofc_doc->setFechaVisto('');  
               $ofc_doc->setEstatusInicial(1);
-              $ofc_doc->setEstatusFinal($objOficio->estatus_final == "Revision" ? 4 : 1);
+
+              $es_fin = 1;
+              if($objOficio->estatus_final == "Revision"){
+                if($enviar){
+                  $es_fin = 4;
+                  $msgEstatus = "Cambios Guardados Correctamente pero NO se puede ENVIAR un Alcance de una Solicitud o Respuesta que este en estatus Revisión";
+                  
+                }
+                else{
+                  $es_fin = 4;
+                }
+              }elseif ($enviar) {
+                $es_fin = 1;
+              }else{
+                $es_fin = 4;
+              }
+
+              $ofc_doc->setEstatusFinal($es_fin);
               $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
               $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
               
@@ -2579,6 +2631,14 @@ class OfcPartesController
                 }
               }                
                  /*****************/
+
+             if(!$enviar){
+               $data = array();
+               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+               echo json_encode(array("success"=>$success,"notificacion" => $data,"msgEstatus" => $msgEstatus));
+               exit;
+
+             }
 
               
               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
@@ -2613,7 +2673,7 @@ class OfcPartesController
               }
 
               // header("Content-type:application/json");
-              echo json_encode(array("success"=>$success,"notificacion" => $data));
+              echo json_encode(array("success"=>$success,"notificacion" => $data,"msgEstatus" => $msgEstatus));
               exit;
 
 

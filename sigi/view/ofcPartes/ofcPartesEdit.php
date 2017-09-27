@@ -393,12 +393,21 @@
     		        	respuesta = JSON.parse(data); 
     		        	console.log('aqui respuesta',respuesta);
     		        	if(respuesta.success){
-    		        		if(enviar){
-    		        			socket.emit( 'notification', respuesta.notificacion );
-    		        			window.location.href = GLOBAL_PATH+"ofcpartes/index";
+    		        		if (respuesta.msgEstatus != ''){
+    		        			bootbox.alert({ 
+    		        			  title: "Advertencia",
+    		        			  message: respuesta.msgEstatus,
+    		        			  type: "warning"
+    		        			})
+
     		        		}else{
-    		        			window.location.href = GLOBAL_PATH+"ofcpartes/edit/"+id_oficio
-    		        			
+	    		        		if(enviar){
+	    		        			socket.emit( 'notification', respuesta.notificacion );
+	    		        			window.location.href = GLOBAL_PATH+"ofcpartes/index";
+	    		        		}else{
+	    		        			window.location.href = GLOBAL_PATH+"ofcpartes/edit/"+id_oficio;
+	    		        			
+	    		        		}    		        			
     		        		}
     		        	}
     		        	else{

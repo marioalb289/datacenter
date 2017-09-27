@@ -191,6 +191,10 @@ th.dt-center, td.dt-center { text-align: center; }
 
 td.capitalize { text-transform: capitalize; }
 
+.selectpicker{
+  font-size: 12px;
+}
+
 
 
 /* CSS used here will be applied after bootstrap.css */
