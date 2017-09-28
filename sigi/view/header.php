@@ -94,20 +94,27 @@
     socket.on('connect', function () {
       //send the jwt
       // console.log('send jwt');
-      socket.emit('authenticate', {token: '<?php echo $_SESSION['token'] ?>'});
+      socket.emit('authenticate', {token: '<?php echo $_SESSION['token'] ?>',user: ID_USER});
     });
 
-    socket.on('connect', function () {
-      console.log('authenticated');
+    socket.on('disconnect', function () {
+      console.log('no connect');
     });
 
     socket.on( 'notification', function( data ) {
-      // console.log(data);
+      console.log(data);
+      users = data.users;
+      data = data.data;
       var actualuser = ID_USER;
       for (var i = data.ids_usuario_receptor.length - 1; i >= 0; i--) {
         if(actualuser==data.ids_usuario_receptor[i])
         {
-           notifyMe(data.asunto,'AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
+           for (var i = users.length - 1; i >= 0; i--) {
+             if(users[i].usuario == actualuser && users[i].socket == socket.id && users[i].notf){
+              notifyMe(data.asunto,'AI/image/nuevoEmblema-753118.JPG',data.nombre_usuario,data.asunto,data.id_oficio); 
+             }
+           }
+           
            
             $('#lista_solicitudes_entrantes').DataTable().ajax.reload();
 

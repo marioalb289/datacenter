@@ -208,7 +208,6 @@
 
 
     msgEstatus = localStorage.getItem("msgEstatus");
-    console.log(msgEstatus);
     if(msgEstatus != null){
       if(msgEstatus != ""){
         bootbox.alert({ 
