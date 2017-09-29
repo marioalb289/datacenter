@@ -840,11 +840,14 @@ class Oficio
 
             $stm = $this->pdo->prepare("
                SELECT
-                id
+                ofc.id
                FROM
                 sigi_oficios ofc
+                JOIN    
+                 sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
                WHERE
                 ofc.folio_institucion = ?
+                AND odr.eliminado = 0
             ");
             // print_r($stm);exit;
 
