@@ -847,7 +847,7 @@ class Oficio
                  sigi_oficios_documentos_recepcion odr ON odr.id_oficio = ofc.id
                WHERE
                 ofc.folio_institucion = ?
-                AND odr.eliminado = 0
+                AND odr.estatus_final <> 'Cancelado'
             ");
             // print_r($stm);exit;
 
