@@ -189,6 +189,8 @@ tbody td{
 
 th.dt-center, td.dt-center { text-align: center; }
 
+td.dt-center-icon { display: flex; }
+
 td.capitalize { text-transform: capitalize; }
 
 .selectpicker{

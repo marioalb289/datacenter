@@ -756,6 +756,14 @@ class OfcPartesController
           // print_r($id_usuario);exit;
           $oficio = new Oficio();
           $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+          if($objOficio->vinculado){
+            $objOficioDoc = new OficioDocumento();
+            $objOficioDoc->setFechaVisto(date("Y-m-d H:i:s"));
+            $objOficioDoc->setIdOficio($id_oficio);
+            $objOficioDoc->setIdUsuario($_SESSION['data_user']['id']);
+            $objOficioDoc->FechaVistoActualizar();
+
+          }
           // print_r($objOficio);exit;
           //Si esta vacio verificar que el usuario este en la lista de usuarios a los que se les envio copia
           if(empty($objOficio) && $id_usuario != ''){
@@ -917,32 +925,34 @@ class OfcPartesController
     }
 
     public function cancelAction(){
-      if(isset($_REQUEST['id'])){
+      if(isset($_POST['id_oficio'])){
         try {
-          if (!$this->validate->numero($_REQUEST['id']))
+          if (!$this->validate->numero($_POST['id_oficio']))
             throw new Exception("Accion no encontrada");
 
           $objOficioDoc =  new OficioDocumento();
           $objOficioDoc->setEstatusFinal('Cancelado');
-          $objOficioDoc->setIdOficio($_REQUEST['id']);
+          $objOficioDoc->setIdOficio($_POST['id_oficio']);
           $objOficioDoc->setUpdatedBy($_SESSION['data_user']['id']); //Cambair por el usuario logeado
-          $objOficioDoc->ActualizarEstatusFinal();
+          $objOficioDoc->CancelarSolicitud();
 
-          $_SESSION['flash-message-success'] = 'Solicitud Cancelada';
-          header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+          //$_SESSION['flash-message-success'] = 'Solicitud Cancelada';
+          //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+          echo json_encode(array("success"=>true));
+          exit;
           
         } catch (Exception $e) {
 
-          $_SESSION['flash-message-error'] = 'Error al cambiar el estatus';
-          header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+          //$_SESSION['flash-message-error'] = 'Error al cambiar el estatus';
+          //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+          echo json_encode(array("success"=>false,"msg_error" => 'Error al cambiar el estatus'));
           exit;
           
         }
 
       }
       else{
-        $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
-        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        echo json_encode(array("success"=>false,"msg_error" => 'Error al recuperar información'));
         exit;
       }
 
@@ -1009,6 +1019,85 @@ class OfcPartesController
               
             //}
             $this->layout->renderVista("ofcPartes","ofcPartesResponse",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr, 'privilegios' => $privilegios));
+
+            
+          } catch (Exception $e) {
+
+            $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+            header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+            exit;
+            
+          }
+
+        
+      }else{
+        $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+
+      }
+
+    }
+
+    public function oficioDescartarAction(){
+
+
+      if(isset($_REQUEST['id'])){
+          try {
+            if (!$this->validate->numero($_REQUEST['id']))
+                throw new Exception("Accion no encontrada");
+
+            $id_oficio = $_REQUEST['id'];
+            $id_usuario = ''; //Aqui deberia sacar el usuario y el rol que este logeado
+
+            //si eres un usuario receptor, buscar solo el oficio que te correponse
+            //if($_SESSION['data_user']['privilegios'] == 3){
+              $id_usuario = $_SESSION['data_user']['id'];
+            //}
+            // else{
+            //   header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+            //   exit;
+            // }
+
+            $oficio = new Oficio();
+            $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
+            if(empty($objOficio)){
+              $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+              header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+              exit;
+            }
+
+            $privilegios = $_SESSION['data_user']['privilegios'];
+
+            // print_r($objOficio);exit;
+
+            $usuario = new Usuario();
+            $usr = array(); 
+            $area =  new Area();
+            $ar = $area->ListarAreas();
+            $usuarios_ccp = array();
+
+            $objUserReceptor = $usuario->getUsuarioArea($objOficio->id_usuario_receptor);
+            $objUserEmisor = $usuario->getUsuarioArea($objOficio->id_usuario_emisor);
+
+            $arrUsrccp = array();
+            //Si eres un usuario receptor cargar los usuarios que tambien recibieron el mensaje solo si eres el titular del mensaje, y solo el titular puede turnar a otros usuarios
+            //if($_SESSION['data_user']['privilegios'] == 3){
+              if($objOficio->ccp == 0){
+
+                //en caso de ser un oficio interno quitar el usuario que lo emitio
+                if($objOficio->origen == "INTERNO")
+                  $usuarios_ccp[] = $objOficio->id_usuario_emisor;
+                //quitar de la lista de usuarios el usuario logeado
+                $usuarios_ccp[] = $id_usuario;
+
+
+                $usr = $usuario->ListarUsuarios($usuarios_ccp);
+
+              }
+              
+            //}
+            $this->layout->renderVista("ofcPartes","ofcPartesOficioDescartar",array('oficio' => $objOficio, 'usuario_emisor' => $objUserEmisor, 'usuario_receptor' => $objUserReceptor,'usuarios' => $usr, 'privilegios' => $privilegios));
 
             
           } catch (Exception $e) {
@@ -1525,6 +1614,197 @@ class OfcPartesController
       
     }
   }
+  public function EnviarSolicitudAction(){
+      // print_r($_POST);
+       // exit;
+    try {
+      //Obtener el oficio original
+      if (!$this->validate->numero($_POST['id_oficio']))
+              throw new Exception("Error al validar Datos");
+
+      $success = false;
+      $usr_notificar = array();
+      $ofcOriginalRes = array();
+      $oficio = new Oficio();
+      $objOficio = $oficio->getOficio($_POST['id_oficio']);  
+      $enviar_alcance = true;  
+      $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
+      $id_oficio = $_POST['id_oficio'];
+      $msgEstatus = "";
+
+      //Guardar oficio
+
+      $ofc = new Oficio();
+
+      if($objOficio->tipo_oficio == "RESPUESTA"){
+        $ofcOriginalRes = $oficio->getOficio($objOficio->flag_id);
+
+        //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta
+        if($ofcOriginalRes->tipo_oficio == "SOLICITUD" && !$ofcOriginalRes->respondido)
+        $ofc->setRespondido(1);
+        //Si es una solicitud el objoficio y ya fue respondida marcar como no respondido para que el receptor pueda responder la respuesta de la respuesta
+        elseif($ofcOriginalRes->tipo_oficio == "SOLICITUD" && $ofcOriginalRes->respondido)
+        $ofc->setRespondido(0);
+        //si es una respuesta el objfocio marcar como respondido para terminar de cerrar el oficio y evitar que respondan sin reabirl el oficio
+        else
+        $ofc->setRespondido(1);
+
+        $ofc->_setUpdatedBy($id_usuario);
+
+        if(!$ofc->UpdateOficioEnviar($id_oficio))
+          throw new Exception("Error al actualizar el oficio");  
+      }
+
+      $ofc_doc = new OficioDocumento();
+      array_push($usr_notificar, $objOficio->id_usuario_receptor); //Asingar al arrreglo de notificaciones el id de usuario receptor
+      if($objOficio->tipo_oficio == "ALCANCE"){
+        $ofcOriginalRes = $oficio->getOficio($objOficio->flag_id);
+        if($ofcOriginalRes->estatus_final == "Revision"){
+          $enviar_alcance = false;
+          $msgEstatus = "NO se puede ENVIAR un Alcance de una Solicitud o Respuesta que este en estatus Revisión";
+          $ofc_doc->setEstatusFinal(4);
+        }
+        else{
+          $ofc_doc->setEstatusFinal(1);
+        }
+      }
+      elseif($objOficio->tipo_oficio == "RESPUESTA"){
+        $ofcOriginalRes = $oficio->getOficio($objOficio->flag_id);
+        if($ofcOriginalRes->estatus_final == 'Cerrado')
+          $ofc_doc->setEstatusFinal(2);
+        else
+          $ofc_doc->setEstatusFinal(1);
+
+      }else{
+        $ofc_doc->setEstatusFinal(2); //<<<<<<<<<<<<<<<verificar que si es guardar o enviar 
+      }
+      $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+             
+      if(!$ofc_doc->ActualizarOficioDocEnviar($objOficio->id_usuario_receptor,$id_oficio,0))
+        throw new Exception("Error al Actualizar oficio_documento");  
+
+      //Se debe validar que los usuarios que ya tienen copia se camvie el estatus a abierto y añadirlos al arreglo de notificaciones
+      $obj_usr_not = array();
+      $usr = new Usuario();
+      if($objOficio->tipo_oficio == "RESPUESTA"){
+        //Obtener oficio original
+        // $ofcOriginalRes = $oficio->getOficio($objOficio->flag_id);
+
+        // print_r($ofcOriginalRes);exit();
+        if($ofcOriginalRes->tipo_oficio == 'SOLICITUD'){
+
+            //Si es solicitud marcarlo como respondido y cambiar estatus global a cerrado
+            //marcar como respondido
+            $ofc->_setId($ofcOriginalRes->id_oficio);
+            $ofc->setRespondido(1);
+            $ofc->marcarRespuesta();
+
+            //cambiar el estatus final 
+            if($ofcOriginalRes->estatus_final == 'Cerrado')
+            $ofc_doc->setEstatusFinal('Abierto');
+            else
+            $ofc_doc->setEstatusFinal('Cerrado');
+
+
+            $ofc_doc->setIdOficio($ofcOriginalRes->id_oficio);
+            $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+            $ofc_doc->CambiarEstatusSolicitud();
+
+
+
+            $obj_usr_not = $ofc_doc->getUsuariosEnDocumentos($_POST['id_oficio'],$id_usuario);
+        }
+        else{
+            //Sie es la respuesta de una respuesta, marcar la respuesta recibida como respondido y cambiar el estatus de la solicitud principal
+            $ofc->_setId($objOficio->flag_id);
+            $ofc->setRespondido(1);
+            $ofc->marcarRespuesta();
+
+            //Usario el oficio original
+            $arr = $ofc_doc->getOficioDocumento($ofcOriginalRes->parent_id);
+
+            //cambiar el estatus final 
+            if($arr->estatus_final == 'Cerrado')
+             $ofc_doc->setEstatusFinal('Abierto');
+            else
+             $ofc_doc->setEstatusFinal('Cerrado');
+
+            $ofc_doc->setIdOficio($arr->id_oficio);
+            $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+            $ofc_doc->ActualizarEstatusFinal();
+
+            $obj_usr_not = $ofc_doc->getUsuariosEnDocumentos($arr->id_oficio,$_SESSION['data_user']['id']);
+        }
+
+      }
+      elseif($objOficio->tipo_oficio == "ALCANCE"){
+        if(!$enviar_alcance){
+          $success = true;
+          echo json_encode(array("success"=>$success,"notificacion" => array(),"msgEstatus" => $msgEstatus));
+          exit;          
+        }
+
+      }
+      else{
+        //cAMBIAR el estatus de todas las solicitudes en revision
+        $arrUsrccp = $usr->ListarUsuariosCcp($objOficio->id_oficio);
+        if(!empty($arrUsrccp)){
+          foreach ($arrUsrccp as $usuario) {
+             $ofc_doc->enviarUsuarios($usuario->id_usuario,$objOficio->id_oficio);
+             if(!in_array($usuario->id_usuario, $usr_notificar))
+              array_push($usr_notificar, $usuario->id_usuario);          
+          }
+
+        }
+        //Cambiar el estatus de todas los alcances a abierto hechos durante la revision de la SOLICITUD
+        //$ofc_doc->enviarAlcances($objOficio->id_oficio);
+
+      }
+
+      //Obtener Lista de usuarios que recibiran copia para notificarles
+      $arrUsrccp = $usr->ListarUsuariosCcp($objOficio->id_oficio);
+      if(!empty($arrUsrccp)){
+        foreach ($arrUsrccp as $usuario) {
+            if($objOficio->id_usuario_receptor != $usuario->id_usuario)
+              array_push($usr_notificar, $usuario->id_usuario);          
+        }
+
+      }
+
+      $success = true;
+      // $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+      $data = array();
+
+      if(!empty($obj_usr_not)){
+        foreach ($obj_usr_not as $value) {
+          if(!in_array($value->id_usuario,$usr_notificar))
+            array_push($usr_notificar,$value->id_usuario);
+        }        
+      }
+
+      //Armar arreglo de datos para los usuarios que se les notificara el oficio
+      
+      $objUsr = $usr->getUsuarioArea($id_usuario);
+
+      $origen = $objOficio->origen;
+      $destino = $objOficio->destino;
+
+      $data = array('id_oficio' => $id_oficio,'nombre_usuario' => ucwords(mb_strtolower($objUsr->nombre_formal,'UTF-8')).' de '.$objUsr->area, 'asunto' => $objOficio->asunto_emisor, 'origen'=> $origen, 'destino' => $destino,'ids_usuario_receptor' => $usr_notificar);        
+      
+
+
+      echo json_encode(array("success"=>$success,"notificacion" => $data,"msgEstatus" => $msgEstatus));
+      exit;
+    } catch (Exception $e) {
+        //Trabajar en un sistema de manejo de errores
+      $_SESSION['flash-message-error'] = $e->getMessage();
+      echo json_encode(array("success"=>false));
+      exit;
+    //header('Location: sigi.php?c=OfcPartes&a=add');
+    }
+
+  }
+
   public function guardarEdicionAction(){
     // print_r($_FILES);
       // print_r($_POST);
@@ -1660,8 +1940,16 @@ class OfcPartesController
           $ofc_doc->setEstatusFinal(1);
         }
       }
-      else{
+      elseif($objOficio->tipo_oficio == "RESPUESTA"){
+        $ofcOriginalRes = $oficio->getOficio($objOficio->flag_id);
+        if($ofcOriginalRes->estatus_final == 'Cerrado')
+          $ofc_doc->setEstatusFinal($enviar ? 2 : 4);
+        else
+          $ofc_doc->setEstatusFinal($enviar ? 1 : 4);
+
+      }else{
         $ofc_doc->setEstatusFinal($enviar ? 2 : 4); //<<<<<<<<<<<<<<<verificar que si es guardar o enviar
+        
       }
 
       $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
@@ -1710,7 +1998,7 @@ class OfcPartesController
 
               $ofc_doc->setIdOficio($ofcOriginalRes->id_oficio);
               $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
-              $ofc_doc->ActualizarEstatusFinal();
+              $ofc_doc->CambiarEstatusSolicitud();
 
 
 
@@ -1756,8 +2044,9 @@ class OfcPartesController
           $arrUsrccp = $usr->ListarUsuariosCcp($objOficio->id_oficio);
           if(!empty($arrUsrccp)){
             foreach ($arrUsrccp as $usuario) {
-               $ofc_doc->enviarUsuarios($usuario->id_usuario,$objOficio->id_oficio);  
-               array_push($usr_notificar, $usuario->id_usuario);          
+               $ofc_doc->enviarUsuarios($usuario->id_usuario,$objOficio->id_oficio);
+               if(!in_array($usuario->id_usuario, $usr_notificar))
+                array_push($usr_notificar, $usuario->id_usuario);          
             }
 
           }
@@ -1823,7 +2112,7 @@ class OfcPartesController
       }
       /*****************/
       $success = true;
-      $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+      //$_SESSION['flash-message-success'] = 'Datos guardados correctamente';
       $data = array();
 
       if(!empty($obj_usr_not)){
@@ -1848,8 +2137,8 @@ class OfcPartesController
       exit;
     } catch (Exception $e) {
         //Trabajar en un sistema de manejo de errores
-      $_SESSION['flash-message-error'] = $e->getMessage();
-      echo json_encode(array("success"=>false));
+      // $_SESSION['flash-message-error'] = $e->getMessage();
+      echo json_encode(array("success"=>false,"msg_error" => $e->getMessage() ));
       exit;
     //header('Location: sigi.php?c=OfcPartes&a=add');
     }
@@ -2072,7 +2361,7 @@ class OfcPartesController
                 }                
                /*****************/
 
-              $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+              // $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
 
               //Armar arreglo de datos para los usuarios que se les notificara el oficio
               $data = array();
@@ -2093,23 +2382,27 @@ class OfcPartesController
           
       } catch (Exception $e) {
           //Trabajar en un sistema de manejo de errores
-        $_SESSION['flash-message-error'] = $e->getMessage();
-        echo json_encode(array("success"=>false));
+        //$_SESSION['flash-message-error'] = $e->getMessage();
+        echo json_encode(array("success"=>false,"msg_error"=>$e->getMessage()));
         exit;
       //header('Location: sigi.php?c=OfcPartes&a=add');
       }
   }
 
   public function guardarRespuestaAction()
-  {
+  {   
       try {
-         if( !isset($_FILES['archivo']) ){
+         if( !isset($_FILES['archivo']) && !isset($_POST['ofc_vinculado'])){
                throw new Exception('No se ha seleccionado ningun archivo.');
-          } else {
-            $success = true;
+          } 
+          else {
             // print_r($_FILES);
             // print_r($_REQUEST);
             // exit;
+
+            $success = true;
+
+
 
             //Buscar el oficio original y obtener sus datos
             // $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
@@ -2143,12 +2436,13 @@ class OfcPartesController
               $folio = $objOficio->folio;
               $folio_archivo = 'R'.$folio.date("Y-m-d-H-i-s").$objArea->abreviatura;
 
-              $temp = explode(".", $_FILES["archivo"]["name"]);
-              $newfilename = $folio_archivo . '.' . end($temp);
+              
               // exit;
 
               //Si es un oficio sin vincular se gaurda el documento
               if(!isset($_POST['ofc_vinculado'])){
+                $temp = explode(".", $_FILES["archivo"]["name"]);
+                $newfilename = $folio_archivo . '.' . end($temp);
                 //Proceder a guardar el arhivo
                 $nombre = $_FILES['archivo']['name'];
                 $nombre_tmp = $_FILES['archivo']['tmp_name'];
@@ -2275,7 +2569,25 @@ class OfcPartesController
               $ofc_doc->setCcp(0);         
               $ofc_doc->setFechaVisto('');  
               $ofc_doc->setEstatusInicial(1);
-              $ofc_doc->setEstatusFinal($enviar ? 1 : 4);
+
+              //Si oficio es solicitud poner el estatus del oficio original
+              if($objOficio->tipo_oficio == 'SOLICITUD' && $enviar){
+
+                //Si el oficio ya fue vinculado descartar el actual y marcar todo como cerrado
+                if(isset($_POST['ofc_vinculado'])){
+                  $ofc_doc->setEstatusFinal('Cerrado');    
+                }
+                //cambiar el estatus final 
+                else{
+                  if($objOficio->estatus_final == 'Cerrado')
+                  $ofc_doc->setEstatusFinal('Abierto');
+                  else
+                  $ofc_doc->setEstatusFinal('Cerrado');                  
+                }
+
+              }else{
+                $ofc_doc->setEstatusFinal($enviar ? 1 : 4);                
+              }
               $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
               $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
               
@@ -2304,7 +2616,7 @@ class OfcPartesController
 
               if(!$enviar){
                 $data = array();
-                $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+                //$_SESSION['flash-message-success'] = 'Datos guardados correctamente';
                 echo json_encode(array("success"=>$success,"notificacion" => $data));
                 exit;
 
@@ -2318,16 +2630,33 @@ class OfcPartesController
                   $ofc->setRespondido(1);
                   $ofc->marcarRespuesta();
 
-                  //cambiar el estatus final 
-                  if($objOficio->estatus_final == 'Cerrado')
-                  $objOficioDoc->setEstatusFinal('Abierto');
-                  else
-                  $objOficioDoc->setEstatusFinal('Cerrado');
+                  //Si el oficio ya fue vinculado descartar el actual y marcar todo como cerrado
+                  if(isset($_POST['ofc_vinculado'])){
+
+                    if($objOficio->estatus_final == 'Cerrado')
+                    $objOficioDoc->setEstatusFinal('Cerrado');
+                    elseif($objOficio->estatus_final == 'Abierto')
+                    $objOficioDoc->setEstatusFinal('Cerrado');
 
 
-                  $objOficioDoc->setIdOficio($_POST['id_oficio']);
-                  $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
-                  $objOficioDoc->ActualizarEstatusFinal();
+                    $objOficioDoc->setIdOficio($_POST['id_oficio']);
+                    $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+                    $objOficioDoc->CambiarEstatusSolicitud();
+
+                  }
+                  else{
+                    //cambiar el estatus final 
+                    if($objOficio->estatus_final == 'Cerrado')
+                    $objOficioDoc->setEstatusFinal('Abierto');
+                    else
+                    $objOficioDoc->setEstatusFinal('Cerrado');
+
+
+                    $objOficioDoc->setIdOficio($_POST['id_oficio']);
+                    $objOficioDoc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+                    $objOficioDoc->CambiarEstatusSolicitud();
+                  }
+
 
                   $obj_usr_not = $objOficioDoc->getUsuariosEnDocumentos($_POST['id_oficio'],$_SESSION['data_user']['id']);
               }
@@ -2381,7 +2710,7 @@ class OfcPartesController
              
 
               
-              $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+              //$_SESSION['flash-message-success'] = 'Datos guardados correctamente';
               //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
 
               //Armar arreglo de datos para los usuarios que se les notificara el oficio
@@ -2419,8 +2748,8 @@ class OfcPartesController
           
       } catch (Exception $e) {
           //Trabajar en un sistema de manejo de errores
-          $_SESSION['flash-message-error'] = 'Error al guardar la información';
-          echo json_encode(array("success"=>false));
+          // $_SESSION['flash-message-error'] = 'Error al guardar la información';
+          echo json_encode(array("success"=>false,"msg_error" => $e->getMessage()));
           exit;
           //header('Location: sigi.php?c=OfcPartes&a=add');            
       }
@@ -2634,14 +2963,14 @@ class OfcPartesController
 
              if(!$enviar){
                $data = array();
-               $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+               // $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
                echo json_encode(array("success"=>$success,"notificacion" => $data,"msgEstatus" => $msgEstatus));
                exit;
 
              }
 
               
-              $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
+              // $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
               //header("Location: $this->GLOBAL_PATH/ofcpartes/index");
 
               //Armar arreglo de datos para los usuarios que se les notificara el oficio
@@ -2682,8 +3011,8 @@ class OfcPartesController
           
       } catch (Exception $e) {
           //Trabajar en un sistema de manejo de errores
-          $_SESSION['flash-message-error'] = 'Error al guardar la información';
-          echo json_encode(array("success"=>false));
+          // $_SESSION['flash-message-error'] = 'Error al guardar la información';
+          echo json_encode(array("success"=>false,"msg_error"=> $e->getMessage()));
           exit;
           //header('Location: sigi.php?c=OfcPartes&a=add');            
       }

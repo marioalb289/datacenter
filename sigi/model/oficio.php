@@ -654,6 +654,40 @@ class Oficio
 
     }
 
+    public function UpdateOficioEnviar($id_oficio){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios SET 
+                `respondido`=?, 
+                `updated_at`=?, 
+                `updated_by`=? 
+                WHERE (`id`= ?);
+            ";
+
+            //print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getRespondido(),
+                        $this->getUpdatedBy(),
+                        date('Y-m-d H:i:s'),
+                        $id_oficio
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+
+
+    }
+
     public function RegistrarOficio()
     {
         try 

@@ -167,14 +167,6 @@
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
 					      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" maxlength="255" style="height: 100px;" data-validacion-tipo="alfa-numerico"></textarea>
 					    </div>
-					    <div class="form-group" style="text-align: center;">
-					    	<div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;"  >
-					    		<label>
-					    			<input type="checkbox" id="ofc_vinculado" name="ofc_vinculado" value="1">
-					    			<strong>Oficio ya vinculado</strong>
-					    		</label>
-					    	</div>
-					    </div>
 
 						<div id="cargar_archivo">
 						    <div class="form-group" >
@@ -258,35 +250,78 @@
 				var formData = new FormData($(this)[0]);
 				formData.append('enviar', enviar);
 
-			    $.ajax({
-			        url: GLOBAL_PATH+"ofcpartes/guardarRespuesta",
-			        type: 'POST',
-			        data: formData,
-			        async: false,
-			        success: function (data) {
-			        	event.preventDefault();
-			        	respuesta = JSON.parse(data); 
-			        	console.log('aqui respuesta',respuesta);
-			        	if(respuesta.success){
-			        		if(enviar){
-			        			socket.emit( 'notification', respuesta.notificacion );
-			        		}
-			        		window.location.href = GLOBAL_PATH+"ofcpartes/index";
-			        	}
-			        	else{
-			        		window.location.href = GLOBAL_PATH+"ofcpartes/index";
-			        	}
-			        },
-			        cache: false,
-			        contentType: false,
-			        processData: false
-			    });
+			    if(enviar){
+			    	bootbox.confirm({
+			    	    title: "Advertencia",
+			    	    message: "El mensaje será enviado a todos los destinatarios. Los cambios no se pondrán deshacer.<br> ¿Desea continuar?",
+			    	    buttons: {              
+			    	        cancel: {
+			    	            label: 'No',
+			    	            className: 'btn-danger'
+			    	        },
+			    	        confirm: {
+			    	            label: 'Si',
+			    	            className: 'btn-success'
+			    	        }
+			    	    },
+			    	    type: "warning",
+			    	    callback: function (result) {
+			    	        if(result){
+			    	        	enviarSolicitud(formData,enviar);
+			    	        }
+			    	    }
+			    	});
+			    }
+			    else{
+			    	enviarSolicitud(formData,enviar,event)
+			    }
 			}
 
 			
 
 		    event.preventDefault();
 	    });
+
+	    function enviarSolicitud(formData,enviar,event){
+    		$.ajax({
+    		    // url: '?c=OfcPartes&a=Guardar',
+    		    url: GLOBAL_PATH+"ofcpartes/guardarRespuesta",
+    		    type: 'POST',
+    		    data: formData,
+    		    async: false,
+    		    success: function (data) {
+    		    	// event.preventDefault();
+    		    	respuesta = JSON.parse(data); 
+    		    	if(respuesta.success){
+    		    		if(enviar){
+    		    			socket.emit( 'notification', respuesta.notificacion );	    		        			
+    		    		}
+    		    		bootbox.alert({ 
+                          title: "Atención",
+                          message: enviar ? "Solicitud Enviada Correctamente": "Solicitud Guardada Correctamente",
+                          type: "success",
+                          callback: function(){ 
+                          	window.location.href = GLOBAL_PATH+"ofcpartes/index"
+                          }
+                        })
+    		    	}
+    		    	else{
+    		    		bootbox.alert({ 
+                          title: "Advertencia",
+                          message: respuesta.msg_error,
+                          type: "danger",
+                          callback: function(){ 
+                          	window.location.href = GLOBAL_PATH+"ofcpartes/add";
+                          }
+                        })    		    		
+    		    	}
+    		    },
+    		    cache: false,
+    		    contentType: false,
+    		    processData: false
+    		});
+
+    	}
 		$('.form-control').bind('blur', function () {
 		    return $(this).validateBlur();
 		});

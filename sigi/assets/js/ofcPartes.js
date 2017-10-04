@@ -150,11 +150,11 @@ $(document).ready(function(){
               "className": "dt-center",
               "render": function ( data, type, row ) {
                     if(row.estatus_final == 'Cerrado')
-                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:80px;font-size:14px;'>"+row.estatus_final+"</button>";
                     else if(row.estatus_final == 'Cancelado')
-                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:80px;font-size:14px;'>"+row.estatus_final+"</button>";
                     else
-                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:80px;font-size:14px;'>"+row.estatus_final+"</button>";  
                 },
             },
             { "data": "fecha_recibido",
@@ -172,9 +172,9 @@ $(document).ready(function(){
                 "className": "dt-center",
                 "render": function ( data, type, row ) {
                   if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
+                    return  "<img src='AI/image/1.png' style='width:35px' title='Sin Revisar'>";
                   else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'>";
+                    return  "<img src='AI/image/9.png' style='width:35px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'>";
 
                 },
             }            
@@ -273,13 +273,13 @@ $(document).ready(function(){
               "className": "dt-center",
               "render": function ( data, type, row ) {
                     if(row.estatus_final == 'Cerrado')
-                      return  "<button type='button' class='btn btn-success btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                      return  "<button type='button' class='btn btn-success btn-xs' style='width:80px;font-size:14px;'>"+row.estatus_final+"</button>";
                     else if(row.estatus_final == 'Cancelado')
-                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                      return  "<button type='button' class='btn btn-danger btn-xs' style='width:80px;font-size:14px;'>"+row.estatus_final+"</button>";
                     else if(row.estatus_final == 'Revision')
-                      return  "<button type='button' class='btn btn-info btn-xs' style='width:70px'>"+row.estatus_final+"</button>";
+                      return  "<button type='button' class='btn btn-info btn-xs' style='width:80px;font-size:14px;'>"+row.estatus_final+"</button>";
                     else
-                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:70px'>"+row.estatus_final+"</button>";  
+                      return  "<button type='button' class='btn btn-warning btn-xs' style='width:80px;font-size:14px;'>"+row.estatus_final+"</button>";  
                 },
             },
             { "data": "fecha_recibido",
@@ -292,35 +292,31 @@ $(document).ready(function(){
             {
                 "targets": -1,
                 "data": null, 
-                "visible": true,
-                "orderable" : false,
-                "className": "dt-center",
-                "render": function ( data, type, row ) {
-                  if(row.fecha_visto == "0000-00-00 00:00:00")
-                    return  "<img src='AI/image/1.png' style='width:25px' title='Sin Revisar'>";
-                  else 
-                    return  "<img src='AI/image/9.png' style='width:25px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'>";
-
-                },
-            },
-            {
-                "targets": -1,
-                "data": null, 
                 //"visible": ocultarColumnas(USER_PRIV),
                 "orderable" : false,
-                "className": "dt-center",
+                "className": "dt-center-icon",
                 "render": function ( data, type, row ) {
                     var ren = "";
+                    if(row.fecha_visto == "0000-00-00 00:00:00")
+                      ren =  "<a style= 'padding: 0px 5px;'><img src='AI/image/1.png' style='width:35px' title='Sin Revisar'></a>";
+                    else 
+                      ren =  "<a style='padding: 0px 5px;'><img src='AI/image/9.png' style='width:35px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'></a>";
+
+                    
+
 
                     if( (row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Abierto' && row.respondido != 1)||(row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Revision'))
-                      ren = "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      // ren = "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                      ren = ren + "<a style='padding: 0px 5px;' ><img class='cancelar' id='cancel_"+parseInt( row.DT_RowId.substring(4))+"' src='AI/image/0.png' style='width:35px' title='Cancelar Solicitud'></a>";
                     else
-                      ren = "";
+                      ren = ren + "<a style='padding: 0px 5px; cursor: no-drop;' ><img src='AI/image/0.png' style='width:35px;-webkit-filter: grayscale(100%);filter: grayscale(100%);' title='Cancelar Solicitud'></a>";
 
                     if(row.estatus_final == 'Revision')
-                      ren = ren +"<a href='"+GLOBAL_PATH+"ofcpartes/edit/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs edit' style='width:60px'>Editar</a>";
+                      ren = ren +"<a href='"+GLOBAL_PATH+"ofcpartes/edit/"+parseInt( row.DT_RowId.substring(4))+"' style='padding: 0px 5px;' ><img class='edit' src='AI/image/editar.png' style='width:35px' title='Editar Oficio'></a>"
+                      +"<a style='padding: 0px 5px;' ><img id='env_"+parseInt( row.DT_RowId.substring(4))+"' class='enviar' src='AI/image/enviar2.png' style='width:35px' title='Enviar Oficio'></a>";
                     else
-                      ren = ren +"";
+                      ren = ren +"<a style='padding: 0px 5px;cursor: no-drop;' ><img class='edit' src='AI/image/editar.png' style='width:35px;-webkit-filter: grayscale(100%);filter: grayscale(100%);' title='Editar Oficio'></a>"
+                      +"<a style='padding: 0px 5px;cursor: no-drop;' ><img class='edit' src='AI/image/enviar2.png' style='width:35px;-webkit-filter: grayscale(100%);filter: grayscale(100%);' title='Enviar Oficio'></a>";;
 
                     return ren;
                 },
@@ -344,9 +340,25 @@ $(document).ready(function(){
       "order": [[ 8, 'desc' ]],
       "createdRow": function( row, data, dataIndex ) {
         $(row).click(function(e) {
-          if($(e.target).is('a')){
+          if($(e.target).is('a') || $(e.target).is('img')){
             if($(e.target).is('.edit')){
               return;
+            }
+            else if($(e.target).is('.enviar')){
+              // console.log(e.target);
+              e.preventDefault();
+              var id = $(e.target).attr('id');
+              confirmarEnvio(parseInt(id.substring(4)));
+              return;
+
+            }            
+            else if($(e.target).is('.cancelar')){
+              // console.log(e.target);
+              e.preventDefault();
+              var id = $(e.target).attr('id');
+              confirmarCancelar(parseInt(id.substring(7)));
+              return;
+
             }
             else{
               e.preventDefault();
@@ -397,6 +409,130 @@ $(document).ready(function(){
 
 
     });
+
+    function confirmarCancelar(id){
+      bootbox.confirm({
+          title: "Advertencia",
+          message: "Al cancelar la solicitud, ningun usuario podrá verlo. Los cambios no se pondrán deshacer. <br> ¿Deseas continuar?",
+          buttons: {              
+              cancel: {
+                  label: 'No',
+                  className: 'btn-danger'
+              },
+              confirm: {
+                  label: 'Si',
+                  className: 'btn-success'
+              }
+          },
+          type: "warning",
+          callback: function (result) {
+              if(result){
+                //alert("peticion ajax:" +id);
+                $.ajax({
+                  method: "POST",
+                  // url: "?c=OfcPartes&a=createReportParam",
+                  url: GLOBAL_PATH+"ofcpartes/cancel",
+                  data: {id_oficio: id}
+                })
+                  .done(function( res ) {                
+                    
+                    var respuesta = JSON.parse(res);
+                    if(respuesta.success){
+                       $('#lista_solicitudes_salientes').DataTable().ajax.reload();
+                       bootbox.alert({ 
+                          title: "Atención",
+                          message: "Solicitud cancelada correctamente",
+                          type: "success"
+                        })
+                                     
+                    }
+                    else{
+                      //mensaje de error
+                      bootbox.alert({ 
+                        title: "Error",
+                        message: "No se pudo Cancelar el oficio",
+                        type: "danger"
+                      })
+                    }
+                  })
+                  .fail(function( jqXHR, textStatus ) {
+                      bootbox.alert({ 
+                        title: "Error",
+                        message: "No se pudo Cancelar el oficio: " +textStatus,
+                        type: "danger"
+                      })
+                });
+
+              }
+          }
+      });
+
+    }
+
+    function confirmarEnvio(id){
+      // alert(id);
+      bootbox.confirm({
+          title: "Advertencia",
+          message: "El mensaje será enviado a todos los destinatarios. Los cambios no se pondrán deshacer.<br> ¿Desea continuar?",
+          buttons: {              
+              cancel: {
+                  label: 'No',
+                  className: 'btn-danger'
+              },
+              confirm: {
+                  label: 'Si',
+                  className: 'btn-success'
+              }
+          },
+          type: "warning",
+          callback: function (result) {
+              if(result){
+                $.ajax({
+                  method: "POST",
+                  // url: "?c=OfcPartes&a=createReportParam",
+                  url: GLOBAL_PATH+"ofcpartes/EnviarSolicitud",
+                  data: {id_oficio: id}
+                })
+                  .done(function( res ) {                
+                    
+                    var respuesta = JSON.parse(res);
+                    if(respuesta.success){
+                      console.log(respuesta);
+                      if(respuesta.msgEstatus != ''){
+                        $('#lista_solicitudes_salientes').DataTable().ajax.reload();
+                        bootbox.alert({ 
+                          title: "Advertencia",
+                          message: respuesta.msgEstatus,
+                          type: "warning"
+                        })
+
+                      }else{
+                        $('#lista_solicitudes_salientes').DataTable().ajax.reload();
+                        socket.emit( 'notification', respuesta.notificacion );  
+                        bootbox.alert({ 
+                          title: "Atención",
+                          message: "Solicitud enviada",
+                          type: "success"
+                        })
+                      }
+                                     
+                    }
+                    else{
+                      //mensaje de error
+                      bootbox.alert({ 
+                        title: "Error",
+                        message: "No se pudo enviar el oficio",
+                        type: "danger"
+                      })
+                    }
+                  })
+                  .fail(function( jqXHR, textStatus ) {
+                      alert( "Request failed: " + textStatus );
+                });
+              }
+          }
+      });
+    }
     
 
     //Evento de respuestas recibidas

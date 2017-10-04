@@ -32,6 +32,7 @@
 				<div class="col-md-8 text-right">
 				    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_enviar_oficio" name="btn_enviar_oficio" class="btn btn-primary" name="btn_busca" value="Enviar" />
 				    <input style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="submit" id="btn_guardar_oficio" name="btn_guardar_oficio" class="btn btn-primary" name="btn_busca" value="Guardar" />
+				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_cancelar">Cancelar</button>
 				    <button style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;" type="button" class="btn btn-primary" id="btn_regresar">Regresar</button>
 				</div>
 			</div>
@@ -188,7 +189,7 @@
 					      <a href='ofcpartes/viewFile/<?php echo $data['oficio']->id_documento ?>/<?php  echo $data['oficio']->id_oficio?>' class='btn btn-default'  style="width: 100px;" target="_blank">Ver Original</a>
 					    </div>
 					    <div class="form-group" style="text-align: center;">
-					    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;">No se eligió archivo</span>
+					    	<span class="fileinput-filename"></span><span class="fileinput-new" style="font-weight: 700;"><?php echo $data['oficio']->doc_nombre ?></span>
 					    	
 					    </div>
 
@@ -309,6 +310,11 @@
 	    	window.history.go(-1);
 	    });
 
+	    $( "#btn_cancelar" ).click(function() {
+	    	var id_oficio = $("#id_oficio").val();
+	    	window.location.href = GLOBAL_PATH+"ofcpartes/edit/"+id_oficio;
+	    });
+
 	    $("#fecha_recepcion").datepicker({
 	        dateFormat: 'yy-mm-dd',
 	        maxDate: 0,
@@ -382,42 +388,31 @@
 				var id_oficio = $("#id_oficio").val();
 
 
-    		    $.ajax({
-    		        // url: '?c=OfcPartes&a=Guardar',
-    		        url: GLOBAL_PATH+"ofcpartes/guardarEdicion",
-    		        type: 'POST',
-    		        data: formData,
-    		        async: false,
-    		        success: function (data) {
-    		        	event.preventDefault();
-    		        	respuesta = JSON.parse(data); 
-    		        	console.log('aqui respuesta',respuesta);
-    		        	if(respuesta.success){
-    		        		if (respuesta.msgEstatus != ''){
-    		        			bootbox.alert({ 
-    		        			  title: "Advertencia",
-    		        			  message: respuesta.msgEstatus,
-    		        			  type: "warning"
-    		        			})
-
-    		        		}else{
-	    		        		if(enviar){
-	    		        			socket.emit( 'notification', respuesta.notificacion );
-	    		        			window.location.href = GLOBAL_PATH+"ofcpartes/index";
-	    		        		}else{
-	    		        			window.location.href = GLOBAL_PATH+"ofcpartes/edit/"+id_oficio;
-	    		        			
-	    		        		}    		        			
-    		        		}
-    		        	}
-    		        	else{
-    		        		window.location.href = GLOBAL_PATH+"ofcpartes/edit/"+id_oficio;
-    		        	}
-    		        },
-    		        cache: false,
-    		        contentType: false,
-    		        processData: false
-    		    });
+				if(enviar){
+					bootbox.confirm({
+					    title: "Advertencia",
+					    message: "El mensaje será enviado a todos los destinatarios. Los cambios no se pondrán deshacer.<br> ¿Desea continuar?",
+					    buttons: {              
+					        cancel: {
+					            label: 'No',
+					            className: 'btn-danger'
+					        },
+					        confirm: {
+					            label: 'Si',
+					            className: 'btn-success'
+					        }
+					    },
+					    type: "warning",
+					    callback: function (result) {
+					        if(result){
+					        	enviarSolicitud(formData,enviar);
+					        }
+					    }
+					});
+				}
+				else{
+					enviarSolicitud(formData,enviar,event)
+				}
 
     		}
 
@@ -425,6 +420,57 @@
 
     	    event.preventDefault();
         });
+        function enviarSolicitud(formData,enviar,event){
+    		$.ajax({
+    		    // url: '?c=OfcPartes&a=Guardar',
+    		    url: GLOBAL_PATH+"ofcpartes/guardarEdicion",
+    		    type: 'POST',
+    		    data: formData,
+    		    async: false,
+    		    success: function (data) {
+    		    	// event.preventDefault();
+    		    	respuesta = JSON.parse(data); 
+    		    	if(respuesta.success){
+    		    		if (respuesta.msgEstatus != ''){
+    		    			bootbox.alert({
+	                        	title: "Advertencia",
+	                        	message: respuesta.msgEstatus,
+	                        	type: "warning",
+	                        	callback: function(){ 
+	                          		window.location.href = GLOBAL_PATH+"ofcpartes/index"
+	                          	}
+	                        })
+    		    		}
+    		    		else{
+	    		    		if(enviar)
+	    		    			socket.emit( 'notification', respuesta.notificacion );
+				    		bootbox.alert({ 
+		                      title: "Atención",
+		                      message: enviar ? "Solicitud Enviada Correctamente": "Solicitud Guardada Correctamente",
+		                      type: "success",
+		                      callback: function(){ 
+		                      	window.location.href = GLOBAL_PATH+"ofcpartes/index"
+		                      }
+		                    })	    		    		
+    		    		}
+    		    	}
+    		    	else{
+    		    		bootbox.alert({ 
+                          title: "Advertencia",
+                          message: respuesta.msg_error,
+                          type: "danger",
+                          callback: function(){ 
+                          	window.location.href = GLOBAL_PATH+"ofcpartes/index";
+                          }
+                        })    		    		
+    		    	}
+    		    },
+    		    cache: false,
+    		    contentType: false,
+    		    processData: false
+    		});
+
+    	}
     	$('.form-control').bind('blur', function () {
     	    return $(this).validateBlur();
     	});

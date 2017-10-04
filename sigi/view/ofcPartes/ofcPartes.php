@@ -1,25 +1,3 @@
-<!-- Modal -->
-<div class="modal fade" id="cancelar_solicitud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header modal-header-warning">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h1><i class="glyphicon glyphicon-question-sign"></i> Advertencia</h1>
-            </div>
-            <div class="modal-body">
-              <p>Al cancelar la solicitud, ningun usuario podrá verlo. </p>
-              <p>Los cambios no se pondrán deshacer. </p>
-              <p><strong>¿Deseas continuar?</strong></p>
-            </div>
-            <div class="modal-footer">
-            <a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='#' type="button" class="btn btn-primary pull-left" name="btn-cancelar" id="btn-responder" data-dismiss="modal" role="button">No</a>
-                <a style="width: 120px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" href='' type="button" class="btn btn-primary" name="btn-cancelar" id="btn-confirmar" role="button">Si</a>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- Modal -->
-
 <div class=" jumbotron sigi-welcome" style="margin-top: 10px; padding: 30px 15px; background-color: #8c1b67;">
   <img src="AI/image/sigi_blanco.png" style="height: 75px;">
 </div>
@@ -39,23 +17,6 @@
         <div class="panel-body">
         
             <div class="row">
-              <!-- <div class="col-md-6">
-                <div class="form-group">
-                    <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha:</label>
-                    <div class="row">
-                          <div class="col-md-6">
-                            <label for="">Desde:</label>
-                            <input type="text" id="fecha_inicio" name="fecha_inicio"  class="form-control input-sm" placeholder="Fecha Inicio" tabindex="-1" style="cursor: auto;display: inline; width: 70%; margin-left: 10px;" />                                  
-                          </div>
-                          <div class="col-md-6">
-                            <label for="">Hasta:</label>
-                            <input type="text" id="fecha_fin" name="fecha_fin"  class="form-control input-sm" placeholder="Fecha Fin" tabindex="-1" style="cursor:auto;display: inline; width: 70%; margin-left: 10px;" />
-                          </div>
-                    </div>
-                    
-                    <span class="text-danger"></span>
-                </div>  
-              </div> -->
               <div class="col-md-2">        
                   
                 <div class="form-group">
@@ -169,6 +130,16 @@
                     </tr>
                 </thead>
               </table>
+              <div class="leyenda">
+                <table style="margin: 15px 0px;">
+                  <tr>
+                    <td style="text-align: right;"><a style="padding: 0px 5px;"><img src="AI/image/1.png" style="width:25px" title="Sin Revisar"></a></td>
+                    <td>Oficio sin Revisar</td>
+                    <td style="text-align: right;"><a style="padding: 0px 5px;"><img src="AI/image/9.png" style="width:25px" title="Sin Revisar"></a></td>
+                    <td>Oficio visto</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -187,11 +158,28 @@
                         <th></th>
                         <th>Estatus Final</th>
                         <th>Fecha Enviado</th>
-                        <th>Visto</th>
                         <th></th>
                     </tr>
                 </thead>
               </table>
+              <div class="leyenda">
+                <table style="margin: 15px 0px; width: 100%">
+                  <tr>
+                    <td style="text-align: right;"><a style="padding: 0px 5px;"><img src="AI/image/1.png" style="width:25px" title="Sin Revisar"></a></td>
+                    <td>Oficio sin Revisar</td>
+                    <td style="text-align: right;"><a style="padding: 0px 5px;"><img src="AI/image/9.png" style="width:25px" title="Sin Revisar"></a></td>
+                    <td>Oficio visto</td>
+                    <td style="text-align: right;"><a style="padding: 0px 5px;"><img src="AI/image/0.png" style="width:25px" title="Sin Revisar"></a></td>
+                    <td>Cancelar Oficio</td>
+                    <td style="text-align: right;"><a style="padding: 0px 5px;"><img src="AI/image/editar.png" style="width:25px" title="Sin Revisar"></a></td>
+                    <td>Editar Oficio</td>
+                    <td style="text-align: right;"><a style="padding: 0px 5px;"><img src="AI/image/enviar2.png" style="width:25px" title="Sin Revisar"></a></td>
+                    <td>Enviar Oficio</td>
+                    <td style="text-align: right;"><a style="padding: 0px 5px; cursor: no-drop;"><img src="AI/image/0.png" style="width:25px;-webkit-filter: grayscale(100%);filter: grayscale(100%);" title="Cancelar Solicitud"></a><a style="padding: 0px 5px;cursor: no-drop;"><img class="edit" src="AI/image/editar.png" style="width:25px;-webkit-filter: grayscale(100%);filter: grayscale(100%);" title="Editar Oficio"></a><a style="padding: 0px 5px;cursor: no-drop;"><img class="edit" src="AI/image/enviar2.png" style="width:25px;-webkit-filter: grayscale(100%);filter: grayscale(100%);" title="Enviar Oficio"></a></td>
+                    <td>Funciones Desactivadas</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>

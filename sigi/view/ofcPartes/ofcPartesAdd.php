@@ -287,29 +287,33 @@
 				formData.append('check', arrCheck);
 				formData.append('enviar', enviar);
 
-    		    $.ajax({
-    		        // url: '?c=OfcPartes&a=Guardar',
-    		        url: GLOBAL_PATH+"ofcpartes/guardar",
-    		        type: 'POST',
-    		        data: formData,
-    		        async: false,
-    		        success: function (data) {
-    		        	event.preventDefault();
-    		        	respuesta = JSON.parse(data); 
-    		        	if(respuesta.success){
-    		        		if(enviar){
-    		        			socket.emit( 'notification', respuesta.notificacion );	    		        			
-    		        		}
-    		        		window.location.href = GLOBAL_PATH+"ofcpartes/index"
-    		        	}
-    		        	else{
-    		        		window.location.href = GLOBAL_PATH+"ofcpartes/add";
-    		        	}
-    		        },
-    		        cache: false,
-    		        contentType: false,
-    		        processData: false
-    		    });
+				if(enviar){
+					bootbox.confirm({
+					    title: "Advertencia",
+					    message: "El mensaje será enviado a todos los destinatarios. Los cambios no se pondrán deshacer.<br> ¿Desea continuar?",
+					    buttons: {              
+					        cancel: {
+					            label: 'No',
+					            className: 'btn-danger'
+					        },
+					        confirm: {
+					            label: 'Si',
+					            className: 'btn-success'
+					        }
+					    },
+					    type: "warning",
+					    callback: function (result) {
+					        if(result){
+					        	enviarSolicitud(formData,enviar);
+					        }
+					    }
+					});
+				}
+				else{
+					enviarSolicitud(formData,enviar,event)
+				}
+
+    		    
 
     		}
 
@@ -317,6 +321,51 @@
 
     	    event.preventDefault();
         });
+
+    	function enviarSolicitud(formData,enviar,event){
+    		$.ajax({
+    		    // url: '?c=OfcPartes&a=Guardar',
+    		    url: GLOBAL_PATH+"ofcpartes/guardar",
+    		    type: 'POST',
+    		    data: formData,
+    		    async: false,
+    		    success: function (data) {
+    		    	// event.preventDefault();
+    		    	respuesta = JSON.parse(data); 
+    		    	if(respuesta.success){
+    		    		if(enviar){
+    		    			socket.emit( 'notification', respuesta.notificacion );	    		        			
+    		    		}
+    		    		bootbox.alert({ 
+                          title: "Atención",
+                          message: enviar ? "Solicitud Enviada Correctamente": "Solicitud Guardada Correctamente",
+                          type: "success",
+                          callback: function(){ 
+                          	window.location.href = GLOBAL_PATH+"ofcpartes/index"
+                          }
+                        })
+
+
+    		    		
+    		    	}
+    		    	else{
+    		    		bootbox.alert({ 
+                          title: "Advertencia",
+                          message: respuesta.msg_error,
+                          type: "danger",
+                          callback: function(){ 
+                          	window.location.href = GLOBAL_PATH+"ofcpartes/add";
+                          }
+                        })    		    		
+    		    	}
+    		    },
+    		    cache: false,
+    		    contentType: false,
+    		    processData: false
+    		});
+
+    	}
+
     	$('.form-control').bind('blur', function () {
     	    return $(this).validateBlur();
     	});

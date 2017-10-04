@@ -61,6 +61,7 @@
 				<?php } ?>	
 				<?php if ( ($_SESSION['data_user']['privilegios'] == 3 || $_SESSION['data_user']['privilegios'] == 2) && $data['oficio']->tipo_oficio == 'SOLICITUD' && $data['oficio']->id_usuario_receptor == $_SESSION['data_user']['id'] && $data['oficio']->ccp == 0 &&  $data['oficio']->respondido == 0 ){  ?>
 				<a style="width: 100px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='ofcpartes/vincular/".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Vincular</a>
+				<a style="width: 145px;height:40px;background: #8c1b67;border-color: #8c1b67;padding: 9px 12px;" <?php echo "href='ofcpartes/oficioDescartar/".$data['oficio']->id_oficio."'"; ?> type="button" class="btn btn-primary" name="btn-cancelar" id="btn-vincular" role="button">Oficio ya Vinculado</a>
 				<?php } ?>	
 
 				<?php if( $data['oficio']->id_usuario_emisor == $_SESSION['data_user']['id'] && $data['oficio']->tipo_oficio <> 'ALCANCE' ){ ?>

@@ -380,6 +380,39 @@ class OficioDocumento
         }
 
     }
+    public function ActualizarOficioDocEnviar($id_usuario_actual,$id_oficio,$ccp){
+        try 
+        {
+            $sql = "
+                UPDATE sigi_oficios_documentos_recepcion SET
+                estatus_final = ?,
+                updated_by = ?,
+                update_at = ?
+                WHERE (id_oficio= ? AND id_usuario = ? AND ccp = ?);
+            ";
+
+            //print_r($sql);exit;
+
+            $res = $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getEstatusFinal(),
+                        $this->getUpdatedBy(),
+                        date('Y-m-d H:i:s'),
+                        $id_oficio,
+                        $id_usuario_actual,
+                        $ccp
+                    )
+                );
+
+            return $res;
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
     public function ActualizarTitularAlcance($id_usuario_actual,$id_oficio){
         try 
         {
@@ -584,6 +617,30 @@ class OficioDocumento
         }
 
     }
+    public function FechaVistoActualizarVinculado(){
+        try 
+        {
+            $sql = "UPDATE sigi_oficios_documentos_recepcion SET 
+                        fecha_visto          = ?
+                    WHERE id_oficio = ? AND id_usuario = ? ";
+
+                    print_r($sql);exit;
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getFechaVisto(),
+                        intval($this->getIdOficio()),
+                        intval($this->getIdUsuario()),
+                    )
+                );
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
 
 
     public function getOficioDocumento($id){
@@ -658,6 +715,34 @@ class OficioDocumento
                         date('Y-m-d H:i:s'), 
                         $this->getUpdatedBy(),
                         intval($this->getIdOficio()),
+                        intval($this->getIdOficio())
+                    )
+                );
+
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+
+    }
+    public function CambiarEstatusSolicitud(){
+        try 
+        {
+            $sql = "UPDATE sigi_oficios_documentos_recepcion odr
+                    JOIN sigi_oficios ofc ON ofc.id = odr.id_oficio
+                     SET 
+                        odr.estatus_final = ?, odr.update_at = ? , odr.updated_by = ?
+                    WHERE odr.id_oficio = ?
+                        AND ofc.tipo_oficio <> 'ALCANCE' ";
+
+                    // print_r($sql);exit;
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                    array(
+                        $this->getEstatusFinal(),
+                        date('Y-m-d H:i:s'), 
+                        $this->getUpdatedBy(),
                         intval($this->getIdOficio())
                     )
                 );
