@@ -508,6 +508,7 @@ $(document).ready(function(){
 
                       }else{
                         $('#lista_solicitudes_salientes').DataTable().ajax.reload();
+                        $('#lista_solicitudes_entrantes').DataTable().ajax.reload();
                         socket.emit( 'notification', respuesta.notificacion );  
                         bootbox.alert({ 
                           title: "Atención",

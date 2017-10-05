@@ -2532,7 +2532,7 @@ class OfcPartesController
               $ofc->setVinculado(isset($_POST['ofc_vinculado']) && intval($_POST['ofc_vinculado']) == 1 ? 1 : 0);
               $ofc->_setAsuntoReceptor("");
               $ofc->_setRespuesta(1);
-              // if($enviar){
+              if($enviar){
                 //Si es una solicitud el objoficio y no ha sido responido marcar como responido para evitar que respondan la respuesta
                 if($objOficio->tipo_oficio == "SOLICITUD" && !$objOficio->respondido)
                 $ofc->setRespondido(1);
@@ -2542,7 +2542,7 @@ class OfcPartesController
                 //si es una respuesta el objfocio marcar como respondido para terminar de cerrar el oficio y evitar que respondan sin reabirl el oficio
                 else
                 $ofc->setRespondido(1);
-              // }
+              }
 
               
               $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
@@ -2615,6 +2615,12 @@ class OfcPartesController
               }
 
               if(!$enviar){
+
+                //Si es solicitud marcarlo como respondido al guardar y evitar que generen mas de una respuesta por solicitud
+                $ofc->_setId($objOficio->id_oficio);
+                $ofc->setRespondido(1);
+                $ofc->marcarRespuesta();
+
                 $data = array();
                 //$_SESSION['flash-message-success'] = 'Datos guardados correctamente';
                 echo json_encode(array("success"=>$success,"notificacion" => $data));
