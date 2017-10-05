@@ -756,7 +756,8 @@ class OfcPartesController
           // print_r($id_usuario);exit;
           $oficio = new Oficio();
           $objOficio = $oficio->getOficio($id_oficio,$id_usuario);
-          if($objOficio->vinculado){
+          //Marcar como visto cuando el oficio ya este vinculado
+          if(!empty($objOficio) && $objOficio->vinculado){
             $objOficioDoc = new OficioDocumento();
             $objOficioDoc->setFechaVisto(date("Y-m-d H:i:s"));
             $objOficioDoc->setIdOficio($id_oficio);
