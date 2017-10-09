@@ -43,7 +43,6 @@
                         <option value="0">Todos</option>
                         <option value="1">Cerrado</option>
                         <option value="2">Abierto</option>
-                        <option value="3">Cancelado</option>
                         <option value="4">Revisión</option>
                         <span class="text-danger"></span>
                       </select>

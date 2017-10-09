@@ -300,13 +300,9 @@ $(document).ready(function(){
                     if(row.fecha_visto == "0000-00-00 00:00:00")
                       ren =  "<a style= 'padding: 0px 5px;'><img src='AI/image/1.png' style='width:35px' title='Sin Revisar'></a>";
                     else 
-                      ren =  "<a style='padding: 0px 5px;'><img src='AI/image/9.png' style='width:35px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'></a>";
+                      ren =  "<a style='padding: 0px 5px;'><img src='AI/image/9.png' style='width:35px' title='Visto "+moment(row.fecha_visto).format('DD/MM/YYYY, HH:mm')+"'></a>";                    
 
-                    
-
-
-                    if( (row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Abierto' && row.respondido != 1)||(row.tipo_oficio=="SOLICITUD" && row.estatus_final == 'Revision'))
-                      // ren = "<a data-toggle='modal' data-target='#cancelar_solicitud' data-whatever='"+GLOBAL_PATH+"ofcpartes/cancel/"+parseInt( row.DT_RowId.substring(4))+"' class='btn btn-default btn-xs' style='width:60px'>Cancelar</a>";
+                    if( (row.tipo_oficio=="SOLICITUD" && row.estatus_final== 'Revision' && row.respondido != 1) || (row.tipo_oficio=="ALCANCE" && row.estatus_final== 'Revision'))
                       ren = ren + "<a style='padding: 0px 5px;' ><img class='cancelar' id='cancel_"+parseInt( row.DT_RowId.substring(4))+"' src='AI/image/0.png' style='width:35px' title='Cancelar Solicitud'></a>";
                     else
                       ren = ren + "<a style='padding: 0px 5px; cursor: no-drop;' ><img src='AI/image/0.png' style='width:35px;-webkit-filter: grayscale(100%);filter: grayscale(100%);' title='Cancelar Solicitud'></a>";
