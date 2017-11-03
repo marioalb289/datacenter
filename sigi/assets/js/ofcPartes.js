@@ -425,12 +425,16 @@ $(document).ready(function(){
               if(result){
                 //alert("peticion ajax:" +id);
                 $.ajax({
+                  beforeSend: function(){
+                    CustomLoadingShow();
+                  },
                   method: "POST",
                   // url: "?c=OfcPartes&a=createReportParam",
                   url: GLOBAL_PATH+"ofcpartes/cancel",
                   data: {id_oficio: id}
                 })
-                  .done(function( res ) {                
+                  .done(function( res ) { 
+                    CustomLoadingClose();               
                     
                     var respuesta = JSON.parse(res);
                     if(respuesta.success){
@@ -485,12 +489,15 @@ $(document).ready(function(){
               if(result){
                 $.ajax({
                   method: "POST",
+                  beforeSend: function(){
+                    CustomLoadingShow("Guardando...");
+                  },
                   // url: "?c=OfcPartes&a=createReportParam",
                   url: GLOBAL_PATH+"ofcpartes/EnviarSolicitud",
                   data: {id_oficio: id}
                 })
                   .done(function( res ) {                
-                    
+                    CustomLoadingClose();
                     var respuesta = JSON.parse(res);
                     if(respuesta.success){
                       console.log(respuesta);

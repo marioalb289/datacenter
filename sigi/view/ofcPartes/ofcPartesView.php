@@ -200,7 +200,7 @@
 			    </div>
 
 			    
-				<?php if(!$data['oficio']->vinculado){ ?>
+				<?php if( $data['oficio']->vinculado == 0 || $data['oficio']->vinculado == 2){ ?>
 			    <div class="form-group">
 			    
 			      <img src="AI/image/pdf.jpg" class="img-responsive" alt="Responsive image" style="margin-left:auto;margin-right: auto; height: 82px; ">

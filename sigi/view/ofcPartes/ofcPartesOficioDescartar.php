@@ -273,8 +273,12 @@
     		    url: GLOBAL_PATH+"ofcpartes/guardarRespuesta",
     		    type: 'POST',
     		    data: formData,
+    		    beforeSend: function(){
+    		    	CustomLoadingShow("Guardando...");
+    		    },
     		    async: false,
     		    success: function (data) {
+    		    	CustomLoadingClose();
     		    	// event.preventDefault();
     		    	respuesta = JSON.parse(data); 
     		    	if(respuesta.success){

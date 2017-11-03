@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="sigi/assets/css/style.css" />
         <link rel="stylesheet" href="sigi/assets/css/jquery.gritter.css" />
         <link rel="stylesheet" href="sigi/assets/css/wickedpicker.min.css" />
+        <link rel="stylesheet" href="sigi/assets/css/font-awesome-4.7.0/css/font-awesome.min.css" />
 
         <script src="sigi/assets/js/moment.min.js"></script>
         
@@ -135,6 +136,30 @@
       
       
     });
+    var Customdialog = null;
+    function CustomLoadingShow(message = ''){
+      message = message != '' ? message : "Cargando...";
+      Customdialog = bootbox.dialog({
+              message: '<p style="font-size: 24px;color: #8c1b67;text-align: center;"><i class="fa fa-spin fa-spinner" style="margin-right:5px"></i>'+message +'</p>',
+              closeButton: false,
+              size: 'small'
+          });
+      // .find('.modal-content').css({
+      //     'margin-top': function (){
+      //         var w = $( window ).height();
+      //         var b = $(".modal-dialog").height();
+      //         // should not be (w-h)/2
+      //         var h = (w-b)/2;
+      //         return h+"px";
+      //     }
+      // });
+      Customdialog.modal('hide');
+
+    }
+
+    function CustomLoadingClose(){
+      bootbox.hideAll();
+    }
 
 
     // socket.on('news', function (data) {

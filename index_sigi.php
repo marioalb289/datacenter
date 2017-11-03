@@ -97,9 +97,9 @@ else{
         $extra = '/index';
         // print_r($validate);exit;
         if (!$validate->alfanumerico($correo))
-           header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");     
+           header("Location: http://$host$uri/$extra");     
         if (!$validate->alfanumerico($pass))
-             header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");     
+             header("Location: http://$host$uri/$extra");     
 
         $usuario = new Usuario();
         $objUser = $usuario->reLoginUser($correo,$pass);
@@ -156,7 +156,7 @@ else{
         }
         else{
            $extra = '/index';
-            header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");
+            header("Location: http://$host$uri/$extra");
 
         }
 
@@ -165,7 +165,7 @@ else{
     }
     else{
         $extra = '/index';
-         header("Location: https://datacenter-iepcdurango.mx/datacenter/index.php");      
+         header("Location: http://$host$uri/$extra");      
     }
 }
 

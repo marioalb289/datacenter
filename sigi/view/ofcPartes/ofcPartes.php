@@ -1,6 +1,6 @@
-<div class=" jumbotron sigi-welcome" style="margin-top: 10px; padding: 30px 15px; background-color: #8c1b67;">
+<!-- <div class=" jumbotron sigi-welcome" style="margin-top: 10px; padding: 30px 15px; background-color: #8c1b67;">
   <img src="AI/image/sigi_blanco.png" style="height: 75px;">
-</div>
+</div> -->
 <div class="row">
 
   <div class="col-md-12">

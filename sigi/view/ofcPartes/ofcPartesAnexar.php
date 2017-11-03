@@ -290,9 +290,13 @@
 		    		    url: GLOBAL_PATH+"ofcpartes/guardarAnexo",
 		    		    type: 'POST',
 		    		    data: formData,
+		    		    beforeSend: function(){
+		    		    	CustomLoadingShow("Guardando...");
+		    		    },
 		    		    async: false,
 		    		    success: function (data) {
 		    		    	// event.preventDefault();
+		    		    	CustomLoadingClose();
 		    		    	respuesta = JSON.parse(data); 
 		    		    	if(respuesta.success){
 		    		    		if (respuesta.msgEstatus != ''){

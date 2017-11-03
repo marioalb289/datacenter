@@ -322,15 +322,21 @@
     	    event.preventDefault();
         });
 
+        
+
     	function enviarSolicitud(formData,enviar,event){
     		$.ajax({
     		    // url: '?c=OfcPartes&a=Guardar',
     		    url: GLOBAL_PATH+"ofcpartes/guardar",
     		    type: 'POST',
+    		    beforeSend: function(){
+    		    	CustomLoadingShow("Guardando...");
+    		    },
     		    data: formData,
     		    async: false,
     		    success: function (data) {
     		    	// event.preventDefault();
+    		    	CustomLoadingClose();
     		    	respuesta = JSON.parse(data); 
     		    	if(respuesta.success){
     		    		if(enviar){
@@ -344,9 +350,6 @@
                           	window.location.href = GLOBAL_PATH+"ofcpartes/index"
                           }
                         })
-
-
-    		    		
     		    	}
     		    	else{
     		    		bootbox.alert({ 

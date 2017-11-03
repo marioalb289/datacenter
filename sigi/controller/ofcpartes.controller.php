@@ -1552,57 +1552,99 @@ class OfcPartesController
         $id_usuario = $_SESSION['data_user']['id'];
         $objOficioSolicitud = $ofc->getOficio($_REQUEST['id'],$id_usuario); //solicitud original
         $objOficioVincular = $ofc->getOficio($_REQUEST['idVincular'],$id_usuario);
+        $id_usuario = $_SESSION['data_user']['id']; //id de usuario logeado
 
         // print_r($objOficioSolicitud);
         // print_r("<br><br>");
         // print_r($objOficioVincular);
         // exit;
 
-
-        
-        //Modificar datos del oficio que sera vinculado
+        //Proceder a guardar el oficio como una respuesta 
+        //Guardar oficio
         $ofc->_setOrigen($objOficioVincular->origen);
         $ofc->setTipoOficio("RESPUESTA");
-        $ofc->setFolio($objOficioSolicitud->folio);//hAY QUE SACAR FOLIO DEL OFICIO ORIGINAL
-        $ofc->setFolioInstitucion("S/N"); //Folio de institucion cambiar
-        $ofc->_setIdUsuarioEmisor($objOficioVincular->id_usuario_emisor); //VERIFICAR SI ES POSIBLE
-        $ofc->_setRespuesta(1); //revisar si es posible reabrir el oficio
-        $ofc->setRespondido(1); //Marcar que el oficio fue respondido, para identificar que la solicitud fue convertida a respuesta
-        $ofc->setDestino('INTERNO') ; 
+        $ofc->setFolio($objOficioSolicitud->folio);
+        $ofc->setFolioInstitucion($objOficioVincular->folio_iepc); //Folio caputrado
+        $ofc->_setIdUsuarioEmisor($objOficioVincular->id_usuario_emisor);
+        $ofc->_setNombreEmisor($objOficioVincular->nombre_emisor);
+        $ofc->_setInstitucionEmisor($objOficioVincular->institucion_emisor);
+        $ofc->_setCargo($objOficioVincular->cargo);
+        $ofc->_setAsuntoEmisor($objOficioVincular->asunto_emisor);
+
+        //$ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
+        $ofc->setDestino($objOficioVincular->destino);
+        $ofc->setComentarios($objOficioVincular->comentarios);
+        /*
+          Vinculado
+          0- Identifica que un oficio no esta vinculado
+          1- Identifica que un oficio ya no es necesario ser vinculado
+          2- Identifica que un oficio acaba de ser vinculado a una solicitud capturada anteriormente
+
+        */
+        $ofc->setVinculado(2);//Evita que se muestre el boton de ver y descagar de una solicitud vinculada
+        $ofc->_setAsuntoReceptor("");
+        $ofc->_setRespuesta(1);
+        $ofc->setRespondido(1);
+
+        $ofc->_setCreatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
         $ofc->_setUpdatedBy($id_usuario); //aqui deberia sacar el usuario actual de sesion
-        $ofc->vincularOficio($_REQUEST['idVincular']); //Actualizar datos del oficio
+        $ofc->setFlagId($objOficioSolicitud->id_oficio);
+        $id_ofc = $ofc->RegistrarOficio();
 
-        //Modificar datos del oficio con documentos
-        $ofc_doc->setParentId($_REQUEST['id']);    
-        $ofc_doc->setEstatusInicial(2); //Estatus para el tramite que corresponda
-        $ofc_doc->setEstatusFinal(1); //Estatus cerrado
-        $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado 
-        $ofc_doc->vincularOficioDocumento($_REQUEST['idVincular']);
+        //Guardar Registro del oficio con documento
+        $ofc_doc = new OficioDocumento();
+        $ofc_doc->setIdOficio($id_ofc);    
+        $ofc_doc->setParentId($objOficioSolicitud->id_oficio );    
+        $ofc_doc->setIdDocumentos($objOficioVincular->id_documento);
+        $ofc_doc->setIdUsuario($objOficioVincular->id_usuario_receptor); 
+        $ofc_doc->setCcp(0);         
+        $ofc_doc->setFechaVisto('');  
+        $ofc_doc->setEstatusInicial(1);
+        $ofc_doc->setEstatusFinal('Cerrado');  
+        $ofc_doc->setCreatedBy($id_usuario); //Cambair por el usuario logeado   
+        $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+        
+        $ofc_doc->RegistrarOficioDocumento();
 
-        //Cambiar el estatus de la solicitud original a cerrado y marcar como respondido
+        //Cambiar el estatus de la solicitud original y de la que se desea vincular a cerrado y marcar como respondido
         //marcar como respondido
         $ofc->_setId($objOficioSolicitud->id_oficio);
         $ofc->setRespondido(1);
         $ofc->marcarRespuesta();
 
-        //cambiar el estatus final 
-        if($objOficioSolicitud->estatus_final == 'Cerrado')
-        $ofc_doc->setEstatusFinal('Abierto');
-        else
-        $ofc_doc->setEstatusFinal('Cerrado');
 
+        //Guardar tambien una copia de la respuesta para el usuario que capturo el oficio a vincular
+        $ofc->_setOrigen($objOficioSolicitud->origen);
+        $ofc->setDestino($objOficioVincular->destino);
+        $ofc->setFolio($objOficioVincular->folio);
+        $ofc->_setIdUsuarioEmisor($id_usuario); //Emite el usuario que vincula
+        $ofc->_setAsuntoEmisor("El oficio fue vinculado a una SOLICITUD capturada anteriormente");
+        $ofc->setComentarios("");
+        $ofc->setFlagId($objOficioVincular->id_oficio);
+        $ofc->setVinculado(1);//Evita que se muestre el boton de ver y descagar de una solicitud vinculada
+        $id_ofc = $ofc->RegistrarOficio();
 
+        $ofc_doc->setIdOficio($id_ofc);    
+        $ofc_doc->setParentId($objOficioVincular->id_oficio );    
+        $ofc_doc->setIdDocumentos(0);
+        $ofc_doc->setIdUsuario($objOficioVincular->id_usuario_emisor); 
+        $ofc_doc->RegistrarOficioDocumento();
+
+        $ofc->_setId($objOficioVincular->id_oficio);
+        $ofc->setRespondido(1);
+        $ofc->marcarRespuesta();
+
+        //Cambiar el estatus final de las 2 solicitudes
         $ofc_doc->setIdOficio($objOficioSolicitud->id_oficio);
+        $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
+        $ofc_doc->ActualizarEstatusFinal();
+
+        $ofc_doc->setIdOficio($objOficioVincular->id_oficio);
         $ofc_doc->setUpdatedBy($id_usuario); //Cambair por el usuario logeado
         $ofc_doc->ActualizarEstatusFinal();
 
         $_SESSION['flash-message-success'] = 'Datos guardados correctamente';
         header("Location: $this->GLOBAL_PATH/ofcpartes/index");
-
-        
-        
-        
-
       }
       else{
         throw new Exception("Error al guardar información");
@@ -2484,7 +2526,7 @@ class OfcPartesController
                       }
 
                       else{
-                            //crear archivo
+                        //crear archivo
                         if(move_uploaded_file($nombre_tmp,$rutaArea.'/'.$newfilename)){
 
                         }
