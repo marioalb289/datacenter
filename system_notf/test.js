@@ -10,6 +10,7 @@ var options = {
    cert : fs.readFileSync(process.env.SERVER_CRT)
 };
 var serverPort = 8181;
+var users = [];
 
 var server = https.createServer(options, app);
 var io = require('socket.io')(server);
