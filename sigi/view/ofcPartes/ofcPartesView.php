@@ -389,7 +389,6 @@
 		        url: GLOBAL_PATH+"ofcpartes/turnar",
 		        type: 'POST',
 		        data: formData,
-		        async: false,
 		        success: function (data) {
 		        	event.preventDefault();
 		        	respuesta = JSON.parse(data); 

@@ -333,7 +333,6 @@
     		    	CustomLoadingShow("Guardando...");
     		    },
     		    data: formData,
-    		    async: false,
     		    success: function (data) {
     		    	// event.preventDefault();
     		    	CustomLoadingClose();

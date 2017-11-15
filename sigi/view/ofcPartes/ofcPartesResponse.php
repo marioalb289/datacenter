@@ -291,7 +291,6 @@
     		    beforeSend: function(){
     		    	CustomLoadingShow("Guardando...");
     		    },
-    		    async: false,
     		    success: function (data) {
     		    	CustomLoadingClose();
     		    	// event.preventDefault();

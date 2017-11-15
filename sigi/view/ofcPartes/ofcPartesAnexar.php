@@ -293,7 +293,6 @@
 		    		    beforeSend: function(){
 		    		    	CustomLoadingShow("Guardando...");
 		    		    },
-		    		    async: false,
 		    		    success: function (data) {
 		    		    	// event.preventDefault();
 		    		    	CustomLoadingClose();
