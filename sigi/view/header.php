@@ -144,17 +144,6 @@
               closeButton: false,
               size: 'small'
           });
-      // .find('.modal-content').css({
-      //     'margin-top': function (){
-      //         var w = $( window ).height();
-      //         var b = $(".modal-dialog").height();
-      //         // should not be (w-h)/2
-      //         var h = (w-b)/2;
-      //         return h+"px";
-      //     }
-      // });
-      Customdialog.modal('hide');
-
     }
 
     function CustomLoadingClose(){
