@@ -431,10 +431,11 @@
     		    },
     		    success: function (data) {
     		    	// event.preventDefault();
-    		    	CustomLoadingClose();
+    		    	
     		    	respuesta = JSON.parse(data); 
     		    	if(respuesta.success){
     		    		if (respuesta.msgEstatus != ''){
+    		    			CustomLoadingClose();
     		    			bootbox.alert({
 	                        	title: "Advertencia",
 	                        	message: respuesta.msgEstatus,
@@ -445,6 +446,7 @@
 	                        })
     		    		}
     		    		else{
+    		    			CustomLoadingClose();
 	    		    		if(enviar)
 	    		    			socket.emit( 'notification', respuesta.notificacion );
 				    		bootbox.alert({ 
@@ -458,6 +460,7 @@
     		    		}
     		    	}
     		    	else{
+    		    		CustomLoadingClose();
     		    		bootbox.alert({ 
                           title: "Advertencia",
                           message: respuesta.msg_error,

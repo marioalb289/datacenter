@@ -335,12 +335,13 @@
     		    data: formData,
     		    success: function (data) {
     		    	// event.preventDefault();
-    		    	CustomLoadingClose();
+    		    	
     		    	respuesta = JSON.parse(data); 
     		    	if(respuesta.success){
     		    		if(enviar){
     		    			socket.emit( 'notification', respuesta.notificacion );	    		        			
     		    		}
+    		    		CustomLoadingClose();
     		    		bootbox.alert({ 
                           title: "Atención",
                           message: enviar ? "Solicitud Enviada Correctamente": "Solicitud Guardada Correctamente",
@@ -351,6 +352,7 @@
                         })
     		    	}
     		    	else{
+    		    		CustomLoadingClose();
     		    		bootbox.alert({ 
                           title: "Advertencia",
                           message: respuesta.msg_error,

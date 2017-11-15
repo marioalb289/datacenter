@@ -276,12 +276,12 @@
     		    beforeSend: function(){
     		    	CustomLoadingShow("Guardando...");
     		    },
-    		    async: false,
     		    success: function (data) {
-    		    	CustomLoadingClose();
+    		    	
     		    	// event.preventDefault();
     		    	respuesta = JSON.parse(data); 
     		    	if(respuesta.success){
+    		    		CustomLoadingClose();
     		    		if(enviar){
     		    			socket.emit( 'notification', respuesta.notificacion );	    		        			
     		    		}
@@ -295,6 +295,7 @@
                         })
     		    	}
     		    	else{
+    		    		CustomLoadingClose();
     		    		bootbox.alert({ 
                           title: "Advertencia",
                           message: respuesta.msg_error,
