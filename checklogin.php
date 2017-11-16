@@ -45,6 +45,18 @@ session_start();
 
       // print_r($nombre_formal);exit;
 
+      $ip = '';
+      if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"),"unknown"))
+         $ip = getenv("HTTP_CLIENT_IP");
+      else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+         $ip = getenv("HTTP_X_FORWARDED_FOR");
+      else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+         $ip = getenv("REMOTE_ADDR");
+      else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+         $ip = $_SERVER['REMOTE_ADDR'];
+      else
+         header("Location: https://www.google.com.mx");
+
       $_SESSION['data_user'] = array(
           'nombre_formal' => $nombre_formal ,
           'nombre' =>  $nombre,
@@ -53,18 +65,28 @@ session_start();
           'privilegios' => $mostrarx['priv_sigi'],
           'id' =>  $idx,
           'area' =>  $are,
-          'titular' => $mostrarx['titular']
+          'titular' => $mostrarx['titular'],
+          'ip' => $ip
       );
 
       $time = time();
       $secret_key = 'Sdw1s9x8784455gtykifd335@';
-      
+      $secret_keySession = 'SSsgi1s9x8784455gtykifd335@';
+
       $token = array(
+           'iat' => $time,
+           'exp' => $time + (60*60*12),
+           'data' => $_SESSION['data_user']
+       );
+      
+      $dataSession = array(
           'iat' => $time,
           'exp' => $time + (60*60*12),
-          'data' => $_SESSION['data_user']
+          'ip' => $ip
       );
 
+      $tokenSession = JWT::encode($dataSession, $secret_keySession);
+      $_SESSION[$tokenSession] = true;
       $_SESSION['token'] = JWT::encode($token, $secret_key);
 
       /*
