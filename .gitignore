@@ -11,4 +11,3 @@ target/
 /documentos
 /system_notf/node_modules
 .env
-/sigi/view/header.php
