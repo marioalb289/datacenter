@@ -35,7 +35,13 @@ class OfcPartesController
       $this->layout = new Layout();    
       $this->validate = new Validate();
 
-      $this->GLOBAL_PATH  = "http://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+
+      /*$dotenv = new Dotenv\Dotenv(__DIR__.'/../../');
+      $dotenv->load();*/
+
+      // print_r($_ENV['BASE']);exit;
+
+      $this->GLOBAL_PATH  = $_ENV['SS'].$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
     }
     catch(Exception $e)
     {
@@ -794,7 +800,11 @@ class OfcPartesController
             }
           }
 
-          // print_r($objOficio);exit;
+          if(empty($objOficio)){
+            $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+            header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+            exit;       
+          }
 
           $usuario = new Usuario();
           $usr = array(); 

@@ -86,7 +86,7 @@
     <script type="text/javascript">
     const USER_PRIV = <?php echo $_SESSION['data_user']['privilegios']; ?>;
     const ID_USER = <?php echo $_SESSION['data_user']['id']; ?>;
-    const GLOBAL_PATH = <?php echo "'http://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').'/'."'"; ?>;
+    const GLOBAL_PATH = <?php echo "'".$_SERVER['SS'].$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').'/'."'"; ?>;
 
     var audio = new Audio('AI/image/presence_changed.mp3');
 

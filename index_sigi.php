@@ -6,14 +6,37 @@ require_once __DIR__ . '/vendor/autoload.php';
   use Firebase\JWT\JWT;
 
 $controller = 'ofcpartes';
+$secret_key = 'Sdw1s9x8784455gtykifd335@';
 session_start();
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
-$host  = $_SERVER['HTTP_HOST'];
+$host  = $_ENV['SS'].$_SERVER['HTTP_HOST'];
 $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+$ip = '';
+$url = "$host$uri/";
 
 //Validar primero que exista una sesion
 if( !empty($_SESSION['data_user'])){
+
+    //Validar Sesion
+
+    if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"),"unknown"))
+       $ip = getenv("HTTP_CLIENT_IP");
+    else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+       $ip = getenv("HTTP_X_FORWARDED_FOR");
+    else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+       $ip = getenv("REMOTE_ADDR");
+    else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+       $ip = $_SERVER['REMOTE_ADDR'];
+    else
+       header("Location: https://www.google.com.mx");
+
+    $decoded = JWT::decode($_SESSION['token'], $secret_key, array('HS256'));
+    // print_r($decoded);exit;
+
+    if($decoded->data->base != $_ENV['BASE'] || $decoded->data->ip != $ip){
+        header("Location: $url");
+    }
 
 
     // Todo esta lógica hara el papel de un FrontController
@@ -79,8 +102,8 @@ if( !empty($_SESSION['data_user'])){
             /*Nota: deberia redireccionar a un status 404*/
             //header('Location: sigi.php');
             //die($e->getMessage());
-            http_response_code(404);
-            //die();
+            header("HTTP/1.0 404 Not Found");
+            exit();
         }
         
     }
@@ -88,84 +111,85 @@ if( !empty($_SESSION['data_user'])){
     //require_once 'sigi/view/footer.php';
 }
 else{
+    header("Location: $url");
     // print_r($_REQUEST);exit;
-    if( (isset($_REQUEST['idVincular']) && $_REQUEST['idVincular'] != '') && (isset($_REQUEST['id']) && $_REQUEST['id'] != '')){
-        // print_r($_REQUEST);
-        $correo = $_REQUEST['idVincular'];
-        $pass = $_REQUEST['id'];
-        $validate = new Validate();
-        $extra = '/index';
-        // print_r($validate);exit;
-        if (!$validate->alfanumerico($correo))
-           header("Location: http://$host$uri/$extra");     
-        if (!$validate->alfanumerico($pass))
-             header("Location: http://$host$uri/$extra");     
+    // if( (isset($_REQUEST['idVincular']) && $_REQUEST['idVincular'] != '') && (isset($_REQUEST['id']) && $_REQUEST['id'] != '')){
+    //     // print_r($_REQUEST);
+    //     $correo = $_REQUEST['idVincular'];
+    //     $pass = $_REQUEST['id'];
+    //     $validate = new Validate();
+    //     $extra = '/index';
+    //     // print_r($validate);exit;
+    //     if (!$validate->alfanumerico($correo))
+    //        header("Location: http://$host$uri/$extra");     
+    //     if (!$validate->alfanumerico($pass))
+    //          header("Location: http://$host$uri/$extra");     
 
-        $usuario = new Usuario();
-        $objUser = $usuario->reLoginUser($correo,$pass);
-        if(!empty($objUser)){
+    //     $usuario = new Usuario();
+    //     $objUser = $usuario->reLoginUser($correo,$pass);
+    //     if(!empty($objUser)){
 
-            $user = $objUser->correo;
-            $tusu = $objUser->privilegios;
-            $nombre = $objUser->nombre;
-            $apelli = $objUser->apellido;
-            $idx = $objUser->id;
-            $are = $objUser->area;
-            $_SESSION['loggedin'] = true;
-            $_SESSION['nom'] = $nombre;
-            $_SESSION['ape'] = $apelli;
-            $_SESSION['cor'] = $user;
-            $_SESSION['prv'] = $tusu;
-            $_SESSION['idx'] = $idx;
-            $_SESSION['are'] = $idx;
-            $_SESSION['con'] = $pass;
+    //         $user = $objUser->correo;
+    //         $tusu = $objUser->privilegios;
+    //         $nombre = $objUser->nombre;
+    //         $apelli = $objUser->apellido;
+    //         $idx = $objUser->id;
+    //         $are = $objUser->area;
+    //         $_SESSION['loggedin'] = true;
+    //         $_SESSION['nom'] = $nombre;
+    //         $_SESSION['ape'] = $apelli;
+    //         $_SESSION['cor'] = $user;
+    //         $_SESSION['prv'] = $tusu;
+    //         $_SESSION['idx'] = $idx;
+    //         $_SESSION['are'] = $idx;
+    //         $_SESSION['con'] = $pass;
 
-            $_SESSION['start'] = time();
-            $_SESSION['expire'] = $_SESSION['start'];
-            $nombre_formal = ucwords(mb_strtolower(utf8_encode($objUser->nombre_formal),'UTF-8'));
+    //         $_SESSION['start'] = time();
+    //         $_SESSION['expire'] = $_SESSION['start'];
+    //         $nombre_formal = ucwords(mb_strtolower(utf8_encode($objUser->nombre_formal),'UTF-8'));
 
-            $_SESSION['data_user'] = array(
-                'nombre_formal' => $nombre_formal ,
-                'nombre' =>  $nombre,
-                'apellido' =>  $apelli,
-                'correo' =>  $user,
-                'privilegios' => $objUser->priv_sigi,
-                'id' =>  $idx,
-                'area' =>  $are,
-                'titular' => $objUser->nombre_formal->titular
-            );
+    //         $_SESSION['data_user'] = array(
+    //             'nombre_formal' => $nombre_formal ,
+    //             'nombre' =>  $nombre,
+    //             'apellido' =>  $apelli,
+    //             'correo' =>  $user,
+    //             'privilegios' => $objUser->priv_sigi,
+    //             'id' =>  $idx,
+    //             'area' =>  $are,
+    //             'titular' => $objUser->nombre_formal->titular
+    //         );
 
-            $time = time();
-            $secret_key = 'Sdw1s9x8784455gtykifd335@';
+    //         $time = time();
+    //         $secret_key = 'Sdw1s9x8784455gtykifd335@';
             
-            $token = array(
-                'iat' => $time,
-                'exp' => $time + (60*60),
-                'data' => $_SESSION['data_user']
-            );
+    //         $token = array(
+    //             'iat' => $time,
+    //             'exp' => $time + (60*60),
+    //             'data' => $_SESSION['data_user']
+    //         );
 
-            $_SESSION['token'] = JWT::encode($token, $secret_key);
+    //         $_SESSION['token'] = JWT::encode($token, $secret_key);
             
-            $host  = $_SERVER['HTTP_HOST'];
-            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            $extra = 'ofcpartes/index';
+    //         $host  = $_SERVER['HTTP_HOST'];
+    //         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    //         $extra = 'ofcpartes/index';
 
-            // print_r($uri);exit; 
-            header("Location: http://$host$uri/$extra");
+    //         // print_r($uri);exit; 
+    //         header("Location: http://$host$uri/$extra");
 
-        }
-        else{
-           $extra = '/index';
-            header("Location: http://$host$uri/$extra");
+    //     }
+    //     else{
+    //        $extra = '/index';
+    //         header("Location: http://$host$uri/$extra");
 
-        }
+    //     }
 
         
 
-    }
-    else{
-        $extra = '/index';
-         header("Location: http://$host$uri/$extra");      
-    }
+    // }
+    // else{
+    //     $extra = '/index';
+    //      header("Location: http://$host$uri/$extra");      
+    // }
 }
 

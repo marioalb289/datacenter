@@ -3,6 +3,8 @@ session_start();
   include('AI/detalles/class/classAsistencias.php');
   require __DIR__ . '/vendor/autoload.php';
   use Firebase\JWT\JWT;
+  $dotenv = new Dotenv\Dotenv(__DIR__);
+  $dotenv->load();
   $clase = new sistema;
   $clase->conexion();
   $u = md5($_POST['username']);
@@ -46,6 +48,13 @@ session_start();
       // print_r($nombre_formal);exit;
 
       $ip = '';
+      $url = $_SERVER["REQUEST_URI"];
+
+      // print_r($_SERVER);exit;
+      //print_r( $_ENV['BASE']);exit;
+
+
+
       if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"),"unknown"))
          $ip = getenv("HTTP_CLIENT_IP");
       else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
@@ -66,28 +75,23 @@ session_start();
           'id' =>  $idx,
           'area' =>  $are,
           'titular' => $mostrarx['titular'],
-          'ip' => $ip
+          'ip' => $ip,
+          'base' => $_ENV['BASE']
       );
 
       $time = time();
       $secret_key = 'Sdw1s9x8784455gtykifd335@';
-      $secret_keySession = 'SSsgi1s9x8784455gtykifd335@';
 
       $token = array(
            'iat' => $time,
            'exp' => $time + (60*60*12),
            'data' => $_SESSION['data_user']
        );
-      
-      $dataSession = array(
-          'iat' => $time,
-          'exp' => $time + (60*60*12),
-          'ip' => $ip
-      );
-
-      $tokenSession = JWT::encode($dataSession, $secret_keySession);
-      $_SESSION[$tokenSession] = true;
       $_SESSION['token'] = JWT::encode($token, $secret_key);
+
+      $decoded = JWT::decode($_SESSION['token'], $secret_key, array('HS256'));
+
+      // print_r($decoded);exit;
 
       /*
       Setcookie(nombre , valor, duracion, ruta, dominio, seguridad)
@@ -97,20 +101,21 @@ session_start();
       setcookie('privi', $tusu, false, '/account', 'www.example.com);
       setcookie('contr', md5($_POST['password']), false, '/account', 'www.example.com);*/
       
-      $host  = $_SERVER['HTTP_HOST'];
+      $host  = $_ENV['SS'].$_SERVER['HTTP_HOST'];
       $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-      $extra = 'menu_inicial';
+      $extra = 'index_sigi';
+      $url = "$host$uri/$extra";
 
-      // print_r($uri);exit; 
-      header("Location: http://$host$uri/$extra");
+      // print_r($url);exit; 
+      header("Location: $url");
     }
   }
   else{
 
-    $host  = $_SERVER['HTTP_HOST'];
+    $host  = $_ENV['SS'].$_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $extra = 'menu_inicial';
+    $url = "$host$uri/";
       
-    header("Location: http://$host$uri/$extra");
+    header("Location: $url");
   }
 ?>
