@@ -1580,6 +1580,8 @@ class OfcPartesController
         $ofc->_setInstitucionEmisor($objOficioVincular->institucion_emisor);
         $ofc->_setCargo($objOficioVincular->cargo);
         $ofc->_setAsuntoEmisor($objOficioVincular->asunto_emisor);
+        $ofc->setFechaRecepcion($objOficioVincular->fecha_recepcion);
+        $ofc->setHoraRecepcion($objOficioVincular->hora_recepcion);
 
         //$ofc->setDestino( $objOficio->destino == 'EXTERNO' ? 'EXTERNO': 'INTERNO') ;
         $ofc->setDestino($objOficioVincular->destino);
