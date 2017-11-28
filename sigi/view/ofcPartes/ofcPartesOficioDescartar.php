@@ -1,4 +1,4 @@
-<div>
+<div class="col-md-10 col-md-offset-1">
 	<!-- Modal -->
 	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
@@ -42,7 +42,7 @@
 					<div class="col-md-6 ">
 						<div class="form-group">
 						    <label for="recepciones_nombreEmisor" class="required">Origen:</label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->origen; ?>" />
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php  echo $data['oficio']->origen; ?>" />
 						    <span class="text-danger"></span>
 						    <input type="hidden" name="origen" value = "<?php echo $data['oficio']->origen ?>">
 							<input type="hidden" name="id_oficio" value = "<?php echo $data['oficio']->id_oficio;?>">
@@ -53,13 +53,13 @@
 						<div id="formInterno" >
 							<div class="form-group">
 							   <label for="recepciones_nombreEmisor" class="required">Área Origen:</label>
-							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['usuario_emisor']->area; ?>" />
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php  echo $data['usuario_emisor']->area; ?>" />
 							    <span class="text-danger"></span>
 							</div>
 							
 							<div class="form-group">
 							   <label for="recepciones_nombreEmisor" class="required">Usuario Origen:</label>
-							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php echo $data['usuario_emisor']->nombre_usuario. ' '. $data['usuario_emisor']->apellido_usuario ; ?>" />
 							    <span class="text-danger"></span>
 							</div>
 
@@ -69,7 +69,7 @@
 
 							<div class="form-group">
 							    <label ><?php if($data['oficio']->destino == "EXTERNO") echo "Nombre Destino:"; else echo "Nombre de quien Suscribe:" ?></label>
-							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php  echo $data['oficio']->nombre_emisor; ?>" />
 							    <span class="text-danger"></span>
 							</div>
 
@@ -77,13 +77,13 @@
 
 							<div class="form-group">
 							   <label for="recepciones_nombreEmisor" class="required"><?php if($data['oficio']->destino == "EXTERNO") echo "Institución	Destino:"; else echo "Institución:" ?></label>
-							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->cargo; ?>" />
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php  echo $data['oficio']->cargo; ?>" />
 							    <span class="text-danger"></span>
 							</div>
 
 							<div class="form-group">
 							   <label for="recepciones_nombreEmisor" class="required">Institución:</label>
-							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
+							    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php  echo $data['oficio']->institucion_emisor; ?>" />
 							    <span class="text-danger"></span>
 							</div>
 						</div>
@@ -94,13 +94,13 @@
 						<?php  if($data['oficio']->destino != "EXTERNO") { ?>
 						<div class="form-group">
 						   <label for="recepciones_nombreEmisor" class="required">Área Destino:</label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->area;} ?>" />
 						    <span class="text-danger"></span>
 						</div>
 
 						<div class="form-group">
 						   <label for="recepciones_nombreEmisor" class="required">Usuario Destino:</label>
-						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
+						    <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo $data['usuario_receptor']->nombre_usuario. ' '. $data['usuario_receptor']->apellido_usuario ;} ?>" />
 						    <span class="text-danger"></span>
 						</div>
 
@@ -109,19 +109,19 @@
 						<?php if($data['oficio']->folio_iepc != '') { ?>
 					    <div class="form-group" id="box_cargo">
 					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
-					        <input type="text" id="usuario_receptor" readonly="" class="form-control input-sm" value="<?php echo $data['oficio']->folio_iepc; ?>" />
+					        <input type="text" id="usuario_receptor" readonly="" class="form-control input-md" value="<?php echo $data['oficio']->folio_iepc; ?>" />
 					        <span class="text-danger"></span>
 					    </div>
 					    <?php } ?>
 
 						<div class="form-group">
 							   <label for="recepciones_nombreEmisor" class="required">Asunto Emisor:</label>
-							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->asunto_emisor; ?></textarea>
+							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-md" ><?php  echo $data['oficio']->asunto_emisor; ?></textarea>
 							    <span class="text-danger"></span>
 						</div>
 					    <div class="form-group">
 							   <label for="recepciones_nombreEmisor" class="required">Comentarios:</label>
-							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-sm" ><?php  echo $data['oficio']->comentarios; ?></textarea>
+							    <textarea type="text" id="usuario_receptor" readonly="" class="form-control input-md" ><?php  echo $data['oficio']->comentarios; ?></textarea>
 							    <span class="text-danger"></span>
 						</div>
 
@@ -134,7 +134,7 @@
 					    
 					    <div class="form-group has-feedback" id="box_num_oficio" >
 					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
-					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="20" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="20" class="form-control input-md" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
 					        <span class="text-danger"></span>
 					    </div>
 					    
@@ -142,7 +142,7 @@
 					        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Número de Oficio:</label>
 					        <div class="row">
 			        	        <div class="col-md-8">
-			        	        	<input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+			        	        	<input type="text" id="folio_iepc" name="folio_iepc"  maxlength="50" class="form-control input-md" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
 			        	        </div>
 			        	        <div class="col-md-4">
 			        		        <div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;"  >
@@ -159,13 +159,13 @@
 					    <div class="form-group">
 					      <label for="exampleInputFile">Asunto:</label><span style="font-size: 9px;"> Máximo 150 carácteres</span>				      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="150" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+					      <textarea class="form-control input-md"  name="asunto_oficio" id="asunto_oficio" placeholder="Asunto del Oficio" maxlength="150" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 					    </div>
 
 					    <div class="form-group">
 					      <label for="exampleInputFile">Comentarios:</label><span style="font-size: 9px;"> Máximo 255 carácteres</span>				      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" maxlength="255" style="height: 100px;" data-validacion-tipo="alfa-numerico"></textarea>
+					      <textarea class="form-control input-md"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" maxlength="255" style="height: 100px;" data-validacion-tipo="alfa-numerico"></textarea>
 					    </div>
 						
 					</div>

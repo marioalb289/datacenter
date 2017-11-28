@@ -1,5 +1,4 @@
-
-<div >
+<div class="col-md-10 col-md-offset-1">
 	<!-- Modal -->
 	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog modal-lg" role="document">
@@ -49,7 +48,7 @@
 					<div class="col-md-6">
 			            <div class="form-group">
 			                <label for="recepciones_nombreEmisor" class="required">Origen</label>
-			                <select class="form-control input-sm" name="origen" id="origen" disabled >
+			                <select class="form-control input-md" name="origen" id="origen" disabled >
 			                  <option value="2" <?php if($data['privilegios'] == 1) echo "selected" ?>>Externo</option>
 			                  <option value="1" <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) echo "selected" ?>>Interno</option>
 			                </select>
@@ -60,19 +59,19 @@
 			            <div id="formExterno">
 				            <div class="form-group">
 				                <label for="recepciones_nombreEmisor" class="required" id="lbl_nombre_emisor">Nombre quien Suscribe:</label>
-				                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" />
+				                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-md" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" />
 				                <span class="text-danger"></span>
 				            </div>
 				            
 						    <div class="form-group" id="box_cargo">
 						        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
-						        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" />
+						        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-md" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" />
 						        <span class="text-danger"></span>
 						    </div>
 
 						    <div class="form-group">
 						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Institución:</label>
-						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institución del Titular" data-validacion-tipo="alfa|requerido|min:5"/>
+						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-md" placeholder="Institución del Titular" data-validacion-tipo="alfa|requerido|min:5"/>
 						        <span class="text-danger"></span>
 						        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
 						          Result:
@@ -84,10 +83,10 @@
 						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
 						        <div class="row">
 				        	        <div class="col-md-6">
-				        	        	<input type="text" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+				        	        	<input type="text" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-md" placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
 				        	        </div>
 				        	        <div class="col-md-6">
-				        		        <input type="text" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm " placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
+				        		        <input type="text" id="hora_recepcion" name="hora_recepcion"  class="form-control input-md " placeholder="Fecha de Recepción" data-validacion-tipo="requerido"/>
 				        	        </div>
 						        </div>
 						        
@@ -98,7 +97,7 @@
 			            <div id="formInterno" >
 			    		    <div class="form-group">
 			    		        <label for="" class="required">Área Origen:</label>
-			    		        <select class="form-control input-sm" name="area_origen" id="area_origen" disabled>
+			    		        <select class="form-control input-md" name="area_origen" id="area_origen" disabled>
 			        			    <option value=""><?php echo $data['area_usuario']->area; ?></option>
 			                    </select>
 			    		        <span class="text-danger"></span>
@@ -106,7 +105,7 @@
 
 						    <div class="form-group">
 						        <label for="recepciones_institucionEmisor" class="required">Usuario Origen:</label>
-						        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo ucwords(mb_strtolower($data['area_usuario']->nombre_formal,'UTF-8'));?>" />
+						        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-md" placeholder="Usuario Destino" value="<?php echo ucwords(mb_strtolower($data['area_usuario']->nombre_formal,'UTF-8'));?>" />
 						        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
 						        <span class="text-danger"></span>
 						    </div>
@@ -116,7 +115,7 @@
 
 					    <div class="form-group">
 					        <label for="" class="required">Área Destino:</label>
-					        <select class="form-control input-sm selectpicker" data-live-search="true" id="area_destino" name="area_destino" data-validacion-tipo="requerido">
+					        <select class="form-control input-md selectpicker" data-live-search="true" id="area_destino" name="area_destino" data-validacion-tipo="requerido">
 			    			    <option value="">Selecccionar Área de Destino</option>
 					        	<?php foreach($data['areas'] as $area): ?>
 			    			        <option value="<?php echo $area->id; ?>"><?php echo $area->nombre; ?></option>
@@ -127,7 +126,7 @@
 
 					    <div class="form-group">
 					        <label for="recepciones_institucionEmisor" class="required">Usuario Destino:</label>
-					        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" />
+					        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control input-md" placeholder="Usuario Destino" />
 					        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor">
 					        <span class="text-danger"></span>
 					    </div>
@@ -154,20 +153,20 @@
 					    
 					    <div class="form-group has-feedback" id="box_num_oficio" >
 					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
-					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="20" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
+					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="20" class="form-control input-md" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="S/N"/>
 					        <span class="text-danger"></span>
 					    </div>
 					    <div class="form-group">
 					      <label for="exampleInputFile">Asunto:</label>	<span style="font-size: 9px;"> Máximo 150 carácteres</span>			      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="asunto_oficio" maxlength="150"  id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
+					      <textarea class="form-control input-md"  name="asunto_oficio" maxlength="150"  id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"></textarea>
 					    </div>
 
 
 					    <div class="form-group">
 					      <label for="exampleInputFile">Comentarios:</label><span style="font-size: 9px;"> Máximo 255 carácteres</span>				      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico" maxlength="255"></textarea>
+					      <textarea class="form-control input-md"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico" maxlength="255"></textarea>
 					    </div>
 
 					    <div class="form-group">
@@ -189,46 +188,46 @@
 		</div>
 	</div>
 	<div class="panel panel-default">
-	<div class="panel-heading">
-		<div class="row">
-			<div class="col-md-12"><h4><strong>Seleccionar usuarios que recibirán copia</strong></h4></div>
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-md-12"><h4><strong>Seleccionar usuarios que recibirán copia</strong></h4></div>
+			</div>
 		</div>
-	</div>
-	<div class="panel-body">
-		<div class="row">		
+		<div class="panel-body">
+			<div class="row">		
 
-			<div class="col-md-12">
-				<div class="form-group">
-					
-					<div class="form-group" id="lista_usuarios" >
-						<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-			    	        <thead>
-			    	            <tr>
-			    	            	<th></th>
-			    	            	<th></th>
-			    	            	<th></th>
-			    	                <th>Nombre</th>
-			    	                <th>Area</th>
-			    	            </tr>
-			    	        </thead>
-			    	        <tbody>
-			    	        	<?php foreach($data['usuarios'] as $u): ?>
-			    	        	   <tr>
-										<td></td>
-										<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
-										<td ><?php echo $u->titular; ?></td>
-									    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
-									    <td><?php echo $u->area; ?></td>
-									</tr>
-			    	        	<?php endforeach; ?>
-			    	        </tbody>
-				    	</table>
-					</div>						
+				<div class="col-md-12">
+					<div class="form-group">
+						
+						<div class="form-group" id="lista_usuarios" >
+							<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				    	        <thead>
+				    	            <tr>
+				    	            	<th></th>
+				    	            	<th></th>
+				    	            	<th></th>
+				    	                <th>Nombre</th>
+				    	                <th>Area</th>
+				    	            </tr>
+				    	        </thead>
+				    	        <tbody>
+				    	        	<?php foreach($data['usuarios'] as $u): ?>
+				    	        	   <tr>
+											<td></td>
+											<td class="usuario_select"><?php echo $u->id_usuario; ?></td>
+											<td ><?php echo $u->titular; ?></td>
+										    <td><?php echo ucwords(mb_strtolower($u->nombre_formal,'UTF-8')) ?></td>
+										    <td><?php echo $u->area; ?></td>
+										</tr>
+				    	        	<?php endforeach; ?>
+				    	        </tbody>
+					    	</table>
+						</div>						
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 	
 	</form>	
 </div>

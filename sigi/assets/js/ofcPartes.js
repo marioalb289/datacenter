@@ -710,6 +710,76 @@ $(document).ready(function(){
 
     }
 
+    /*Configuracion inicial de la tabla de usuarios*/
+    var temp = [];
+    var flag = false;
+    var flag2 = false;
+    var table_conf =  $('#usuarios_conf').DataTable({
+      language: language,
+
+      "columnDefs": [ 
+        {
+          "searchable": false,
+          "orderable": false,
+          "targets": 0,
+          "className": "dt-center"
+        },
+         {
+            "targets": [ 1 ],
+            "visible": false
+        },
+         {
+            "targets": [ 2 ],
+            "visible": false
+        },
+         {
+            "targets": [ 3 ],
+            "visible": true,
+        },
+        {
+            "targets": [ 4 ],
+            "visible": true,
+            "searchable": true
+        },
+        {
+            "targets": [ 5 ],
+            "visible": true,
+            "searchable": true,
+            "className": "dt-center"
+        },
+        {
+            "targets": [ 6 ],
+            "data": null, 
+            //"visible": ocultarColumnas(USER_PRIV),
+            "orderable" : false,
+            "className": "",
+            "render": function ( data, type, row ) {
+
+                return "<a href='"+GLOBAL_PATH+"ofcpartes/editarContrasena/"+parseInt( row[1])+"' style='padding: 0px 5px;' ><img class='edit' src='AI/image/contra.png' style='width:85px' title='Editar Oficio'></a>";
+            },
+        },
+        {
+            "targets": [ 7 ],
+            "data": null, 
+            //"visible": ocultarColumnas(USER_PRIV),
+            "orderable" : false,
+            "className": "",
+            "render": function ( data, type, row ) {
+                console.log(row);
+                return "<a href='"+GLOBAL_PATH+"ofcpartes/editarUsuario/"+parseInt( row[1])+"' style='padding: 0px 5px;' ><img class='edit' src='AI/image/editar.png' style='width:35px' title='Editar Oficio'></a>";
+            },
+        }
+
+       ],
+      "initComplete": function(settings, json) {
+        }
+    });
+
+    table_conf.on( 'order.dt search.dt', function () {
+        table_conf.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
 
 
     

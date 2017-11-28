@@ -17,9 +17,6 @@ session_start();
       $user = $mostrarx['correo'];
       
       $tusu = $mostrarx['privilegios'];
-      $tususigi = $mostrarx['priv_sigi'];
-      $tususiu = $mostrarx['priv_sui'];
-      $tususia = $mostrarx['priv_sia'];
 
 
       $nombre = $mostrarx['nombre'];
@@ -32,10 +29,6 @@ session_start();
       $_SESSION['ape'] = $apelli;
       $_SESSION['cor'] = $user;
       $_SESSION['prv'] = $tusu;
-
-      $_SESSION['prvsigi'] = $tususigi;
-      $_SESSION['prvsiu'] = $tususiu;
-      $_SESSION['prvsia'] = $tususia;
 
       $_SESSION['idx'] = $idx;
       $_SESSION['are'] = $are;

@@ -1,5 +1,5 @@
 
-<div >
+<div class="col-md-10 col-md-offset-1">
 	<!-- Modal -->
 	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog modal-lg" role="document">
@@ -50,7 +50,7 @@
 					<div class="col-md-6">
 			            <div class="form-group">
 			                <label for="recepciones_nombreEmisor" class="required">Origen</label>
-			                <select class="form-control input-sm" name="origen" id="origen" disabled >
+			                <select class="form-control input-md" name="origen" id="origen" disabled >
 			                  <option value="2" <?php if($data['privilegios'] == 1) echo "selected" ?>>Externo</option>
 			                  <option value="1" <?php if($data['privilegios'] == 3 || $data['privilegios'] == 2) echo "selected" ?>>Interno</option>
 			                </select>
@@ -61,7 +61,7 @@
 			            <div id="formInterno" >
 			    		    <div class="form-group">
 			    		        <label for="" class="required">Área Origen:</label>
-			    		        <select class="form-control input-sm" name="area_origen" id="area_origen" disabled>
+			    		        <select class="form-control input-md" name="area_origen" id="area_origen" disabled>
 			        			    <option value=""><?php echo $data['area_usuario']->area; ?></option>
 			                    </select>
 			    		        <span class="text-danger"></span>
@@ -69,7 +69,7 @@
 
 						    <div class="form-group">
 						        <label for="recepciones_institucionEmisor" class="required">Usuario Origen:</label>
-						        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php echo ucwords(mb_strtolower($data['area_usuario']->nombre_formal,'UTF-8'));?>" />
+						        <input type="text" id="usuario_origen" name="usuario_origen" readonly="" required="required" maxlength="50" class="form-control input-md" placeholder="Usuario Destino" value="<?php echo ucwords(mb_strtolower($data['area_usuario']->nombre_formal,'UTF-8'));?>" />
 						        <input type="hidden" id="id_usuario_origen" name="id_usuario_origen" value="<?php echo $data['area_usuario']->id_usuario ?>">
 						        <span class="text-danger"></span>
 						    </div>
@@ -81,19 +81,19 @@
 			            <div id="formExterno">
 				            <div class="form-group">
 				                <label ><?php if($data['oficio']->destino == "EXTERNO") echo "Nombre Destino:"; else echo "Nombre de quien Suscribe:" ?></label>
-				                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" value="<?php  echo $data['oficio']->nombre_emisor; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+				                <input type="text" id="nombre_emisor" name="nombre_emisor"  maxlength="50" class="form-control input-md" placeholder="Nombre del Titular del Oficio" data-validacion-tipo="alfa|requerido|min:10" value="<?php  echo $data['oficio']->nombre_emisor; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
 				                <span class="text-danger"></span>
 				            </div>
 				            
 						    <div class="form-group" id="box_cargo">
 						        <label for="recepciones_institucionEmisor" class="required">Cargo:</label>
-						        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-sm" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->cargo; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+						        <input type="text" id="cargo_emisor" name="cargo_emisor"  maxlength="50" class="form-control input-md" placeholder="Nombre del cargo del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->cargo; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
 						        <span class="text-danger"></span>
 						    </div>
 
 						    <div class="form-group">
 						        <label for="recepciones_nombreEmisor" class="required"><?php if($data['oficio']->destino == "EXTERNO") echo "Institución	Destino:"; else echo "Institución:" ?></label>
-						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-sm" placeholder="Institución del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->institucion_emisor; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?>/>
+						        <input type="text" id="institucion_emisor" name="institucion_emisor"  maxlength="50" class="form-control input-md" placeholder="Institución del Titular" data-validacion-tipo="alfa|requerido|min:5" value="<?php  echo $data['oficio']->institucion_emisor; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?>/>
 						        <span class="text-danger"></span>
 						        <!-- <div class="ui-widget" style="margin-top:2em; font-family:Arial">
 						          Result:
@@ -105,10 +105,10 @@
 						        <label for="institucion_emisor" id="lbl_institucion_emisor" class="required">Fecha y Hora de Recepción:</label>
 						        <div class="row">
 				        	        <div class="col-md-6">
-				        	        	<input type="text" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-sm" placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->fecha_recepcion ; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+				        	        	<input type="text" id="fecha_recepcion" name="fecha_recepcion"  class="form-control input-md" placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->fecha_recepcion ; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
 				        	        </div>
 				        	        <div class="col-md-6">
-				        		        <input type="text" id="hora_recepcion" name="hora_recepcion"  class="form-control input-sm " placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->hora_recepcion; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
+				        		        <input type="text" id="hora_recepcion" name="hora_recepcion"  class="form-control input-md " placeholder="Fecha de Recepción" data-validacion-tipo="requerido" value="<?php echo $data['oficio']->hora_recepcion; ?>" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("readonly");} ?> />
 				        	        </div>
 						        </div>
 						        
@@ -121,7 +121,7 @@
 			            <?php if( $data['oficio']->destino == "INTERNO" ){ ?>
 					    <div class="form-group">
 					        <label for="" class="required">Área Destino:</label>
-					        <select class="form-control input-sm" id="area_destino" name="area_destino" data-validacion-tipo="requerido" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("disabled");} ?> >
+					        <select class="form-control input-md" id="area_destino" name="area_destino" data-validacion-tipo="requerido" <?php if($data['oficio']->tipo_oficio == "ALCANCE" || $data['oficio']->tipo_oficio == "RESPUESTA") {echo("disabled");} ?> >
 			    			    <option value="">Selecccionar Área de Destino</option>
 					        	<?php foreach($data['areas'] as $area): ?>
 			    			        <option value="<?php echo $area->id; ?>" <?php if($area->id == $data['usuario_receptor']->id_area) {echo "selected";} ?> ><?php echo $area->nombre; ?></option>
@@ -131,7 +131,7 @@
 					    </div>
 					    <div class="form-group">
 					        <label for="recepciones_institucionEmisor" class="required">Usuario Destino:</label>
-					        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control input-sm" placeholder="Usuario Destino" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo ucwords(mb_strtolower($data['usuario_receptor']->nombre_formal,'UTF-8'));} ?>" />
+					        <input type="text" id="usuario_receptor" name="usuario_receptor" readonly="" required="required" maxlength="50" class="form-control input-md" placeholder="Usuario Destino" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo ucwords(mb_strtolower($data['usuario_receptor']->nombre_formal,'UTF-8'));} ?>" />
 					        <input type="hidden" id="id_usuario_receptor" name="id_usuario_receptor" value="<?php if(empty($data['usuario_receptor'])) {echo "";} else {echo ucwords(mb_strtolower($data['usuario_receptor']->id_usuario,'UTF-8'));} ?>">
 					        <span class="text-danger"></span>
 					    </div>
@@ -163,20 +163,20 @@
 					    
 					    <div class="form-group has-feedback" id="box_num_oficio" >
 					        <label for="recepciones_institucionEmisor" class="required">Número de Oficio:</label>
-					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="20" class="form-control input-sm" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="<?php echo $data['oficio']->folio_iepc; ?>"/>
+					        <input type="text" id="folio_iepc" name="folio_iepc"  maxlength="20" class="form-control input-md" placeholder="Número de Oficio"  data-validacion-tipo="min:3" value="<?php echo $data['oficio']->folio_iepc; ?>"/>
 					        <span class="text-danger"></span>
 					    </div>
 					    <div class="form-group">
 					      <label for="exampleInputFile">Asunto:</label>	<span style="font-size: 9px;"> Máximo 150 carácteres</span>			      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="asunto_oficio" maxlength="150"  id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"><?php echo $data['oficio']->asunto_emisor ?></textarea>
+					      <textarea class="form-control input-md"  name="asunto_oficio" maxlength="150"  id="asunto_oficio" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico|requerido|min:10"><?php echo $data['oficio']->asunto_emisor ?></textarea>
 					    </div>
 
 
 					    <div class="form-group">
 					      <label for="exampleInputFile">Comentarios:</label><span style="font-size: 9px;"> Máximo 255 carácteres</span>				      
 					      <!-- <input type="file" name="archivo" id="documento_iepc" required="required"> -->
-					      <textarea class="form-control input-sm"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico" maxlength="255"><?php echo $data['oficio']->comentarios ?></textarea>
+					      <textarea class="form-control input-md"  name="comentarios" id="comentarios" placeholder="Asunto del Oficio" style="height: 100px;" data-validacion-tipo="alfa-numerico" maxlength="255"><?php echo $data['oficio']->comentarios ?></textarea>
 					    </div>
 
 					    <div class="form-group">

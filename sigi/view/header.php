@@ -58,13 +58,13 @@
                 <?php } ?>
               </ul>
             </li>
-            <li style="float: left;" class="men">
-                <a  href="menu_inicial">Menú Principal</a>
-            </li>
+             <?php if($_SESSION['prv'] == 1){ ?>
+            <li class="active"><a href="ofcpartes/directorioList"><span class="glyphicon glyphicon-cog" style="margin-right: 2px;"></span>Configruación</a></li>
+            <?php } ?>
           </ul>
           <ul class="nav navbar-nav navbar-right"> 
             <li style="float: left;" class="men">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="ofcpartes/editarContrasenaPersonal/<?php echo ($_SESSION['data_user']['id']) ?>" class="dropdown-toggle" >
                    <span class="glyphicon glyphicon-user"></span> 
                    <strong><?php echo ucwords(strtolower($_SESSION['data_user']['nombre_formal']))?></strong>
                    <span class="glyphicon glyphicon-chevron-down"></span>

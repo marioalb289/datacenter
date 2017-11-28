@@ -142,6 +142,123 @@ class OfcPartesController
     $this->layout->renderVista("ofcPartes","ofcPartes",array('areas' => $ar,'usuarios' => $usr));
   }
 
+  public function directorioListAction(){
+
+    if($_SESSION['data_user']['privilegios'] != 1){
+      $_SESSION['flash-message-error'] = 'Error no tienes permsios para realizar esta operacion';
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+      exit;
+    }
+
+    $usuario = new Usuario();
+    $usr = $usuario->ListarUsuarios();
+    $this->layout->renderVista("directorio","directorioList",array('usuarios' => $usr));
+  }
+  public function nuevoUsuarioAction(){
+
+    if($_SESSION['data_user']['privilegios'] != 1){
+      $_SESSION['flash-message-error'] = 'Error no tienes permsios para realizar esta operacion';
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+      exit;
+    }
+    $area = new Area();
+    $ar = $area->ListarAreas();
+    $this->layout->renderVista("directorio","nuevoUsuario",array('areas' => $ar));
+  }
+  public function editarUsuarioAction(){
+    if(isset($_REQUEST['id'])){
+      if($_SESSION['data_user']['privilegios'] != 1){
+        $_SESSION['flash-message-error'] = 'Error no tienes permsios para realizar esta operacion';
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+      }
+      //Buscar oficio
+      try {
+        if (!$this->validate->numero($_REQUEST['id']))
+          throw new Exception("Accion no encontrada");
+        $id_usuario = $_REQUEST['id'];
+        $usr = new Usuario();
+        $objUsr = $usr->getDataUsuario($id_usuario);
+        $area = new Area();
+        $ar = $area->ListarAreas();
+        // print_r($objUsr);exit;
+
+        $this->layout->renderVista("directorio","editarUsuario",array('usuario' => $objUsr,'areas' => $ar));
+      }
+      catch (Exception $e) {
+        $_SESSION['flash-message-error'] = $e->getMessage();
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+      }
+    }
+    else{
+      $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+      exit;
+
+    }
+  }
+  public function editarContrasenaPersonalAction(){
+    if(isset($_REQUEST['id'])){
+      if($_SESSION['data_user']['id'] != $_REQUEST['id']){
+        $_SESSION['flash-message-error'] = 'Error no tienes permsios para realizar esta operacion';
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+      }
+      //Buscar oficio
+      try {
+        if (!$this->validate->numero($_REQUEST['id']))
+          throw new Exception("Accion no encontrada");
+        $id_usuario = $_REQUEST['id'];
+        $usr = new Usuario();
+        $objUsr = $usr->getDataUsuario($id_usuario);
+
+        $this->layout->renderVista("directorio","editarContrasenaPersonal",array('usuario' => $objUsr));
+      }
+      catch (Exception $e) {
+        $_SESSION['flash-message-error'] = $e->getMessage();
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+      }
+    }
+    else{
+      $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+      exit;
+
+    }
+  }
+  public function editarContrasenaAction(){
+    if(isset($_REQUEST['id'])){
+      if($_SESSION['data_user']['privilegios'] != 1){
+        $_SESSION['flash-message-error'] = 'Error no tienes permsios para realizar esta operacion';
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+      }
+      //Buscar oficio
+      try {
+        if (!$this->validate->numero($_REQUEST['id']))
+          throw new Exception("Accion no encontrada");
+        $id_usuario = $_REQUEST['id'];
+        $usr = new Usuario();
+        $objUsr = $usr->getDataUsuario($id_usuario);
+
+        $this->layout->renderVista("directorio","editarContrasena",array('usuario' => $objUsr));
+      }
+      catch (Exception $e) {
+        $_SESSION['flash-message-error'] = $e->getMessage();
+        header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+        exit;
+      }
+    }
+    else{
+      $_SESSION['flash-message-error'] = 'Error al recuperar la Información';
+      header("Location: $this->GLOBAL_PATH/ofcpartes/index");
+      exit;
+
+    }
+  }
+
   public function createReportParamAction(){
     // print_r($_POST);exit;
     // if(isset($_REQUEST['draw'])){
@@ -2199,6 +2316,154 @@ class OfcPartesController
     }
 
   }
+  public function guardarEditarContrasenaPersonalAction(){
+    // print_r($_POST);exit();
+    try {
+      if (isset($_POST['id_usuario']) && $_POST['id_usuario'] != '' ) {
+        if($_SESSION['data_user']['id'] !=$_POST['id_usuario']){
+          throw new Exception("No tienes permisos para realizar esa acccion");
+        }
+        $id_usuario = $_POST['id_usuario'];
+        if (!$this->validate->numero($id_usuario))
+          throw new Exception("Error al validar Datos");
+        $success = false;
+        if(isset($_POST['password1']) && isset($_POST['password2'])){
+          if($_POST['password1'] != $_POST['password2'])
+            throw new Exception("Las contraseñas deben ser iguales");
+        }
+        $usr = new Usuario();
+        $usr->setContrasena(isset($_POST['password1']) && $_POST['password1'] != '' ? md5($_POST['password1']) : md5('123456'));
+        $usr->setUpdatedBy($_SESSION['data_user']['id']);  
+        $usr->setId($id_usuario); 
+        $usr->guardarContrasena();
+        $success = true;
+
+        echo json_encode(array("success"=>$success));
+        exit;
+
+      } else {
+        throw new Exception("Error al guardar la información");
+      }
+
+      
+      
+      
+    } catch (Exception $e) {
+      echo json_encode(array("success"=>false,"msg_error"=>$e->getMessage()));
+      exit;
+    }    
+  }
+
+  public function guardarEditarContrasenaAction(){
+    // print_r($_POST);exit();
+    try {
+      if (isset($_POST['id_usuario']) && $_POST['id_usuario'] != '' ) {
+        if($_SESSION['data_user']['privilegios'] != 1){
+          throw new Exception("No tienes permisos para realizar esa acccion");
+        }
+        $id_usuario = $_POST['id_usuario'];
+        if (!$this->validate->numero($id_usuario))
+          throw new Exception("Error al validar Datos");
+        $success = false;
+        if(isset($_POST['password1']) && isset($_POST['password2'])){
+          if($_POST['password1'] != $_POST['password2'])
+            throw new Exception("Las contraseñas deben ser iguales");
+        }
+        $usr = new Usuario();
+        $usr->setContrasena(isset($_POST['password1']) && $_POST['password1'] != '' ? md5($_POST['password1']) : md5('123456'));
+        $usr->setUpdatedBy($_SESSION['data_user']['id']);  
+        $usr->setId($id_usuario); 
+        $usr->guardarContrasena();
+        $success = true;
+
+        echo json_encode(array("success"=>$success));
+        exit;
+
+      } else {
+        throw new Exception("Error al guardar la información");
+      }
+
+      
+      
+      
+    } catch (Exception $e) {
+      echo json_encode(array("success"=>false,"msg_error"=>$e->getMessage()));
+      exit;
+    }    
+  }
+
+  public function guardarUsuarioAction(){
+    // print_r($_POST);exit;
+    try {
+      if($_SESSION['data_user']['privilegios'] != 1){
+        throw new Exception("No tienes permisos para realizar esa acccion");
+      }
+      $success = false;
+      $id_usuario = isset($_POST['id_usuario']) && $_POST['id_usuario'] != '' ? $_POST['id_usuario'] : 0;
+
+      if (!$this->validate->numero($id_usuario))
+        throw new Exception("Error al validar Datos");
+
+      $usr = new Usuario();
+      $correo = md5(trim( $_POST['nombre'].'.'.$_POST['apellido'].'@iepcdurango.mx'));
+      $tempContrasena= '';
+
+      if($id_usuario == 0){ //Usuario nuevo buscar que no este repetido
+        if(!empty($usr->buscarUsuarioRepetido($correo)))
+          throw new Exception("Este correo ya se encuentra registrado en el sistema");
+
+      }else{
+        $objUsrOriginal = $usr->getDataUsuario($id_usuario);
+        if(empty($objUsrOriginal))
+          throw new Exception("Error al guardar información");
+        $tempContrasena = $objUsrOriginal->contrasena;
+
+        if($correo != $objUsrOriginal->correo){
+          if(!empty($usr->buscarUsuarioRepetido($correo)))
+            throw new Exception("Este correo ya se encuentra registrado en el sistema");
+
+        }
+
+      }
+      if(isset($_POST['password1']) && isset($_POST['password2'])){
+        if($_POST['password1'] != $_POST['password2'])
+          throw new Exception("Las contraseñas deben ser iguales");
+      }
+
+      $usr->setNombreFormal($_POST['nombre_formal']);
+      $usr->setNombre($_POST['nombre']);
+      $usr->setApellido($_POST['apellido']);
+      $usr->setPrivSigi($_POST['priv_sigi']);
+      $usr->setTitular($_POST['titular']);
+      $usr->setContrasena(isset($_POST['password1']) && $_POST['password1'] != '' ? md5($_POST['password1']) : $tempContrasena);
+      $usr->setEmail($_POST['nombre'].'.'.$_POST['apellido'].'@iepcdurango.mx');
+      $usr->setCorreo($correo);
+      $usr->setPrivilegios($_POST['privilegios']);
+      $usr->setArea($_POST['area']);
+      $usr->setPuesto($_POST['puesto']);
+      $usr->setEstado($_POST['estado']);
+
+      if($id_usuario == 0){
+        $usr->setCreatedBy($_SESSION['data_user']['id']);
+        $usr->setUpdatedBy($_SESSION['data_user']['id']);
+        
+      }else{
+        $usr->setUpdatedBy($_SESSION['data_user']['id']);   
+        $usr->setId($id_usuario);     
+      }
+
+      $usr->guardarUsuario();
+      $success = true;
+
+      echo json_encode(array("success"=>$success));
+      exit;
+      
+    } catch (Exception $e) {
+      echo json_encode(array("success"=>false,"msg_error"=>$e->getMessage()));
+      exit;
+    }
+  }
+
   public function guardarAction(){
       try {
           $success = true;

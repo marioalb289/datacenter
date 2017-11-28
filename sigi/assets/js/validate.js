@@ -3,6 +3,7 @@ var _mensaje = {
     campo_obligatorio: 'Este campo es obligatorio',
     campo_numerico: 'Este campo no es numérico',
     campo_alfa: 'Este campo sólo debe contener letras',
+    campo_alfa_wws: 'Este campo sólo debe contener letras sin espacios en blanco',
     campo_alfa_numerico: 'Este campo sólo debe contener letras y números',
     folio_repetido: 'Este folio ya esta dado de alta en el Sistema',
     campo_correo: 'Este campo no es un correo',
@@ -150,7 +151,7 @@ function validarObjetoForm (control){
 
                 /* Validamos si es solo letras */
                 if (v == 'alfa') {
-                    if (!obj.val().match(/^[a-zA-Z \u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00c1 \u00c9 \u00cd \u00d3 \u00da \u00f1 \u00d1]+$/i) && obj.val().length > 0) {
+                    if (!obj.val().match(/^[a-zA-Z . \u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00c1 \u00c9 \u00cd \u00d3 \u00da \u00f1 \u00d1]+$/i) && obj.val().length > 0) {
 
                         errores++;
                         form_group.addClass('has-error');
@@ -158,6 +159,23 @@ function validarObjetoForm (control){
                         /* Mostramos el mensaje */
                         if (obj.data('validacion-mensaje') == undefined) {
                             small.text(_mensaje.campo_alfa);
+                        } else {
+                            small.text(obj.data('validacion-mensaje'));
+                        }
+
+                        return false; /* Rompe el bucle */
+                    }
+                }
+                /* Validamos si es solo letras */
+                if (v == 'alfa-wws') {
+                    if (!obj.val().match(/^[A-Za-z][A-Za-z0-9]*$/i)&& obj.val().length > 0) {
+
+                        errores++;
+                        form_group.addClass('has-error');
+
+                        /* Mostramos el mensaje */
+                        if (obj.data('validacion-mensaje') == undefined) {
+                            small.text(_mensaje.campo_alfa_wws);
                         } else {
                             small.text(obj.data('validacion-mensaje'));
                         }
@@ -408,6 +426,7 @@ jQuery.fn.validateNumOficio = function ()
         if(obj.val().trim() == '' || obj.val().toLowerCase().trim() == 's-n' || obj.val().toLowerCase().trim() == 's/n' || obj.val().trim().length <= 8 ){
             $("#folio_iepc").val("S/N");
             $("#btn_guardar_oficio").prop('disabled', false);
+            $("#btn_enviar_oficio").prop('disabled', false);
             obj.parent().append($("<span id='icon-valido' class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>") );
             return;
         }
@@ -430,6 +449,7 @@ jQuery.fn.validateNumOficio = function ()
         if(folioOriginal == obj.val()){
             //Num de oficio valido
             $("#btn_guardar_oficio").prop('disabled', false);
+            $("#btn_enviar_oficio").prop('disabled', false);
             form_group.addClass('has-success');
             obj.parent().append($("<span id='icon-valido' class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>") );
             return;
@@ -442,6 +462,7 @@ jQuery.fn.validateNumOficio = function ()
           data: { folio_iepc : obj.val() },
           beforeSend: function( xhr ) {
               $("#btn_guardar_oficio").prop('disabled', true);
+              $("#btn_enviar_oficio").prop('disabled', true);
             }
         })
           .done(function( res ) {
@@ -450,6 +471,7 @@ jQuery.fn.validateNumOficio = function ()
                 if(data.opc == 1){
                     //Num de oficio valido
                     $("#btn_guardar_oficio").prop('disabled', false);
+                    $("#btn_enviar_oficio").prop('disabled', false);
                     form_group.addClass('has-success');
                     obj.parent().append($("<span id='icon-valido' class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>") );
                 }
