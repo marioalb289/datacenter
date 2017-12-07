@@ -393,7 +393,6 @@
 		        success: function (data) {
 		        	event.preventDefault();
 		        	respuesta = JSON.parse(data); 
-		        	console.log('aqui respuesta',respuesta);
 		        	if(respuesta.success){
 		        		socket.emit( 'notification', respuesta.notificacion );
 		        		window.location.href = GLOBAL_PATH+"ofcpartes/view/"+id_oficio
